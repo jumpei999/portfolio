@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "title": "JPK Engineering",
+    "openGraph": {
+      "title": "JPK Engineering",
+      "type": "website"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "history": "History",
+    "constituents": "Constituents",
+    "contact": "Contact",
+    "logoAlt": "JPK Engineering",
+    "localeJa": "JA",
+    "localeEn": "EN"
+  },
+  "hero": {
+    "primaryMessage": "No engineering, no life.",
+    "secondaryMessage": "Unless sufficient funding is secured.",
+    "scrollLabel": "Scroll"
+  },
+  "about": {
+    "heading": "About JPK"
+  }
+}

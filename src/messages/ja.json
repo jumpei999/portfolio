@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "description": "擬会社化したエンジニアJPKの自己紹介サイト",
+    "openGraph": {
+      "description": "擬会社化したエンジニアJPKの自己紹介サイト"
+    }
+  },
+  "nav": {
+    "logoAria": "ホームに戻る",
+    "logoAlt": "ジェイピーケイエンジニアリングの小さい版ロゴ"
+  },
+  "hero": {
+    "logoAlt": "ジェイピーケイエンジニアリングのロゴ",
+    "scrollAria": "激熱コンテンツへスクロール"
+  },
+  "about": {
+    "paragraphs": [
+      "松本市を拠点に活動するフリーランスエンジニアです。Webサイト制作から業務改善のためのツール開発まで、使いやすさと保守のしやすさを両立する実装を心がけています。",
+      "Next.js や TypeScript を中心に、デザインを活かすフロントエンド実装、情報設計、運用しやすい構成づくりに取り組んでいます。必要に応じてバックエンドやインフラも含めて柔軟に対応します。",
+      "このセクションのプロフィール画像は、好きな作品テイストをもとにした遊び心のあるバリエーションです。ページを開くたびにランダムに表示され、ボタンから別の画像にも切り替えられます。"
+    ],
+    "profileImages": {
+      "berserk": {
+        "alt": "ベルセルク風のプロフィール画像",
+        "label": "すぐに絶望しそうなベルセルク風"
+      },
+      "ghibli": {
+        "alt": "ジブリ風のプロフィール画像",
+        "label": "安定のジブリ風"
+      },
+      "gundam": {
+        "alt": "ガンダム風のプロフィール画像",
+        "label": "ワンタンク誕生ガンダム風"
+      },
+      "hokuto": {
+        "alt": "北斗の拳風のプロフィール画像",
+        "label": "世紀末に袖など不要な北斗の拳風"
+      },
+      "seiya": {
+        "alt": "聖闘士星矢風のプロフィール画像",
+        "label": "犬がペガサスか聖闘士星矢風"
+      }
+    }
+  },
+  "history": {
+    "heading": "History",
+    "timelineLabel": "沿革タイムライン",
+    "entries": {
+      "kosen": {
+        "title": "高専 機械工学科",
+        "description": "機械設計・材料・製図の基礎を学び、ものづくりの現場感覚を身につけました。",
+        "eraDate": "平成22年4月"
+      },
+      "maker": {
+        "title": "メーカー 技術職",
+        "description": "製造現場での品質管理と生産改善に携わり、現場課題をデータで解く経験を積みました。",
+        "eraDate": "平成26年4月"
+      },
+      "itCompany": {
+        "title": "IT企業 Webエンジニア",
+        "description": "運用・インフラからフロントエンドまで幅広く担当し、実務ベースでスキルを広げました。",
+        "eraDate": "令和元年4月"
+      },
+      "freelance": {
+        "title": "フリーランスエンジニア",
+        "description": "松本市を拠点に、Web制作・業務改善ツール開発を中心に活動しています。",
+        "eraDate": "令和4年4月"
+      }
+    }
+  },
+  "contact": {
+    "heading": "Contact",
+    "intro": "ご訪問いただきありがとうございました。お仕事のご依頼、ご相談、その他コメントなど何かありましたらお気軽に下記のフォームからご連絡ください。",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "namePlaceholder": "name",
+    "emailPlaceholder": "email"
+  },
+  "constituents": {
+    "title": "Constituents",
+    "ariaLabel": "Constituents tag cloud",
+    "seoHeading": "Constituents",
+    "filterLabel": "カテゴリで絞り込み",
+    "clear": "クリア",
+    "categories": {
+      "skill": "Skill",
+      "personality": "Personality",
+      "language": "Language",
+      "infra": "Infra"
+    },
+    "tagDescriptions": {
+      "typescriptPrimary": "主力言語",
+      "curiosity": "新しい技術が好き"
+    }
+  }
+}
