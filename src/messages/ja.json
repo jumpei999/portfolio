@@ -69,30 +69,6 @@
     }
   },
   "contact": {
-    "heading": "Contact",
-    "intro": "ご訪問いただきありがとうございました。お仕事のご依頼、ご相談、その他コメントなど何かありましたらお気軽に下記のフォームからご連絡ください。",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "send": "Send",
-    "namePlaceholder": "name",
-    "emailPlaceholder": "email"
-  },
-  "constituents": {
-    "title": "Constituents",
-    "ariaLabel": "Constituents tag cloud",
-    "seoHeading": "Constituents",
-    "filterLabel": "カテゴリで絞り込み",
-    "clear": "クリア",
-    "categories": {
-      "skill": "Skill",
-      "personality": "Personality",
-      "language": "Language",
-      "infra": "Infra"
-    },
-    "tagDescriptions": {
-      "typescriptPrimary": "主力言語",
-      "curiosity": "新しい技術が好き"
-    }
+    "intro": "ご訪問いただきありがとうございました。お仕事のご依頼、ご相談、その他コメントなど何かありましたらお気軽に下記のフォームからご連絡ください。"
   }
 }

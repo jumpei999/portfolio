@@ -26,7 +26,7 @@ export default function HistoryTimeline() {
       variants={containerVariants}
     >
       <div
-        className="pointer-events-none absolute top-0 bottom-0 left-3 w-px -translate-x-1/2 md:left-1/2"
+        className="pointer-events-none absolute top-0 bottom-0 left-3 w-px -translate-x-1/2 bg-border md:left-1/2"
         aria-hidden
       />
 

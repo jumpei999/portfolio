@@ -37,7 +37,7 @@ export default function ProfileImageSwitcher({
           }
         />
       </div>
-      <p className="w-full text-right text-sm text-slate-500 px-2">
+      <p className="w-full text-right text-sm text-muted-foreground px-2">
         {t(`profileImages.${currentImage.imageKey}.label`)}
       </p>
     </div>

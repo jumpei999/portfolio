@@ -1,7 +1,13 @@
 "use client"
-import { motion, Variants } from "motion/react"
+
+import { motion, type Variants } from "motion/react"
 import { useTranslations } from "next-intl"
 import Section from "@/components/section"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { cn } from "@/lib/utils"
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -25,13 +31,76 @@ const itemVariants: Variants = {
   },
 }
 
+const underlineInputClass =
+  "peer h-auto min-h-0 w-full rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 md:text-base"
+
+const underlineTextareaClass =
+  "peer field-sizing-fixed min-h-0 w-full resize-none rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 md:text-base"
+
+const floatingLabelClass =
+  "absolute left-0 top-2 pointer-events-none font-normal transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-valid:-top-6 peer-valid:text-sm"
+
+const floatingMessageLabelClass =
+  "absolute left-0 top-20 pointer-events-none font-normal transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-valid:-top-6 peer-valid:text-sm"
+
+const submitButtonClass =
+  "group relative overflow-hidden rounded-none bg-primary px-8 py-3 font-bold text-primary-foreground shadow-xs shadow-primary/30 transition-all duration-400 hover:scale-105 hover:brightness-110 hover:shadow-md active:scale-100 focus-visible:ring-ring border-primary hover:border-primary hover:bg-primary ring-0 hover:ring-0"
+
+type FloatingFieldProps = Readonly<{
+  id: string
+  label: string
+  name: string
+  type?: string
+  autoComplete?: string
+  multiline?: boolean
+  rows?: number
+}>
+
+function FloatingField({
+  id,
+  label,
+  name,
+  type = "text",
+  autoComplete,
+  multiline = false,
+  rows = 4,
+}: FloatingFieldProps) {
+  const labelClass = multiline ? floatingMessageLabelClass : floatingLabelClass
+
+  return (
+    <div className="relative group">
+      {multiline ? (
+        <Textarea
+          id={id}
+          name={name}
+          required
+          rows={rows}
+          className={underlineTextareaClass}
+        />
+      ) : (
+        <Input
+          id={id}
+          name={name}
+          type={type}
+          required
+          autoComplete={autoComplete}
+          className={underlineInputClass}
+        />
+      )}
+      <Label htmlFor={id} className={cn(labelClass)}>
+        {label}
+      </Label>
+    </div>
+  )
+}
+
 export default function Contact() {
   const t = useTranslations("contact")
 
   return (
     <Section id="contact">
-      <div className="w-1/2 mx-auto">
-        <h2 className="text-4xl font-bold mb-12 text-center">{t("heading")}</h2>
+      <div className="mx-auto w-full max-w-2xl px-6 md:w-1/2 md:max-w-none md:px-0">
+        <h2 className="mb-12 text-center text-4xl font-bold">{t("heading")}</h2>
         <div className="mb-12">{t("intro")}</div>
         <motion.form
           className="space-y-10"
@@ -41,65 +110,40 @@ export default function Contact() {
           variants={containerVariants}
         >
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="grid grid-cols-1 gap-8 md:grid-cols-2"
             variants={itemVariants}
           >
-            <InputGroup
+            <FloatingField
+              id="name"
+              name="name"
               label={t("name")}
               type="text"
-              placeholder={t("namePlaceholder")}
+              autoComplete="name"
             />
-            <InputGroup
+            <FloatingField
+              id="email"
+              name="email"
               label={t("email")}
               type="email"
-              placeholder={t("emailPlaceholder")}
+              autoComplete="email"
             />
           </motion.div>
-          <motion.div className="relative group" variants={itemVariants}>
-            <textarea
+          <motion.div variants={itemVariants}>
+            <FloatingField
               id="message"
-              required
+              name="message"
+              label={t("message")}
+              multiline
               rows={4}
-              className="peer w-full bg-transparent border-b-2 border-slate-500 py-2 outline-none focus:border-slate-700 transition-colors resize-none"
             />
-            <label
-              htmlFor="message"
-              className="absolute left-0 top-20 pointer-events-none transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-valid:-top-6 peer-valid:text-sm"
-            >
-              {t("message")}
-            </label>
           </motion.div>
           <motion.div className="flex justify-center" variants={itemVariants}>
-            <button className="group relative py-3 overflow-hidden bg-slate-700 font-bold text-slate-50 shadow-xs shadow-slate-700 transition-all duration-400 hover:brightness-120 hover:shadow-md hover:scale-105 active:scale-100">
-              <span className="relative z-8 px-8">{t("send")}</span>
-            </button>
+            <Button type="submit" className={submitButtonClass}>
+              {t("send")}
+            </Button>
           </motion.div>
         </motion.form>
       </div>
     </Section>
-  )
-}
-
-function InputGroup({
-  label,
-  type,
-  placeholder,
-}: Readonly<{
-  label: string
-  type: string
-  placeholder: string
-}>) {
-  return (
-    <div className="relative group">
-      <input
-        type={type}
-        required
-        className="peer w-full border-b-2 border-slate-500 py-2 outline-none focus:border-slate-700 transition-colors placeholder-transparent"
-        placeholder={placeholder}
-      />
-      <label className="absolute left-0 top-2 pointer-events-none transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-valid:-top-6 peer-valid:text-sm">
-        {label}
-      </label>
-    </div>
   )
 }

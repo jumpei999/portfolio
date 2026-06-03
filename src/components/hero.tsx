@@ -43,7 +43,7 @@ export default function Hero() {
 
       <motion.a
         href="#about"
-        className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-1 transition-colors text-slate-500 hover:text-slate-700"
+        className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-1 transition-colors text-muted-foreground hover:text-foreground"
         aria-label={t("scrollAria")}
         animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
         transition={

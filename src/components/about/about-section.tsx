@@ -1,5 +1,6 @@
 import Section from "@/components/section"
 import ProfileImageSwitcher from "@/components/about/profile-image-switcher"
+import SocialLinks from "@/components/about/social-links"
 import { pickInitialProfileIndex } from "@/data/profile-images"
 import { getTranslations } from "next-intl/server"
 
@@ -20,6 +21,8 @@ export default async function AboutSection() {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+
+          <SocialLinks />
         </div>
 
         <ProfileImageSwitcher initialIndex={pickInitialProfileIndex()} />

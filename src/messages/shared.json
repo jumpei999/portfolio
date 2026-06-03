@@ -22,6 +22,37 @@
     "scrollLabel": "Scroll"
   },
   "about": {
-    "heading": "About JPK"
+    "heading": "About JPK",
+    "links": {
+      "label": "Links",
+      "github": "GitHub",
+      "bluesky": "Bluesky",
+      "instagram": "Instagram",
+      "email": "Email"
+    }
+  },
+  "constituents": {
+    "title": "Constituents",
+    "ariaLabel": "Constituents tag cloud",
+    "seoHeading": "Constituents",
+    "filterLabel": "Filter by category",
+    "clear": "Clear",
+    "categories": {
+      "skill": "Skill",
+      "personality": "Personality",
+      "language": "Language",
+      "infra": "Infra"
+    },
+    "tagDescriptions": {
+      "typescriptPrimary": "Primary language",
+      "curiosity": "Enjoys exploring new technology"
+    }
+  },
+  "contact": {
+    "heading": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send"
   }
 }

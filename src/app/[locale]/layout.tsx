@@ -10,6 +10,7 @@ import {
 import "../globals.css"
 import Header from "@/components/header"
 import { routing } from "@/i18n/routing"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -71,8 +72,10 @@ export default async function LocaleLayout({
         className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          {children}
+          <TooltipProvider delayDuration={150}>
+            <Header />
+            {children}
+          </TooltipProvider>
         </NextIntlClientProvider>
       </body>
     </html>

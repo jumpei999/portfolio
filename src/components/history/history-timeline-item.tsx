@@ -32,7 +32,7 @@ function ContentBlock({
       aria-labelledby={headingId}
       className="flex w-full max-w-md flex-col gap-2"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <div className="relative aspect-4/3 w-full overflow-hidden">
         <Image
           src={entry.image}
           alt=""
@@ -51,7 +51,7 @@ function ContentBlock({
       >
         {entry.year}
       </p>
-      <p className="text-sm text-slate-400">
+      <p className="text-sm text-muted-foreground">
         {t(`entries.${entry.id}.eraDate`)}
       </p>
     </article>
@@ -71,7 +71,7 @@ export default function HistoryTimelineItem({
     >
       <div className="col-start-1 row-start-1 flex w-6 shrink-0 justify-center pt-1 md:col-start-2 md:w-auto md:pt-0">
         <span
-          className="relative z-10 h-3.5 w-3.5 shrink-0 rounded-full bg-red-600 ring-[3px] ring-slate-50"
+          className="relative z-10 h-3.5 w-3.5 shrink-0 rounded-full bg-red-600 ring-[3px] ring-background"
           aria-hidden
         />
       </div>

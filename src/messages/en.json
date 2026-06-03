@@ -69,30 +69,6 @@
     }
   },
   "contact": {
-    "heading": "Contact",
-    "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below.",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "send": "Send",
-    "namePlaceholder": "name",
-    "emailPlaceholder": "email"
-  },
-  "constituents": {
-    "title": "Constituents",
-    "ariaLabel": "Constituents tag cloud",
-    "seoHeading": "Constituents",
-    "filterLabel": "Filter by category",
-    "clear": "Clear",
-    "categories": {
-      "skill": "Skill",
-      "personality": "Personality",
-      "language": "Language",
-      "infra": "Infra"
-    },
-    "tagDescriptions": {
-      "typescriptPrimary": "Primary language",
-      "curiosity": "Enjoys exploring new technology"
-    }
+    "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below."
   }
 }
