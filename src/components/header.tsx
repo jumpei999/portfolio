@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { useLocale, useTranslations } from "next-intl"
+import { LogoTextLg } from "@/components/brand/logo-text-lg"
 import { useSyncExternalStore } from "react"
 import { Link, usePathname } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
@@ -82,23 +82,12 @@ export default function Header() {
           className="flex items-center py-2"
           aria-label={t("logoAria")}
         >
-          <Image
-            src="/logo-text-lg.svg"
-            alt={t("logoAlt")}
-            width={512}
-            height={512}
-            priority
-            className="h-12 w-auto"
-            aria-hidden
-          />
+          <LogoTextLg className="h-12 w-auto" aria-hidden />
         </Link>
         <div className="flex items-center gap-3">
           <ul className="flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
-              <li
-                key={item.key}
-                className="py-3"
-              >
+              <li key={item.key} className="py-3">
                 <Button asChild variant="ghost" size="sm">
                   <Link href={item.href}>{t(item.key)}</Link>
                 </Button>

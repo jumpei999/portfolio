@@ -1,8 +1,8 @@
 "use client"
 
-import Image from "next/image"
 import { motion, useReducedMotion } from "motion/react"
 import { useTranslations } from "next-intl"
+import { Logo } from "@/components/brand/logo"
 import Section from "@/components/section"
 
 export default function Hero() {
@@ -21,15 +21,7 @@ export default function Hero() {
             : { duration: 0.6, ease: [0.24, 1, 0.32, 1] }
         }
       >
-        <Image
-          src="/logo.svg"
-          alt="{t(logoAlt)}"
-          width={512}
-          height={512}
-          priority
-          className="h-auto"
-          aria-hidden
-        />
+        <Logo className="h-auto w-full max-w-md" aria-label={t("logoAlt")} />
 
         <div className="flex flex-col gap-1">
           <p className="text-2xl tracking-[0.25em] text-foreground uppercase font-montserrat">

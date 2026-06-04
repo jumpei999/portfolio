@@ -52,7 +52,10 @@ export default function SocialLinks() {
                     }
                     aria-label={title}
                   >
-                    <Icon className="size-4" aria-hidden />
+                    <Icon
+                      className="size-4 text-muted-foreground transition-colors group-hover/button:text-foreground"
+                      aria-hidden
+                    />
                   </a>
                 </Button>
               </TooltipTrigger>
