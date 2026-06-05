@@ -2,6 +2,7 @@ import About from "@/components/about/about-section"
 import ConstituentsClient from "@/components/constituents/constituents-client"
 import ConstituentsSeo from "@/components/constituents/constituents-seo"
 import Contact from "@/components/contact"
+import Footer from "@/components/footer"
 import History from "@/components/history/history-section"
 import Hero from "@/components/hero"
 import { routing } from "@/i18n/routing"
@@ -29,6 +30,7 @@ export default async function Home({ params }: Readonly<PageProps>) {
         <ConstituentsClient />
       </div>
       <Contact />
+      <Footer />
     </main>
   )
 }

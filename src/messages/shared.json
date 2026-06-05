@@ -54,5 +54,9 @@
     "email": "Email",
     "message": "Message",
     "send": "Send"
+  },
+  "footer": {
+    "backToTopHover": "Please back to the top and have fun again!",
+    "copyright": "© {year} JPK Engineering"
   }
 }

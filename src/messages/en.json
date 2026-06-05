@@ -70,5 +70,8 @@
   },
   "contact": {
     "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below."
+  },
+  "footer": {
+    "backToTopAria": "Back to top"
   }
 }
