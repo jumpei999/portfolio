@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils"
 
 export default function Footer() {
   const t = useTranslations("footer")
-  const year = new Date().getFullYear()
 
   return (
     <div className="relative overflow-x-clip">
@@ -61,7 +60,7 @@ export default function Footer() {
           )}
         >
           <p className="text-xs text-background sm:text-sm">
-            {t("copyright", { year })}
+            {t("brand")}
           </p>
           <SocialIconLinks
             iconClassName="size-4 text-background/90 transition-opacity hover:opacity-100"

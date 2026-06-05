@@ -57,6 +57,6 @@
   },
   "footer": {
     "backToTopHover": "Please back to the top and have fun again!",
-    "copyright": "© {year} JPK Engineering"
+    "brand": "JPK Engineering"
   }
 }
