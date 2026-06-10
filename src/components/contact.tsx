@@ -17,13 +17,10 @@ const underlineTextareaClass =
   "peer field-sizing-fixed min-h-0 w-full resize-none rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 md:text-base"
 
 const floatingLabelClass =
-  "absolute left-0 top-2 pointer-events-none font-normal transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-valid:-top-6 peer-valid:text-sm"
+  "absolute left-0 top-2 pointer-events-none font-normal text-muted-foreground transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-valid:-top-6 peer-valid:text-sm"
 
 const floatingMessageLabelClass =
-  "absolute left-0 top-20 pointer-events-none font-normal transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-valid:-top-6 peer-valid:text-sm"
-
-const submitButtonClass =
-  "group relative overflow-hidden rounded-none bg-primary px-8 py-3 font-bold text-primary-foreground shadow-xs shadow-primary/30 transition-all duration-400 hover:scale-105 hover:brightness-110 hover:shadow-md active:scale-100 focus-visible:ring-ring border-primary hover:border-primary hover:bg-primary ring-0 hover:ring-0"
+  "absolute left-0 top-20 pointer-events-none font-normal text-muted-foreground transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-valid:-top-6 peer-valid:text-sm"
 
 type FloatingFieldProps = Readonly<{
   id: string
@@ -78,19 +75,19 @@ export default function Contact() {
   const { sectionRef, entranceProps } = useEntranceAnimation()
 
   return (
-    <Section id="contact">
-      <div
-        ref={sectionRef}
-        className="mx-auto w-full max-w-2xl px-6 md:w-1/2 md:max-w-none md:px-0"
-      >
+    <Section id="contact" className="px-6 py-24 sm:px-10 lg:px-16">
+      <div ref={sectionRef} className="mx-auto w-full max-w-6xl">
         <motion.h2
-          className="mb-12 text-center text-4xl font-bold"
+          className="mb-12 text-center text-4xl font-bold tracking-tight sm:text-5xl"
           {...entranceProps(0)}
         >
           {t("heading")}
         </motion.h2>
 
-        <motion.div className="mb-12" {...entranceProps(1)}>
+        <motion.div
+          className="mb-12 text-start text-base leading-8 text-muted-foreground sm:text-lg"
+          {...entranceProps(1)}
+        >
           {t("intro")}
         </motion.div>
 
@@ -127,7 +124,17 @@ export default function Contact() {
           </motion.div>
 
           <motion.div className="flex justify-center" {...entranceProps(5)}>
-            <Button type="submit" className={submitButtonClass}>
+            <Button
+              type="submit"
+              size="lg"
+              className={cn(
+                "px-8",
+                "ease-[cubic-bezier(0.24,1,0.32,1)]",
+                "transition-none hover:scale-105 hover:transition-transform hover:duration-300",
+                "active:scale-100 active:transition-transform active:duration-150",
+                "motion-reduce:transition-none motion-reduce:hover:scale-100",
+              )}
+            >
               {t("send")}
             </Button>
           </motion.div>
