@@ -1,17 +1,8 @@
 "use client"
 
-import { motion, useReducedMotion, type Variants } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
 import type { HistoryItem } from "@/data/history"
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: [0.24, 1, 0.32, 1] },
-  },
-}
 
 type HistoryCommitItemProps = {
   item: HistoryItem
@@ -30,10 +21,7 @@ export default function HistoryCommitItem({
   const label = `${item.type}: ${item.title}`
 
   return (
-    <motion.li
-      className={cn("relative flex gap-4", !isLast && "pb-10")}
-      variants={itemVariants}
-    >
+    <motion.li className={cn("relative flex gap-4", !isLast && "pb-10")}>
       <div className="relative flex w-6 shrink-0 justify-center">
         <motion.button
           type="button"

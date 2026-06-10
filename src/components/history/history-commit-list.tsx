@@ -1,23 +1,15 @@
 "use client"
 
-import { motion, useReducedMotion, type Variants } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 import HistoryCommitItem from "@/components/history/history-commit-item"
 import type { HistoryItem } from "@/data/history"
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
-}
 
 type HistoryCommitListProps = {
   items: HistoryItem[]
   activeId: string
   activeIndex: number
   timelineLabel: string
-  sectionInView: boolean
+  animationStarted: boolean
   onSelect: (id: string) => void
 }
 
@@ -26,7 +18,7 @@ export default function HistoryCommitList({
   activeId,
   activeIndex,
   timelineLabel,
-  sectionInView,
+  animationStarted,
   onSelect,
 }: Readonly<HistoryCommitListProps>) {
   const reduceMotion = useReducedMotion()
@@ -40,7 +32,7 @@ export default function HistoryCommitList({
         className="pointer-events-none absolute top-1.5 bottom-1.5 left-3 w-0.5 -translate-x-1/2 origin-top bg-border"
         aria-hidden
         initial={reduceMotion ? false : { scaleY: 0 }}
-        animate={{ scaleY: sectionInView ? 1 : 0 }}
+        animate={{ scaleY: animationStarted ? 1 : 0 }}
         transition={{ duration: 0.6, ease: [0.24, 1, 0.32, 1] }}
       />
 
@@ -49,19 +41,13 @@ export default function HistoryCommitList({
         aria-hidden
         initial={reduceMotion ? false : { scaleY: 0 }}
         animate={{
-          scaleY: sectionInView && activeIndex >= 0 ? progress : 0,
+          scaleY: animationStarted && activeIndex >= 0 ? progress : 0,
         }}
         transition={{ duration: 0.5, ease: [0.24, 1, 0.32, 1] }}
         style={{ height: "calc(100% - 0.75rem)" }}
       />
 
-      <motion.ol
-        className="relative m-0 list-none p-0"
-        aria-label={timelineLabel}
-        initial="hidden"
-        animate={sectionInView ? "visible" : "hidden"}
-        variants={containerVariants}
-      >
+      <ol className="relative m-0 list-none p-0" aria-label={timelineLabel}>
         {items.map((item, index) => (
           <HistoryCommitItem
             key={item.id}
@@ -71,7 +57,7 @@ export default function HistoryCommitList({
             onSelect={onSelect}
           />
         ))}
-      </motion.ol>
+      </ol>
     </div>
   )
 }

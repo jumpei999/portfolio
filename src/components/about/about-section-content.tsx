@@ -1,11 +1,9 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useInView, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 import ProfileImageSwitcher from "@/components/about/profile-image-switcher"
 import SocialLinks from "@/components/about/social-links"
-
-const IN_VIEW_AMOUNT = 0.6
+import { useEntranceAnimation } from "@/hooks/use-entrance-animation"
 
 type AboutSectionContentProps = {
   heading: string
@@ -18,38 +16,7 @@ export default function AboutSectionContent({
   paragraphs,
   initialIndex,
 }: Readonly<AboutSectionContentProps>) {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const animationStarted = useInView(sectionRef, {
-    once: true,
-    amount: IN_VIEW_AMOUNT,
-  })
-  const reduceMotion = useReducedMotion()
-
-  const itemTransition = reduceMotion
-    ? { duration: 0 }
-    : { duration: 0.6, ease: [0.24, 1, 0.32, 1] as const }
-
-  const stagger = reduceMotion ? 0 : 0.12
-
-  const itemHidden = { opacity: 0, y: 16 }
-  const itemAnimate = { opacity: 1, y: 0 }
-  const started = animationStarted || reduceMotion
-
-  const entranceProps = (index: number) => {
-    if (reduceMotion) {
-      return {
-        initial: false as const,
-        animate: itemAnimate,
-        transition: { duration: 0 },
-      }
-    }
-
-    return {
-      initial: itemHidden,
-      animate: started ? itemAnimate : itemHidden,
-      transition: { ...itemTransition, delay: started ? stagger * index : 0 },
-    }
-  }
+  const { sectionRef, entranceProps } = useEntranceAnimation()
 
   const socialDelayIndex = 1 + paragraphs.length
   const profileDelayIndex = socialDelayIndex + 1
