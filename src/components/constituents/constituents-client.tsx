@@ -6,7 +6,12 @@ const Constituents = dynamic(
   () => import("@/components/constituents/constituents-section"),
   {
     ssr: false,
-    loading: () => <div className="min-h-screen w-full" aria-hidden />,
+    loading: () => (
+      <div
+        className="h-[calc(100svh-var(--site-header-height))] w-full"
+        aria-hidden
+      />
+    ),
   },
 )
 

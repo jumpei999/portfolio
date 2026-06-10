@@ -45,33 +45,35 @@ export default function Constituents() {
   return (
     <Section
       id="constituents"
-      className="relative items-stretch justify-stretch overflow-hidden p-0"
+      className="relative min-h-0 h-[calc(100svh-var(--site-header-height))] items-stretch justify-stretch overflow-hidden p-0"
     >
       <div
         ref={sectionRef}
-        className="relative min-h-screen w-full"
+        className="flex h-full w-full flex-col"
         aria-label={t("ariaLabel")}
       >
-        {placedTags.length > 0 && (
-          <div className="absolute inset-0">
-            <TagConnections
-              tags={placedTags}
-              selectedCategories={selectedReadonly}
-              started={animationStarted}
-            />
+        <div className="relative min-h-0 flex-1">
+          {placedTags.length > 0 && (
+            <div className="absolute inset-0">
+              <TagConnections
+                tags={placedTags}
+                selectedCategories={selectedReadonly}
+                started={animationStarted}
+              />
 
-            <TagCloud
-              tags={placedTags}
-              selectedCategories={selectedReadonly}
-              started={animationStarted}
-            />
-          </div>
-        )}
+              <TagCloud
+                tags={placedTags}
+                selectedCategories={selectedReadonly}
+                started={animationStarted}
+              />
+            </div>
+          )}
 
-        <CenterTitle title={t("title")} started={animationStarted} />
+          <CenterTitle title={t("title")} started={animationStarted} />
+        </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-8 z-30 px-4"
+          className="z-30 shrink-0 px-4 pb-6 sm:pb-8"
           initial={{ opacity: 0, y: 12 }}
           animate={
             animationStarted ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }
