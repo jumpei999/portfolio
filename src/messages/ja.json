@@ -45,6 +45,8 @@
   "history": {
     "heading": "History",
     "timelineLabel": "沿革タイムライン",
+    "skipToPrev": "前のセクションへ",
+    "skipToPrevAria": "Aboutセクションへ戻る",
     "skipToNext": "次のセクションへ",
     "skipToNextAria": "Constituentsセクションへスキップ",
     "detail": {

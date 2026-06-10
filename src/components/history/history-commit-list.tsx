@@ -35,7 +35,7 @@ export default function HistoryCommitList({
     items.length <= 1 ? 1 : activeIndex / (items.length - 1)
 
   return (
-    <div className="relative">
+    <div className="relative min-w-0">
       <motion.div
         className="pointer-events-none absolute top-1.5 bottom-1.5 left-3 w-0.5 -translate-x-1/2 origin-top bg-border"
         aria-hidden

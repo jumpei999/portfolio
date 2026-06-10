@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react"
 import { useTranslations } from "next-intl"
 import { Logo } from "@/components/brand/logo"
 import Section from "@/components/section"
+import SectionScrollLink from "@/components/section-scroll-link"
 
 export default function Hero() {
   const reduceMotion = useReducedMotion()
@@ -33,34 +34,12 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <motion.a
+      <SectionScrollLink
         href="#about"
-        className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-1 transition-colors text-muted-foreground hover:text-foreground"
-        aria-label={t("scrollAria")}
-        animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
-        transition={
-          reduceMotion
-            ? { duration: 0 }
-            : { duration: 2, repeat: Infinity, ease: "easeInOut" }
-        }
-      >
-        <span className="text-xs tracking-widest uppercase">
-          {t("scrollLabel")}
-        </span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-5 w-5"
-          aria-hidden
-        >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </motion.a>
+        label={t("scrollLabel")}
+        ariaLabel={t("scrollAria")}
+        className="absolute inset-x-0 bottom-10"
+      />
     </Section>
   )
 }

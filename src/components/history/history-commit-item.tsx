@@ -64,7 +64,7 @@ export default function HistoryCommitItem({
         type="button"
         onClick={() => onSelect(item.id)}
         className={cn(
-          "min-w-0 pt-0 text-left font-mono text-sm transition-colors",
+          "min-w-0 truncate pt-0 text-left font-mono text-sm transition-colors",
           isActive
             ? "text-foreground"
             : "text-muted-foreground hover:text-foreground",

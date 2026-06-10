@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { scrollTrackHeight } from "@/components/history/constants"
 import HistoryCommitList from "@/components/history/history-commit-list"
 import HistoryDetailPanel from "@/components/history/history-detail-panel"
+import HistoryBackButton from "@/components/history/history-back-button"
 import HistorySkipButton from "@/components/history/history-skip-button"
 import { useActiveCommit } from "@/components/history/use-active-commit"
 import { historyItems } from "@/data/history"
@@ -16,7 +17,10 @@ function HistoryHeading() {
   const t = useTranslations("history")
 
   return (
-    <header className="mb-8 shrink-0 sm:mb-10">
+    <header className="mb-4 shrink-0 sm:mb-6">
+      <div className="mb-4 flex justify-center">
+        <HistoryBackButton />
+      </div>
       <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
         {t("heading")}
       </h2>
@@ -26,7 +30,7 @@ function HistoryHeading() {
 
 function HistorySkipFooter() {
   return (
-    <div className="mt-8 flex shrink-0 justify-center sm:justify-end">
+    <div className="mt-auto flex shrink-0 justify-center pt-4">
       <HistorySkipButton />
     </div>
   )
@@ -34,11 +38,11 @@ function HistorySkipFooter() {
 
 function HistoryBody({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <>
+    <div className="flex min-h-0 flex-1 flex-col">
       <HistoryHeading />
       {children}
       <HistorySkipFooter />
-    </>
+    </div>
   )
 }
 
@@ -62,7 +66,7 @@ export default function HistoryTimeline() {
   })
 
   const timelineContent = (
-    <div className="grid w-full items-start gap-10 lg:grid-cols-[35%_65%] lg:gap-12">
+    <div className="grid w-full min-w-0 items-start gap-10 lg:grid-cols-[35%_65%] lg:gap-12">
       <HistoryCommitList
         items={historyItems}
         activeId={activeId}
@@ -96,16 +100,18 @@ export default function HistoryTimeline() {
     >
       <div
         ref={panelRef}
-        className="sticky top-[var(--site-header-height)] flex min-h-[calc(100svh-var(--site-header-height))] flex-col py-8 sm:py-10"
+        className="sticky top-(--site-header-height) flex h-[calc(100svh-var(--site-header-height))] flex-col overflow-x-hidden overflow-hidden py-6 sm:py-8"
       >
         <motion.div
-          className="flex w-full flex-1 flex-col"
+          className="flex min-h-0 flex-1 flex-col w-full"
           initial={{ opacity: 0 }}
           animate={sectionInView ? { opacity: 1 } : undefined}
           transition={{ duration: 0.5, ease: [0.24, 1, 0.32, 1] }}
         >
           <HistoryBody>
-            <div className="flex flex-1 items-center">{timelineContent}</div>
+            <div className="min-h-0 flex-1 overflow-hidden py-2 sm:py-4">
+              {timelineContent}
+            </div>
           </HistoryBody>
         </motion.div>
       </div>

@@ -18,7 +18,7 @@ export default function HistoryDetailPanel({
   if (!item) return null
 
   return (
-    <div className="h-fit w-full self-start rounded-2xl border border-border bg-card p-6 sm:p-8">
+    <div className="h-fit w-full min-w-0 self-start rounded-2xl border border-border bg-card p-6 sm:p-8">
       <AnimatePresence mode="wait" initial={false}>
         <motion.article
           key={item.id}
