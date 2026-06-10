@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { LightningUp } from "@/components/brand/lightning-up"
+import { BsLightningFill } from "react-icons/bs"
 import SocialIconLinks from "@/components/social-icon-links"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
@@ -22,7 +22,10 @@ export default function Footer() {
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-background",
         )}
       >
-        <LightningUp className="size-7 text-background sm:size-8" aria-hidden />
+        <BsLightningFill
+          className="size-7 -translate-x-0.5 -translate-y-0.5 rotate-180 text-background sm:size-8"
+          aria-hidden
+        />
       </Link>
 
       <div
