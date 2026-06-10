@@ -45,27 +45,10 @@
   "history": {
     "heading": "History",
     "timelineLabel": "沿革タイムライン",
-    "entries": {
-      "kosen": {
-        "title": "高専 機械工学科",
-        "description": "機械設計・材料・製図の基礎を学び、ものづくりの現場感覚を身につけました。",
-        "eraDate": "平成22年4月"
-      },
-      "maker": {
-        "title": "メーカー 技術職",
-        "description": "製造現場での品質管理と生産改善に携わり、現場課題をデータで解く経験を積みました。",
-        "eraDate": "平成26年4月"
-      },
-      "itCompany": {
-        "title": "IT企業 Webエンジニア",
-        "description": "運用・インフラからフロントエンドまで幅広く担当し、実務ベースでスキルを広げました。",
-        "eraDate": "令和元年4月"
-      },
-      "freelance": {
-        "title": "フリーランスエンジニア",
-        "description": "松本市を拠点に、Web制作・業務改善ツール開発を中心に活動しています。",
-        "eraDate": "令和4年4月"
-      }
+    "skipToNext": "次のセクションへ",
+    "skipToNextAria": "Constituentsセクションへスキップ",
+    "detail": {
+      "techStack": "技術スタック"
     }
   },
   "contact": {

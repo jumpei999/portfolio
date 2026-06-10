@@ -45,27 +45,10 @@
   "history": {
     "heading": "History",
     "timelineLabel": "Career timeline",
-    "entries": {
-      "kosen": {
-        "title": "Technical College — Mechanical Engineering",
-        "description": "Studied mechanical design, materials, and drafting, building a foundation in hands-on manufacturing.",
-        "eraDate": "April 2010"
-      },
-      "maker": {
-        "title": "Manufacturer — Engineering Role",
-        "description": "Worked in quality control and production improvement on the factory floor, learning to solve site issues with data.",
-        "eraDate": "April 2014"
-      },
-      "itCompany": {
-        "title": "IT Company — Web Engineer",
-        "description": "Handled operations, infrastructure, and frontend, expanding practical skills across the stack.",
-        "eraDate": "April 2019"
-      },
-      "freelance": {
-        "title": "Freelance Engineer",
-        "description": "Based in Matsumoto, focusing on web production and business improvement tools.",
-        "eraDate": "April 2022"
-      }
+    "skipToNext": "Continue",
+    "skipToNextAria": "Skip to Constituents section",
+    "detail": {
+      "techStack": "Tech Stack"
     }
   },
   "contact": {

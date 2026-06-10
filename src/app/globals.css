@@ -50,6 +50,7 @@
 }
 
 :root {
+  --site-header-height: 4rem;
   --radius: 0.625rem;
   --background: oklch(0.984 0.003 247.858);
   --foreground: oklch(0.334 0.041 257.417);
@@ -162,6 +163,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--site-header-height);
 }
 
 @layer base {
