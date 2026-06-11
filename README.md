@@ -31,7 +31,7 @@ Single-page layout ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx)):
 - **History** — Horizontal-scroll timeline
 - **Constituents** — A tag cloud of my constituents
 - **Contact** — Inquiry form UI
-- **Footer** — Brand label, social links, and a back-to-top control with a hover-slide message
+- **Footer** — Site tech stack icons (left), social links (right), and a back-to-top control with a hover-slide message
 
 ## Getting Started
 
@@ -58,7 +58,7 @@ src/
   components/       # UI and section components
   messages/         # i18n (ja.json, en.json, shared.json)
   i18n/             # next-intl routing
-  data/             # Nav, social links, history, etc.
+  data/             # Nav, social links, history, site-tech-stack, etc.
 public/             # Logo and static SVG assets
 scripts/            # svg-to-tsx.mjs (brand component generator)
 ```
