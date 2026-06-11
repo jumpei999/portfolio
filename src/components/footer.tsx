@@ -58,7 +58,7 @@ export default function Footer() {
       <footer className="relative z-10 bg-foreground text-background">
         <div
           className={cn(
-            "mx-auto w-full max-w-6xl px-6 py-4 sm:px-10",
+            "mx-auto w-3/4 py-4",
             "min-h-12 sm:min-h-14",
           )}
         >
