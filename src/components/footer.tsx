@@ -2,6 +2,14 @@
 
 import { useTranslations } from "next-intl"
 import { BsLightningFill } from "react-icons/bs"
+import {
+  FOOTER_ICON_BUTTON_CLASS,
+  FOOTER_ICON_CLASS,
+} from "@/components/footer/footer-icon-styles"
+import {
+  FOOTER_TOOLTIP_OFFSET,
+  FOOTER_TOOLTIP_SIDE,
+} from "@/components/footer/footer-tooltip"
 import SiteTechStackIcons from "@/components/footer/site-tech-stack-icons"
 import SocialIconLinks from "@/components/social-icon-links"
 import { Link } from "@/i18n/navigation"
@@ -66,8 +74,11 @@ export default function Footer() {
             <SiteTechStackIcons />
             <SocialIconLinks
               className="shrink-0"
-              iconClassName="size-4 text-background/90 transition-opacity hover:opacity-100"
-              buttonClassName="hover:bg-background/10 hover:text-background"
+              buttonSize="icon"
+              iconClassName={FOOTER_ICON_CLASS}
+              buttonClassName={FOOTER_ICON_BUTTON_CLASS}
+              tooltipSide={FOOTER_TOOLTIP_SIDE}
+              tooltipSideOffset={FOOTER_TOOLTIP_OFFSET}
             />
           </div>
         </div>

@@ -30,6 +30,9 @@ type SocialIconLinksProps = Readonly<{
   className?: string
   iconClassName?: string
   buttonClassName?: string
+  buttonSize?: "icon-sm" | "icon"
+  tooltipSide?: "top" | "right" | "bottom" | "left"
+  tooltipSideOffset?: number
 }>
 
 const defaultIconClassName =
@@ -40,6 +43,9 @@ export default function SocialIconLinks({
   className,
   iconClassName = defaultIconClassName,
   buttonClassName,
+  buttonSize = "icon-sm",
+  tooltipSide = "bottom",
+  tooltipSideOffset = 0,
 }: SocialIconLinksProps) {
   const t = useTranslations("about")
 
@@ -61,7 +67,7 @@ export default function SocialIconLinks({
                 <Button
                   asChild
                   variant="ghost"
-                  size="icon-sm"
+                  size={buttonSize}
                   className={buttonClassName}
                 >
                   <a
@@ -78,7 +84,9 @@ export default function SocialIconLinks({
                   </a>
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="bottom">{title}</TooltipContent>
+              <TooltipContent side={tooltipSide} sideOffset={tooltipSideOffset}>
+                {title}
+              </TooltipContent>
             </Tooltip>
           )
         })}

@@ -13,11 +13,19 @@ import {
   SiTypescript,
 } from "react-icons/si"
 import CursorIcon from "@/components/footer/cursor-icon"
+import {
+  FOOTER_ICON_BUTTON_CLASS,
+  FOOTER_ICON_CLASS,
+} from "@/components/footer/footer-icon-styles"
+import {
+  FOOTER_TOOLTIP_OFFSET,
+  FOOTER_TOOLTIP_SIDE,
+} from "@/components/footer/footer-tooltip"
 import { SITE_TECH_STACK } from "@/data/site-tech-stack"
+import { Button } from "@/components/ui/button"
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -48,33 +56,39 @@ export default function SiteTechStackIcons({
   const t = useTranslations("footer")
 
   return (
-    <TooltipProvider>
-      <ul
-        className={cn("flex flex-wrap items-center gap-1", className)}
-        aria-label={t("techStackLabel")}
-      >
-        {SITE_TECH_STACK.map((item) => {
-          const Icon = ICON_MAP[item.slug]
+    <ul
+      className={cn("flex flex-wrap items-center gap-1", className)}
+      aria-label={t("techStackLabel")}
+    >
+      {SITE_TECH_STACK.map((item) => {
+        const Icon = ICON_MAP[item.slug]
 
-          if (!Icon) return null
+        if (!Icon) return null
 
-          return (
-            <li key={item.slug}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span
-                    className="inline-flex size-8 items-center justify-center text-background/90"
-                    aria-label={item.name}
-                  >
-                    <Icon className="size-4" aria-hidden />
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent side="top">{item.name}</TooltipContent>
-              </Tooltip>
-            </li>
-          )
-        })}
-      </ul>
-    </TooltipProvider>
+        return (
+          <li key={item.slug}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className={FOOTER_ICON_BUTTON_CLASS}
+                  aria-label={item.name}
+                >
+                  <Icon className={FOOTER_ICON_CLASS} aria-hidden />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent
+                side={FOOTER_TOOLTIP_SIDE}
+                sideOffset={FOOTER_TOOLTIP_OFFSET}
+              >
+                {item.name}
+              </TooltipContent>
+            </Tooltip>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
