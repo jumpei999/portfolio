@@ -70,13 +70,19 @@ export default function SiteTechStackIcons({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  type="button"
+                  asChild
                   variant="ghost"
                   size="icon"
                   className={FOOTER_ICON_BUTTON_CLASS}
-                  aria-label={item.name}
                 >
-                  <Icon className={FOOTER_ICON_CLASS} aria-hidden />
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={item.name}
+                  >
+                    <Icon className={FOOTER_ICON_CLASS} aria-hidden />
+                  </a>
                 </Button>
               </TooltipTrigger>
               <TooltipContent
