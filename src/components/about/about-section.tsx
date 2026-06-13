@@ -8,7 +8,10 @@ export default async function AboutSection() {
   const paragraphs = t.raw("paragraphs") as string[]
 
   return (
-    <Section id="about" className="px-6 py-24 sm:px-10 lg:px-16">
+    <Section
+      id="about"
+      className="max-md:min-h-0 max-md:items-start max-md:justify-start px-6 pt-8 pb-16 sm:px-10 sm:pt-12 sm:pb-20 md:py-24 lg:px-16"
+    >
       <AboutSectionContent
         heading={t("heading")}
         paragraphs={paragraphs}
