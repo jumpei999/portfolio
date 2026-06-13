@@ -26,12 +26,40 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 
 Single-page layout ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx)):
 
-- **Hero** — Brand logo and scroll cue
+- **Home** — Brand logo and scroll cue
 - **About** — Profile copy with randomized/switchable images
-- **History** — Horizontal-scroll timeline
+- **History** — Git-style timeline of milestones
 - **Constituents** — A tag cloud of my constituents
 - **Contact** — Inquiry form UI
-- **Footer** — Site tech stack icons (left), social links (right), and a back-to-top control with a hover-slide message
+- **Footer** — Site tech stack icons, social links, and a back-to-top control with a hover-slide message
+
+## Internationalization
+
+Default locale: Japanese (`ja`). Routing config: [`src/i18n/routing.ts`](src/i18n/routing.ts).
+
+| Locale             | URL example        |
+| ------------------ | ------------------ |
+| Japanese (default) | `/`, `/#about`     |
+| English            | `/en`, `/en#about` |
+
+Japanese URLs have no locale prefix. Requests to `/ja` redirect to `/`.
+
+Message files in [`src/messages/`](src/messages/):
+
+- **`shared.json`** — strings identical in every locale (English UI chrome, shared labels)
+- **`ja.json` / `en.json`** — locale-specific copy (metadata, aria labels, long paragraphs)
+
+Do not define the same key path in `shared.json` and a locale file. See [`.cursor/rules/i18n-messages.mdc`](.cursor/rules/i18n-messages.mdc).
+
+## Responsive design
+
+| Role            | Width                               |
+| --------------- | ----------------------------------- |
+| Support minimum | 320px                               |
+| Design baseline | 375px                               |
+| Tablet          | Tailwind `md:` 768px / `lg:` 1024px |
+
+For AI-assisted UI work, see [`.cursor/rules/responsive-design.mdc`](.cursor/rules/responsive-design.mdc).
 
 ## Getting Started
 
@@ -53,15 +81,28 @@ pnpm lint     # ESLint
 ## Project Structure
 
 ```
+AGENTS.md              # Agent instructions (AI tools)
+.cursor/rules/         # Cursor project rules (e.g. responsive-design.mdc)
 src/
-  app/[locale]/     # Pages and layouts
-  components/       # UI and section components
-  messages/         # i18n (ja.json, en.json, shared.json)
-  i18n/             # next-intl routing
-  data/             # Nav, social links, history, site-tech-stack, etc.
-public/             # Logo and static SVG assets
-scripts/            # svg-to-tsx.mjs (brand component generator)
+  app/[locale]/        # Pages and layouts
+  components/          # UI and section components
+  lib/                 # Shared utilities (e.g. scroll-to-home.ts)
+  messages/            # i18n (ja.json, en.json, shared.json)
+  i18n/                # next-intl routing
+  data/                # Nav, social links, history, site-tech-stack.ts, etc.
+public/                # Logo and static SVG assets
+scripts/               # svg-to-tsx.mjs (brand component generator)
 ```
+
+## Documentation
+
+| File                                   | Audience     | Purpose                                   |
+| -------------------------------------- | ------------ | ----------------------------------------- |
+| README.md                              | Humans       | Project overview (this file)              |
+| [AGENTS.md](AGENTS.md)                 | AI agents    | Stack, commands, conventions              |
+| `.cursor/rules/responsive-design.mdc`  | Cursor Agent | Responsive breakpoints and mobile targets |
+| `.cursor/rules/documentation-sync.mdc` | Cursor Agent | When to update README / AGENTS / rules    |
+| `.cursor/rules/i18n-messages.mdc`      | Cursor Agent | shared vs ja/en message file roles        |
 
 ## Credits
 

@@ -1,0 +1,37 @@
+---
+description: Avoid duplicate keys across shared.json and locale message files
+globs: src/messages/**/*.json
+alwaysApply: false
+---
+
+# i18n messages
+
+Messages merge in [`src/i18n/request.ts`](../../src/i18n/request.ts): `deepMerge(shared, locale)` — locale values override shared on the same key path.
+
+## One key, one file
+
+| Case                      | Where to add                                                            |
+| ------------------------- | ----------------------------------------------------------------------- |
+| Same text in ja and en    | `shared.json` only                                                      |
+| Different text per locale | **Both** `ja.json` and `en.json` (same key path) — not in `shared.json` |
+| Never                     | The same leaf key in `shared.json` and a locale file                    |
+
+Duplicate paths make shared entries dead code and confuse maintenance.
+
+## Additive locale keys
+
+Locale files may add keys under namespaces that exist in shared (e.g. `hero.scrollAria` next to shared `hero.scrollLabel`). **No overlapping leaf keys.**
+
+Types in [`src/global.d.ts`](../../src/global.d.ts) use `shared & ja` — keep `ja.json` and `en.json` structurally in sync for localized keys.
+
+## Checklist when adding text
+
+1. Locale-agnostic or locale-specific?
+2. Pick file(s): shared **or** ja + en (both).
+3. Grep `src/messages/` for the key path — no duplicate paths.
+4. Use the key in components via `useTranslations` / `getTranslations`.
+
+## Out of scope for routine edits
+
+- Do not change merge logic in `request.ts`.
+- Do not localize shared English UI chrome unless the user asks.

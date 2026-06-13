@@ -21,7 +21,7 @@ pnpm lint
 ## Layout
 
 - Entry: [`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx) — Hero, About, History, Constituents, Contact, Footer
-- i18n messages: [`src/messages/`](src/messages/) (`shared.json` + `ja.json` / `en.json`)
+- i18n messages: [`src/messages/`](src/messages/) (`shared.json` + `ja.json` / `en.json`) — see [`.cursor/rules/i18n-messages.mdc`](.cursor/rules/i18n-messages.mdc) (no duplicate keys across shared / locale files)
 - Static data: [`src/data/`](src/data/) (nav, history, social links, site tech stack)
 - Shared UI: [`src/components/ui/`](src/components/ui/)
 
@@ -31,6 +31,7 @@ pnpm lint
 - Keep diffs focused; avoid unrelated changes.
 - Client components use `"use client"` where needed; prefer server components by default.
 - Home navigation uses [`src/lib/scroll-to-home.ts`](src/lib/scroll-to-home.ts) (`#home` anchor + `replaceState` for clean URLs).
+- When behavior or project structure changes, update docs per [`.cursor/rules/documentation-sync.mdc`](.cursor/rules/documentation-sync.mdc).
 - Do not commit unless explicitly asked.
 
 ## Responsive design

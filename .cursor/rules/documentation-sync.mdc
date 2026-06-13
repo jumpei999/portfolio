@@ -1,0 +1,42 @@
+---
+description: Keep README, AGENTS.md, and project rules in sync when behavior or structure changes
+alwaysApply: true
+---
+
+# Documentation sync
+
+When code, data, or user-visible behavior changes, update project docs **as needed** — do not leave README, AGENTS.md, or rules stale.
+
+## Where each doc lives
+
+| File                  | Update when                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| `README.md`           | Human-facing overview changes (site features, i18n URLs, project structure, getting started)  |
+| `AGENTS.md`           | Agent-facing stack, commands, layout paths, or conventions change                             |
+| `.cursor/rules/*.mdc` | Persistent policies or constraints change (e.g. responsive targets → `responsive-design.mdc`) |
+
+Do not copy the same long content into multiple files. Pick one source of truth; elsewhere use a short summary + link.
+
+## Common triggers
+
+| Change                                                    | Check                                                            |
+| --------------------------------------------------------- | ---------------------------------------------------------------- |
+| `src/data/` (nav, history, site-tech-stack, social-links) | README Site Features / Project Structure                         |
+| i18n or URLs (`src/i18n/routing.ts`, `src/middleware.ts`) | README Internationalization; AGENTS Stack                        |
+| `src/messages/` (new/changed keys)                        | `i18n-messages.mdc`; README Internationalization if roles change |
+| New/changed sections, header, footer behavior             | README Site Features                                             |
+| Dependencies or npm scripts                               | README Tech Stack / Getting Started; AGENTS Stack / Commands     |
+| Responsive policy                                         | `responsive-design.mdc` (README keeps summary only)              |
+| New standing Agent convention                             | New or existing `.mdc` rule                                      |
+
+## Skip doc updates unless the user asks
+
+- Internal refactors with no behavior or README-relevant change
+- Typo or formatting-only edits in code
+- User explicitly says not to touch documentation
+
+## Workflow
+
+1. After implementing a change, decide what became outdated (human docs / agent docs / rules).
+2. Update only the files that need it, with minimal diffs.
+3. Ensure README and AGENTS.md do not contradict each other (locale URLs, section descriptions, paths).
