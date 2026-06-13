@@ -10,7 +10,7 @@ export default async function AboutSection() {
   return (
     <Section
       id="about"
-      className="max-md:min-h-0 max-md:items-start max-md:justify-start px-6 pt-8 pb-16 sm:px-10 sm:pt-12 sm:pb-20 md:py-24 lg:px-16"
+      className="max-md:min-h-0 max-md:items-start max-md:justify-start px-6 pb-16 sm:px-10 sm:pb-20 md:py-24 lg:px-16"
     >
       <AboutSectionContent
         heading={t("heading")}

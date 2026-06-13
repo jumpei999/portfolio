@@ -1,6 +1,11 @@
 "use client"
 
-import { useLayoutEffect, useState, type RefObject } from "react"
+import {
+  useLayoutEffect,
+  useState,
+  useSyncExternalStore,
+  type RefObject,
+} from "react"
 
 type UseFitTextFontSizeOptions = {
   containerRef: RefObject<HTMLElement | null>
@@ -23,6 +28,8 @@ type Measurement = {
   fontSizePx: number
   letterSpacingEm: number
 }
+
+const MOBILE_FIT_MEDIA_QUERY = "(min-width: 768px)"
 
 function findMaxFontSize(
   textEl: HTMLElement,
@@ -78,12 +85,18 @@ function measureFit(
   return { fontSizePx: bestFontSize, letterSpacingEm: bestTracking }
 }
 
-function getMobileFitEnabled(): boolean {
-  if (typeof globalThis.matchMedia !== "function") {
-    return false
-  }
+function subscribeMobileFitEnabled(onStoreChange: () => void) {
+  const mediaQuery = globalThis.matchMedia(MOBILE_FIT_MEDIA_QUERY)
+  mediaQuery.addEventListener("change", onStoreChange)
+  return () => mediaQuery.removeEventListener("change", onStoreChange)
+}
 
-  return !globalThis.matchMedia("(min-width: 768px)").matches
+function getMobileFitEnabledSnapshot() {
+  return !globalThis.matchMedia(MOBILE_FIT_MEDIA_QUERY).matches
+}
+
+function getMobileFitEnabledServerSnapshot() {
+  return false
 }
 
 export function useFitTextFontSize({
@@ -95,17 +108,12 @@ export function useFitTextFontSize({
   trackingTiers,
 }: UseFitTextFontSizeOptions): FitTextFontSizeResult {
   const defaultTracking = trackingTiers[0] ?? 0
-  const [enabled, setEnabled] = useState(getMobileFitEnabled)
+  const enabled = useSyncExternalStore(
+    subscribeMobileFitEnabled,
+    getMobileFitEnabledSnapshot,
+    getMobileFitEnabledServerSnapshot,
+  )
   const [measurement, setMeasurement] = useState<Measurement | null>(null)
-
-  useLayoutEffect(() => {
-    const mediaQuery = globalThis.matchMedia("(min-width: 768px)")
-    const updateEnabled = () => setEnabled(!mediaQuery.matches)
-
-    mediaQuery.addEventListener("change", updateEnabled)
-
-    return () => mediaQuery.removeEventListener("change", updateEnabled)
-  }, [])
 
   useLayoutEffect(() => {
     if (!enabled) {
