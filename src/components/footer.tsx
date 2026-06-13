@@ -14,6 +14,7 @@ import SiteTechStackIcons from "@/components/footer/site-tech-stack-icons"
 import SocialIconLinks from "@/components/social-icon-links"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
+import { scrollToHome } from "@/lib/scroll-to-home"
 
 export default function Footer() {
   const t = useTranslations("footer")
@@ -21,7 +22,8 @@ export default function Footer() {
   return (
     <div className="relative overflow-x-clip">
       <Link
-        href="/"
+        href="#home"
+        onClick={scrollToHome}
         aria-label={t("backToTopAria")}
         className={cn(
           "peer/backToTop absolute left-1/2 top-0 z-30 -translate-x-1/2 translate-y-[-40%]",

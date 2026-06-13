@@ -22,7 +22,7 @@ export default function Hero() {
   const itemAnimate = { opacity: 1, y: 0 }
 
   return (
-    <Section id="hero" className="relative flex-col gap-6 pt-16">
+    <Section id="home" className="relative flex-col gap-6 pt-16">
       <div className="flex flex-col items-center gap-6 px-6 text-center">
         <MotionLogo
           className="h-auto w-full max-w-md"

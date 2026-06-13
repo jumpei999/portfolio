@@ -1,5 +1,5 @@
 export const NAV_ITEMS = [
-  { key: "home", href: "/" },
+  { key: "home", href: "#home" },
   { key: "about", href: "#about" },
   { key: "history", href: "#history" },
   { key: "constituents", href: "#constituents" },
