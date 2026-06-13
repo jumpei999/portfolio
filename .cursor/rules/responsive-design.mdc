@@ -1,0 +1,35 @@
+---
+description: Responsive layout breakpoints and mobile support targets
+globs: "**/*.{tsx,css}"
+alwaysApply: true
+---
+
+# Responsive design
+
+## Viewport targets
+
+| Role            | Width                                                                                                           |
+| --------------- | --------------------------------------------------------------------------------------------------------------- |
+| Support minimum | **320px** — must not break (no horizontal scroll; core actions usable)                                          |
+| Design baseline | **375px** — spacing, typography, and tap targets are tuned here                                                 |
+| Below 320px     | Out of scope; no need to optimize                                                                               |
+| Tablet          | Use existing Tailwind **`md:` (768px)** and **`lg:` (1024px)** — do not add custom breakpoints unless necessary |
+
+## Implementation
+
+- Mobile-first: base styles target `< sm` (640px); use `sm:` / `md:` / `lg:` for larger screens.
+- Prefer `min-w-0`, `truncate`, and `flex-wrap` so layouts survive 320px.
+- Use `100svh` (not `100vh`) for full-viewport sections when mobile browser chrome matters.
+- Verify at **320px** and **375px** after UI changes; spot-check **390px** on large phones.
+
+## High-risk areas in this repo
+
+- **Header / footer**: `w-3/4` nav with many links + locale switcher — likely needs a mobile nav pattern below `md:`.
+- **Footer**: tech stack icons + SNS in one row.
+- **History**: sticky scroll track + commit list; test short viewports (e.g. iPhone SE height).
+- **Constituents**: full-viewport sticky section.
+
+## Out of scope for responsive work
+
+- Do not redesign desktop layouts when fixing mobile unless asked.
+- Do not introduce new breakpoint tokens in Tailwind config unless the user requests it.
