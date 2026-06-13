@@ -25,10 +25,7 @@ function HistoryHeading({ entranceProps }: Readonly<HistoryHeadingProps>) {
 
   return (
     <header className="mb-4 shrink-0 sm:mb-6">
-      <motion.div
-        className="mb-4 flex justify-center"
-        {...entranceProps(0)}
-      >
+      <motion.div className="mb-4 flex justify-center" {...entranceProps(0)}>
         <HistoryBackButton />
       </motion.div>
       <motion.h2
@@ -105,7 +102,7 @@ export default function HistoryTimeline() {
           items={historyItems}
           activeId={activeId}
           activeIndex={activeIndex}
-          timelineLabel={t("timelineLabel")}
+          timelineLabel={t("timelineAria")}
           animationStarted={started}
           onSelect={scrollToCommit}
         />

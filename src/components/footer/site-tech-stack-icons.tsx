@@ -58,7 +58,7 @@ export default function SiteTechStackIcons({
   return (
     <ul
       className={cn("flex flex-wrap items-center gap-1", className)}
-      aria-label={t("techStackLabel")}
+      aria-label={t("techStackAria")}
     >
       {SITE_TECH_STACK.map((item) => {
         const Icon = ICON_MAP[item.slug]

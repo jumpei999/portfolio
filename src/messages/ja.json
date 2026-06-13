@@ -43,21 +43,15 @@
     }
   },
   "history": {
-    "heading": "History",
-    "timelineLabel": "沿革タイムライン",
-    "skipToPrev": "前のセクションへ",
+    "timelineAria": "沿革のタイムライン",
     "skipToPrevAria": "Aboutセクションへ戻る",
-    "skipToNext": "次のセクションへ",
-    "skipToNextAria": "Constituentsセクションへスキップ",
-    "detail": {
-      "techStack": "技術スタック"
-    }
+    "skipToNextAria": "Constituentsセクションへ進む"
   },
   "contact": {
     "intro": "ご訪問いただきありがとうございました。お仕事のご依頼、ご相談、その他コメントなど何かありましたらお気軽に下記のフォームからご連絡ください。"
   },
   "footer": {
     "backToTopAria": "ページ上部へ戻る",
-    "techStackLabel": "技術スタック"
+    "techStackAria": "技術スタック"
   }
 }

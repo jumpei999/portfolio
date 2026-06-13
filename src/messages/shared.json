@@ -33,11 +33,8 @@
   },
   "history": {
     "heading": "History",
-    "timelineLabel": "Career timeline",
     "skipToPrev": "Previous",
-    "skipToPrevAria": "Back to About section",
     "skipToNext": "Continue",
-    "skipToNextAria": "Skip to Constituents section",
     "detail": {
       "techStack": "Tech Stack"
     }

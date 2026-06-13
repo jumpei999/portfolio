@@ -43,21 +43,15 @@
     }
   },
   "history": {
-    "heading": "History",
-    "timelineLabel": "Career timeline",
-    "skipToPrev": "Previous",
+    "timelineAria": "History timeline",
     "skipToPrevAria": "Back to About section",
-    "skipToNext": "Continue",
-    "skipToNextAria": "Skip to Constituents section",
-    "detail": {
-      "techStack": "Tech Stack"
-    }
+    "skipToNextAria": "Skip to Constituents section"
   },
   "contact": {
     "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below."
   },
   "footer": {
     "backToTopAria": "Back to top",
-    "techStackLabel": "Tech stack"
+    "techStackAria": "Tech stack"
   }
 }
