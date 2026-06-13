@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
 import { MOBILE_NAV_ICONS } from "@/data/nav-icons"
 import type { NavItem } from "@/data/nav-items"
-import { scrollToHome } from "@/lib/scroll-to-home"
+import { scrollToSection } from "@/lib/scroll-to-section"
 import { cn } from "@/lib/utils"
 
 type SiteNavLinksProps = Readonly<{
@@ -54,9 +54,7 @@ export default function SiteNavLinks({
                 href={item.href}
                 title={t(item.key)}
                 onClick={(event) => {
-                  if (item.key === "home") {
-                    scrollToHome(event)
-                  }
+                  scrollToSection(event, item.href)
                   onNavigate?.()
                 }}
                 className={cn(

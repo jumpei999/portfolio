@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react"
 import { BsLightningFill } from "react-icons/bs"
+import { scrollToSection } from "@/lib/scroll-to-section"
 import { cn } from "@/lib/utils"
 
 type SectionScrollLinkProps = {
@@ -41,6 +42,7 @@ export default function SectionScrollLink({
         className,
       )}
       aria-label={ariaLabel}
+      onClick={(event) => scrollToSection(event, href)}
       animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
       transition={
         reduceMotion

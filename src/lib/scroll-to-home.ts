@@ -1,19 +1,8 @@
 import type { MouseEvent } from "react"
+import { HOME_SECTION_ID, scrollToSection } from "@/lib/scroll-to-section"
 
-export const HOME_SECTION_ID = "home"
+export { HOME_SECTION_ID }
 
 export function scrollToHome(event: MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault()
-
-  document.getElementById(HOME_SECTION_ID)?.scrollIntoView({
-    behavior: globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ? "auto"
-      : "smooth",
-  })
-
-  history.replaceState(
-    null,
-    "",
-    `${globalThis.location.pathname}${globalThis.location.search}`,
-  )
+  scrollToSection(event, `#${HOME_SECTION_ID}`)
 }

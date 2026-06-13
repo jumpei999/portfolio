@@ -30,7 +30,7 @@ pnpm lint
 - Match existing patterns (naming, imports, component style) before adding abstractions.
 - Keep diffs focused; avoid unrelated changes.
 - Client components use `"use client"` where needed; prefer server components by default.
-- Home navigation uses [`src/lib/scroll-to-home.ts`](src/lib/scroll-to-home.ts) (`#home` anchor + `replaceState` for clean URLs).
+- In-page section links use [`src/lib/scroll-to-section.ts`](src/lib/scroll-to-section.ts) (`preventDefault` + `scrollIntoView` + `replaceState`; Home clears the hash via [`scroll-to-home.ts`](src/lib/scroll-to-home.ts)).
 - When behavior or project structure changes, update docs per [`.cursor/rules/documentation-sync.mdc`](.cursor/rules/documentation-sync.mdc).
 - Do not commit unless explicitly asked.
 
