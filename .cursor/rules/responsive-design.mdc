@@ -24,7 +24,7 @@ alwaysApply: true
 
 ## High-risk areas in this repo
 
-- **Header / footer**: `w-3/4` nav with many links + locale switcher — likely needs a mobile nav pattern below `md:`.
+- **Header / footer**: below `md:` — centered logo header + fixed bottom nav (Home via logo only); `≥ md` keeps horizontal header nav.
 - **Footer**: tech stack icons + SNS in one row.
 - **History**: sticky scroll track + commit list; test short viewports (e.g. iPhone SE height).
 - **Constituents**: full-viewport sticky section.

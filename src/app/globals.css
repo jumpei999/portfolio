@@ -51,6 +51,7 @@
 
 :root {
   --site-header-height: 4rem;
+  --site-bottom-nav-height: 3.5rem;
   --radius: 0.625rem;
   --background: oklch(0.984 0.003 247.858);
   --foreground: oklch(0.334 0.041 257.417);
@@ -164,6 +165,14 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--site-header-height);
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-bottom: calc(
+      var(--site-bottom-nav-height) + env(safe-area-inset-bottom, 0px)
+    );
+  }
 }
 
 @layer base {

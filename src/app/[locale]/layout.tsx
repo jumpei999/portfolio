@@ -9,6 +9,7 @@ import {
 } from "next-intl/server"
 import "../globals.css"
 import Header from "@/components/header"
+import MobileBottomNav from "@/components/header/mobile-bottom-nav"
 import { routing } from "@/i18n/routing"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
@@ -75,6 +76,7 @@ export default async function LocaleLayout({
           <TooltipProvider delayDuration={150}>
             <Header />
             {children}
+            <MobileBottomNav />
           </TooltipProvider>
         </NextIntlClientProvider>
       </body>

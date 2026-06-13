@@ -2,43 +2,49 @@
 
 import { useTranslations } from "next-intl"
 import { LogoTextLg } from "@/components/brand/logo-text-lg"
+import SiteNavLinks from "@/components/header/site-nav-links"
 import LocaleSwitcher from "@/components/locale-switcher"
 import { Link } from "@/i18n/navigation"
-import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "@/data/nav-items"
 import { scrollToHome } from "@/lib/scroll-to-home"
+import { cn } from "@/lib/utils"
 
-export default function Header() {
+function LogoHomeLink({ className }: Readonly<{ className?: string }>) {
   const t = useTranslations("nav")
 
   return (
+    <Link
+      href="#home"
+      onClick={scrollToHome}
+      className={cn("flex items-center py-2", className)}
+      aria-label={t("logoAria")}
+    >
+      <LogoTextLg className="h-8 w-auto md:h-12" aria-hidden />
+    </Link>
+  )
+}
+
+export default function Header() {
+  return (
     <header className="fixed top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur">
-      <nav className="mx-auto flex w-3/4 items-center justify-between">
-        <Link
-          href="#home"
-          onClick={scrollToHome}
-          className="flex items-center py-2"
-          aria-label={t("logoAria")}
-        >
-          <LogoTextLg className="h-12 w-auto" aria-hidden />
-        </Link>
+      <nav
+        className="mx-auto grid w-full grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 md:hidden"
+        aria-label="Site"
+      >
+        <div aria-hidden />
+        <LogoHomeLink className="justify-self-center" />
+        <div className="flex justify-end">
+          <LocaleSwitcher />
+        </div>
+      </nav>
+
+      <nav
+        className="mx-auto hidden w-3/4 items-center justify-between md:flex"
+        aria-label="Site"
+      >
+        <LogoHomeLink />
         <div className="flex items-center gap-3">
-          <ul className="flex items-center gap-1">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.key} className="py-3">
-                <Button asChild variant="ghost" size="sm">
-                  <Link
-                    href={item.href}
-                    {...(item.key === "home"
-                      ? { onClick: scrollToHome }
-                      : {})}
-                  >
-                    {t(item.key)}
-                  </Link>
-                </Button>
-              </li>
-            ))}
-          </ul>
+          <SiteNavLinks items={NAV_ITEMS} orientation="horizontal" />
           <LocaleSwitcher />
         </div>
       </nav>

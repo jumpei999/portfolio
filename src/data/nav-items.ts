@@ -7,3 +7,9 @@ export const NAV_ITEMS = [
 ] as const
 
 export type NavItemKey = (typeof NAV_ITEMS)[number]["key"]
+
+export type NavItem = (typeof NAV_ITEMS)[number]
+
+export const MOBILE_NAV_ITEMS = NAV_ITEMS.filter(
+  (item) => item.key !== "home",
+) as Exclude<NavItem, { key: "home" }>[]
