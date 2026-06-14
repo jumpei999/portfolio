@@ -1,22 +1,23 @@
 "use client"
 
-import {
-  useMotionValueEvent,
-  useScroll,
-} from "motion/react"
+import { useMotionValueEvent, useScroll, type MotionValue } from "motion/react"
 import { useCallback, useState, type RefObject } from "react"
 
 type UseActiveCommitOptions = {
   commitIds: string[]
   trackRef: RefObject<HTMLElement | null>
   defaultId?: string
-  /** When false, active index is click-only (reduced motion fallback). */
   scrollDriven?: boolean
 }
 
-function progressToIndex(progress: number, count: number): number {
+export function progressToFractional(progress: number, count: number): number {
   if (count <= 1) return 0
-  return Math.min(count - 1, Math.floor(progress * count))
+  return Math.min(count - 1, Math.max(0, progress * (count - 1)))
+}
+
+function fractionalToIndex(fractional: number, count: number): number {
+  if (count <= 1) return 0
+  return Math.min(count - 1, Math.round(fractional))
 }
 
 export function useActiveCommit({
@@ -30,6 +31,7 @@ export function useActiveCommit({
     commitIds.indexOf(defaultId ?? commitIds[0] ?? ""),
   )
   const [activeIndex, setActiveIndex] = useState(defaultIndex)
+  const [fractionalIndex, setFractionalIndex] = useState(defaultIndex)
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -38,7 +40,9 @@ export function useActiveCommit({
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     if (!scrollDriven) return
-    setActiveIndex(progressToIndex(progress, commitIds.length))
+    const fractional = progressToFractional(progress, commitIds.length)
+    setFractionalIndex(fractional)
+    setActiveIndex(fractionalToIndex(fractional, commitIds.length))
   })
 
   const scrollToCommit = useCallback(
@@ -47,6 +51,7 @@ export function useActiveCommit({
       if (index < 0) return
 
       setActiveIndex(index)
+      setFractionalIndex(index)
 
       if (!scrollDriven) return
 
@@ -73,6 +78,10 @@ export function useActiveCommit({
   return {
     activeId,
     activeIndex,
+    fractionalIndex,
+    scrollYProgress: scrollYProgress as MotionValue<number>,
     scrollToCommit,
+    setActiveIndex,
+    setFractionalIndex,
   }
 }

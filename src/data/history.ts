@@ -9,7 +9,6 @@ export type HistoryItem = {
   tags: string[]
 }
 
-/** Newest first — matches Git log order (latest commit at top). */
 export const historyItems: HistoryItem[] = [
   {
     id: "freelancing",
