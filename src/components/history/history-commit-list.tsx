@@ -66,15 +66,22 @@ export default function HistoryCommitList({
     [itemRefs],
   )
 
+  const skipInitialScrollIntoView = useRef(true)
+
   useEffect(() => {
-    if (layout !== "default") return
+    if (layout !== "default" || scrollDriven) return
+
+    if (skipInitialScrollIntoView.current) {
+      skipInitialScrollIntoView.current = false
+      return
+    }
 
     const container = listRef.current
     if (!container) return
 
     const activeItem = container.querySelector<HTMLElement>("[data-active]")
-    activeItem?.scrollIntoView({ block: "nearest" })
-  }, [activeId, layout])
+    activeItem?.scrollIntoView({ block: "nearest", behavior: "instant" })
+  }, [activeId, layout, scrollDriven])
 
   const [lineHeightPx, setLineHeightPx] = useState<number | null>(null)
 
