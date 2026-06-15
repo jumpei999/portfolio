@@ -1,9 +1,8 @@
 "use client"
 
-import { motion } from "motion/react"
 import ProfileImageSwitcher from "@/components/about/profile-image-switcher"
 import SocialLinks from "@/components/about/social-links"
-import { useEntranceAnimation } from "@/hooks/use-entrance-animation"
+import EntranceMotion from "@/components/entrance-motion"
 
 type AboutSectionContentProps = {
   heading: string
@@ -16,40 +15,32 @@ export default function AboutSectionContent({
   paragraphs,
   initialIndex,
 }: Readonly<AboutSectionContentProps>) {
-  const { sectionRef, entranceProps } = useEntranceAnimation()
-
-  const socialDelayIndex = 1 + paragraphs.length
-  const profileDelayIndex = socialDelayIndex + 1
-
   return (
-    <div
-      ref={sectionRef}
-      className="mx-auto grid w-full max-w-6xl gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(280px,360px)] md:items-center"
-    >
-      <div className="space-y-6">
-        <motion.h2
-          className="text-4xl font-bold tracking-tight sm:text-5xl"
-          {...entranceProps(0)}
+    <div className="mx-auto grid w-full max-w-6xl gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(280px,360px)] md:items-center">
+      <div className="contents md:col-start-1 md:block md:space-y-6">
+        <EntranceMotion
+          as="h2"
+          className="order-1 text-4xl font-bold tracking-tight sm:text-5xl"
         >
           {heading}
-        </motion.h2>
+        </EntranceMotion>
 
-        <div className="space-y-4 text-base leading-8 sm:text-lg">
-          {paragraphs.map((paragraph, index) => (
-            <motion.p key={paragraph} {...entranceProps(index + 1)}>
+        <div className="order-3 space-y-4 text-base sm:text-lg sm:leading-relaxed max-sm:text-sm max-sm:leading-relaxed">
+          {paragraphs.map((paragraph) => (
+            <EntranceMotion as="p" key={paragraph}>
               {paragraph}
-            </motion.p>
+            </EntranceMotion>
           ))}
         </div>
 
-        <motion.div {...entranceProps(socialDelayIndex)}>
+        <EntranceMotion className="order-4">
           <SocialLinks />
-        </motion.div>
+        </EntranceMotion>
       </div>
 
-      <motion.div {...entranceProps(profileDelayIndex)}>
+      <EntranceMotion className="order-2 md:col-start-2 md:row-start-1 md:self-center">
         <ProfileImageSwitcher initialIndex={initialIndex} />
-      </motion.div>
+      </EntranceMotion>
     </div>
   )
 }

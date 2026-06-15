@@ -1,13 +1,12 @@
 "use client"
 
-import { motion } from "motion/react"
 import { useTranslations } from "next-intl"
 import Section from "@/components/section"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { useEntranceAnimation } from "@/hooks/use-entrance-animation"
+import EntranceMotion from "@/components/entrance-motion"
 import { cn } from "@/lib/utils"
 
 const underlineInputClass =
@@ -17,10 +16,13 @@ const underlineTextareaClass =
   "peer field-sizing-fixed min-h-0 w-full resize-none rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 md:text-base"
 
 const floatingLabelClass =
-  "absolute left-0 top-2 pointer-events-none font-normal text-muted-foreground transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-valid:-top-6 peer-valid:text-sm"
+  "absolute left-0 top-2 pointer-events-none font-normal text-muted-foreground transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-not-placeholder-shown:-top-6 peer-not-placeholder-shown:text-sm peer-not-placeholder-shown:-translate-x-0.5"
 
-const floatingMessageLabelClass =
-  "absolute left-0 top-20 pointer-events-none font-normal text-muted-foreground transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-valid:-top-6 peer-valid:text-sm"
+const floatingMessageLabelClass = cn(
+  floatingLabelClass,
+  "peer-not-focus:peer-placeholder-shown:top-[calc(100%-2rem)]",
+  "md:peer-not-focus:peer-placeholder-shown:top-[calc(100%-2.25rem)]",
+)
 
 type FloatingFieldProps = Readonly<{
   id: string
@@ -51,6 +53,7 @@ function FloatingField({
           name={name}
           required
           rows={rows}
+          placeholder=" "
           className={underlineTextareaClass}
         />
       ) : (
@@ -60,6 +63,7 @@ function FloatingField({
           type={type}
           required
           autoComplete={autoComplete}
+          placeholder=" "
           className={underlineInputClass}
         />
       )}
@@ -72,28 +76,27 @@ function FloatingField({
 
 export default function Contact() {
   const t = useTranslations("contact")
-  const { sectionRef, entranceProps } = useEntranceAnimation()
 
   return (
     <Section id="contact" className="px-6 py-24 sm:px-10 lg:px-16">
-      <div ref={sectionRef} className="mx-auto w-full max-w-6xl">
-        <motion.h2
+      <div className="mx-auto w-full max-w-6xl">
+        <EntranceMotion
+          as="h2"
           className="mb-12 text-center text-4xl font-bold tracking-tight sm:text-5xl"
-          {...entranceProps(0)}
         >
           {t("heading")}
-        </motion.h2>
+        </EntranceMotion>
 
-        <motion.div
-          className="mb-12 text-start text-base leading-8 text-muted-foreground sm:text-lg"
-          {...entranceProps(1)}
+        <EntranceMotion
+          as="p"
+          className="mb-12 text-start text-base sm:text-lg sm:leading-relaxed sm:text-muted-foreground max-sm:text-sm max-sm:leading-relaxed"
         >
           {t("intro")}
-        </motion.div>
+        </EntranceMotion>
 
         <form className="space-y-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <motion.div {...entranceProps(2)}>
+            <EntranceMotion>
               <FloatingField
                 id="name"
                 name="name"
@@ -101,8 +104,8 @@ export default function Contact() {
                 type="text"
                 autoComplete="name"
               />
-            </motion.div>
-            <motion.div {...entranceProps(3)}>
+            </EntranceMotion>
+            <EntranceMotion>
               <FloatingField
                 id="email"
                 name="email"
@@ -110,10 +113,10 @@ export default function Contact() {
                 type="email"
                 autoComplete="email"
               />
-            </motion.div>
+            </EntranceMotion>
           </div>
 
-          <motion.div {...entranceProps(4)}>
+          <EntranceMotion>
             <FloatingField
               id="message"
               name="message"
@@ -121,9 +124,9 @@ export default function Contact() {
               multiline
               rows={4}
             />
-          </motion.div>
+          </EntranceMotion>
 
-          <motion.div className="flex justify-center" {...entranceProps(5)}>
+          <EntranceMotion className="flex justify-center">
             <Button
               type="submit"
               size="lg"
@@ -137,7 +140,7 @@ export default function Contact() {
             >
               {t("send")}
             </Button>
-          </motion.div>
+          </EntranceMotion>
         </form>
       </div>
     </Section>

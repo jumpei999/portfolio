@@ -9,52 +9,48 @@ import HistoryDetailPanel from "@/components/history/history-detail-panel"
 import HistoryBackButton from "@/components/history/history-back-button"
 import HistorySkipButton from "@/components/history/history-skip-button"
 import { useActiveCommit } from "@/components/history/use-active-commit"
-import { useEntranceAnimation } from "@/hooks/use-entrance-animation"
+import EntranceMotion from "@/components/entrance-motion"
+import { useEntranceInView } from "@/hooks/use-entrance-animation"
 import { historyItems } from "@/data/history"
 import { cn } from "@/lib/utils"
 
 const commitIds = historyItems.map((item) => item.id)
 
-type EntrancePropsFn = ReturnType<typeof useEntranceAnimation>["entranceProps"]
-
-type HistoryHeadingProps = {
-  entranceProps: EntrancePropsFn
-}
-
-function HistoryHeading({ entranceProps }: Readonly<HistoryHeadingProps>) {
+function HistoryHeading() {
   const t = useTranslations("history")
 
   return (
     <header className="max-lg:mb-2 mb-4 shrink-0 sm:mb-6">
-      <motion.div
-        className="mb-4 hidden justify-center lg:flex"
-        {...entranceProps(0)}
-      >
+      <EntranceMotion className="mb-4 hidden justify-center lg:flex">
         <HistoryBackButton />
-      </motion.div>
-      <motion.h2
+      </EntranceMotion>
+      <EntranceMotion
+        as="h2"
         className="text-3xl font-bold tracking-tight sm:text-4xl"
-        {...entranceProps(1)}
       >
         {t("heading")}
-      </motion.h2>
+      </EntranceMotion>
     </header>
   )
 }
 
-type HistorySkipFooterProps = {
-  entranceProps: EntrancePropsFn
-  delayIndex: number
-}
+function HistorySkipFooter({ visible }: Readonly<{ visible: boolean }>) {
+  const reduceMotion = useReducedMotion()
 
-function HistorySkipFooter({
-  entranceProps,
-  delayIndex,
-}: Readonly<HistorySkipFooterProps>) {
+  if (reduceMotion) {
+    return (
+      <div className="mt-auto hidden shrink-0 justify-center pt-4 lg:flex">
+        <HistorySkipButton />
+      </div>
+    )
+  }
+
   return (
     <motion.div
       className="mt-auto hidden shrink-0 justify-center pt-4 lg:flex"
-      {...entranceProps(delayIndex)}
+      initial={{ opacity: 0, y: 16 }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.6, ease: [0.24, 1, 0.32, 1] }}
     >
       <HistorySkipButton />
     </motion.div>
@@ -63,21 +59,13 @@ function HistorySkipFooter({
 
 function HistoryBody({
   children,
-  entranceProps,
-  footerDelayIndex,
-}: Readonly<{
-  children: ReactNode
-  entranceProps: EntrancePropsFn
-  footerDelayIndex: number
-}>) {
+  sectionStarted,
+}: Readonly<{ children: ReactNode; sectionStarted: boolean }>) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <HistoryHeading entranceProps={entranceProps} />
+      <HistoryHeading />
       {children}
-      <HistorySkipFooter
-        entranceProps={entranceProps}
-        delayIndex={footerDelayIndex}
-      />
+      <HistorySkipFooter visible={sectionStarted} />
     </div>
   )
 }
@@ -89,8 +77,6 @@ type HistoryTimelinePanelsProps = {
   fractionalIndex: number
   scrollYProgress?: MotionValue<number>
   timelineLabel: string
-  animationStarted: boolean
-  entranceProps: EntrancePropsFn
   onSelect: (id: string) => void
 }
 
@@ -101,12 +87,15 @@ function HistoryTimelinePanels({
   fractionalIndex,
   scrollYProgress,
   timelineLabel,
-  animationStarted,
-  entranceProps,
   onSelect,
 }: Readonly<HistoryTimelinePanelsProps>) {
   const stageRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLElement | null)[]>([])
+  const { ref: desktopListRef, started: desktopListStarted } =
+    useEntranceInView()
+  const { ref: mobileListRef, started: mobileListStarted } =
+    useEntranceInView()
+  const animationStarted = desktopListStarted || mobileListStarted
 
   const listProps = {
     items: historyItems,
@@ -125,18 +114,18 @@ function HistoryTimelinePanels({
   return (
     <>
       <div className="hidden min-h-0 w-full lg:grid lg:grid-cols-[35%_65%] lg:items-start lg:gap-12">
-        <motion.div {...entranceProps(2)}>
+        <div ref={desktopListRef}>
           <HistoryCommitList layout="default" {...listProps} />
-        </motion.div>
-        <motion.div {...entranceProps(3)}>
+        </div>
+        <EntranceMotion>
           <HistoryDetailPanel activeId={activeId} />
-        </motion.div>
+        </EntranceMotion>
       </div>
 
       <div className="flex min-h-0 w-full flex-1 flex-col lg:hidden">
-        <motion.div
+        <div
+          ref={mobileListRef}
           className="relative min-h-0 flex-1 overflow-hidden"
-          {...entranceProps(2)}
         >
           <div
             ref={stageRef}
@@ -149,13 +138,10 @@ function HistoryTimelinePanels({
           >
             <HistoryCommitList layout="mobileStage" {...listProps} />
           </div>
-        </motion.div>
-        <motion.div
-          className="shrink-0 border-t border-border py-4"
-          {...entranceProps(3)}
-        >
+        </div>
+        <EntranceMotion className="shrink-0 border-t border-border py-4">
           <HistoryDetailPanel activeId={activeId} variant="dock" />
-        </motion.div>
+        </EntranceMotion>
       </div>
     </>
   )
@@ -165,9 +151,9 @@ export default function HistoryTimeline() {
   const t = useTranslations("history")
   const reduceMotion = useReducedMotion()
   const trackRef = useRef<HTMLDivElement>(null)
-  const { sectionRef, started, entranceProps } = useEntranceAnimation()
 
   const scrollDriven = !reduceMotion
+  const { ref: sectionRef, started: sectionStarted } = useEntranceInView()
 
   const {
     activeId,
@@ -182,8 +168,6 @@ export default function HistoryTimeline() {
     scrollDriven,
   })
 
-  const footerDelayIndex = 4
-
   const timelineContent = (
     <HistoryTimelinePanels
       scrollDriven={scrollDriven}
@@ -192,8 +176,6 @@ export default function HistoryTimeline() {
       fractionalIndex={fractionalIndex}
       scrollYProgress={scrollDriven ? scrollYProgress : undefined}
       timelineLabel={t("timelineAria")}
-      animationStarted={started}
-      entranceProps={entranceProps}
       onSelect={scrollToCommit}
     />
   )
@@ -201,10 +183,7 @@ export default function HistoryTimeline() {
   if (!scrollDriven) {
     return (
       <div ref={sectionRef}>
-        <HistoryBody
-          entranceProps={entranceProps}
-          footerDelayIndex={footerDelayIndex}
-        >
+        <HistoryBody sectionStarted={sectionStarted}>
           <div className="flex min-h-0 flex-col max-lg:py-0 sm:min-h-[70svh] lg:min-h-0 lg:py-4">
             {timelineContent}
           </div>
@@ -220,18 +199,14 @@ export default function HistoryTimeline() {
       style={{ height: scrollTrackHeight(historyItems.length) }}
     >
       <div
-        ref={sectionRef}
         className={cn(
           "sticky top-(--site-header-height) flex flex-col overflow-x-hidden overflow-hidden max-lg:py-0 lg:py-8",
           "h-[calc(100svh-var(--site-header-height))]",
           "max-md:h-[calc(100svh-var(--site-header-height)-var(--site-bottom-nav-height)-env(safe-area-inset-bottom,0))]",
         )}
       >
-        <div className="flex min-h-0 flex-1 flex-col w-full">
-          <HistoryBody
-            entranceProps={entranceProps}
-            footerDelayIndex={footerDelayIndex}
-          >
+        <div ref={sectionRef} className="flex min-h-0 flex-1 flex-col w-full">
+          <HistoryBody sectionStarted={sectionStarted}>
             <div className="flex min-h-0 flex-1 flex-col overflow-hidden max-lg:py-0 lg:py-4">
               {timelineContent}
             </div>
