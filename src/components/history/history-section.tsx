@@ -1,11 +1,17 @@
 import Section from "@/components/section"
 import HistoryTimeline from "@/components/history/history-timeline"
+import { SECTION_PB, SECTION_PX } from "@/lib/section-shell"
+import { cn } from "@/lib/utils"
 
 export default function HistorySection() {
   return (
     <Section
       id="history"
-      className="min-h-0 items-stretch justify-start px-6 pb-20 sm:px-10 sm:pb-24 lg:px-16"
+      className={cn(
+        "min-h-0 items-stretch justify-start",
+        SECTION_PX,
+        SECTION_PB,
+      )}
     >
       <div className="mx-auto w-full max-w-6xl">
         <HistoryTimeline />

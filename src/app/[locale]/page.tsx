@@ -1,7 +1,7 @@
 import About from "@/components/about/about-section"
 import ConstituentsClient from "@/components/constituents/constituents-client"
 import ConstituentsSeo from "@/components/constituents/constituents-seo"
-import Contact from "@/components/contact"
+import ContactSection from "@/components/contact/contact-section"
 import Footer from "@/components/footer"
 import History from "@/components/history/history-section"
 import Hero from "@/components/hero"
@@ -21,7 +21,7 @@ export default async function Home({ params }: Readonly<PageProps>) {
   setRequestLocale(locale)
 
   return (
-    <main className="flex flex-col pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0px))] md:pb-0">
+    <main className="flex flex-col pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))] md:pb-0">
       <Hero />
       <About />
       <History />
@@ -29,7 +29,7 @@ export default async function Home({ params }: Readonly<PageProps>) {
         <ConstituentsSeo />
         <ConstituentsClient />
       </div>
-      <Contact />
+      <ContactSection />
       <Footer />
     </main>
   )

@@ -16,7 +16,7 @@ export default function AboutSectionContent({
   initialIndex,
 }: Readonly<AboutSectionContentProps>) {
   return (
-    <div className="mx-auto grid w-full max-w-6xl gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(280px,360px)] md:items-center">
+    <div className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(280px,360px)] md:items-center">
       <div className="contents md:col-start-1 md:block md:space-y-6">
         <EntranceMotion
           as="h2"
