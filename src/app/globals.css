@@ -85,7 +85,11 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  --footer-elevated: color-mix(in oklch, var(--foreground) 72%, var(--background));
+  --footer-elevated: color-mix(
+    in oklch,
+    var(--foreground) 72%,
+    var(--background)
+  );
 }
 
 .dark {
@@ -184,5 +188,27 @@ html {
     @apply bg-background text-foreground;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@keyframes footer-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-1 * var(--footer-marquee-shift)), 0, 0);
+  }
+}
+
+.footer-marquee-track--active {
+  animation: footer-marquee var(--footer-marquee-duration, 20s) linear infinite;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-marquee-track--active {
+    animation: none;
   }
 }

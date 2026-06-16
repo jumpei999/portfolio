@@ -13,6 +13,7 @@ import {
   FOOTER_TOOLTIP_SIDE,
 } from "@/components/footer/footer-tooltip"
 import SiteTechStackIcons from "@/components/footer/site-tech-stack-icons"
+import SiteTechStackIconsMarquee from "@/components/footer/site-tech-stack-icons-marquee"
 import SocialIconLinks from "@/components/social-icon-links"
 import { useMaxWidth } from "@/hooks/use-max-width"
 import { Link } from "@/i18n/navigation"
@@ -101,15 +102,20 @@ export default function Footer() {
 
       <footer
         className={cn(
-          "relative z-10 bg-foreground text-background",
+          "relative bg-foreground text-background",
           "max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
         )}
       >
-        <div className={cn("mx-auto w-3/4 py-4", "min-h-12 sm:min-h-14")}>
-          <div className="flex w-full items-center justify-between gap-2">
-            <SiteTechStackIcons />
+        <div
+          className={cn("mx-auto w-full py-4 md:w-3/4", "min-h-12 sm:min-h-14")}
+        >
+          <div className="flex w-full items-center gap-2 md:justify-between">
+            <div className="relative z-40 w-full min-w-0 md:hidden">
+              <SiteTechStackIconsMarquee className="w-full min-w-0" />
+            </div>
+            <SiteTechStackIcons className="hidden md:flex" />
             <SocialIconLinks
-              className="shrink-0"
+              className="hidden shrink-0 md:flex"
               buttonSize="icon"
               iconClassName={FOOTER_ICON_CLASS}
               buttonClassName={FOOTER_ICON_BUTTON_CLASS}

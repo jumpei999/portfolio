@@ -21,5 +21,5 @@ export const SITE_TECH_STACK: readonly SiteTechStackItem[] = [
   { name: "Radix UI", slug: "radixui", href: "https://www.radix-ui.com" },
   { name: "Motion", slug: "motion", href: "https://motion.dev" },
   { name: "pnpm", slug: "pnpm", href: "https://pnpm.io" },
-  { name: "Cursor", slug: "cursor", href: "https://cursor.com" },
+  { name: "Cursor", slug: "cursor", href: "https://cursor.com/home" },
 ] as const

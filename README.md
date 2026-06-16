@@ -20,7 +20,7 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 | UI / UX     | Radix UI, Motion, react-icons                                                  |
 | Tooling     | ESLint, React Compiler (Babel plugin), pnpm                                    |
 | Assets      | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                       |
-| Development | [Cursor](https://cursor.com) — AI-assisted design and implementation           |
+| Development | [Cursor](https://cursor.com/home) — AI-assisted design and implementation      |
 
 ## Site Features
 
@@ -31,7 +31,7 @@ Single-page layout ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx)):
 - **History** — Git-style timeline of milestones
 - **Constituents** — A tag cloud of my constituents
 - **Contact** — Inquiry form UI
-- **Footer** — Site tech stack icons, social links, and a back-to-top control with a hover-slide message
+- **Footer** — Site tech stack icons, social links (large screens only), and a back-to-top control with a hover-slide message
 
 ## Internationalization
 
@@ -106,7 +106,7 @@ scripts/               # svg-to-tsx.mjs (brand component generator)
 
 ## Credits
 
-Built by JPK Engineering. Design and implementation were developed with [Cursor](https://cursor.com) as an AI pair-programming tool—used for layout exploration, component work, i18n, and iterative UI fixes.
+Built by JPK Engineering. Design and implementation were developed with [Cursor](https://cursor.com/home) as an AI pair-programming tool—used for layout exploration, component work, i18n, and iterative UI fixes.
 
 ## Contact
 
