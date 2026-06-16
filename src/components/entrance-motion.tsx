@@ -2,11 +2,14 @@
 
 import { useRef, type ComponentPropsWithoutRef, type ReactNode } from "react"
 import { motion, useInView, useReducedMotion } from "motion/react"
-import { entranceInViewOptions } from "@/hooks/use-entrance-animation"
+import {
+  entranceInViewOptions,
+  entranceItemTransition,
+  useEntranceStarted,
+} from "@/hooks/use-entrance-animation"
 
 const itemHidden = { opacity: 0, y: 16 }
 const itemAnimate = { opacity: 1, y: 0 }
-const itemEase = [0.24, 1, 0.32, 1] as const
 
 type MotionTag = "div" | "h2" | "p"
 
@@ -14,6 +17,8 @@ type EntranceMotionProps = {
   as?: MotionTag
   children: ReactNode
   className?: string
+  /** Stagger index; multiplied by ENTRANCE_STAGGER_SEC when animation starts. */
+  delayIndex?: number
 } & Omit<
   ComponentPropsWithoutRef<typeof motion.div>,
   "initial" | "animate" | "transition" | "children"
@@ -23,12 +28,14 @@ export default function EntranceMotion({
   as = "div",
   children,
   className,
+  delayIndex = 0,
   ...rest
 }: EntranceMotionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, entranceInViewOptions)
   const reduceMotion = useReducedMotion()
-  const started = inView === true || reduceMotion === true
+  const started = useEntranceStarted(inView === true)
+  const transition = entranceItemTransition(delayIndex, started)
 
   if (as === "h2") {
     if (reduceMotion) {
@@ -45,7 +52,7 @@ export default function EntranceMotion({
         className={className}
         initial={itemHidden}
         animate={started ? itemAnimate : itemHidden}
-        transition={{ duration: 0.6, ease: itemEase }}
+        transition={transition}
         {...rest}
       >
         {children}
@@ -68,7 +75,7 @@ export default function EntranceMotion({
         className={className}
         initial={itemHidden}
         animate={started ? itemAnimate : itemHidden}
-        transition={{ duration: 0.6, ease: itemEase }}
+        transition={transition}
         {...rest}
       >
         {children}
@@ -90,7 +97,7 @@ export default function EntranceMotion({
       className={className}
       initial={itemHidden}
       animate={started ? itemAnimate : itemHidden}
-      transition={{ duration: 0.6, ease: itemEase }}
+      transition={transition}
       {...rest}
     >
       {children}

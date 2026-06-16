@@ -21,11 +21,12 @@ function HistoryHeading() {
 
   return (
     <header className="max-lg:mb-2 mb-4 shrink-0 sm:mb-6">
-      <EntranceMotion className="mb-4 hidden justify-center lg:flex">
+      <EntranceMotion className="mb-4 hidden justify-center lg:flex" delayIndex={0}>
         <HistoryBackButton />
       </EntranceMotion>
       <EntranceMotion
         as="h2"
+        delayIndex={1}
         className="text-4xl font-bold tracking-tight sm:text-5xl"
       >
         {t("heading")}
@@ -117,7 +118,7 @@ function HistoryTimelinePanels({
         <div ref={desktopListRef}>
           <HistoryCommitList layout="default" {...listProps} />
         </div>
-        <EntranceMotion>
+        <EntranceMotion delayIndex={2}>
           <HistoryDetailPanel activeId={activeId} />
         </EntranceMotion>
       </div>
@@ -139,7 +140,7 @@ function HistoryTimelinePanels({
             <HistoryCommitList layout="mobileStage" {...listProps} />
           </div>
         </div>
-        <EntranceMotion className="shrink-0 border-t border-border py-4">
+        <EntranceMotion className="shrink-0 border-t border-border py-4" delayIndex={2}>
           <HistoryDetailPanel activeId={activeId} variant="dock" />
         </EntranceMotion>
       </div>

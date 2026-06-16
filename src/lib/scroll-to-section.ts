@@ -1,4 +1,5 @@
 import type { MouseEvent } from "react"
+import { beginProgrammaticScroll } from "@/lib/programmatic-scroll"
 
 export const HOME_SECTION_ID = "home"
 
@@ -19,6 +20,8 @@ export function getSectionIdFromHref(href: string): string | null {
 }
 
 export function scrollToSectionById(sectionId: string): void {
+  beginProgrammaticScroll()
+
   document.getElementById(sectionId)?.scrollIntoView({
     behavior: getScrollBehavior(),
   })

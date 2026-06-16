@@ -12,6 +12,7 @@ export default function ContactSectionContent() {
     <div className="mx-auto w-full max-w-6xl space-y-6">
       <EntranceMotion
         as="h2"
+        delayIndex={0}
         className="text-4xl font-bold tracking-tight sm:text-5xl sm:pb-6 sm:text-center"
       >
         {t("heading")}
@@ -19,6 +20,7 @@ export default function ContactSectionContent() {
 
       <EntranceMotion
         as="p"
+        delayIndex={1}
         className="text-base sm:text-lg sm:leading-relaxed max-sm:text-sm max-sm:leading-relaxed"
       >
         {t("intro")}
@@ -26,7 +28,7 @@ export default function ContactSectionContent() {
 
       <form className="space-y-10 pt-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <EntranceMotion>
+          <EntranceMotion delayIndex={2}>
             <ContactFloatingField
               id="name"
               name="name"
@@ -35,7 +37,7 @@ export default function ContactSectionContent() {
               autoComplete="name"
             />
           </EntranceMotion>
-          <EntranceMotion>
+          <EntranceMotion delayIndex={3}>
             <ContactFloatingField
               id="email"
               name="email"
@@ -46,7 +48,7 @@ export default function ContactSectionContent() {
           </EntranceMotion>
         </div>
 
-        <EntranceMotion>
+        <EntranceMotion delayIndex={4}>
           <ContactFloatingField
             id="message"
             name="message"
@@ -56,7 +58,7 @@ export default function ContactSectionContent() {
           />
         </EntranceMotion>
 
-        <EntranceMotion className="flex justify-center">
+        <EntranceMotion className="flex justify-center" delayIndex={5}>
           <Button type="submit" size="lg" className="px-8">
             {t("send")}
           </Button>
