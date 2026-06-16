@@ -100,12 +100,7 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      <footer
-        className={cn(
-          "relative bg-foreground text-background",
-          "max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
-        )}
-      >
+      <footer className="relative bg-foreground text-background">
         <div
           className={cn("mx-auto w-full py-4 md:w-3/4", "min-h-12 sm:min-h-14")}
         >
@@ -125,6 +120,10 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+      <div
+        aria-hidden
+        className="bg-background max-md:h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))] md:hidden"
+      />
     </div>
   )
 }

@@ -25,7 +25,7 @@ alwaysApply: true
 ## High-risk areas in this repo
 
 - **Header / footer**: below `md:` — centered logo header + fixed bottom nav (Home via logo only); `≥ md` keeps horizontal header nav.
-- **Footer**: tech stack icons + SNS in one row.
+- **Footer**: tech stack icons + SNS in one row; on mobile, bottom-nav clearance uses a `bg-background` spacer below the dark footer bar (not dark `padding-bottom`).
 - **History**: sticky scroll track + commit list; test short viewports (e.g. iPhone SE height).
 - **Constituents**: full-viewport sticky section.
 

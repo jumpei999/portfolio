@@ -212,3 +212,7 @@ html {
     animation: none;
   }
 }
+
+.site-chrome-surface {
+  @apply bg-background/80 backdrop-blur;
+}

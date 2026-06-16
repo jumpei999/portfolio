@@ -26,7 +26,7 @@ function LogoHomeLink({ className }: Readonly<{ className?: string }>) {
 
 export default function Header() {
   return (
-    <header className="fixed top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur">
+    <header className="site-chrome-surface fixed top-0 z-40 w-full border-b border-border/60">
       <nav
         className="mx-auto grid w-full grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 md:hidden"
         aria-label="Site"
