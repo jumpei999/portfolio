@@ -2,16 +2,20 @@
 
 import { useTranslations } from "next-intl"
 import { useReducedMotion } from "motion/react"
-import { useLayoutEffect, useRef, useState, type CSSProperties, type Ref } from "react"
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type Ref,
+} from "react"
 import { TechStackIcon } from "@/components/footer/site-tech-stack-icon-item"
 import { FOOTER_ICON_CLASS } from "@/components/footer/footer-icon-styles"
 import { SITE_TECH_STACK } from "@/data/site-tech-stack"
 import { cn } from "@/lib/utils"
 
-const MARQUEE_SPEED_PX_PER_SEC = 28
-/** Extra copies beyond the minimum so content sits off-screen before it is needed. */
+const MARQUEE_SPEED_PX_PER_SEC = 24
 const MARQUEE_COPY_BUFFER = 2
-/** Safe default until first measure (767px / ~324px segment + buffer). */
 const MARQUEE_FALLBACK_COPY_COUNT = 5
 
 type SiteTechStackIconsMarqueeProps = Readonly<{
@@ -38,12 +42,18 @@ function getFooterMarqueeTrackStyle(shiftPx: number): FooterMarqueeTrackStyle {
 const MARQUEE_SEGMENT_CLASS =
   "flex shrink-0 flex-nowrap items-center gap-1 pr-1"
 
-function getMarqueeCopyCount(viewportWidth: number, segmentWidth: number): number {
+function getMarqueeCopyCount(
+  viewportWidth: number,
+  segmentWidth: number,
+): number {
   if (segmentWidth <= 0) {
     return 2
   }
 
-  return Math.max(2, Math.ceil(viewportWidth / segmentWidth) + MARQUEE_COPY_BUFFER)
+  return Math.max(
+    2,
+    Math.ceil(viewportWidth / segmentWidth) + MARQUEE_COPY_BUFFER,
+  )
 }
 
 function MarqueeIconSegment({
@@ -147,7 +157,9 @@ export default function SiteTechStackIconsMarquee({
           "footer-marquee-track flex w-max items-center",
           shiftPx !== null && "footer-marquee-track--active",
         )}
-        style={shiftPx === null ? undefined : getFooterMarqueeTrackStyle(shiftPx)}
+        style={
+          shiftPx === null ? undefined : getFooterMarqueeTrackStyle(shiftPx)
+        }
       >
         {Array.from({ length: copyCount }, (_, index) => (
           <MarqueeIconSegment
