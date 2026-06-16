@@ -18,17 +18,7 @@ export function getSectionIdFromHref(href: string): string | null {
   return id.length > 0 ? id : null
 }
 
-export function scrollToSection(
-  event: MouseEvent<HTMLAnchorElement>,
-  href: string,
-): void {
-  event.preventDefault()
-
-  const sectionId = getSectionIdFromHref(href)
-  if (!sectionId) {
-    return
-  }
-
+export function scrollToSectionById(sectionId: string): void {
   document.getElementById(sectionId)?.scrollIntoView({
     behavior: getScrollBehavior(),
   })
@@ -40,4 +30,18 @@ export function scrollToSection(
   } else {
     history.replaceState(null, "", `${url}#${sectionId}`)
   }
+}
+
+export function scrollToSection(
+  event: MouseEvent<HTMLAnchorElement>,
+  href: string,
+): void {
+  event.preventDefault()
+
+  const sectionId = getSectionIdFromHref(href)
+  if (!sectionId) {
+    return
+  }
+
+  scrollToSectionById(sectionId)
 }

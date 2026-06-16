@@ -1,6 +1,8 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { motion, useReducedMotion } from "motion/react"
+import { useEffect, useRef, useState, type MouseEvent } from "react"
 import { BsLightningFill } from "react-icons/bs"
 import {
   FOOTER_ICON_BUTTON_CLASS,
@@ -12,18 +14,47 @@ import {
 } from "@/components/footer/footer-tooltip"
 import SiteTechStackIcons from "@/components/footer/site-tech-stack-icons"
 import SocialIconLinks from "@/components/social-icon-links"
+import { useMaxWidth } from "@/hooks/use-max-width"
 import { Link } from "@/i18n/navigation"
-import { cn } from "@/lib/utils"
+import { HOME_SECTION_ID, scrollToSectionById } from "@/lib/scroll-to-section"
 import { scrollToHome } from "@/lib/scroll-to-home"
+import { cn } from "@/lib/utils"
+
+const MOBILE_SCROLL_DELAY_MS = 800
 
 export default function Footer() {
   const t = useTranslations("footer")
+  const isMobile = useMaxWidth(767)
+  const reduceMotion = useReducedMotion()
+  const [panelOpen, setPanelOpen] = useState(false)
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined)
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(scrollTimerRef.current)
+    }
+  }, [])
+
+  const handleBackToTopClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!isMobile) {
+      scrollToHome(event)
+      return
+    }
+
+    event.preventDefault()
+    setPanelOpen(true)
+    clearTimeout(scrollTimerRef.current)
+    scrollTimerRef.current = setTimeout(() => {
+      scrollToSectionById(HOME_SECTION_ID)
+      setPanelOpen(false)
+    }, MOBILE_SCROLL_DELAY_MS)
+  }
 
   return (
     <div className="relative overflow-x-clip">
       <Link
         href="#home"
-        onClick={scrollToHome}
+        onClick={handleBackToTopClick}
         aria-label={t("backToTopAria")}
         className={cn(
           "peer/backToTop absolute left-1/2 top-0 z-30 -translate-x-1/2 translate-y-[-40%]",
@@ -43,15 +74,18 @@ export default function Footer() {
         aria-hidden
         className={cn(
           "pointer-events-none absolute inset-x-0 bottom-full z-5 overflow-hidden",
-          "peer-hover/backToTop:[&>div]:translate-y-0",
-          "peer-focus-visible/backToTop:[&>div]:translate-y-0",
+          "md:peer-hover/backToTop:[&>div]:translate-y-0",
+          "md:peer-focus-visible/backToTop:[&>div]:translate-y-0",
         )}
       >
-        <div
+        <motion.div
+          animate={isMobile ? { y: panelOpen ? "0%" : "100%" } : false}
+          transition={{ duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
           className={cn(
-            "w-full translate-y-full bg-footer-elevated",
-            "px-8 py-10 transition-transform duration-300 ease-out sm:px-12 sm:py-14",
-            "motion-reduce:transition-none",
+            "w-full bg-footer-elevated",
+            "px-8 py-10 sm:px-12 sm:py-14",
+            "md:translate-y-full md:transition-transform md:duration-300 md:ease-out",
+            "motion-reduce:md:transition-none",
           )}
         >
           <p
@@ -62,16 +96,16 @@ export default function Footer() {
           >
             {t("backToTopHover")}
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      <footer className="relative z-10 bg-foreground text-background">
-        <div
-          className={cn(
-            "mx-auto w-3/4 py-4",
-            "min-h-12 sm:min-h-14",
-          )}
-        >
+      <footer
+        className={cn(
+          "relative z-10 bg-foreground text-background",
+          "max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
+        )}
+      >
+        <div className={cn("mx-auto w-3/4 py-4", "min-h-12 sm:min-h-14")}>
           <div className="flex w-full items-center justify-between gap-2">
             <SiteTechStackIcons />
             <SocialIconLinks

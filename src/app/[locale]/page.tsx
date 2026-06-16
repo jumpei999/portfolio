@@ -21,15 +21,17 @@ export default async function Home({ params }: Readonly<PageProps>) {
   setRequestLocale(locale)
 
   return (
-    <main className="flex flex-col pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))] md:pb-0">
-      <Hero />
-      <About />
-      <History />
-      <div className="relative">
-        <ConstituentsSeo />
-        <ConstituentsClient />
+    <main className="flex flex-col">
+      <div className="flex flex-col pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))] md:pb-0">
+        <Hero />
+        <About />
+        <History />
+        <div className="relative">
+          <ConstituentsSeo />
+          <ConstituentsClient />
+        </div>
+        <ContactSection />
       </div>
-      <ContactSection />
       <Footer />
     </main>
   )
