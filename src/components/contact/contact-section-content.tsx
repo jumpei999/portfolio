@@ -12,7 +12,7 @@ export default function ContactSectionContent() {
     <div className="mx-auto w-full max-w-6xl space-y-6">
       <EntranceMotion
         as="h2"
-        className="text-4xl font-bold tracking-tight sm:text-5xl"
+        className="text-4xl font-bold tracking-tight sm:text-5xl sm:pb-6 sm:text-center"
       >
         {t("heading")}
       </EntranceMotion>

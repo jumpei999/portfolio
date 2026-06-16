@@ -16,8 +16,8 @@ const floatingLabelClass =
 
 const floatingMessageLabelClass = cn(
   floatingLabelClass,
-  "peer-not-focus:peer-placeholder-shown:top-[calc(100%-2rem)]",
-  "md:peer-not-focus:peer-placeholder-shown:top-[calc(100%-2.25rem)]",
+  "peer-not-focus:peer-placeholder-shown:top-[calc(100%-30px)]",
+  "md:peer-not-focus:peer-placeholder-shown:top-[calc(100%-26px)]",
 )
 
 type ContactFloatingFieldProps = Readonly<{

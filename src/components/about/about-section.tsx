@@ -16,7 +16,12 @@ export default async function AboutSection() {
   return (
     <Section
       id="about"
-      className={cn(SECTION_CONTENT_LAYOUT, SECTION_PX, SECTION_PY_MD)}
+      className={cn(
+        SECTION_CONTENT_LAYOUT,
+        SECTION_PX,
+        SECTION_PY_MD,
+        "md:scroll-mt-[-32px]",
+      )}
     >
       <AboutSectionContent
         heading={t("heading")}
