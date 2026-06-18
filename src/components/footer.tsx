@@ -91,8 +91,9 @@ export default function Footer() {
         >
           <p
             className={cn(
-              "mx-auto max-w-4xl text-center text-3xl font-bold tracking-tight text-background",
-              "sm:text-4xl",
+              "mx-auto max-w-4xl text-center font-bold tracking-tight text-background",
+              "text-2xl sm:text-3xl",
+              "md:text-3xl md:sm:text-4xl",
             )}
           >
             {t("backToTopHover")}

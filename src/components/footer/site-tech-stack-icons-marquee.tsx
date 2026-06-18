@@ -14,7 +14,7 @@ import { FOOTER_ICON_CLASS } from "@/components/footer/footer-icon-styles"
 import { SITE_TECH_STACK } from "@/data/site-tech-stack"
 import { cn } from "@/lib/utils"
 
-const MARQUEE_SPEED_PX_PER_SEC = 24
+const MARQUEE_SPEED_PX_PER_SEC = 12
 const MARQUEE_COPY_BUFFER = 2
 const MARQUEE_FALLBACK_COPY_COUNT = 5
 
