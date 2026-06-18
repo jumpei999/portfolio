@@ -45,7 +45,7 @@ export default function Constituents() {
   return (
     <Section
       id="constituents"
-      className="relative min-h-0 h-[calc(100svh-var(--site-header-height))] items-stretch justify-stretch overflow-hidden p-0"
+      className="relative min-h-0 h-[calc(100svh-var(--site-header-height))] max-md:h-[calc(100svh-var(--site-header-height)-var(--site-bottom-nav-height)-env(safe-area-inset-bottom,0))] items-stretch justify-stretch overflow-hidden p-0"
     >
       <div
         ref={sectionRef}

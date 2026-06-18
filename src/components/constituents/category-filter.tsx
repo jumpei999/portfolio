@@ -3,11 +3,7 @@
 import { motion } from "motion/react"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
-import {
-  CATEGORIES,
-  getCategoryChipClass,
-  type Category,
-} from "@/data/category-config"
+import { CATEGORIES, type Category } from "@/data/category-config"
 
 type CategoryFilterProps = {
   selected: ReadonlySet<Category>
@@ -23,7 +19,7 @@ export default function CategoryFilter({
   const t = useTranslations("constituents")
 
   return (
-    <div className="pointer-events-auto flex flex-col items-center gap-3">
+    <div className="pointer-events-auto flex w-full min-w-0 flex-col items-center gap-3">
       <p className="text-xs tracking-wider text-foreground/50 uppercase">
         {t("filterLabel")}
       </p>
@@ -41,9 +37,10 @@ export default function CategoryFilter({
               aria-pressed={active}
               onClick={() => onToggle(category)}
               className={cn(
-                "rounded-full border border-foreground/20 bg-background/70 px-3 py-1.5 text-sm",
+                "rounded-full border border-foreground/20 bg-background/70 px-3 py-1.5 text-sm text-foreground/50",
                 "transition-colors hover:border-foreground/40",
-                getCategoryChipClass(category),
+                "data-[active=true]:border-foreground/40 data-[active=true]:text-foreground",
+                "data-[active=true]:hover:border-foreground/20",
               )}
             >
               {t(`categories.${category}`)}

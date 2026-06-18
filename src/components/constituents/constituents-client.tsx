@@ -8,7 +8,7 @@ const Constituents = dynamic(
     ssr: false,
     loading: () => (
       <div
-        className="h-[calc(100svh-var(--site-header-height))] w-full"
+        className="h-[calc(100svh-var(--site-header-height))] max-md:h-[calc(100svh-var(--site-header-height)-var(--site-bottom-nav-height)-env(safe-area-inset-bottom,0))] w-full"
         aria-hidden
       />
     ),

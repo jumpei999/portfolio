@@ -1,12 +1,29 @@
 import { CONSTITUENT_TAGS } from "@/data/constituent-tags"
 import type { PlacedTag } from "./types"
 
+const TAG_EDGE_PADDING = {
+  desktop: { x: 8, y: 8 },
+  mobile: { x: 8, y: 2 },
+} as const
+
 function isInCenterExclusion(left: number, top: number, radius = 18) {
   return Math.hypot(left - 50, top - 50) < radius
 }
 
-export function buildPlacedTags(): PlacedTag[] {
-  const padding = 8
+function getTagEdgePadding() {
+  if (typeof globalThis.matchMedia !== "function") {
+    return TAG_EDGE_PADDING.desktop
+  }
+
+  return globalThis.matchMedia("(max-width: 767px)").matches
+    ? TAG_EDGE_PADDING.mobile
+    : TAG_EDGE_PADDING.desktop
+}
+
+export function buildPlacedTags(
+  edgePadding = getTagEdgePadding(),
+): PlacedTag[] {
+  const { x: paddingX, y: paddingY } = edgePadding
   const minDistance = 9
   const placed: PlacedTag[] = []
 
@@ -16,8 +33,8 @@ export function buildPlacedTags(): PlacedTag[] {
     let attempts = 0
 
     do {
-      left = padding + Math.random() * (100 - padding * 2)
-      top = padding + Math.random() * (100 - padding * 2)
+      left = paddingX + Math.random() * (100 - paddingX * 2)
+      top = paddingY + Math.random() * (100 - paddingY * 2)
       attempts++
     } while (
       attempts < 80 &&

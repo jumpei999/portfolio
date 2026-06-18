@@ -27,11 +27,7 @@ export default async function ConstituentsSeo() {
 
   return (
     <>
-      <section
-        id="constituents"
-        aria-labelledby="constituents-heading"
-        className="sr-only"
-      >
+      <section aria-labelledby="constituents-heading" className="sr-only">
         <h2 id="constituents-heading">{t("seoHeading")}</h2>
         <ul>
           {CONSTITUENT_TAGS.map((tag) => {
