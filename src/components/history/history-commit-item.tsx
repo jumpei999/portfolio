@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react"
 import { cn } from "@/lib/utils"
+import { formatHistoryCommitLabel } from "@/lib/history-commit-label"
 import type { HistoryItem } from "@/data/history"
 
 type HistoryCommitItemLayout = "default" | "mobile"
@@ -24,7 +25,7 @@ export default function HistoryCommitItem({
   onSelect,
 }: Readonly<HistoryCommitItemProps>) {
   const reduceMotion = useReducedMotion()
-  const label = `${item.type}: ${item.title}`
+  const label = formatHistoryCommitLabel(item)
   const isMobileLayout = layout === "mobile"
 
   return (

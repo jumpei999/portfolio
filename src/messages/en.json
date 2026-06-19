@@ -44,7 +44,42 @@
   "history": {
     "timelineAria": "History timeline",
     "skipToPrevAria": "Back to About section",
-    "skipToNextAria": "Skip to Constituents section"
+    "skipToNextAria": "Skip to Constituents section",
+    "items": {
+      "launch-website": {
+        "description": "It’s been a while since I built something purely for the fun of it. Reminds me of why developing is so much fun."
+      },
+      "vue-spring-boot-project": {
+        "description": "Grateful to be getting hands-on work purely as a coder right now. Having a blast with it."
+      },
+      "start-freelancing": {
+        "description": "Starting something new is just plain fun. Finding that perfect sweet spot for tax optimization without overdoing it felt incredibly satisfying."
+      },
+      "moved-to-matsumoto": {
+        "description": "Since location no longer tied me down, I thought, 'Why not live near the ski resorts?' and made the move. Being a city boy at heart, I looked for an urban area close to the mountains, though it turns out it’s still a bit of a trek to go every single weekend. That said, living in a beautiful city surrounded by mountains is truly amazing."
+      },
+      "start-skiing": {
+        "description": "A friend dragged me into it, and I instantly unlocked it as a lifelong obsession. Currently aiming for the Olympics."
+      },
+      "join-consulting-firm": {
+        "description": "I never thought I’d end up working in one of those shiny, glamorous corporate offices. But in reality, it was a world where 'might makes right.' Honestly, it was fun in its own way."
+      },
+      "join-salesforce-partner-firm": {
+        "description": "The company was packed with brilliant engineers. Looking back after finishing a massive, long-term system development, I sometimes think, 'Wait, couldn't I have just built this alone?'—and this company was actually capable of doing exactly that. Well, until we got acquired by a mega-corporation. Also, I didn't really like Salesforce."
+      },
+      "programming-instructor": {
+        "description": "While staying at the same company, I somehow ended up doing rookie training for system development, teaching at a kids' coding school, and handling marketing."
+      },
+      "long-term-on-site-in-ishigaki-island": {
+        "description": "I thought I joined an IT company, but somehow we ended up building a hotel on Ishigaki Island. I lived there on and off for about a year and a half. It was truly, deeply an incredible place."
+      },
+      "start-golfing": {
+        "description": "Apparently, if you break into the world's top 50, you get into the Masters. So that's the goal. Right now, I'm probably ranked around 43.2 millionth."
+      },
+      "start-career": {
+        "description": "I was just living a carefree life as a freelancer/part-timer, but then I realized I’d never done an office job. I decided to look for work using my hobby of programming, and it turned out I could actually pull it off."
+      }
+    }
   },
   "contact": {
     "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below."

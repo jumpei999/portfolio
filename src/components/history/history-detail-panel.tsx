@@ -10,11 +10,12 @@ import {
 import { useTranslations } from "next-intl"
 import { MOBILE_DOCK_MAX_HEIGHT_PX } from "@/components/history/constants"
 import type { HistoryItem } from "@/data/history"
-import { historyItemById } from "@/data/history"
+import { findHistoryItemById } from "@/lib/history-commit-label"
 import { cn } from "@/lib/utils"
 
 type HistoryDetailPanelProps = {
   activeId: string
+  items: HistoryItem[]
   variant?: "default" | "dock"
 }
 
@@ -133,11 +134,12 @@ function HistoryDetailContent({
 
 export default function HistoryDetailPanel({
   activeId,
+  items,
   variant = "default",
 }: Readonly<HistoryDetailPanelProps>) {
   const t = useTranslations("history")
   const reduceMotion = useReducedMotion()
-  const item = historyItemById.get(activeId)
+  const item = findHistoryItemById(items, activeId)
   const isDock = variant === "dock"
   const cardRef = useRef<HTMLDivElement>(null)
   const articleRef = useRef<HTMLElement>(null)

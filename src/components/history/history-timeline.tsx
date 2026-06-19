@@ -11,10 +11,12 @@ import HistorySkipButton from "@/components/history/history-skip-button"
 import { useActiveCommit } from "@/components/history/use-active-commit"
 import EntranceMotion from "@/components/entrance-motion"
 import { useEntranceInView } from "@/hooks/use-entrance-animation"
-import { historyItems } from "@/data/history"
+import { useHistoryItems } from "@/hooks/use-history-items"
+import { HISTORY_ITEM_IDS } from "@/data/history"
+import type { HistoryItem } from "@/data/history"
 import { cn } from "@/lib/utils"
 
-const commitIds = historyItems.map((item) => item.id)
+const commitIds = HISTORY_ITEM_IDS
 
 function HistoryHeading() {
   const t = useTranslations("history")
@@ -72,6 +74,7 @@ function HistoryBody({
 }
 
 type HistoryTimelinePanelsProps = {
+  items: HistoryItem[]
   scrollDriven: boolean
   activeId: string
   activeIndex: number
@@ -82,6 +85,7 @@ type HistoryTimelinePanelsProps = {
 }
 
 function HistoryTimelinePanels({
+  items,
   scrollDriven,
   activeId,
   activeIndex,
@@ -99,7 +103,7 @@ function HistoryTimelinePanels({
   const animationStarted = desktopListStarted || mobileListStarted
 
   const listProps = {
-    items: historyItems,
+    items,
     activeId,
     activeIndex,
     timelineLabel,
@@ -119,7 +123,7 @@ function HistoryTimelinePanels({
           <HistoryCommitList layout="default" {...listProps} />
         </div>
         <EntranceMotion delayIndex={2}>
-          <HistoryDetailPanel activeId={activeId} />
+          <HistoryDetailPanel activeId={activeId} items={items} />
         </EntranceMotion>
       </div>
 
@@ -141,7 +145,7 @@ function HistoryTimelinePanels({
           </div>
         </div>
         <EntranceMotion className="shrink-0 border-t border-border py-4" delayIndex={2}>
-          <HistoryDetailPanel activeId={activeId} variant="dock" />
+          <HistoryDetailPanel activeId={activeId} items={items} variant="dock" />
         </EntranceMotion>
       </div>
     </>
@@ -150,6 +154,7 @@ function HistoryTimelinePanels({
 
 export default function HistoryTimeline() {
   const t = useTranslations("history")
+  const items = useHistoryItems()
   const reduceMotion = useReducedMotion()
   const trackRef = useRef<HTMLDivElement>(null)
 
@@ -171,6 +176,7 @@ export default function HistoryTimeline() {
 
   const timelineContent = (
     <HistoryTimelinePanels
+      items={items}
       scrollDriven={scrollDriven}
       activeId={activeId}
       activeIndex={activeIndex}
@@ -197,7 +203,7 @@ export default function HistoryTimeline() {
     <div
       ref={trackRef}
       className="relative"
-      style={{ height: scrollTrackHeight(historyItems.length) }}
+      style={{ height: scrollTrackHeight(items.length) }}
     >
       <div
         className={cn(
