@@ -45,10 +45,10 @@
     "filterLabel": "Filter by category",
     "clear": "Clear",
     "categories": {
-      "skill": "Skill",
-      "personality": "Personality",
       "language": "Language",
-      "infra": "Infra"
+      "stack": "Stack",
+      "platform": "Platform",
+      "life": "Life"
     },
     "tagDescriptions": {
       "typescriptPrimary": "Primary language",

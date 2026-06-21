@@ -29,17 +29,10 @@ export type HistoryItem = HistoryItemConfig & {
 
 export const HISTORY_ITEM_CONFIGS = [
   {
-    id: "launch-website",
+    id: "develop-vue-spring-boot",
     date: "2026",
     type: "feat",
-    title: "Launched this website",
-    tags: ["Next.js", "React", "Tailwind", "Shadcn", "Motion"],
-  },
-  {
-    id: "vue-spring-boot-project",
-    date: "2026",
-    type: "feat",
-    title: "Vue.js + Spring Boot Project",
+    title: "enhance full-stack features using Vue.js and Spring Boot",
     tags: ["Vue.js", "Spring Boot"],
   },
   {
@@ -47,51 +40,60 @@ export const HISTORY_ITEM_CONFIGS = [
     date: "2026",
     type: "refactor",
     breaking: true,
-    title: "Started Freelancing",
+    title: "decouple kernel from organization and migrate to freelance runtime",
     tags: ["Tax savings", "e-Tax"],
   },
   {
-    id: "moved-to-matsumoto",
+    id: "move-to-matsumoto",
     date: "2025",
     type: "perf",
-    title: "Moved to Matsumoto",
+    title: "optimize performance by migrating infrastructure to Matsumoto",
     tags: ["Japan Alps", "Clear Water", "Extreme Seasons"],
+  },
+  {
+    id: "adopt-a-dog",
+    date: "2023",
+    type: "feat",
+    title:
+      "import Dog.js sub-module to intercept and handle brain-overheat exceptions",
+    tags: ["Dog", "Mutt"],
   },
   {
     id: "start-skiing",
     date: "2022",
     type: "feat",
     breaking: true,
-    title: "Started Skiing",
+    title: "implement module to slide down snowy mountains on narrow planks",
     tags: ["Skiing", "Snowy Mountains", "Deep Powder"],
   },
   {
     id: "join-consulting-firm",
     date: "2022",
     type: "feat",
-    title: "Joined a Consulting Firm",
+    title: "integrate enterprise management layer into core architecture",
     tags: ["Management", "Large-Scale Projects", "Spirit and Guts Approach"],
   },
   {
     id: "join-salesforce-partner-firm",
     date: "2017",
     type: "feat",
-    title: "Joined a Salesforce Partner Firm",
-    tags: ["Salesforce", "CRM", "SaaS"],
+    title:
+      "load cloud CRM plugin to expand multi-scale business development capabilities",
+    tags: ["Salesforce", "CRM"],
   },
   {
-    id: "programming-instructor",
+    id: "work-as-a-programming-instructor",
     date: "2015",
     type: "feat",
-    title: "Programming Instructor for Kids & Rookies",
+    title: "expose public teaching API for rookies and kids",
     tags: ["Education", "Marketing"],
   },
   {
-    id: "long-term-on-site-in-ishigaki-island",
+    id: "assignment-to-ishigaki",
     date: "2014",
     type: "feat",
     breaking: true,
-    title: "Long-Term On-Site in Ishigaki Island",
+    title: "deploy physical architecture and operations handler",
     tags: [
       "Construction",
       "Super Typhoon",
@@ -106,7 +108,8 @@ export const HISTORY_ITEM_CONFIGS = [
     date: "2010",
     type: "feat",
     breaking: true,
-    title: "Started Golfing",
+    title:
+      "implement module to swing a stick in greenery and drop a ball into a small hole",
     tags: ["Golf", "Full Swing"],
   },
   {
@@ -114,7 +117,7 @@ export const HISTORY_ITEM_CONFIGS = [
     date: "2007",
     type: "feat",
     breaking: true,
-    title: "Started Career as a Software Engineer",
+    title: "init: boot software engineer lifecycle",
     tags: ["Java", "PHP", "JavaScript", "Open Systems"],
   },
 ] as const satisfies readonly HistoryItemConfig[]

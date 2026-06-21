@@ -1,8 +1,8 @@
 export const CATEGORIES = [
-  "skill",
-  "personality",
   "language",
-  "infra",
+  "stack",
+  "platform",
+  "life",
 ] as const
 
 export type Category = (typeof CATEGORIES)[number]

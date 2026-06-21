@@ -22,7 +22,7 @@ Do not copy the same long content into multiple files. Pick one source of truth;
 | Change                                                    | Check                                                            |
 | --------------------------------------------------------- | ---------------------------------------------------------------- |
 | `src/data/` (nav, history, site-tech-stack, social-links) | README Site Features / Project Structure                         |
-| i18n or URLs (`src/i18n/routing.ts`, `src/middleware.ts`) | README Internationalization; AGENTS Stack                        |
+| i18n or URLs (`src/i18n/routing.ts`, `src/proxy.ts`) | README Internationalization; AGENTS Stack                        |
 | `src/messages/` (new/changed keys)                        | `i18n-messages.mdc`; README Internationalization if roles change |
 | New/changed sections, header, footer behavior             | README Site Features                                             |
 | Dependencies or npm scripts                               | README Tech Stack / Getting Started; AGENTS Stack / Commands     |
