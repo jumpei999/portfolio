@@ -6,7 +6,7 @@ I build primarily with **Next.js** and **TypeScript**, prioritizing pure playful
 
 ## Live Site
 
-<!-- TODO: Add production URL when deployed -->
+[https://jpk-engineering.dev](https://jpk-engineering.dev) (English: [/en](https://jpk-engineering.dev/en))
 
 Local development: [http://localhost:3000](http://localhost:3000) (English: [/en](http://localhost:3000/en))
 
@@ -71,7 +71,14 @@ cp .env.example .env.local   # then fill in Resend / contact settings
 pnpm dev
 ```
 
-Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` in `.env.local` (see [`.env.example`](.env.example)).
+Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` in `.env.local` (see [`.env.example`](.env.example)). Set `NEXT_PUBLIC_SITE_URL` to the production origin (e.g. `https://jpk-engineering.dev`) for SEO metadata, sitemap, and robots.
+
+## Deployment (Vercel)
+
+1. Push to GitHub and import the repo in [Vercel](https://vercel.com)
+2. Build command: `pnpm build` / Install command: `pnpm i`
+3. Environment variables: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL`
+4. Verify `/sitemap.xml`, `/robots.txt`, and the contact form on the production URL
 
 Other scripts:
 

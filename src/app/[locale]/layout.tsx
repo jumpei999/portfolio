@@ -10,9 +10,15 @@ import {
 import "../globals.css"
 import Header from "@/components/header"
 import MobileBottomNav from "@/components/header/mobile-bottom-nav"
-import ThemeScript from "@/components/theme-script"
-import { Toaster } from "@/components/ui/sonner"
+import SiteJsonLd from "@/components/seo/site-json-ld"
+import { ThemeProvider } from "@/components/theme-provider"
 import { routing } from "@/i18n/routing"
+import {
+  getAbsoluteLocalizedUrl,
+  getLocalizedPath,
+  getSiteUrl,
+} from "@/lib/site-url"
+import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 const montserrat = Montserrat({
@@ -43,15 +49,36 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "metadata" })
+  const siteUrl = getSiteUrl()
+  const canonicalPath = getLocalizedPath(locale)
+  const openGraphLocale = locale === "ja" ? "ja_JP" : "en_US"
+  const alternateOpenGraphLocale = locale === "ja" ? "en_US" : "ja_JP"
 
   return {
+    metadataBase: siteUrl,
     title: t("title"),
     description: t("description"),
     alternates: {
+      canonical: canonicalPath,
       languages: {
         ja: "/",
         en: "/en",
+        "x-default": "/",
       },
+    },
+    openGraph: {
+      title: t("openGraph.title"),
+      description: t("openGraph.description"),
+      type: "website",
+      url: getAbsoluteLocalizedUrl(locale),
+      siteName: t("title"),
+      locale: openGraphLocale,
+      alternateLocale: [alternateOpenGraphLocale],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
     },
   }
 }
@@ -70,21 +97,29 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className="h-full" suppressHydrationWarning>
-      <head>
-        <ThemeScript />
-      </head>
+    <html
+      lang={locale}
+      className="h-full"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <body
         className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable}`}
       >
-        <NextIntlClientProvider messages={messages}>
-          <TooltipProvider delayDuration={150}>
-            <Header />
-            {children}
-            <MobileBottomNav />
-            <Toaster position="top-center" offset="calc(var(--site-header-height) + 0.5rem)" />
-          </TooltipProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <SiteJsonLd locale={locale} />
+          <NextIntlClientProvider messages={messages}>
+            <TooltipProvider delayDuration={150}>
+              <Header />
+              {children}
+              <MobileBottomNav />
+              <Toaster
+                position="top-center"
+                offset="calc(var(--site-header-height) + 0.5rem)"
+              />
+            </TooltipProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

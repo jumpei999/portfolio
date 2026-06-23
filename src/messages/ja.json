@@ -3,6 +3,9 @@
     "description": "擬会社化したエンジニアJPKの自己紹介サイト",
     "openGraph": {
       "description": "擬会社化したエンジニアJPKの自己紹介サイト"
+    },
+    "jsonLd": {
+      "jobTitle": "フリーランスソフトウェアエンジニア"
     }
   },
   "nav": {

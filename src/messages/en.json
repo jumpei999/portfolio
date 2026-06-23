@@ -3,6 +3,9 @@
     "description": "Pseudo-corporate engineer JPK's portfolio",
     "openGraph": {
       "description": "Pseudo-corporate engineer JPK's portfolio"
+    },
+    "jsonLd": {
+      "jobTitle": "Freelance Software Engineer"
     }
   },
   "nav": {
