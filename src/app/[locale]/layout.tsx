@@ -10,6 +10,8 @@ import {
 import "../globals.css"
 import Header from "@/components/header"
 import MobileBottomNav from "@/components/header/mobile-bottom-nav"
+import ThemeScript from "@/components/theme-script"
+import { Toaster } from "@/components/ui/sonner"
 import { routing } from "@/i18n/routing"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
@@ -68,7 +70,10 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className="h-full">
+    <html lang={locale} className="h-full" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body
         className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable}`}
       >
@@ -77,6 +82,7 @@ export default async function LocaleLayout({
             <Header />
             {children}
             <MobileBottomNav />
+            <Toaster position="top-center" offset="calc(var(--site-header-height) + 0.5rem)" />
           </TooltipProvider>
         </NextIntlClientProvider>
       </body>

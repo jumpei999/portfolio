@@ -7,12 +7,13 @@ Personal portfolio site (single-page, corporate style). Freelance software engin
 - **Next.js 16** (App Router), **React 19**, **TypeScript**
 - **Tailwind CSS v4**, shadcn/ui, semantic CSS variables
 - **next-intl** — locales `ja` (default) / `en`, `localePrefix: as-needed` (Japanese URLs have no prefix; English uses `/en`)
-- **Motion**, Radix UI, react-icons, pnpm
+- **Motion**, Radix UI, react-icons, **Resend** (contact form), pnpm
 
 ## Commands
 
 ```bash
 pnpm i
+cp .env.example .env.local   # RESEND_API_KEY, CONTACT_* for contact form
 pnpm dev      # http://localhost:3000  (English: /en)
 pnpm build
 pnpm lint
@@ -21,6 +22,8 @@ pnpm lint
 ## Layout
 
 - Entry: [`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx) — Hero, About, History, Constituents, Contact, Footer
+- Privacy: modal via [`src/components/privacy/`](src/components/privacy/) (Contact form trigger)
+- Contact: Server Action in [`src/lib/contact/submit-contact.ts`](src/lib/contact/submit-contact.ts) (Resend)
 - i18n messages: [`src/messages/`](src/messages/) (`shared.json` + `ja.json` / `en.json`) — see [`.cursor/rules/i18n-messages.mdc`](.cursor/rules/i18n-messages.mdc) (no duplicate keys across shared / locale files)
 - Static data: [`src/data/`](src/data/) (nav, history, social links, site tech stack)
 - Shared UI: [`src/components/ui/`](src/components/ui/)

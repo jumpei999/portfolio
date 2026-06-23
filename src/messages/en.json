@@ -82,7 +82,47 @@
     }
   },
   "contact": {
-    "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below."
+    "intro": "Thank you for visiting. For project inquiries, consultations, or any comments, please feel free to reach out using the form below.",
+    "sending": "Sending...",
+    "success": "Message sent. Thank you!",
+    "error": "Something went wrong. Please try again later.",
+    "errorConfig": "The contact form is not configured yet. Please try again later.",
+    "errors": {
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageRequired": "Please enter your message."
+    },
+    "privacyConsentBefore": "By submitting, you agree to the ",
+    "privacyConsentLink": "Privacy Policy",
+    "privacyConsentAfter": "."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: June 22, 2026",
+    "close": "Close",
+    "sections": {
+      "collection": {
+        "heading": "Information we collect",
+        "body": "Through the contact form, we collect your name, email address, and message."
+      },
+      "purpose": {
+        "heading": "How we use it",
+        "body": "We use this information only to respond to your inquiry and for related follow-up communication."
+      },
+      "thirdParty": {
+        "heading": "Third-party sharing",
+        "body": "We do not share your personal information with third parties except as required by law. We use Resend to deliver contact form emails."
+      },
+      "retention": {
+        "heading": "Retention",
+        "body": "We retain the information for as long as needed to handle your inquiry, then delete it appropriately."
+      },
+      "contact": {
+        "heading": "Contact",
+        "body": "For questions about this policy, reach out via the contact form or email jumpei.kato.999@gmail.com."
+      }
+    }
   },
   "footer": {
     "backToTopAria": "Back to top",

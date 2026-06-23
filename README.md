@@ -30,7 +30,7 @@ Single-page layout ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx)):
 - **About** — Profile copy with randomized/switchable images
 - **History** — Git-style timeline of milestones
 - **Constituents** — A tag cloud of my constituents
-- **Contact** — Inquiry form UI
+- **Contact** — Inquiry form (Resend)
 - **Footer** — Site tech stack icons, social links (large screens only), and a back-to-top control with a hover-slide message
 
 ## Internationalization
@@ -67,8 +67,11 @@ Requires [pnpm](https://pnpm.io/).
 
 ```bash
 pnpm i
+cp .env.example .env.local   # then fill in Resend / contact settings
 pnpm dev
 ```
+
+Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` in `.env.local` (see [`.env.example`](.env.example)).
 
 Other scripts:
 
