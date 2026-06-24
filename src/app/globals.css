@@ -94,8 +94,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--site-header-height);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 html.light {

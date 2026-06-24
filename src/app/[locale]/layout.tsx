@@ -9,6 +9,7 @@ import {
 } from "next-intl/server"
 import "../globals.css"
 import Header from "@/components/header"
+import SkipToMain from "@/components/skip-to-main"
 import MobileBottomNav from "@/components/header/mobile-bottom-nav"
 import SiteJsonLd from "@/components/seo/site-json-ld"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -110,6 +111,7 @@ export default async function LocaleLayout({
           <SiteJsonLd locale={locale} />
           <NextIntlClientProvider messages={messages}>
             <TooltipProvider delayDuration={150}>
+              <SkipToMain />
               <Header />
               {children}
               <MobileBottomNav />

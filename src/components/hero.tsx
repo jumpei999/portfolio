@@ -17,6 +17,7 @@ const SECONDARY_TRACKING_TIERS = [0.1, 0.06, 0.03, 0] as const
 export default function Hero() {
   const reduceMotion = useReducedMotion()
   const t = useTranslations("hero")
+  const tMetadata = useTranslations("metadata")
   const copyContainerRef = useRef<HTMLDivElement>(null)
   const primaryRef = useRef<HTMLParagraphElement>(null)
   const secondaryRef = useRef<HTMLParagraphElement>(null)
@@ -63,6 +64,7 @@ export default function Hero() {
       )}
     >
       <div className="flex flex-col items-center gap-6 px-6 text-center">
+        <h1 className="sr-only">{tMetadata("title")}</h1>
         <MotionLogo
           className="h-auto w-full max-w-md"
           aria-label={t("logoAlt")}

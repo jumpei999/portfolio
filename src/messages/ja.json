@@ -9,7 +9,10 @@
     }
   },
   "nav": {
-    "logoAria": "ホームに戻る"
+    "logoAria": "ホームに戻る",
+    "skipToMain": "メインコンテンツへ",
+    "siteAria": "サイト",
+    "sectionsAria": "セクション"
   },
   "hero": {
     "logoAlt": "ジェイピーケイエンジニアリングのロゴ",

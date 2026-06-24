@@ -36,6 +36,59 @@
     "skipToNext": "Continue",
     "detail": {
       "techStack": "Tech Stack"
+    },
+    "items": {
+      "develop-vue-spring-boot": {
+        "title": "enhance full-stack features using Vue.js and Spring Boot",
+        "tags": ["Vue.js", "Spring Boot"]
+      },
+      "start-freelancing": {
+        "title": "decouple kernel from organization and migrate to freelance runtime",
+        "tags": ["Tax savings", "e-Tax"]
+      },
+      "move-to-matsumoto": {
+        "title": "optimize performance by migrating infrastructure to Matsumoto",
+        "tags": ["Japan Alps", "Clear Water", "Extreme Seasons"]
+      },
+      "adopt-a-dog": {
+        "title": "import Dog.js sub-module to intercept and handle brain-overheat exceptions",
+        "tags": ["Dog", "Mutt"]
+      },
+      "start-skiing": {
+        "title": "implement module to slide down snowy mountains on narrow planks",
+        "tags": ["Skiing", "Snowy Mountains", "Deep Powder"]
+      },
+      "join-consulting-firm": {
+        "title": "integrate enterprise management layer into core architecture",
+        "tags": ["Management", "Large-Scale Projects", "Spirit and Guts Approach"]
+      },
+      "join-salesforce-partner-firm": {
+        "title": "load cloud CRM plugin to expand multi-scale business development capabilities",
+        "tags": ["Salesforce", "CRM"]
+      },
+      "work-as-a-programming-instructor": {
+        "title": "expose public teaching API for rookies and kids",
+        "tags": ["Education", "Marketing"]
+      },
+      "assignment-to-ishigaki": {
+        "title": "deploy physical architecture and operations handler",
+        "tags": [
+          "Construction",
+          "Super Typhoon",
+          "Starry Sky",
+          "Blue Sea",
+          "White Sand Beach",
+          "Warmhearted People"
+        ]
+      },
+      "start-golfing": {
+        "title": "implement module to swing a stick in greenery and drop a ball into a small hole",
+        "tags": ["Golf", "Full Swing"]
+      },
+      "start-career": {
+        "title": "init: boot software engineer lifecycle",
+        "tags": ["Java", "PHP", "JavaScript", "Open Systems"]
+      }
     }
   },
   "constituents": {

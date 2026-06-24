@@ -9,7 +9,10 @@
     }
   },
   "nav": {
-    "logoAria": "Back to home"
+    "logoAria": "Back to home",
+    "skipToMain": "Skip to main content",
+    "siteAria": "Site",
+    "sectionsAria": "Sections"
   },
   "hero": {
     "logoAlt": "The JPK Engineering logo",

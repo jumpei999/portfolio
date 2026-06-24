@@ -21,7 +21,8 @@ pnpm lint
 
 ## Layout
 
-- Entry: [`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx) — Hero, About, History, Constituents, Contact, Footer
+- Entry: [`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx) — Hero, About, History, Constituents, Contact, Footer (`<main id="main">`)
+- A11y chrome: [`src/components/skip-to-main.tsx`](src/components/skip-to-main.tsx) in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) (skip link → `#main`)
 - Privacy: modal via [`src/components/privacy/`](src/components/privacy/) (Contact form trigger)
 - Contact: Server Action in [`src/lib/contact/submit-contact.ts`](src/lib/contact/submit-contact.ts) (Resend)
 - SEO: [`src/lib/site-url.ts`](src/lib/site-url.ts), [`src/app/sitemap.ts`](src/app/sitemap.ts), [`src/app/robots.ts`](src/app/robots.ts), [`src/app/[locale]/opengraph-image.tsx`](src/app/[locale]/opengraph-image.tsx), [`src/components/seo/site-json-ld.tsx`](src/components/seo/site-json-ld.tsx)

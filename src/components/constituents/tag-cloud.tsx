@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "motion/react"
+import { useTranslations } from "next-intl"
 import type { Category } from "@/data/category-config"
 import { isTagHighlighted } from "./highlight"
 import TagCloudItem from "./tag-cloud-item"
@@ -18,11 +19,12 @@ export default function TagCloud({
   started,
 }: Readonly<TagCloudProps>) {
   const reduceMotion = useReducedMotion()
+  const t = useTranslations("constituents")
 
   return (
     <motion.div
       className="absolute inset-0 z-10 font-montserrat"
-      aria-label="A tag cloud of my constituents"
+      aria-label={t("ariaLabel")}
     >
       {tags.map((tag) => (
         <TagCloudItem

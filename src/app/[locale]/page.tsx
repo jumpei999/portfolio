@@ -21,7 +21,7 @@ export default async function Home({ params }: Readonly<PageProps>) {
   setRequestLocale(locale)
 
   return (
-    <main className="flex flex-col">
+    <main id="main" tabIndex={-1} className="flex flex-col outline-none">
       <div className="flex flex-col pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))] md:pb-0">
         <Hero />
         <About />

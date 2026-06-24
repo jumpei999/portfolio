@@ -14,7 +14,9 @@ export function useHistoryItems(): HistoryItem[] {
     () =>
       HISTORY_ITEM_CONFIGS.map((config) => ({
         ...config,
+        title: tItems(`${config.id}.title`),
         description: tItems(`${config.id}.description`),
+        tags: tItems.raw(`${config.id}.tags`) as string[],
       })),
     [tItems],
   )
