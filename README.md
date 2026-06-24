@@ -18,7 +18,7 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 | Styling     | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens) |
 | i18n        | next-intl (Japanese / English, `localePrefix: as-needed`)                      |
 | UI / UX     | Radix UI, Motion, react-icons                                                  |
-| Tooling     | ESLint, React Compiler (Babel plugin), pnpm                                    |
+| Tooling     | ESLint, React Compiler (Babel plugin), pnpm, GitHub Actions, Dependabot      |
 | Assets      | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                       |
 | Development | [Cursor](https://cursor.com/home) — AI-assisted design and implementation      |
 
@@ -75,22 +75,30 @@ Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EM
 
 ## Deployment (Vercel)
 
-1. Push to GitHub and import the repo in [Vercel](https://vercel.com)
-2. Build command: `pnpm build` / Install command: `pnpm i`
-3. Environment variables: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL`
+Production: [https://jpk-engineering.dev](https://jpk-engineering.dev). Vercel is connected to GitHub; merging to `main` triggers a production deploy after CI passes.
+
+1. Open a PR — [GitHub Actions](.github/workflows/ci.yml) runs `pnpm lint`, `typecheck`, `check:i18n`, and `build`
+2. Merge to `main` — Vercel deploys automatically ([`vercel.json`](vercel.json): `pnpm install` / `pnpm build`)
+3. Environment variables on Vercel: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL` (`https://jpk-engineering.dev`)
 4. Verify `/sitemap.xml`, `/robots.txt`, and the contact form on the production URL
+
+[Dependabot](.github/dependabot.yml) opens weekly PRs for npm and GitHub Actions updates (security fixes included).
 
 Other scripts:
 
 ```bash
-pnpm build    # production build
-pnpm start    # serve production build
-pnpm lint     # ESLint
+pnpm build       # production build
+pnpm start       # serve production build
+pnpm lint        # ESLint
+pnpm typecheck   # tsc --noEmit
+pnpm check:i18n  # ja/en key parity + shared overlap
 ```
 
 ## Project Structure
 
 ```
+.github/workflows/     # CI (lint, typecheck, i18n, build)
+.github/dependabot.yml # Weekly dependency update PRs
 AGENTS.md              # Agent instructions (AI tools)
 .cursor/rules/         # Cursor project rules (e.g. responsive-design.mdc)
 src/
@@ -101,7 +109,8 @@ src/
   i18n/                # next-intl routing
   data/                # Nav, social links, history, site-tech-stack.ts, etc.
 public/                # Logo and static SVG assets
-scripts/               # svg-to-tsx.mjs (brand component generator)
+scripts/               # svg-to-tsx.mjs, check-i18n-keys.mjs
+vercel.json            # Vercel install/build commands
 ```
 
 ## Documentation

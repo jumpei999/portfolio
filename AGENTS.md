@@ -17,7 +17,11 @@ cp .env.example .env.local   # RESEND_API_KEY, CONTACT_*, NEXT_PUBLIC_SITE_URL
 pnpm dev      # http://localhost:3000  (English: /en)
 pnpm build
 pnpm lint
+pnpm typecheck
+pnpm check:i18n
 ```
+
+CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typecheck, i18n, build on PR/push), [`.github/dependabot.yml`](.github/dependabot.yml) (weekly dependency PRs), [`vercel.json`](vercel.json) (pnpm install/build for Vercel Git deploys).
 
 ## Layout
 
