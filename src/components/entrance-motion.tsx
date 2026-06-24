@@ -17,7 +17,6 @@ type EntranceMotionProps = {
   as?: MotionTag
   children: ReactNode
   className?: string
-  /** Stagger index; multiplied by ENTRANCE_STAGGER_SEC when animation starts. */
   delayIndex?: number
 } & Omit<
   ComponentPropsWithoutRef<typeof motion.div>,

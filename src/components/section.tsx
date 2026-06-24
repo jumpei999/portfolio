@@ -16,7 +16,7 @@ export default function Section({
   return (
     <div
       {...(id ? { id } : {})}
-      className={cn("min-h-screen flex items-center justify-center", className)}
+      className={cn("min-h-svh flex items-center justify-center", className)}
     >
       {children}
     </div>

@@ -1,4 +1,5 @@
 import { CONSTITUENT_TAGS } from "@/data/constituent-tags"
+import { matchesMobileViewport } from "@/lib/media-queries"
 import type { PlacedTag } from "./types"
 
 const TAG_EDGE_PADDING = {
@@ -11,11 +12,7 @@ function isInCenterExclusion(left: number, top: number, radius = 18) {
 }
 
 function getTagEdgePadding() {
-  if (typeof globalThis.matchMedia !== "function") {
-    return TAG_EDGE_PADDING.desktop
-  }
-
-  return globalThis.matchMedia("(max-width: 767px)").matches
+  return matchesMobileViewport()
     ? TAG_EDGE_PADDING.mobile
     : TAG_EDGE_PADDING.desktop
 }

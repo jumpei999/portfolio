@@ -2,31 +2,26 @@ export const PROFILE_IMAGES = [
   {
     src: "/profile/ghibli-style.webp",
     imageKey: "ghibli",
-    label: "Ghibli style",
     weight: 60,
   },
   {
     src: "/profile/berserk-style.webp",
     imageKey: "berserk",
-    label: "Berserk style",
     weight: 5,
   },
   {
     src: "/profile/gundam-style.webp",
     imageKey: "gundam",
-    label: "Gundam style",
     weight: 15,
   },
   {
     src: "/profile/hokuto-no-ken-style.webp",
     imageKey: "hokuto",
-    label: "Hokuto no Ken style",
     weight: 5,
   },
   {
     src: "/profile/saint-seiya-style.webp",
     imageKey: "seiya",
-    label: "Saint Seiya style",
     weight: 15,
   },
 ] as const

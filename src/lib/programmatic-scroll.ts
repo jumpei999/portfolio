@@ -1,10 +1,12 @@
+import { prefersReducedMotion } from "@/lib/media-queries"
+
 type Listener = () => void
 
 let programmaticScrolling = false
 const listeners = new Set<Listener>()
 
 function prefersReducedScroll(): boolean {
-  return globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
+  return prefersReducedMotion()
 }
 
 function emit(): void {

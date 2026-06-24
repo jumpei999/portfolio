@@ -1,12 +1,11 @@
 import type { MouseEvent } from "react"
+import { prefersReducedMotion } from "@/lib/media-queries"
 import { beginProgrammaticScroll } from "@/lib/programmatic-scroll"
 
 export const HOME_SECTION_ID = "home"
 
 function getScrollBehavior(): ScrollBehavior {
-  return globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ? "auto"
-    : "smooth"
+  return prefersReducedMotion() ? "auto" : "smooth"
 }
 
 export function getSectionIdFromHref(href: string): string | null {

@@ -6,6 +6,7 @@ import {
   useSyncExternalStore,
   type RefObject,
 } from "react"
+import { DESKTOP_MIN_MEDIA_QUERY } from "@/lib/media-queries"
 
 type UseFitTextFontSizeOptions = {
   containerRef: RefObject<HTMLElement | null>
@@ -29,7 +30,6 @@ type Measurement = {
   letterSpacingEm: number
 }
 
-const MOBILE_FIT_MEDIA_QUERY = "(min-width: 768px)"
 
 function findMaxFontSize(
   textEl: HTMLElement,
@@ -86,13 +86,13 @@ function measureFit(
 }
 
 function subscribeMobileFitEnabled(onStoreChange: () => void) {
-  const mediaQuery = globalThis.matchMedia(MOBILE_FIT_MEDIA_QUERY)
+  const mediaQuery = globalThis.matchMedia(DESKTOP_MIN_MEDIA_QUERY)
   mediaQuery.addEventListener("change", onStoreChange)
   return () => mediaQuery.removeEventListener("change", onStoreChange)
 }
 
 function getMobileFitEnabledSnapshot() {
-  return !globalThis.matchMedia(MOBILE_FIT_MEDIA_QUERY).matches
+  return !globalThis.matchMedia(DESKTOP_MIN_MEDIA_QUERY).matches
 }
 
 function getMobileFitEnabledServerSnapshot() {

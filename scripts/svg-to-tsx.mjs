@@ -81,8 +81,4 @@ fs.writeFileSync(
   path.join(dir, "logo-text-lg.tsx"),
   svgToTsx("public/logo-text-lg.svg", "LogoTextLg", "0 0 1536 512"),
 )
-fs.writeFileSync(
-  path.join(dir, "lightning-up.tsx"),
-  svgToTsx("public/lightning-up.svg", "LightningUp", "0 0 512 512"),
-)
 console.log("Generated logo components")

@@ -1,16 +1,15 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import { SECTION_VIEWPORT_HEIGHT } from "@/lib/section-shell"
+import { cn } from "@/lib/utils"
 
 const Constituents = dynamic(
   () => import("@/components/constituents/constituents-section"),
   {
     ssr: false,
     loading: () => (
-      <div
-        className="h-[calc(100svh-var(--site-header-height))] max-md:h-[calc(100svh-var(--site-header-height)-var(--site-bottom-nav-height)-env(safe-area-inset-bottom,0))] w-full"
-        aria-hidden
-      />
+      <div className={cn(SECTION_VIEWPORT_HEIGHT, "w-full")} aria-hidden />
     ),
   },
 )

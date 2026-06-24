@@ -7,6 +7,9 @@ import { Logo } from "@/components/brand/logo"
 import Section from "@/components/section"
 import SectionScrollLink from "@/components/section-scroll-link"
 import { useFitTextFontSize } from "@/hooks/use-fit-text-font-size"
+import {
+  MOBILE_BOTTOM_CLEARANCE_MAX_MD,
+} from "@/lib/section-shell"
 import { cn } from "@/lib/utils"
 
 const MotionLogo = motion.create(Logo)
@@ -59,7 +62,7 @@ export default function Hero() {
         "relative flex-col gap-6",
         "box-border min-h-svh",
         "pt-(--site-header-height)",
-        "max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
+        MOBILE_BOTTOM_CLEARANCE_MAX_MD,
         "md:pb-10",
       )}
     >

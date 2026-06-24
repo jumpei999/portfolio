@@ -12,14 +12,12 @@ function loadJson(filename) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"))
 }
 
-/** @param {unknown} value @param {string} prefix */
 function collectLeafPaths(value, prefix = "") {
   if (Array.isArray(value)) {
     return prefix ? [prefix] : []
   }
 
   if (value && typeof value === "object") {
-    /** @type {string[]} */
     const paths = []
 
     for (const [key, child] of Object.entries(value)) {
@@ -33,7 +31,6 @@ function collectLeafPaths(value, prefix = "") {
   return prefix ? [prefix] : []
 }
 
-/** @param {Record<string, unknown>} obj */
 function pathSet(obj) {
   return new Set(collectLeafPaths(obj))
 }

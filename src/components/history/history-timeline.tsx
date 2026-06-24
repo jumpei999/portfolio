@@ -15,6 +15,7 @@ import { useHistoryItems } from "@/hooks/use-history-items"
 import { HISTORY_ITEM_IDS } from "@/data/history"
 import type { HistoryItem } from "@/data/history"
 import { cn } from "@/lib/utils"
+import { SECTION_VIEWPORT_HEIGHT } from "@/lib/section-shell"
 
 const commitIds = HISTORY_ITEM_IDS
 
@@ -208,8 +209,7 @@ export default function HistoryTimeline() {
       <div
         className={cn(
           "sticky top-(--site-header-height) flex flex-col overflow-x-hidden overflow-hidden max-lg:py-0 lg:py-8",
-          "h-[calc(100svh-var(--site-header-height))]",
-          "max-md:h-[calc(100svh-var(--site-header-height)-var(--site-bottom-nav-height)-env(safe-area-inset-bottom,0))]",
+          SECTION_VIEWPORT_HEIGHT,
         )}
       >
         <div ref={sectionRef} className="flex min-h-0 flex-1 flex-col w-full">

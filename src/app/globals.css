@@ -2,6 +2,13 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@source inline(
+  "pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
+  "max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
+  "h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
+  "max-md:h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]"
+);
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

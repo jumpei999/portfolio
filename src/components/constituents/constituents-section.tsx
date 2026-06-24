@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react"
 import { motion, useInView } from "motion/react"
 import { useTranslations } from "next-intl"
 import Section from "@/components/section"
+import { SECTION_VIEWPORT_HEIGHT } from "@/lib/section-shell"
 import CategoryFilter from "@/components/constituents/category-filter"
 import CenterTitle from "@/components/constituents/center-title"
 import TagCloud from "@/components/constituents/tag-cloud"
@@ -11,6 +12,7 @@ import TagConnections from "@/components/constituents/tag-connections"
 import { buildPlacedTags } from "@/components/constituents/placement"
 import type { PlacedTag } from "@/components/constituents/types"
 import type { Category } from "@/data/category-config"
+import { cn } from "@/lib/utils"
 
 const IN_VIEW_AMOUNT = 0.6
 
@@ -45,7 +47,10 @@ export default function Constituents() {
   return (
     <Section
       id="constituents"
-      className="relative min-h-0 h-[calc(100svh-var(--site-header-height))] max-md:h-[calc(100svh-var(--site-header-height)-var(--site-bottom-nav-height)-env(safe-area-inset-bottom,0))] items-stretch justify-stretch overflow-hidden p-0"
+      className={cn(
+        "relative min-h-0 items-stretch justify-stretch overflow-hidden p-0",
+        SECTION_VIEWPORT_HEIGHT,
+      )}
     >
       <div
         ref={sectionRef}

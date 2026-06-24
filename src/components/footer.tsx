@@ -17,15 +17,17 @@ import SiteTechStackIconsMarquee from "@/components/footer/site-tech-stack-icons
 import SocialIconLinks from "@/components/social-icon-links"
 import { useMaxWidth } from "@/hooks/use-max-width"
 import { Link } from "@/i18n/navigation"
+import { MOBILE_MAX_WIDTH_PX } from "@/lib/media-queries"
 import { HOME_SECTION_ID, scrollToSectionById } from "@/lib/scroll-to-section"
 import { scrollToHome } from "@/lib/scroll-to-home"
+import { MOBILE_BOTTOM_SPACER_HEIGHT_MAX_MD } from "@/lib/section-shell"
 import { cn } from "@/lib/utils"
 
 const MOBILE_SCROLL_DELAY_MS = 800
 
 export default function Footer() {
   const t = useTranslations("footer")
-  const isMobile = useMaxWidth(767)
+  const isMobile = useMaxWidth(MOBILE_MAX_WIDTH_PX)
   const reduceMotion = useReducedMotion()
   const [panelOpen, setPanelOpen] = useState(false)
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined)
@@ -123,7 +125,7 @@ export default function Footer() {
       </footer>
       <div
         aria-hidden
-        className="bg-background max-md:h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))] md:hidden"
+        className={cn("bg-background md:hidden", MOBILE_BOTTOM_SPACER_HEIGHT_MAX_MD)}
       />
     </div>
   )
