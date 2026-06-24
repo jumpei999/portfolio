@@ -5,8 +5,12 @@ import ContactSection from "@/components/contact/contact-section"
 import Footer from "@/components/footer"
 import History from "@/components/history/history-section"
 import Hero from "@/components/hero"
+import Section from "@/components/section"
 import { routing } from "@/i18n/routing"
-import { MOBILE_BOTTOM_CLEARANCE } from "@/lib/section-shell"
+import {
+  MOBILE_BOTTOM_CLEARANCE,
+  SECTION_VIEWPORT_HEIGHT,
+} from "@/lib/section-shell"
 import { cn } from "@/lib/utils"
 import { setRequestLocale } from "next-intl/server"
 
@@ -28,10 +32,16 @@ export default async function Home({ params }: Readonly<PageProps>) {
         <Hero />
         <About />
         <History />
-        <div className="relative">
+        <Section
+          id="constituents"
+          className={cn(
+            "relative min-h-0 items-stretch justify-stretch overflow-hidden p-0",
+            SECTION_VIEWPORT_HEIGHT,
+          )}
+        >
           <ConstituentsSeo />
           <ConstituentsClient />
-        </div>
+        </Section>
         <ContactSection />
       </div>
       <Footer />

@@ -4,12 +4,8 @@ import { motion, useReducedMotion } from "motion/react"
 import { useTranslations } from "next-intl"
 import { useRef } from "react"
 import { Logo } from "@/components/brand/logo"
-import Section from "@/components/section"
 import SectionScrollLink from "@/components/section-scroll-link"
 import { useFitTextFontSize } from "@/hooks/use-fit-text-font-size"
-import {
-  MOBILE_BOTTOM_CLEARANCE_MAX_MD,
-} from "@/lib/section-shell"
 import { cn } from "@/lib/utils"
 
 const MotionLogo = motion.create(Logo)
@@ -17,7 +13,7 @@ const MotionLogo = motion.create(Logo)
 const PRIMARY_TRACKING_TIERS = [0.25, 0.15, 0.08] as const
 const SECONDARY_TRACKING_TIERS = [0.1, 0.06, 0.03, 0] as const
 
-export default function Hero() {
+export default function HeroContent() {
   const reduceMotion = useReducedMotion()
   const t = useTranslations("hero")
   const tMetadata = useTranslations("metadata")
@@ -56,16 +52,7 @@ export default function Hero() {
   const itemAnimate = { opacity: 1, y: 0 }
 
   return (
-    <Section
-      id="home"
-      className={cn(
-        "relative flex-col gap-6",
-        "box-border min-h-svh",
-        "pt-(--site-header-height)",
-        MOBILE_BOTTOM_CLEARANCE_MAX_MD,
-        "md:pb-10",
-      )}
-    >
+    <>
       <div className="flex flex-col items-center gap-6 px-6 text-center">
         <h1 className="sr-only">{tMetadata("title")}</h1>
         <MotionLogo
@@ -135,6 +122,6 @@ export default function Hero() {
         ariaLabel={t("scrollAria")}
         className="absolute inset-x-0 bottom-10 hidden md:flex"
       />
-    </Section>
+    </>
   )
 }

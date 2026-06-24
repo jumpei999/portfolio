@@ -44,7 +44,8 @@
       "seiya": {
         "alt": "Saint Seiya-style profile image",
         "label": "Pegasus Dog - Saint Seiya Style"
-      }
+      },
+      "randomizeAria": "Show a random profile image"
     }
   },
   "history": {
@@ -133,5 +134,13 @@
   "footer": {
     "backToTopAria": "Back to top",
     "techStackAria": "Tech stack"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist or may have been moved.",
+    "notFoundHome": "Back to home",
+    "genericTitle": "Something went wrong",
+    "genericDescription": "A temporary error occurred. Please try again in a moment.",
+    "retry": "Try again"
   }
 }

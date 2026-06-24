@@ -7,18 +7,19 @@ Personal portfolio site (single-page, corporate style). Freelance software engin
 - **Next.js 16** (App Router), **React 19**, **TypeScript**
 - **Tailwind CSS v4**, shadcn/ui, semantic CSS variables
 - **next-intl** — locales `ja` (default) / `en`, `localePrefix: as-needed` (Japanese URLs have no prefix; English uses `/en`)
-- **Motion**, Radix UI, react-icons, **Resend** (contact form), **Sonner** (toasts), pnpm
+- **Motion**, Radix UI, react-icons, **Resend** (contact form), **Sonner** (toasts), **Vercel Analytics**, **Sentry**, pnpm
 
 ## Commands
 
 ```bash
 pnpm i
-cp .env.example .env.local   # RESEND_API_KEY, CONTACT_*, NEXT_PUBLIC_SITE_URL
+cp .env.example .env.local   # RESEND_API_KEY, CONTACT_*, NEXT_PUBLIC_SITE_URL, SENTRY_*
 pnpm dev      # http://localhost:3000  (English: /en)
 pnpm build
 pnpm lint
 pnpm typecheck
 pnpm check:i18n
+pnpm analyze  # optional: bundle report (ANALYZE=true)
 ```
 
 CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typecheck, i18n, build on PR/push), [`.github/dependabot.yml`](.github/dependabot.yml) (weekly dependency PRs), [`vercel.json`](vercel.json) (pnpm install/build for Vercel Git deploys).
@@ -26,6 +27,7 @@ CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typec
 ## Layout
 
 - Entry: [`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx) — Hero, About, History, Constituents, Contact, Footer (`<main id="main">`)
+- Chrome: [`src/components/header/`](src/components/header/) (server shell + client nav), [`src/components/footer/`](src/components/footer/) (server shell + client island)
 - A11y chrome: [`src/components/skip-to-main.tsx`](src/components/skip-to-main.tsx) in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) (skip link → `#main`)
 - Privacy: modal via [`src/components/privacy/`](src/components/privacy/) (Contact form trigger)
 - Contact: Server Action in [`src/lib/contact/submit-contact.ts`](src/lib/contact/submit-contact.ts) (Resend)

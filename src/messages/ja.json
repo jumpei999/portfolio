@@ -44,7 +44,8 @@
       "seiya": {
         "alt": "聖闘士星矢風のプロフィール画像",
         "label": "犬がペガサスか聖闘士星矢風"
-      }
+      },
+      "randomizeAria": "別のプロフィール画像をランダムに表示"
     }
   },
   "history": {
@@ -133,5 +134,13 @@
   "footer": {
     "backToTopAria": "ページ上部へ戻る",
     "techStackAria": "技術スタック"
+  },
+  "errors": {
+    "notFoundTitle": "ページが見つかりません",
+    "notFoundDescription": "お探しのページは存在しないか、移動した可能性があります。",
+    "notFoundHome": "ホームへ戻る",
+    "genericTitle": "問題が発生しました",
+    "genericDescription": "一時的なエラーが発生しました。しばらくしてからもう一度お試しください。",
+    "retry": "再試行"
   }
 }

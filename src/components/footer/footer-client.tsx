@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils"
 
 const MOBILE_SCROLL_DELAY_MS = 800
 
-export default function Footer() {
+export default function FooterClient() {
   const t = useTranslations("footer")
   const isMobile = useMaxWidth(MOBILE_MAX_WIDTH_PX)
   const reduceMotion = useReducedMotion()
@@ -54,7 +54,7 @@ export default function Footer() {
   }
 
   return (
-    <div className="relative overflow-x-clip">
+    <>
       <Link
         href="#home"
         onClick={handleBackToTopClick}
@@ -127,6 +127,6 @@ export default function Footer() {
         aria-hidden
         className={cn("bg-background md:hidden", MOBILE_BOTTOM_SPACER_HEIGHT_MAX_MD)}
       />
-    </div>
+    </>
   )
 }

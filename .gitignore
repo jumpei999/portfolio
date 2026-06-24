@@ -1,5 +1,6 @@
 .next/
 .vscode/
+.pnpm-store/
 node_modules/
 .env
 .env.local

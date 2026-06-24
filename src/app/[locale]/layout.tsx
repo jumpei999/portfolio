@@ -7,6 +7,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server"
+import { Analytics } from "@vercel/analytics/next"
 import "../globals.css"
 import Header from "@/components/header"
 import SkipToMain from "@/components/skip-to-main"
@@ -119,6 +120,7 @@ export default async function LocaleLayout({
                 position="top-center"
                 offset="calc(var(--site-header-height) + 0.5rem)"
               />
+              <Analytics />
             </TooltipProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

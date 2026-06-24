@@ -3,8 +3,6 @@
 import { useMemo, useRef, useState } from "react"
 import { motion, useInView } from "motion/react"
 import { useTranslations } from "next-intl"
-import Section from "@/components/section"
-import { SECTION_VIEWPORT_HEIGHT } from "@/lib/section-shell"
 import CategoryFilter from "@/components/constituents/category-filter"
 import CenterTitle from "@/components/constituents/center-title"
 import TagCloud from "@/components/constituents/tag-cloud"
@@ -12,7 +10,6 @@ import TagConnections from "@/components/constituents/tag-connections"
 import { buildPlacedTags } from "@/components/constituents/placement"
 import type { PlacedTag } from "@/components/constituents/types"
 import type { Category } from "@/data/category-config"
-import { cn } from "@/lib/utils"
 
 const IN_VIEW_AMOUNT = 0.6
 
@@ -45,18 +42,11 @@ export default function Constituents() {
   }
 
   return (
-    <Section
-      id="constituents"
-      className={cn(
-        "relative min-h-0 items-stretch justify-stretch overflow-hidden p-0",
-        SECTION_VIEWPORT_HEIGHT,
-      )}
+    <div
+      ref={sectionRef}
+      className="flex h-full w-full flex-col"
+      aria-label={t("ariaLabel")}
     >
-      <div
-        ref={sectionRef}
-        className="flex h-full w-full flex-col"
-        aria-label={t("ariaLabel")}
-      >
         <div className="relative min-h-0 flex-1">
           {placedTags.length > 0 && (
             <div className="absolute inset-0">
@@ -93,7 +83,6 @@ export default function Constituents() {
             onClear={() => setSelectedCategories(new Set())}
           />
         </motion.div>
-      </div>
-    </Section>
+    </div>
   )
 }

@@ -18,7 +18,8 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 | Styling     | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens) |
 | i18n        | next-intl (Japanese / English, `localePrefix: as-needed`)                      |
 | UI / UX     | Radix UI, Motion, react-icons                                                  |
-| Tooling     | ESLint, React Compiler (Babel plugin), pnpm, GitHub Actions, Dependabot      |
+| Tooling     | ESLint, React Compiler (Babel plugin), pnpm, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
+| Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                  |
 | Assets      | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                       |
 | Development | [Cursor](https://cursor.com/home) — AI-assisted design and implementation      |
 
@@ -72,6 +73,11 @@ pnpm dev
 ```
 
 Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` in `.env.local` (see [`.env.example`](.env.example)). Set `NEXT_PUBLIC_SITE_URL` to the production origin (e.g. `https://jpk-engineering.dev`) for SEO metadata, sitemap, and robots.
+
+Optional observability (see [`.env.example`](.env.example)):
+
+- **Vercel Analytics** — enable in the Vercel project dashboard after deploy; [`@vercel/analytics`](https://vercel.com/docs/analytics) is wired in the locale layout
+- **Sentry** — set `NEXT_PUBLIC_SENTRY_DSN` (and `SENTRY_ORG` / `SENTRY_PROJECT` / `SENTRY_AUTH_TOKEN` for source map uploads in CI/Vercel)
 
 ## Deployment (Vercel)
 

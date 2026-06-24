@@ -1,5 +1,5 @@
 import Section from "@/components/section"
-import HistoryTimeline from "@/components/history/history-timeline"
+import HistoryClient from "@/components/history/history-client"
 import { SECTION_PB, SECTION_PX } from "@/lib/section-shell"
 import { cn } from "@/lib/utils"
 
@@ -13,9 +13,7 @@ export default function HistorySection() {
         SECTION_PB,
       )}
     >
-      <div className="mx-auto w-full max-w-6xl">
-        <HistoryTimeline />
-      </div>
+      <HistoryClient />
     </Section>
   )
 }

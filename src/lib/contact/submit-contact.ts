@@ -1,5 +1,7 @@
 "use server"
 
+import * as Sentry from "@sentry/nextjs"
+import { headers } from "next/headers"
 import { Resend } from "resend"
 import { type ContactFormState } from "@/lib/contact/types"
 import {
@@ -9,7 +11,7 @@ import {
   parseContactFields,
 } from "@/lib/contact/validate"
 
-export async function submitContact(
+async function submitContactHandler(
   prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
@@ -64,4 +66,18 @@ export async function submitContact(
   }
 
   return { status: "success", resetKey: Date.now() }
+}
+
+export async function submitContact(
+  prevState: ContactFormState,
+  formData: FormData,
+): Promise<ContactFormState> {
+  return Sentry.withServerActionInstrumentation(
+    "submitContact",
+    {
+      recordResponse: true,
+      headers: await headers(),
+    },
+    async () => submitContactHandler(prevState, formData),
+  )
 }
