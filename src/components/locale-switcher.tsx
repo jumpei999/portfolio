@@ -1,28 +1,25 @@
 "use client"
 
-import { useSyncExternalStore } from "react"
+import { useCallback } from "react"
 import { useLocale, useTranslations } from "next-intl"
-import { Link, usePathname } from "@/i18n/navigation"
+import { usePathname, useRouter } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import type { Locale } from "@/i18n/routing"
-
-function useHash() {
-  return useSyncExternalStore(
-    (onStoreChange) => {
-      globalThis.addEventListener("hashchange", onStoreChange)
-      return () => globalThis.removeEventListener("hashchange", onStoreChange)
-    },
-    () => globalThis.location.hash,
-    () => "",
-  )
-}
 
 export default function LocaleSwitcher() {
   const locale = useLocale() as Locale
   const t = useTranslations("nav")
   const pathname = usePathname()
-  const hash = useHash()
+  const router = useRouter()
+
+  const handleSwitch = useCallback(
+    (targetLocale: Locale) => {
+      router.replace(pathname, { locale: targetLocale })
+      globalThis.scrollTo({ top: 0, behavior: "auto" })
+    },
+    [pathname, router],
+  )
 
   const locales: { code: Locale; label: string }[] = [
     { code: "ja", label: t("localeJa") },
@@ -38,24 +35,27 @@ export default function LocaleSwitcher() {
               |
             </span>
           )}
-          <Button
-            asChild
-            variant={locale === code ? "secondary" : "ghost"}
-            size="xs"
-            className={cn(
-              "h-6 px-2 text-xs",
-              locale === code && "font-semibold",
-            )}
-          >
-            <Link
-              href={`${pathname}${hash}`}
-              locale={code}
-              aria-current={locale === code ? "true" : undefined}
-              hrefLang={code}
+          {locale === code ? (
+            <span
+              aria-current="true"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "xs" }),
+                "inline-flex h-6 px-2 text-xs font-semibold",
+              )}
             >
               {label}
-            </Link>
-          </Button>
+            </span>
+          ) : (
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
+              className="h-6 px-2 text-xs"
+              onClick={() => handleSwitch(code)}
+            >
+              {label}
+            </Button>
+          )}
         </span>
       ))}
     </div>
