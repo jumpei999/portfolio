@@ -25,7 +25,7 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 
 ## Site Features
 
-Single-page layout ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx)):
+Single-page layout ([`src/app/[locale]/(home)/page.tsx`](src/app/[locale]/(home)/page.tsx)):
 
 - **Home** — Brand logo and scroll cue
 - **About** — Profile copy with randomized/switchable images

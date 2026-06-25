@@ -9,9 +9,6 @@ import {
 } from "next-intl/server"
 import { Analytics } from "@vercel/analytics/next"
 import "../globals.css"
-import Header from "@/components/header"
-import SkipToMain from "@/components/skip-to-main"
-import MobileBottomNav from "@/components/header/mobile-bottom-nav"
 import SiteJsonLd from "@/components/seo/site-json-ld"
 import { ThemeProvider } from "@/components/theme-provider"
 import { routing } from "@/i18n/routing"
@@ -112,10 +109,7 @@ export default async function LocaleLayout({
           <SiteJsonLd locale={locale} />
           <NextIntlClientProvider messages={messages}>
             <TooltipProvider delayDuration={150}>
-              <SkipToMain />
-              <Header />
               {children}
-              <MobileBottomNav />
               <Toaster
                 position="top-center"
                 offset="calc(var(--site-header-height) + 0.5rem)"

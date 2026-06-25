@@ -26,9 +26,10 @@ CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typec
 
 ## Layout
 
-- Entry: [`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx) — Hero, About, History, Constituents, Contact, Footer (`<main id="main">`)
-- Chrome: [`src/components/header/`](src/components/header/) (server shell + client nav), [`src/components/footer/`](src/components/footer/) (server shell + client island)
-- A11y chrome: [`src/components/skip-to-main.tsx`](src/components/skip-to-main.tsx) in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) (skip link → `#main`)
+- Entry: [`src/app/[locale]/(home)/page.tsx`](src/app/[locale]/(home)/page.tsx) — Hero, About, History, Constituents, Contact, Footer (`<main id="main">`)
+- Chrome: [`src/components/header/`](src/components/header/) (server shell + client nav), [`src/components/footer/`](src/components/footer/) (server shell + client island); header / bottom nav only on home via [`src/app/[locale]/(home)/layout.tsx`](src/app/[locale]/(home)/layout.tsx)
+- A11y chrome: [`src/components/skip-to-main.tsx`](src/components/skip-to-main.tsx) in [`src/app/[locale]/(home)/layout.tsx`](src/app/[locale]/(home)/layout.tsx) (skip link → `#main`)
+- 404: [`src/app/[locale]/not-found.tsx`](src/app/[locale]/not-found.tsx) — minimal UI (logo, message, home link); no site chrome
 - Privacy: modal via [`src/components/privacy/`](src/components/privacy/) (Contact form trigger)
 - Contact: Server Action in [`src/lib/contact/submit-contact.ts`](src/lib/contact/submit-contact.ts) (Resend)
 - SEO: [`src/lib/site-url.ts`](src/lib/site-url.ts), [`src/app/sitemap.ts`](src/app/sitemap.ts), [`src/app/robots.ts`](src/app/robots.ts), [`src/app/[locale]/opengraph-image.tsx`](src/app/[locale]/opengraph-image.tsx), [`src/components/seo/site-json-ld.tsx`](src/components/seo/site-json-ld.tsx)
