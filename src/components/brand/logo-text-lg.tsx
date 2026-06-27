@@ -1,10 +1,13 @@
-import type { SVGProps } from "react"
+import { useId, type SVGProps } from "react"
 import { cn } from "@/lib/utils"
 
+// Circle mask id uses useId — svg-to-tsx regen would drop it; re-apply after regenerate.
 export function LogoTextLg({
   className,
   ...props
 }: Readonly<SVGProps<SVGSVGElement>>) {
+  const circleMaskId = useId()
+
   return (
     <svg
       viewBox="0 0 1536 512"
@@ -33,7 +36,7 @@ export function LogoTextLg({
             in="fbSourceGraphic"
           />
         </filter>
-        <mask maskUnits="userSpaceOnUse" id="mask28">
+        <mask maskUnits="userSpaceOnUse" id={circleMaskId}>
           <g
             id="g30"
             transform="matrix(0.92384309,0,0,0.92384309,-456.14378,35.866845)"
@@ -87,7 +90,7 @@ export function LogoTextLg({
         rx="224.29549"
         cy="256"
         cx="256"
-        mask="url(#mask28)"
+        mask={`url(#${circleMaskId})`}
         transform="matrix(1.0824349,0,0,1.0824349,490.89666,-21.103333)"
       />
       <g id="layer1" transform="translate(511.99999)">
