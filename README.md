@@ -1,5 +1,7 @@
 # JPK Engineering — Portfolio
 
+![CI](https://github.com/jumpei999/portfolio/actions/workflows/ci.yml/badge.svg)
+
 This is the repository for my personal profile website as a freelance software engineer based in Japan. It features a corporate-style, single-page layout.
 
 I build primarily with **Next.js** and **TypeScript**, prioritizing pure playfulness over absolutely everything else.
@@ -45,12 +47,18 @@ Default locale: Japanese (`ja`). Routing config: [`src/i18n/routing.ts`](src/i18
 
 Japanese URLs have no locale prefix. Requests to `/ja` redirect to `/`.
 
+On first visit (no `NEXT_LOCALE` cookie), locale is chosen from the browser's `Accept-Language` header via next-intl middleware. After switching locale in the UI, the cookie persists the choice.
+
 Message files in [`src/messages/`](src/messages/):
 
 - **`shared.json`** — strings identical in every locale (English UI chrome, shared labels)
 - **`ja.json` / `en.json`** — locale-specific copy (metadata, aria labels, long paragraphs)
 
 Do not define the same key path in `shared.json` and a locale file. See [`.cursor/rules/i18n-messages.mdc`](.cursor/rules/i18n-messages.mdc).
+
+## Theme
+
+Default theme is **system** ([`src/components/theme-provider.tsx`](src/components/theme-provider.tsx)): on first visit (no stored preference), light/dark follows the OS `prefers-color-scheme`. Pre-hydration styles in [`src/app/globals.css`](src/app/globals.css) apply the matching palette before React mounts.
 
 ## Responsive design
 
@@ -76,7 +84,7 @@ Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EM
 
 Optional observability (see [`.env.example`](.env.example)):
 
-- **Vercel Analytics** — enable in the Vercel project dashboard after deploy; [`@vercel/analytics`](https://vercel.com/docs/analytics) is wired in the locale layout
+- **Vercel Analytics** — enable in the Vercel project dashboard after deploy (no env vars); [`@vercel/analytics`](https://vercel.com/docs/analytics) is wired in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx). When enabled, production serves `/_vercel/insights/script.js` and the client sends page views after hydration.
 - **Sentry** — set `NEXT_PUBLIC_SENTRY_DSN` (and `SENTRY_ORG` / `SENTRY_PROJECT` / `SENTRY_AUTH_TOKEN` for source map uploads in CI/Vercel)
 
 ## Deployment (Vercel)
