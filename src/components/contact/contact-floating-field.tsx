@@ -6,10 +6,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 
 const underlineInputClass =
-  "peer h-auto min-h-0 w-full rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 text-sm shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:cursor-wait disabled:bg-transparent disabled:opacity-100 sm:text-base"
+  "peer h-auto min-h-0 w-full rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 text-sm shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:cursor-wait disabled:bg-transparent disabled:opacity-100 dark:bg-transparent dark:disabled:bg-transparent sm:text-base"
 
 const underlineTextareaClass =
-  "peer field-sizing-fixed min-h-0 w-full resize-none rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 text-sm shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:cursor-wait disabled:bg-transparent disabled:opacity-100 sm:text-base"
+  "peer field-sizing-fixed min-h-0 w-full resize-none rounded-none border-0 border-b-2 border-input bg-transparent px-0 py-2 text-sm shadow-none placeholder-transparent focus-visible:border-foreground focus-visible:ring-0 aria-invalid:border-destructive aria-invalid:ring-0 disabled:cursor-wait disabled:bg-transparent disabled:opacity-100 dark:bg-transparent dark:disabled:bg-transparent sm:text-base"
 
 const floatingLabelClass =
   "absolute left-0 top-2 pointer-events-none font-normal text-muted-foreground transition-all duration-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:-translate-x-0.5 peer-not-placeholder-shown:-top-6 peer-not-placeholder-shown:text-sm peer-not-placeholder-shown:-translate-x-0.5 peer-aria-invalid:text-destructive"
