@@ -149,11 +149,7 @@ html.light {
     --sidebar-accent-foreground: var(--color-slate-200);
     --sidebar-border: color-mix(in oklch, var(--color-white) 10%, transparent);
     --sidebar-ring: var(--color-gray-500);
-    --footer-elevated: color-mix(
-      in oklch,
-      var(--foreground) 94%,
-      var(--color-white)
-    );
+    --footer-elevated: var(--color-slate-300);
   }
 }
 
@@ -191,11 +187,7 @@ html.dark:not(.light) {
   --sidebar-accent-foreground: var(--color-slate-200);
   --sidebar-border: color-mix(in oklch, var(--color-white) 10%, transparent);
   --sidebar-ring: var(--color-gray-500);
-  --footer-elevated: color-mix(
-    in oklch,
-    var(--foreground) 94%,
-    var(--color-white)
-  );
+  --footer-elevated: var(--color-slate-300);
 }
 
 @media (max-width: 767px) {
