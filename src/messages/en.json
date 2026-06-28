@@ -16,7 +16,9 @@
     "themeLight": "Light mode",
     "themeDark": "Dark mode",
     "themeToggleLabel": "Switch to {mode}",
-    "themeToggleAria": "Switch theme (current: {mode})"
+    "themeToggleAria": "Switch theme (current: {mode})",
+    "localeToggleLabel": "日本語版へ/Switch to Japanese",
+    "localeToggleAria": "言語を切り替え (現在: 日本語)/Switch language (current: Japanese)"
   },
   "hero": {
     "logoAlt": "The JPK Engineering logo",

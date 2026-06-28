@@ -1,10 +1,15 @@
 "use client"
 
 import { useCallback } from "react"
+import { LuLanguages } from "react-icons/lu"
 import { useLocale, useTranslations } from "next-intl"
 import { usePathname, useRouter } from "@/i18n/navigation"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import type { Locale } from "@/i18n/routing"
 
 export default function LocaleSwitcher() {
@@ -13,51 +18,27 @@ export default function LocaleSwitcher() {
   const pathname = usePathname()
   const router = useRouter()
 
-  const handleSwitch = useCallback(
-    (targetLocale: Locale) => {
-      router.replace(pathname, { locale: targetLocale })
-      globalThis.scrollTo({ top: 0, behavior: "auto" })
-    },
-    [pathname, router],
-  )
+  const otherLocale: Locale = locale === "ja" ? "en" : "ja"
 
-  const locales: { code: Locale; label: string }[] = [
-    { code: "ja", label: t("localeJa") },
-    { code: "en", label: t("localeEn") },
-  ]
+  const handleSwitch = useCallback(() => {
+    router.replace(pathname, { locale: otherLocale })
+    globalThis.scrollTo({ top: 0, behavior: "auto" })
+  }, [otherLocale, pathname, router])
 
   return (
-    <div className="flex items-center gap-1 text-sm">
-      {locales.map(({ code, label }, index) => (
-        <span key={code} className="flex items-center gap-1">
-          {index > 0 && (
-            <span className="text-muted-foreground" aria-hidden>
-              |
-            </span>
-          )}
-          {locale === code ? (
-            <span
-              aria-current="true"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "xs" }),
-                "inline-flex h-6 px-2 text-xs font-semibold",
-              )}
-            >
-              {label}
-            </span>
-          ) : (
-            <Button
-              type="button"
-              variant="ghost"
-              size="xs"
-              className="h-6 px-2 text-xs"
-              onClick={() => handleSwitch(code)}
-            >
-              {label}
-            </Button>
-          )}
-        </span>
-      ))}
-    </div>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
+          aria-label={t("localeToggleAria")}
+          onClick={handleSwitch}
+        >
+          <LuLanguages className="size-3.5" aria-hidden />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom">{t("localeToggleLabel")}</TooltipContent>
+    </Tooltip>
   )
 }

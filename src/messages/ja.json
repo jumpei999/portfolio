@@ -16,7 +16,9 @@
     "themeLight": "ライトモード",
     "themeDark": "ダークモード",
     "themeToggleLabel": "{mode}へ",
-    "themeToggleAria": "テーマを切り替え (現在: {mode})"
+    "themeToggleAria": "テーマを切り替え (現在: {mode})",
+    "localeToggleLabel": "Switcn to English/英語版へ",
+    "localeToggleAria": "Switch language (current: Japanese)/言語を切り替え (現在: 日本語)"
   },
   "hero": {
     "logoAlt": "ジェイピーケイエンジニアリングのロゴ",

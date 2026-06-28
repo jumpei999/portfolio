@@ -12,8 +12,8 @@
     "history": "History",
     "constituents": "Constituents",
     "contact": "Contact",
-    "localeJa": "JA",
-    "localeEn": "EN"
+    "localeJa": "Japanese",
+    "localeEn": "English"
   },
   "hero": {
     "primaryMessage": "No engineering, no life.",
@@ -60,7 +60,11 @@
       },
       "join-consulting-firm": {
         "title": "integrate enterprise management layer into core architecture",
-        "tags": ["Management", "Large-Scale Projects", "Spirit and Guts Approach"]
+        "tags": [
+          "Management",
+          "Large-Scale Projects",
+          "Spirit and Guts Approach"
+        ]
       },
       "join-salesforce-partner-firm": {
         "title": "load cloud CRM plugin to expand multi-scale business development capabilities",

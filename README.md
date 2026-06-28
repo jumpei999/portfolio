@@ -14,20 +14,20 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 
 ## Tech Stack
 
-| Category    | Technologies                                                                   |
-| ----------- | ------------------------------------------------------------------------------ |
-| Framework   | Next.js 16 (App Router), React 19, TypeScript                                  |
-| Styling     | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens) |
-| i18n        | next-intl (Japanese / English, `localePrefix: as-needed`)                      |
-| UI / UX     | Radix UI, Motion, react-icons                                                  |
-| Tooling     | ESLint, React Compiler (Babel plugin), pnpm, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
-| Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                  |
-| Assets      | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                       |
-| Development | [Cursor](https://cursor.com/home) — AI-assisted design and implementation      |
+| Category      | Technologies                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| Framework     | Next.js 16 (App Router), React 19, TypeScript                                                    |
+| Styling       | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens)                   |
+| i18n          | next-intl (Japanese / English, `localePrefix: as-needed`)                                        |
+| UI / UX       | Radix UI, Motion, react-icons                                                                    |
+| Tooling       | ESLint, React Compiler (Babel plugin), pnpm, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
+| Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                      |
+| Assets        | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                                         |
+| Development   | [Cursor](https://cursor.com/home) — AI-assisted design and implementation                        |
 
 ## Site Features
 
-Single-page layout ([`src/app/[locale]/(home)/page.tsx`](src/app/[locale]/(home)/page.tsx)):
+Single-page layout ([`src/app/[locale]/(home)/page.tsx`](<src/app/[locale]/(home)/page.tsx>)):
 
 - **Home** — Brand logo and scroll cue (mobile and desktop)
 - **About** — Profile copy with randomized/switchable images
@@ -47,7 +47,7 @@ Default locale: Japanese (`ja`). Routing config: [`src/i18n/routing.ts`](src/i18
 
 Japanese URLs have no locale prefix. Requests to `/ja` redirect to `/`.
 
-On first visit (no `NEXT_LOCALE` cookie), locale is chosen from the browser's `Accept-Language` header via next-intl middleware. After switching locale in the UI, the cookie persists the choice.
+On first visit (no `NEXT_LOCALE` cookie), locale is chosen from the browser's `Accept-Language` header via next-intl middleware. After switching locale in the UI, the cookie persists the choice. The header includes a **Languages** icon toggle ([`src/components/locale-switcher.tsx`](src/components/locale-switcher.tsx)) next to the theme control to switch ja / en.
 
 Message files in [`src/messages/`](src/messages/):
 
@@ -60,7 +60,7 @@ Do not define the same key path in `shared.json` and a locale file. See [`.curso
 
 Default theme is **system** ([`src/components/theme-provider.tsx`](src/components/theme-provider.tsx)): on first visit (no stored preference), light/dark follows the OS `prefers-color-scheme`. The server reads the `portfolio-theme` cookie in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) and applies the matching class on `<html>` before paint. The header includes a **Light / Dark** toggle ([`src/components/theme-toggle.tsx`](src/components/theme-toggle.tsx)); after the first switch, the choice is stored in `localStorage` and synced to the cookie. Favicon follows the resolved theme via [`src/components/theme-favicon.tsx`](src/components/theme-favicon.tsx).
 
-## Responsive design
+## Responsive Design
 
 | Role            | Width                               |
 | --------------- | ----------------------------------- |
