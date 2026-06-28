@@ -7,15 +7,17 @@ type NextIntlIconProps = Readonly<{
 export default function NextIntlIcon({ className }: NextIntlIconProps) {
   return (
     <svg
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 64 64"
       fill="none"
+      stroke="currentColor"
+      className={cn("size-4", className)}
       aria-hidden
-      className={cn("size-4 stroke-current", className)}
     >
       <g
-        fill="none"
         fillRule="evenodd"
-        strokeWidth="1.274"
+        strokeWidth={1.274}
         transform="matrix(2.27345 0 0 2.27345 -17.851 -55.851)"
       >
         <path d="M31.177 48.439a13 13 0 0 1-.934.806c-5.53 4.359-13.488 3.71-18.238-1.488s-4.684-13.181.153-18.299c4.838-5.117 12.805-5.633 18.261-1.182 5.457 4.45 6.563 12.241 2.522 18.008" />
