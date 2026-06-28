@@ -6,7 +6,7 @@ Personal portfolio site (single-page, corporate style). Freelance software engin
 
 - **Next.js 16** (App Router), **React 19**, **TypeScript**
 - **Tailwind CSS v4**, shadcn/ui, semantic CSS variables
-- **next-intl** — locales `ja` (default) / `en`, `localePrefix: as-needed` (Japanese URLs have no prefix; English uses `/en`); first visit uses `Accept-Language`, then `NEXT_LOCALE` cookie
+- **next-intl** — locales `ja` (default) / `en`, `localePrefix: as-needed` (Japanese URLs have no prefix; English uses `/en`); first visit uses primary `Accept-Language` (ja only when primary is Japanese, else en), then `NEXT_LOCALE` cookie
 - **Theme** — [`theme-provider.tsx`](src/components/theme-provider.tsx) defaults to `system` (OS `prefers-color-scheme`); header [`theme-toggle.tsx`](src/components/theme-toggle.tsx) switches light/dark (persisted in `localStorage` + `portfolio-theme` cookie); SSR applies theme class on `<html>` via [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) / [`theme-storage.ts`](src/lib/theme-storage.ts)
 - **Motion**, Radix UI, react-icons, **Resend** (contact form), **Sonner** (toasts), **Vercel Analytics**, **Sentry**, pnpm
 

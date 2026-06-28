@@ -47,7 +47,7 @@ Default locale: Japanese (`ja`). Routing config: [`src/i18n/routing.ts`](src/i18
 
 Japanese URLs have no locale prefix. Requests to `/ja` redirect to `/`.
 
-On first visit (no `NEXT_LOCALE` cookie), locale is chosen from the browser's `Accept-Language` header via next-intl middleware. After switching locale in the UI, the cookie persists the choice. The header includes a **Languages** icon toggle ([`src/components/locale-switcher.tsx`](src/components/locale-switcher.tsx)) next to the theme control to switch ja / en.
+On first visit (no `NEXT_LOCALE` cookie), locale is chosen from the browser's `Accept-Language` header: **Japanese (`ja*`) when the primary language is Japanese, otherwise English**. After switching locale in the UI, the cookie persists the choice. The header includes a **Languages** icon toggle ([`src/components/locale-switcher.tsx`](src/components/locale-switcher.tsx)) next to the theme control to switch ja / en.
 
 Message files in [`src/messages/`](src/messages/):
 
