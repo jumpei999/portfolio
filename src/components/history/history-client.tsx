@@ -1,15 +1,19 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { SECTION_VIEWPORT_HEIGHT } from "@/lib/section-shell"
-import { cn } from "@/lib/utils"
+import { scrollTrackHeight } from "@/components/history/constants"
+import { HISTORY_ITEM_IDS } from "@/data/history"
 
 const HistoryTimeline = dynamic(
   () => import("@/components/history/history-timeline"),
   {
     ssr: false,
     loading: () => (
-      <div className={cn(SECTION_VIEWPORT_HEIGHT, "w-full")} aria-hidden />
+      <div
+        className="w-full"
+        style={{ height: scrollTrackHeight(HISTORY_ITEM_IDS.length) }}
+        aria-hidden
+      />
     ),
   },
 )
