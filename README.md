@@ -58,7 +58,7 @@ Do not define the same key path in `shared.json` and a locale file. See [`.curso
 
 ## Theme
 
-Default theme is **system** ([`src/components/theme-provider.tsx`](src/components/theme-provider.tsx)): on first visit (no stored preference), light/dark follows the OS `prefers-color-scheme`. Pre-hydration styles in [`src/app/globals.css`](src/app/globals.css) apply the matching palette before React mounts. The header includes a **Light / Dark** toggle ([`src/components/theme-toggle.tsx`](src/components/theme-toggle.tsx)); after the first switch, the choice is stored in `localStorage` (`portfolio-theme`). Favicon follows the resolved theme via [`src/components/theme-favicon.tsx`](src/components/theme-favicon.tsx).
+Default theme is **system** ([`src/components/theme-provider.tsx`](src/components/theme-provider.tsx)): on first visit (no stored preference), light/dark follows the OS `prefers-color-scheme`. The server reads the `portfolio-theme` cookie in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) and applies the matching class on `<html>` before paint. The header includes a **Light / Dark** toggle ([`src/components/theme-toggle.tsx`](src/components/theme-toggle.tsx)); after the first switch, the choice is stored in `localStorage` and synced to the cookie. Favicon follows the resolved theme via [`src/components/theme-favicon.tsx`](src/components/theme-favicon.tsx).
 
 ## Responsive design
 

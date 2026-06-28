@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { cookies } from "next/headers"
 import { Montserrat, M_PLUS_Rounded_1c } from "next/font/google"
 import { NextIntlClientProvider, hasLocale } from "next-intl"
 import {
@@ -12,7 +13,6 @@ import "../globals.css"
 import SiteJsonLd from "@/components/seo/site-json-ld"
 import { ThemeProvider } from "@/components/theme-provider"
 import ThemeFavicon from "@/components/theme-favicon"
-import { THEME_INIT_SCRIPT } from "@/lib/theme-storage"
 import { routing } from "@/i18n/routing"
 import {
   getAbsoluteLocalizedUrl,
@@ -21,6 +21,13 @@ import {
 } from "@/lib/site-url"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { cn } from "@/lib/utils"
+import {
+  getThemeColorScheme,
+  getThemeHtmlClass,
+  parseTheme,
+  THEME_STORAGE_KEY,
+} from "@/lib/theme-storage"
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -96,21 +103,23 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale)
   const messages = await getMessages()
+  const cookieStore = await cookies()
+  const initialTheme = parseTheme(cookieStore.get(THEME_STORAGE_KEY)?.value)
+  const themeClass = getThemeHtmlClass(initialTheme)
+  const colorScheme = getThemeColorScheme(initialTheme)
 
   return (
     <html
       lang={locale}
-      className="h-full"
+      className={cn("h-full", themeClass)}
+      style={colorScheme ? { colorScheme } : undefined}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-      </head>
       <body
         className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable}`}
       >
-        <ThemeProvider>
+        <ThemeProvider initialTheme={initialTheme}>
           <ThemeFavicon />
           <SiteJsonLd locale={locale} />
           <NextIntlClientProvider messages={messages}>

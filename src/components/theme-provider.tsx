@@ -2,11 +2,13 @@
 
 import * as React from "react"
 
-import { THEME_STORAGE_KEY } from "@/lib/theme-storage"
+import {
+  THEME_STORAGE_KEY,
+  writeThemeCookie,
+  type Theme,
+} from "@/lib/theme-storage"
 
 const STORAGE_KEY = THEME_STORAGE_KEY
-
-type Theme = "light" | "dark" | "system"
 
 type ThemeContextValue = {
   theme: Theme
@@ -54,10 +56,6 @@ function getThemeSnapshot(): Theme {
   return readStoredTheme()
 }
 
-function getServerThemeSnapshot(): Theme {
-  return "system"
-}
-
 function subscribeSystemTheme(listener: () => void) {
   const media = globalThis.matchMedia("(prefers-color-scheme: dark)")
   media.addEventListener("change", listener)
@@ -85,12 +83,24 @@ function setThemePreference(theme: Theme) {
   try {
     localStorage.setItem(STORAGE_KEY, theme)
   } catch {}
+  writeThemeCookie(theme)
   emitThemeChange()
 }
 
+type ThemeProviderProps = Readonly<{
+  children: React.ReactNode
+  initialTheme?: Theme
+}>
+
 export function ThemeProvider({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  initialTheme = "system",
+}: ThemeProviderProps) {
+  const getServerThemeSnapshot = React.useCallback(
+    () => initialTheme,
+    [initialTheme],
+  )
+
   const theme = React.useSyncExternalStore(
     subscribeTheme,
     getThemeSnapshot,
@@ -103,7 +113,11 @@ export function ThemeProvider({
   )
   const resolvedTheme = theme === "system" ? systemTheme : theme
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
+    writeThemeCookie(readStoredTheme())
+  }, [])
+
+  React.useLayoutEffect(() => {
     applyTheme(resolvedTheme, theme)
   }, [resolvedTheme, theme])
 
