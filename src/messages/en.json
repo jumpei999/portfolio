@@ -12,7 +12,11 @@
     "logoAria": "Back to home",
     "skipToMain": "Skip to main content",
     "siteAria": "Site",
-    "sectionsAria": "Sections"
+    "sectionsAria": "Sections",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode",
+    "themeToggleLabel": "Switch to {mode}",
+    "themeToggleAria": "Switch theme (current: {mode})"
   },
   "hero": {
     "logoAlt": "The JPK Engineering logo",

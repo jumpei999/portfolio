@@ -2,7 +2,9 @@
 
 import * as React from "react"
 
-const STORAGE_KEY = "portfolio-theme"
+import { THEME_STORAGE_KEY } from "@/lib/theme-storage"
+
+const STORAGE_KEY = THEME_STORAGE_KEY
 
 type Theme = "light" | "dark" | "system"
 
@@ -28,11 +30,11 @@ function subscribeTheme(listener: () => void) {
   }
 
   themeListeners.add(listener)
-  window.addEventListener("storage", onStorage)
+  globalThis.addEventListener("storage", onStorage)
 
   return () => {
     themeListeners.delete(listener)
-    window.removeEventListener("storage", onStorage)
+    globalThis.removeEventListener("storage", onStorage)
   }
 }
 
@@ -57,13 +59,13 @@ function getServerThemeSnapshot(): Theme {
 }
 
 function subscribeSystemTheme(listener: () => void) {
-  const media = window.matchMedia("(prefers-color-scheme: dark)")
+  const media = globalThis.matchMedia("(prefers-color-scheme: dark)")
   media.addEventListener("change", listener)
   return () => media.removeEventListener("change", listener)
 }
 
 function getSystemThemeSnapshot(): "light" | "dark" {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
+  return globalThis.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light"
 }
@@ -82,13 +84,13 @@ function applyTheme(resolved: "light" | "dark", theme: Theme) {
 function setThemePreference(theme: Theme) {
   try {
     localStorage.setItem(STORAGE_KEY, theme)
-  } catch {
-    // localStorage unavailable
-  }
+  } catch {}
   emitThemeChange()
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const theme = React.useSyncExternalStore(
     subscribeTheme,
     getThemeSnapshot,
@@ -114,9 +116,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     [theme, setTheme, resolvedTheme],
   )
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
 export function useTheme() {

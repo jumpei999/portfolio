@@ -12,7 +12,11 @@
     "logoAria": "ホームに戻る",
     "skipToMain": "メインコンテンツへ",
     "siteAria": "サイト",
-    "sectionsAria": "セクション"
+    "sectionsAria": "セクション",
+    "themeLight": "ライトモード",
+    "themeDark": "ダークモード",
+    "themeToggleLabel": "{mode}へ",
+    "themeToggleAria": "テーマを切り替え (現在: {mode})"
   },
   "hero": {
     "logoAlt": "ジェイピーケイエンジニアリングのロゴ",

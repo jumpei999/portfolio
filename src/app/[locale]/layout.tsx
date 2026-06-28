@@ -11,6 +11,8 @@ import { Analytics } from "@vercel/analytics/next"
 import "../globals.css"
 import SiteJsonLd from "@/components/seo/site-json-ld"
 import { ThemeProvider } from "@/components/theme-provider"
+import ThemeFavicon from "@/components/theme-favicon"
+import { THEME_INIT_SCRIPT } from "@/lib/theme-storage"
 import { routing } from "@/i18n/routing"
 import {
   getAbsoluteLocalizedUrl,
@@ -102,10 +104,14 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body
         className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable}`}
       >
         <ThemeProvider>
+          <ThemeFavicon />
           <SiteJsonLd locale={locale} />
           <NextIntlClientProvider messages={messages}>
             <TooltipProvider delayDuration={150}>
