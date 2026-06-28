@@ -21,15 +21,15 @@ export function getTagClassName(
 ): string {
   return cn(
     "absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap",
-    "transition-[opacity,filter]",
+    "transition-[opacity,filter,text-shadow]",
     LEVEL_TEXT_CLASS[tag.level],
     "font-medium tracking-tight",
     hasDescription
       ? "pointer-events-auto cursor-default"
       : "pointer-events-none",
     highlighted
-      ? "z-10 text-foreground drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] dark:drop-shadow-[0_2px_14px_rgba(255,255,255,0.14)]"
-      : "z-0 text-foreground/45 blur-[0.3px] drop-shadow-[0_1px_4px_rgba(0,0,0,0.12)] dark:drop-shadow-none",
+      ? "z-10 text-foreground drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] dark:drop-shadow-none dark:[text-shadow:0_0_24px_rgba(255,255,255,0.45),0_2px_28px_rgba(255,255,255,0.28)]"
+      : "z-0 text-foreground/45 blur-[0.3px] drop-shadow-[0_1px_4px_rgba(0,0,0,0.12)] dark:drop-shadow-none dark:blur-[0.6px] dark:[text-shadow:0_0_14px_rgba(255,255,255,0.35),0_2px_20px_rgba(255,255,255,0.18)]",
   )
 }
 
