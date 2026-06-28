@@ -9,6 +9,10 @@ import {
 } from "motion/react"
 import { useTranslations } from "next-intl"
 import { MOBILE_DOCK_MAX_HEIGHT_PX } from "@/components/history/constants"
+import {
+  ENTRANCE_EASE,
+  ENTRANCE_STAGGER_SEC,
+} from "@/hooks/use-entrance-animation"
 import type { HistoryItem } from "@/data/history"
 import { findHistoryItemById } from "@/lib/history-commit-label"
 import { cn } from "@/lib/utils"
@@ -82,37 +86,111 @@ function useDockNeedsScroll(
   return isDock && needsScroll
 }
 
+const detailItemHidden = { opacity: 0, y: 8 }
+const detailItemVisible = { opacity: 1, y: 0 }
+const DETAIL_STAGGER_DURATION_SEC = 0.25
+
+function detailItemTransition(delayIndex: number) {
+  return {
+    duration: DETAIL_STAGGER_DURATION_SEC,
+    ease: ENTRANCE_EASE,
+    delay: delayIndex * ENTRANCE_STAGGER_SEC,
+  }
+}
+
 type HistoryDetailContentProps = {
   item: HistoryItem
   isDock: boolean
   techStackLabel: string
+  reduceMotion: boolean | null
 }
 
 function HistoryDetailContent({
   item,
   isDock,
   techStackLabel,
+  reduceMotion,
 }: Readonly<HistoryDetailContentProps>) {
+  if (reduceMotion) {
+    return (
+      <>
+        <header className={cn("space-y-2", isDock ? "mb-3" : "mb-4")}>
+          <h3
+            className={cn(
+              "font-bold tracking-tight",
+              isDock ? "text-lg" : "text-2xl",
+            )}
+          >
+            {item.title}
+          </h3>
+          <p className="text-sm text-muted-foreground">{item.date}</p>
+        </header>
+
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          {item.description}
+        </p>
+
+        {item.tags.length > 0 && (
+          <div className={cn(isDock ? "mt-4" : "mt-6")}>
+            <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+              {techStackLabel}
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {item.tags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-md border border-border bg-muted px-2 py-0.5 font-mono text-xs text-foreground"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </>
+    )
+  }
+
   return (
     <>
       <header className={cn("space-y-2", isDock ? "mb-3" : "mb-4")}>
-        <h3
+        <motion.h3
           className={cn(
             "font-bold tracking-tight",
             isDock ? "text-lg" : "text-2xl",
           )}
+          initial={detailItemHidden}
+          animate={detailItemVisible}
+          transition={detailItemTransition(0)}
         >
           {item.title}
-        </h3>
-        <p className="text-sm text-muted-foreground">{item.date}</p>
+        </motion.h3>
+        <motion.p
+          className="text-sm text-muted-foreground"
+          initial={detailItemHidden}
+          animate={detailItemVisible}
+          transition={detailItemTransition(1)}
+        >
+          {item.date}
+        </motion.p>
       </header>
 
-      <p className="text-sm leading-relaxed text-muted-foreground">
+      <motion.p
+        className="text-sm leading-relaxed text-muted-foreground"
+        initial={detailItemHidden}
+        animate={detailItemVisible}
+        transition={detailItemTransition(2)}
+      >
         {item.description}
-      </p>
+      </motion.p>
 
       {item.tags.length > 0 && (
-        <div className={cn(isDock ? "mt-4" : "mt-6")}>
+        <motion.div
+          className={cn(isDock ? "mt-4" : "mt-6")}
+          initial={detailItemHidden}
+          animate={detailItemVisible}
+          transition={detailItemTransition(3)}
+        >
           <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
             {techStackLabel}
           </p>
@@ -126,7 +204,7 @@ function HistoryDetailContent({
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       )}
     </>
   )
@@ -183,6 +261,7 @@ export default function HistoryDetailPanel({
             item={item}
             isDock={isDock}
             techStackLabel={t("detail.techStack")}
+            reduceMotion={reduceMotion}
           />
         </motion.article>
       </AnimatePresence>

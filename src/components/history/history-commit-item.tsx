@@ -1,14 +1,29 @@
 "use client"
 
 import { motion, useReducedMotion } from "motion/react"
+import { entranceItemTransition } from "@/hooks/use-entrance-animation"
 import { cn } from "@/lib/utils"
 import { formatHistoryCommitLabel } from "@/lib/history-commit-label"
 import type { HistoryItem } from "@/data/history"
+
+const itemHidden = { opacity: 0, y: 16 }
+const itemVisible = { opacity: 1, y: 0 }
+
+function getItemAnimateTarget(
+  reduceMotion: boolean | null,
+  animationStarted: boolean,
+) {
+  if (reduceMotion) return undefined
+  if (animationStarted) return itemVisible
+  return itemHidden
+}
 
 type HistoryCommitItemLayout = "default" | "mobile"
 
 type HistoryCommitItemProps = {
   item: HistoryItem
+  index: number
+  animationStarted: boolean
   isActive: boolean
   isLast: boolean
   layout?: HistoryCommitItemLayout
@@ -18,6 +33,8 @@ type HistoryCommitItemProps = {
 
 export default function HistoryCommitItem({
   item,
+  index,
+  animationStarted,
   isActive,
   isLast,
   layout = "default",
@@ -27,6 +44,8 @@ export default function HistoryCommitItem({
   const reduceMotion = useReducedMotion()
   const label = formatHistoryCommitLabel(item)
   const isMobileLayout = layout === "mobile"
+  const transition = entranceItemTransition(index, animationStarted)
+  const itemAnimate = getItemAnimateTarget(reduceMotion, animationStarted)
 
   return (
     <motion.li
@@ -36,6 +55,9 @@ export default function HistoryCommitItem({
         !isLast && "max-lg:pb-6 lg:pb-10",
       )}
       data-active={isActive ? "" : undefined}
+      initial={reduceMotion ? false : itemHidden}
+      animate={itemAnimate}
+      transition={transition}
     >
       <div className="relative flex w-6 shrink-0 justify-center">
         <motion.button

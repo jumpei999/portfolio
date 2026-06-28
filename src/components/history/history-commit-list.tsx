@@ -171,6 +171,8 @@ export default function HistoryCommitList({
         <HistoryCommitItem
           key={item.id}
           item={item}
+          index={index}
+          animationStarted={animationStarted}
           isActive={item.id === activeId}
           isLast={index === items.length - 1}
           layout={isMobileStage ? "mobile" : "default"}
