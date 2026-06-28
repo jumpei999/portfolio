@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import type { IconType } from "react-icons"
-import { SiBluesky, SiGithub, SiInstagram, SiGmail } from "react-icons/si"
+import { SiBluesky, SiDiscord, SiGithub, SiGooglemaps } from "react-icons/si"
 import { SOCIAL_LINKS, type SocialLinkKey } from "@/data/social-links"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,10 +18,10 @@ function getIcon(key: SocialLinkKey): IconType {
       return SiGithub
     case "bluesky":
       return SiBluesky
-    case "instagram":
-      return SiInstagram
-    case "email":
-      return SiGmail
+    case "discord":
+      return SiDiscord
+    case "googleLocalGuides":
+      return SiGooglemaps
   }
 }
 

@@ -6,11 +6,15 @@ import {
   SiPnpm,
   SiRadixui,
   SiReact,
+  SiResend,
+  SiSentry,
   SiShadcnui,
   SiTailwindcss,
   SiTypescript,
+  SiVercel,
 } from "react-icons/si"
 import CursorIcon from "@/components/footer/cursor-icon"
+import NextIntlIcon from "@/components/footer/next-intl-icon"
 import {
   FOOTER_ICON_BUTTON_CLASS,
   FOOTER_ICON_CLASS,
@@ -51,8 +55,16 @@ export function TechStackIcon({ slug, className }: TechStackIconProps) {
       return <SiRadixui className={iconClassName} aria-hidden />
     case "motion":
       return <SiFramer className={iconClassName} aria-hidden />
+    case "nextintl":
+      return <NextIntlIcon className={iconClassName} aria-hidden />
     case "pnpm":
       return <SiPnpm className={iconClassName} aria-hidden />
+    case "sentry":
+      return <SiSentry className={iconClassName} aria-hidden />
+    case "resend":
+      return <SiResend className={iconClassName} aria-hidden />
+    case "vercel":
+      return <SiVercel className={iconClassName} aria-hidden />
     case "cursor":
       return <CursorIcon className={iconClassName} aria-hidden />
     default:

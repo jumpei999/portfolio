@@ -120,7 +120,11 @@ export default function HeroContent() {
         href="#about"
         label={t("scrollLabel")}
         ariaLabel={t("scrollAria")}
-        className="absolute inset-x-0 bottom-10 hidden md:flex"
+        className={cn(
+          "absolute inset-x-0 flex",
+          "bottom-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0)+1.5rem)]",
+          "md:bottom-10",
+        )}
       />
     </>
   )

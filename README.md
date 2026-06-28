@@ -29,12 +29,12 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 
 Single-page layout ([`src/app/[locale]/(home)/page.tsx`](src/app/[locale]/(home)/page.tsx)):
 
-- **Home** — Brand logo and scroll cue
+- **Home** — Brand logo and scroll cue (mobile and desktop)
 - **About** — Profile copy with randomized/switchable images
 - **History** — Git-style timeline of milestones
 - **Constituents** — A tag cloud of my constituents
 - **Contact** — Inquiry form (Resend)
-- **Footer** — Site tech stack icons, social links (large screens only), and a back-to-top control with a hover-slide message
+- **Footer** — Site tech stack icons (Next.js, React, next-intl, Sentry, Resend, Vercel, etc.), social links (large screens only), and a back-to-top control with a hover-slide message
 
 ## Internationalization
 
@@ -145,4 +145,5 @@ Built by JPK Engineering. Design and implementation were developed with [Cursor]
 
 - GitHub: [jumpei999](https://github.com/jumpei999/)
 - Bluesky: [@jumpei999.bsky.social](https://bsky.app/profile/jumpei999.bsky.social)
-- Instagram: [@jumpei9999](https://www.instagram.com/jumpei9999/)
+- Discord: [jumpei999](https://discord.com/users/802407652343939123)
+- Google Local Guides: [Maps profile](https://www.google.co.jp/maps/contrib/114625111954146376736)

@@ -1,4 +1,8 @@
-export type SocialLinkKey = "github" | "bluesky" | "instagram" | "email"
+export type SocialLinkKey =
+  | "github"
+  | "bluesky"
+  | "discord"
+  | "googleLocalGuides"
 
 export type SocialLink = Readonly<{
   key: SocialLinkKey
@@ -8,6 +12,12 @@ export type SocialLink = Readonly<{
 export const SOCIAL_LINKS: readonly SocialLink[] = [
   { key: "github", href: "https://github.com/jumpei999/" },
   { key: "bluesky", href: "https://bsky.app/profile/jumpei999.bsky.social" },
-  { key: "instagram", href: "https://www.instagram.com/jumpei9999/" },
-  { key: "email", href: "mailto:jumpei.kato.999@gmail.com" },
+  {
+    key: "discord",
+    href: "https://discord.com/users/802407652343939123",
+  },
+  {
+    key: "googleLocalGuides",
+    href: "https://www.google.co.jp/maps/contrib/114625111954146376736",
+  },
 ] as const
