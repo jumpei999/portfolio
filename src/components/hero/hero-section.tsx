@@ -10,7 +10,7 @@ export default function HeroSection() {
     <Section
       id="home"
       className={cn(
-        "relative flex-col gap-6",
+        "flex-col gap-6",
         "box-border min-h-svh",
         "pt-(--site-header-height)",
         MOBILE_BOTTOM_CLEARANCE_MAX_MD,

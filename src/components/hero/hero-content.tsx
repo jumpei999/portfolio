@@ -52,80 +52,74 @@ export default function HeroContent() {
   const itemAnimate = { opacity: 1, y: 0 }
 
   return (
-    <>
-      <div className="flex flex-col items-center gap-6 px-6 text-center">
-        <h1 className="sr-only">{tMetadata("title")}</h1>
-        <MotionLogo
-          className="h-auto w-full max-w-md"
-          aria-label={t("logoAlt")}
+    <div className="flex flex-col items-center gap-6 px-6 text-center">
+      <h1 className="sr-only">{tMetadata("title")}</h1>
+      <MotionLogo
+        className="h-auto w-full max-w-md"
+        aria-label={t("logoAlt")}
+        initial={itemInitial}
+        animate={itemAnimate}
+        transition={{ ...itemTransition, delay: 0 }}
+      />
+
+      <div
+        ref={copyContainerRef}
+        className="flex w-full min-w-0 flex-col gap-1 max-md:overflow-x-clip"
+      >
+        <motion.p
+          ref={primaryRef}
+          className={cn(
+            "whitespace-nowrap uppercase font-montserrat text-foreground",
+            "md:text-2xl md:tracking-[0.25em]",
+            primaryFit.enabled &&
+              !primaryFit.ready &&
+              "max-md:invisible max-md:min-h-[1.25em]",
+          )}
+          style={
+            primaryFit.enabled
+              ? {
+                  fontSize: `${primaryFit.fontSizePx}px`,
+                  letterSpacing: `${primaryFit.letterSpacingEm}em`,
+                }
+              : undefined
+          }
           initial={itemInitial}
           animate={itemAnimate}
-          transition={{ ...itemTransition, delay: 0 }}
-        />
-
-        <div
-          ref={copyContainerRef}
-          className="flex w-full min-w-0 flex-col gap-1 max-md:overflow-x-clip"
+          transition={{ ...itemTransition, delay: stagger }}
         >
-          <motion.p
-            ref={primaryRef}
-            className={cn(
-              "whitespace-nowrap uppercase font-montserrat text-foreground",
-              "md:text-2xl md:tracking-[0.25em]",
-              primaryFit.enabled &&
-                !primaryFit.ready &&
-                "max-md:invisible max-md:min-h-[1.25em]",
-            )}
-            style={
-              primaryFit.enabled
-                ? {
-                    fontSize: `${primaryFit.fontSizePx}px`,
-                    letterSpacing: `${primaryFit.letterSpacingEm}em`,
-                  }
-                : undefined
-            }
-            initial={itemInitial}
-            animate={itemAnimate}
-            transition={{ ...itemTransition, delay: stagger }}
-          >
-            {primaryMessage}
-          </motion.p>
-          <motion.p
-            ref={secondaryRef}
-            className={cn(
-              "whitespace-nowrap font-light uppercase font-montserrat",
-              "md:text-base md:tracking-widest",
-              secondaryFit.enabled &&
-                !secondaryFit.ready &&
-                "max-md:invisible max-md:min-h-[1.25em]",
-            )}
-            style={
-              secondaryFit.enabled
-                ? {
-                    fontSize: `${secondaryFit.fontSizePx}px`,
-                    letterSpacing: `${secondaryFit.letterSpacingEm}em`,
-                  }
-                : undefined
-            }
-            initial={itemInitial}
-            animate={itemAnimate}
-            transition={{ ...itemTransition, delay: stagger * 2 }}
-          >
-            {secondaryMessage}
-          </motion.p>
-        </div>
+          {primaryMessage}
+        </motion.p>
+        <motion.p
+          ref={secondaryRef}
+          className={cn(
+            "whitespace-nowrap font-light uppercase font-montserrat",
+            "md:text-base md:tracking-widest",
+            secondaryFit.enabled &&
+              !secondaryFit.ready &&
+              "max-md:invisible max-md:min-h-[1.25em]",
+          )}
+          style={
+            secondaryFit.enabled
+              ? {
+                  fontSize: `${secondaryFit.fontSizePx}px`,
+                  letterSpacing: `${secondaryFit.letterSpacingEm}em`,
+                }
+              : undefined
+          }
+          initial={itemInitial}
+          animate={itemAnimate}
+          transition={{ ...itemTransition, delay: stagger * 2 }}
+        >
+          {secondaryMessage}
+        </motion.p>
       </div>
 
       <SectionScrollLink
         href="#about"
         label={t("scrollLabel")}
         ariaLabel={t("scrollAria")}
-        className={cn(
-          "absolute inset-x-0 flex",
-          "bottom-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0)+1.5rem)]",
-          "md:bottom-10",
-        )}
+        className="mt-8 flex md:mt-10"
       />
-    </>
+    </div>
   )
 }
