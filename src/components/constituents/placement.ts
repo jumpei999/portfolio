@@ -1,27 +1,72 @@
 import { CONSTITUENT_TAGS } from "@/data/constituent-tags"
-import { matchesMobileViewport } from "@/lib/media-queries"
+import { MOBILE_MAX_WIDTH_PX } from "@/lib/media-queries"
 import type { PlacedTag } from "./types"
 
-const TAG_EDGE_PADDING = {
-  desktop: { x: 8, y: 8 },
-  mobile: { x: 8, y: 2 },
-} as const
+export const NARROW_MAX_WIDTH_PX = 375
 
-function isInCenterExclusion(left: number, top: number, radius = 18) {
-  return Math.hypot(left - 50, top - 50) < radius
+export type PlacementTier = "narrow" | "mobile" | "desktop"
+
+export type PlacementConfig = {
+  edgePadding: { x: number; y: number }
+  minDistance: number
+  centerExclusion: { x: number; y: number }
 }
 
-function getTagEdgePadding() {
-  return matchesMobileViewport()
-    ? TAG_EDGE_PADDING.mobile
-    : TAG_EDGE_PADDING.desktop
+const PLACEMENT_CONFIG: Record<PlacementTier, PlacementConfig> = {
+  narrow: {
+    edgePadding: { x: 8, y: 2 },
+    minDistance: 10,
+    centerExclusion: { x: 24, y: 18 },
+  },
+  mobile: {
+    edgePadding: { x: 8, y: 2 },
+    minDistance: 9,
+    centerExclusion: { x: 18, y: 18 },
+  },
+  desktop: {
+    edgePadding: { x: 8, y: 8 },
+    minDistance: 9,
+    centerExclusion: { x: 18, y: 18 },
+  },
 }
 
-export function buildPlacedTags(
-  edgePadding = getTagEdgePadding(),
-): PlacedTag[] {
-  const { x: paddingX, y: paddingY } = edgePadding
-  const minDistance = 9
+export function getPlacementTier(width: number): PlacementTier {
+  if (width <= NARROW_MAX_WIDTH_PX) return "narrow"
+  if (width <= MOBILE_MAX_WIDTH_PX) return "mobile"
+  return "desktop"
+}
+
+export function getPlacementConfig(tier: PlacementTier): PlacementConfig {
+  return PLACEMENT_CONFIG[tier]
+}
+
+function isInCenterExclusion(
+  left: number,
+  top: number,
+  { x: radiusX, y: radiusY }: PlacementConfig["centerExclusion"],
+) {
+  const dx = (left - 50) / radiusX
+  const dy = (top - 50) / radiusY
+  return dx * dx + dy * dy < 1
+}
+
+function resolvePlacementConfig(config?: PlacementConfig): PlacementConfig {
+  if (config) return config
+
+  const width =
+    typeof globalThis === "undefined"
+      ? MOBILE_MAX_WIDTH_PX + 1
+      : globalThis.innerWidth
+
+  return getPlacementConfig(getPlacementTier(width))
+}
+
+export function buildPlacedTags(config?: PlacementConfig): PlacedTag[] {
+  const {
+    edgePadding: { x: paddingX, y: paddingY },
+    minDistance,
+    centerExclusion,
+  } = resolvePlacementConfig(config)
   const placed: PlacedTag[] = []
 
   CONSTITUENT_TAGS.forEach((tag, index) => {
@@ -35,7 +80,7 @@ export function buildPlacedTags(
       attempts++
     } while (
       attempts < 80 &&
-      (isInCenterExclusion(left, top) ||
+      (isInCenterExclusion(left, top, centerExclusion) ||
         placed.some(
           (p) => Math.hypot(p.left - left, p.top - top) < minDistance,
         ))
