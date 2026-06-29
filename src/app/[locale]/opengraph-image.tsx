@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ImageResponse } from "next/og"
 import { routing } from "@/i18n/routing"
+import OgLogoMark from "@/lib/og/og-logo-mark"
+import { loadOgFonts } from "@/lib/og/load-og-fonts"
 
 export const alt = "JPK Engineering"
 export const size = { width: 1200, height: 630 }
@@ -17,44 +19,60 @@ export default async function OpenGraphImage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const t = await getTranslations({ locale, namespace: "metadata" })
+
+  const [tHero, fonts] = await Promise.all([
+    getTranslations({ locale, namespace: "hero" }),
+    loadOgFonts(),
+  ])
+
+  const primaryMessage = tHero("primaryMessage").toUpperCase()
+  const secondaryMessage = tHero("secondaryMessage").toUpperCase()
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#f8fafc",
+      }}
+    >
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          width: "100%",
-          height: "100%",
-          padding: "80px",
-          backgroundColor: "#f8fafc",
+          alignItems: "center",
+          textAlign: "center",
           color: "#334155",
         }}
       >
+        <OgLogoMark width={448} height={448} />
         <div
           style={{
-            fontSize: 72,
-            fontWeight: 700,
-            letterSpacing: "-0.02em",
-            marginBottom: 24,
+            fontFamily: "Montserrat",
+            fontSize: 24,
+            fontWeight: 400,
+            letterSpacing: "6px",
+            marginTop: 24,
           }}
         >
-          {t("title")}
+          {primaryMessage}
         </div>
         <div
           style={{
-            fontSize: 36,
-            lineHeight: 1.4,
-            maxWidth: 900,
-            color: "#64748b",
+            fontFamily: "Montserrat",
+            fontSize: 16,
+            fontWeight: 300,
+            letterSpacing: "1.6px",
+            marginTop: "8px",
           }}
         >
-          {t("description")}
+          {secondaryMessage}
         </div>
       </div>
-    ),
-    { ...size },
+    </div>,
+    { ...size, fonts },
   )
 }
