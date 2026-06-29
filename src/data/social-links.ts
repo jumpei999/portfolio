@@ -3,6 +3,7 @@ export type SocialLinkKey =
   | "bluesky"
   | "discord"
   | "googleLocalGuides"
+  | "yukiyama"
 
 export type SocialLink = Readonly<{
   key: SocialLinkKey
@@ -19,5 +20,9 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   {
     key: "googleLocalGuides",
     href: "https://www.google.co.jp/maps/contrib/114625111954146376736",
+  },
+  {
+    key: "yukiyama",
+    href: "https://app-api.yukiyama.biz/app/user?id=Z8brqMg6jGR",
   },
 ] as const
