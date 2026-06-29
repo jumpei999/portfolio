@@ -27,7 +27,7 @@ alwaysApply: true
 - **Header / footer**: below `md:` — centered logo header + fixed bottom nav (Home via logo only); `≥ md` keeps horizontal header nav.
 - **Footer**: tech stack icons + SNS in one row; on mobile, bottom-nav clearance uses a `bg-background` spacer below the dark footer bar (not dark `padding-bottom`).
 - **History**: sticky scroll track + commit list; test short viewports (e.g. iPhone SE height).
-- **Constituents**: full-viewport section; below `md:` subtract `--site-bottom-nav-height` + safe area from section height (same pattern as History in `constituents-section.tsx`); category filter is `shrink-0` at the bottom — verify anchor scroll from bottom nav at 320px/375px; tag edge padding tunable in `src/components/constituents/placement.ts` (`TAG_EDGE_PADDING`, mobile uses smaller `y` only).
+- **Constituents**: full-viewport section; below `md:` subtract `--site-bottom-nav-height` + safe area from section height (same pattern as History in `constituents-section.tsx`); category filter is `shrink-0` at the bottom — verify anchor scroll from bottom nav at 320px/375px; tag placement tiers (`narrow` ≤375 / `mobile` ≤767 / `desktop` ≥768) in `src/components/constituents/placement.ts`, client init + tier-crossing resize via `src/hooks/use-placed-tags.ts` (instant reposition, no pop replay).
 
 ## Out of scope for responsive work
 

@@ -7,9 +7,8 @@ import CategoryFilter from "@/components/constituents/category-filter"
 import CenterTitle from "@/components/constituents/center-title"
 import TagCloud from "@/components/constituents/tag-cloud"
 import TagConnections from "@/components/constituents/tag-connections"
-import { buildPlacedTags } from "@/components/constituents/placement"
-import type { PlacedTag } from "@/components/constituents/types"
 import type { Category } from "@/data/category-config"
+import { usePlacedTags } from "@/hooks/use-placed-tags"
 
 const IN_VIEW_AMOUNT = 0.6
 
@@ -20,7 +19,7 @@ export default function Constituents() {
     once: true,
     amount: IN_VIEW_AMOUNT,
   })
-  const [placedTags] = useState<PlacedTag[]>(() => buildPlacedTags())
+  const { placedTags } = usePlacedTags()
   const [selectedCategories, setSelectedCategories] = useState<Set<Category>>(
     () => new Set(),
   )

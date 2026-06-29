@@ -16,7 +16,7 @@ const PLACEMENT_CONFIG: Record<PlacementTier, PlacementConfig> = {
   narrow: {
     edgePadding: { x: 8, y: 2 },
     minDistance: 10,
-    centerExclusion: { x: 24, y: 18 },
+    centerExclusion: { x: 24, y: 12 },
   },
   mobile: {
     edgePadding: { x: 8, y: 2 },
