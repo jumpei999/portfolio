@@ -11,7 +11,7 @@ import type { Category } from "@/data/category-config"
 import { IN_VIEW_AMOUNT } from "@/hooks/use-entrance-animation"
 import { usePlacedTags } from "@/hooks/use-placed-tags"
 
-export default function Constituents() {
+export default function ConstituentsSection() {
   const t = useTranslations("constituents")
   const sectionRef = useRef<HTMLDivElement>(null)
   const animationStarted = useInView(sectionRef, {

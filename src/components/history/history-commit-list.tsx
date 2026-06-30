@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react"
 import { motion, useReducedMotion, type MotionValue } from "motion/react"
 import HistoryCommitItem from "@/components/history/history-commit-item"
-import { useMobileListFollow } from "@/components/history/use-mobile-list-follow"
+import { useMobileListFollow } from "@/hooks/use-mobile-list-follow"
 import {
   ENTRANCE_DURATION_SEC,
   ENTRANCE_EASE,

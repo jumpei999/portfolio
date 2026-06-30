@@ -6,7 +6,7 @@ import {
   type MotionValue,
 } from "motion/react"
 import { useCallback, useLayoutEffect, useRef, type RefObject } from "react"
-import { progressToFractional } from "@/components/history/use-active-commit"
+import { progressToFractional } from "@/hooks/use-active-commit"
 
 function interpolateCenters(
   fractionalIndex: number,

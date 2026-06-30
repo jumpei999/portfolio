@@ -8,7 +8,7 @@ import HistoryCommitList from "@/components/history/history-commit-list"
 import HistoryDetailPanel from "@/components/history/history-detail-panel"
 import HistoryBackButton from "@/components/history/history-back-button"
 import HistorySkipButton from "@/components/history/history-skip-button"
-import { useActiveCommit } from "@/components/history/use-active-commit"
+import { useActiveCommit } from "@/hooks/use-active-commit"
 import EntranceMotion from "@/components/entrance-motion"
 import {
   ENTRANCE_DURATION_SEC,
