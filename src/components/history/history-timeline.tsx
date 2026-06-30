@@ -66,7 +66,7 @@ function HistoryBody({
   sectionStarted,
 }: Readonly<{ children: ReactNode; sectionStarted: boolean }>) {
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col">
       <HistoryHeading />
       {children}
       <HistorySkipFooter visible={sectionStarted} />
@@ -119,13 +119,15 @@ function HistoryTimelinePanels({
 
   return (
     <>
-      <div className="hidden min-h-0 w-full lg:grid lg:grid-cols-[35%_65%] lg:items-start lg:gap-12">
-        <div ref={desktopListRef}>
+      <div className="hidden min-h-0 w-full min-w-0 lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,13fr)] lg:items-start lg:gap-12">
+        <div ref={desktopListRef} className="min-w-0">
           <HistoryCommitList layout="default" {...listProps} />
         </div>
-        <EntranceMotion delayIndex={2}>
-          <HistoryDetailPanel activeId={activeId} items={items} />
-        </EntranceMotion>
+        <div className="min-w-0 overflow-hidden">
+          <EntranceMotion className="min-w-0 w-full max-w-full" delayIndex={2}>
+            <HistoryDetailPanel activeId={activeId} items={items} />
+          </EntranceMotion>
+        </div>
       </div>
 
       <div className="flex min-h-0 w-full flex-1 flex-col lg:hidden">
@@ -192,7 +194,7 @@ export default function HistoryTimeline() {
     return (
       <div ref={sectionRef}>
         <HistoryBody sectionStarted={sectionStarted}>
-          <div className="flex min-h-0 flex-col max-lg:py-0 sm:min-h-[70svh] lg:min-h-0 lg:py-4">
+          <div className="flex min-h-0 min-w-0 flex-col max-lg:py-0 sm:min-h-[70svh] lg:min-h-0 lg:py-4">
             {timelineContent}
           </div>
         </HistoryBody>
@@ -212,9 +214,9 @@ export default function HistoryTimeline() {
           SECTION_VIEWPORT_HEIGHT,
         )}
       >
-        <div ref={sectionRef} className="flex min-h-0 flex-1 flex-col w-full">
+        <div ref={sectionRef} className="flex min-h-0 min-w-0 flex-1 flex-col w-full">
           <HistoryBody sectionStarted={sectionStarted}>
-            <div className="flex min-h-0 flex-1 flex-col overflow-hidden max-lg:py-0 lg:py-4">
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden max-lg:py-0 lg:py-4">
               {timelineContent}
             </div>
           </HistoryBody>

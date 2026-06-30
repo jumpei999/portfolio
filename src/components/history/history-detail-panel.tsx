@@ -117,7 +117,7 @@ function HistoryDetailContent({
         <header className={cn("space-y-2", isDock ? "mb-3" : "mb-4")}>
           <h3
             className={cn(
-              "font-bold tracking-tight",
+              "w-full wrap-break-word font-bold tracking-tight",
               isDock ? "text-lg" : "text-2xl",
             )}
           >
@@ -126,7 +126,7 @@ function HistoryDetailContent({
           <p className="text-sm text-muted-foreground">{item.date}</p>
         </header>
 
-        <p className="text-sm leading-relaxed text-muted-foreground">
+        <p className="w-full wrap-break-word text-sm leading-relaxed text-muted-foreground">
           {item.description}
         </p>
 
@@ -156,7 +156,7 @@ function HistoryDetailContent({
       <header className={cn("space-y-2", isDock ? "mb-3" : "mb-4")}>
         <motion.h3
           className={cn(
-            "font-bold tracking-tight",
+            "w-full wrap-break-word font-bold tracking-tight",
             isDock ? "text-lg" : "text-2xl",
           )}
           initial={detailItemHidden}
@@ -176,7 +176,7 @@ function HistoryDetailContent({
       </header>
 
       <motion.p
-        className="text-sm leading-relaxed text-muted-foreground"
+        className="w-full wrap-break-word text-sm leading-relaxed text-muted-foreground"
         initial={detailItemHidden}
         animate={detailItemVisible}
         transition={detailItemTransition(2)}
@@ -232,7 +232,7 @@ export default function HistoryDetailPanel({
         "w-full min-w-0 self-start rounded-2xl border border-border bg-card",
         isDock
           ? "flex min-h-0 flex-col overflow-hidden p-4 sm:p-5"
-          : "h-fit p-6 sm:p-8",
+          : "h-fit max-w-full p-6 sm:p-8",
       )}
       style={isDock ? { height: MOBILE_DOCK_MAX_HEIGHT_PX } : undefined}
     >
@@ -243,7 +243,7 @@ export default function HistoryDetailPanel({
           className={cn(
             isDock &&
               cn(
-                "min-h-0 flex-1",
+                "min-h-0 min-w-0 w-full flex-1",
                 needsScroll
                   ? "overflow-y-auto overscroll-y-auto"
                   : "overflow-hidden",
