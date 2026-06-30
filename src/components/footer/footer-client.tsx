@@ -94,8 +94,7 @@ export default function FooterClient() {
           <p
             className={cn(
               "mx-auto max-w-4xl text-center font-bold tracking-tight text-background",
-              "text-2xl sm:text-3xl",
-              "md:text-3xl md:sm:text-4xl",
+              "text-2xl sm:text-3xl md:text-4xl",
             )}
           >
             {t("backToTopHover")}

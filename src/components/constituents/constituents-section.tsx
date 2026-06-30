@@ -8,9 +8,8 @@ import CenterTitle from "@/components/constituents/center-title"
 import TagCloud from "@/components/constituents/tag-cloud"
 import TagConnections from "@/components/constituents/tag-connections"
 import type { Category } from "@/data/category-config"
+import { IN_VIEW_AMOUNT } from "@/hooks/use-entrance-animation"
 import { usePlacedTags } from "@/hooks/use-placed-tags"
-
-const IN_VIEW_AMOUNT = 0.6
 
 export default function Constituents() {
   const t = useTranslations("constituents")

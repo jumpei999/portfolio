@@ -28,6 +28,7 @@ export const CONSTITUENT_TAGS: Tag[] = [
   { label: "Apex", categories: ["language"], level: 1 },
   { label: "PHP", categories: ["language"], level: 1 },
   { label: "Scratch", categories: ["language"], level: 1 },
+  { label: "Solidity", categories: ["language"], level: 1 },
 
   { label: "Next.js", categories: ["stack"], level: 5 },
   { label: "Node.js", categories: ["stack"], level: 5 },
@@ -51,7 +52,11 @@ export const CONSTITUENT_TAGS: Tag[] = [
   { label: "AWS", categories: ["platform"], level: 3 },
   { label: "DevOps", categories: ["platform"], level: 3 },
   { label: "Heroku", categories: ["platform"], level: 3 },
+  { label: "Resend", categories: ["platform"], level: 3 },
+  { label: "Sentry", categories: ["platform"], level: 3 },
   { label: "Vercel", categories: ["platform"], level: 3 },
+  { label: "Cloudflare", categories: ["platform"], level: 1 },
+  { label: "Ethereum", categories: ["platform"], level: 1 },
   { label: "Salesforce", categories: ["platform"], level: 1 },
 
   { label: "Android", categories: ["life"], level: 5 },

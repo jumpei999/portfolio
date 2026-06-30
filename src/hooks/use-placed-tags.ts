@@ -19,22 +19,16 @@ function applyTierIfChanged(
   width: number,
   tierRef: { current: PlacementTier | null },
   setPlacedTags: Dispatch<SetStateAction<PlacedTag[]>>,
-  setPlacementEpoch: Dispatch<SetStateAction<number>>,
 ) {
   const nextTier = getPlacementTier(width)
   if (nextTier === tierRef.current) return
 
   tierRef.current = nextTier
-  setPlacementEpoch((epoch) => epoch + 1)
   setPlacedTags(buildTagsForTier(nextTier))
 }
 
-export function usePlacedTags(): {
-  placedTags: PlacedTag[]
-  placementEpoch: number
-} {
+export function usePlacedTags(): { placedTags: PlacedTag[] } {
   const [placedTags, setPlacedTags] = useState<PlacedTag[]>([])
-  const [placementEpoch, setPlacementEpoch] = useState(0)
   const tierRef = useRef<PlacementTier | null>(null)
 
   useEffect(() => {
@@ -49,13 +43,7 @@ export function usePlacedTags(): {
     const onResize = () => {
       clearTimeout(timeoutId)
       timeoutId = setTimeout(
-        () =>
-          applyTierIfChanged(
-            window.innerWidth,
-            tierRef,
-            setPlacedTags,
-            setPlacementEpoch,
-          ),
+        () => applyTierIfChanged(window.innerWidth, tierRef, setPlacedTags),
         RESIZE_DEBOUNCE_MS,
       )
     }
@@ -69,5 +57,5 @@ export function usePlacedTags(): {
     }
   }, [])
 
-  return { placedTags, placementEpoch }
+  return { placedTags }
 }

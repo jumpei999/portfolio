@@ -50,23 +50,12 @@ function isInCenterExclusion(
   return dx * dx + dy * dy < 1
 }
 
-function resolvePlacementConfig(config?: PlacementConfig): PlacementConfig {
-  if (config) return config
-
-  const width =
-    typeof globalThis === "undefined"
-      ? MOBILE_MAX_WIDTH_PX + 1
-      : globalThis.innerWidth
-
-  return getPlacementConfig(getPlacementTier(width))
-}
-
-export function buildPlacedTags(config?: PlacementConfig): PlacedTag[] {
+export function buildPlacedTags(config: PlacementConfig): PlacedTag[] {
   const {
     edgePadding: { x: paddingX, y: paddingY },
     minDistance,
     centerExclusion,
-  } = resolvePlacementConfig(config)
+  } = config
   const placed: PlacedTag[] = []
 
   CONSTITUENT_TAGS.forEach((tag, index) => {

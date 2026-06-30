@@ -9,11 +9,3 @@ export function prefersReducedMotion(): boolean {
 
   return globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
 }
-
-export function matchesMobileViewport(): boolean {
-  if (typeof globalThis.matchMedia !== "function") {
-    return false
-  }
-
-  return globalThis.matchMedia(MOBILE_MEDIA_QUERY).matches
-}
