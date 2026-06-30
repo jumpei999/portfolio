@@ -12,6 +12,8 @@ import { MOBILE_DOCK_MAX_HEIGHT_PX } from "@/components/history/constants"
 import {
   ENTRANCE_EASE,
   ENTRANCE_STAGGER_SEC,
+  HISTORY_ARTICLE_DOCK_DURATION_SEC,
+  HISTORY_ARTICLE_SWITCH_DURATION_SEC,
 } from "@/hooks/use-entrance-animation"
 import type { HistoryItem } from "@/data/history"
 import { findHistoryItemById } from "@/lib/history-commit-label"
@@ -253,8 +255,10 @@ export default function HistoryDetailPanel({
           animate={isDock ? { opacity: 1 } : { opacity: 1, x: 0 }}
           exit={getArticleMotionExit(reduceMotion, isDock)}
           transition={{
-            duration: isDock ? 0.2 : 0.3,
-            ease: [0.24, 1, 0.32, 1],
+            duration: isDock
+              ? HISTORY_ARTICLE_DOCK_DURATION_SEC
+              : HISTORY_ARTICLE_SWITCH_DURATION_SEC,
+            ease: ENTRANCE_EASE,
           }}
         >
           <HistoryDetailContent

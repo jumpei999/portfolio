@@ -4,6 +4,11 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObje
 import { motion, useReducedMotion, type MotionValue } from "motion/react"
 import HistoryCommitItem from "@/components/history/history-commit-item"
 import { useMobileListFollow } from "@/components/history/use-mobile-list-follow"
+import {
+  ENTRANCE_DURATION_SEC,
+  ENTRANCE_EASE,
+  ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
+} from "@/hooks/use-entrance-animation"
 import type { HistoryItem } from "@/data/history"
 import { cn } from "@/lib/utils"
 
@@ -138,7 +143,7 @@ export default function HistoryCommitList({
         aria-hidden
         initial={reduceMotion ? false : { scaleY: 0 }}
         animate={{ scaleY: animationStarted ? 1 : 0 }}
-        transition={{ duration: 0.6, ease: [0.24, 1, 0.32, 1] }}
+        transition={{ duration: ENTRANCE_DURATION_SEC, ease: ENTRANCE_EASE }}
         style={lineHeightStyle}
       />
 
@@ -149,7 +154,10 @@ export default function HistoryCommitList({
         animate={{
           scaleY: animationStarted && activeIndex >= 0 ? progress : 0,
         }}
-        transition={{ duration: 0.5, ease: [0.24, 1, 0.32, 1] }}
+        transition={{
+          duration: ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
+          ease: ENTRANCE_EASE,
+        }}
         style={
           lineHeightPx == null
             ? { height: "calc(100% - 0.75rem)" }

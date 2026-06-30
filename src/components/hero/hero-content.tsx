@@ -6,6 +6,13 @@ import { useRef } from "react"
 import { Logo } from "@/components/brand/logo"
 import SectionScrollLink from "@/components/section-scroll-link"
 import { useFitTextFontSize } from "@/hooks/use-fit-text-font-size"
+import {
+  ENTRANCE_DURATION_SEC,
+  ENTRANCE_EASE,
+  ENTRANCE_ITEM_HIDDEN,
+  ENTRANCE_ITEM_VISIBLE,
+  ENTRANCE_STAGGER_SEC,
+} from "@/hooks/use-entrance-animation"
 import { cn } from "@/lib/utils"
 
 const MotionLogo = motion.create(Logo)
@@ -44,12 +51,12 @@ export default function HeroContent() {
 
   const itemTransition = reduceMotion
     ? { duration: 0 }
-    : { duration: 0.6, ease: [0.24, 1, 0.32, 1] as const }
+    : { duration: ENTRANCE_DURATION_SEC, ease: ENTRANCE_EASE }
 
-  const stagger = reduceMotion ? 0 : 0.12
+  const stagger = reduceMotion ? 0 : ENTRANCE_STAGGER_SEC
 
-  const itemInitial = reduceMotion ? false : { opacity: 0, y: 16 }
-  const itemAnimate = { opacity: 1, y: 0 }
+  const itemInitial = reduceMotion ? false : ENTRANCE_ITEM_HIDDEN
+  const itemAnimate = ENTRANCE_ITEM_VISIBLE
 
   return (
     <div className="flex flex-col items-center gap-6 px-6 text-center">

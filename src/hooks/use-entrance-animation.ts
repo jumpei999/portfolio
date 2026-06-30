@@ -10,6 +10,16 @@ export const ENTRANCE_ITEM_MARGIN = "0px 0px -10% 0px"
 export const ENTRANCE_STAGGER_SEC = 0.12
 export const ENTRANCE_DURATION_SEC = 0.6
 export const ENTRANCE_EASE = [0.24, 1, 0.32, 1] as const
+export const ENTRANCE_HIDDEN_Y = 16
+export const ENTRANCE_ITEM_HIDDEN = {
+  opacity: 0,
+  y: ENTRANCE_HIDDEN_Y,
+} as const
+export const ENTRANCE_ITEM_VISIBLE = { opacity: 1, y: 0 } as const
+export const ENTRANCE_DOT_SCALE_DURATION_SEC = 0.25
+export const ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC = 0.5
+export const HISTORY_ARTICLE_DOCK_DURATION_SEC = 0.2
+export const HISTORY_ARTICLE_SWITCH_DURATION_SEC = 0.3
 
 export const entranceInViewOptions = {
   once: true,

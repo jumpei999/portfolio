@@ -1,21 +1,24 @@
 "use client"
 
 import { motion, useReducedMotion } from "motion/react"
-import { entranceItemTransition } from "@/hooks/use-entrance-animation"
+import {
+  ENTRANCE_DOT_SCALE_DURATION_SEC,
+  ENTRANCE_EASE,
+  ENTRANCE_ITEM_HIDDEN,
+  ENTRANCE_ITEM_VISIBLE,
+  entranceItemTransition,
+} from "@/hooks/use-entrance-animation"
 import { cn } from "@/lib/utils"
 import { formatHistoryCommitLabel } from "@/lib/history-commit-label"
 import type { HistoryItem } from "@/data/history"
-
-const itemHidden = { opacity: 0, y: 16 }
-const itemVisible = { opacity: 1, y: 0 }
 
 function getItemAnimateTarget(
   reduceMotion: boolean | null,
   animationStarted: boolean,
 ) {
   if (reduceMotion) return undefined
-  if (animationStarted) return itemVisible
-  return itemHidden
+  if (animationStarted) return ENTRANCE_ITEM_VISIBLE
+  return ENTRANCE_ITEM_HIDDEN
 }
 
 type HistoryCommitItemLayout = "default" | "mobile"
@@ -55,7 +58,7 @@ export default function HistoryCommitItem({
         !isLast && "max-lg:pb-6 lg:pb-10",
       )}
       data-active={isActive ? "" : undefined}
-      initial={reduceMotion ? false : itemHidden}
+      initial={reduceMotion ? false : ENTRANCE_ITEM_HIDDEN}
       animate={itemAnimate}
       transition={transition}
     >
@@ -67,7 +70,10 @@ export default function HistoryCommitItem({
           onClick={() => onSelect(item.id)}
           className="relative z-10 mt-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           animate={reduceMotion ? undefined : { scale: isActive ? 1.2 : 1 }}
-          transition={{ duration: 0.25, ease: [0.24, 1, 0.32, 1] }}
+          transition={{
+            duration: ENTRANCE_DOT_SCALE_DURATION_SEC,
+            ease: ENTRANCE_EASE,
+          }}
         >
           <span
             data-commit-dot
