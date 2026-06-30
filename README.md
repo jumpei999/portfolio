@@ -14,16 +14,16 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 
 ## Tech Stack
 
-| Category      | Technologies                                                                                     |
-| ------------- | ------------------------------------------------------------------------------------------------ |
-| Framework     | Next.js 16 (App Router), React 19, TypeScript                                                    |
-| Styling       | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens)                   |
-| i18n          | next-intl (Japanese / English, `localePrefix: as-needed`)                                        |
-| UI / UX       | Radix UI, Motion, react-icons                                                                    |
-| Tooling       | ESLint, React Compiler (Babel plugin), pnpm, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
-| Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                      |
-| Assets        | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                                         |
-| Development   | [Cursor](https://cursor.com/home) — AI-assisted design and implementation                        |
+| Category      | Technologies                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Framework     | Next.js 16 (App Router), React 19, TypeScript                                                                                   |
+| Styling       | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens)                                                  |
+| i18n          | next-intl (Japanese / English, `localePrefix: as-needed`)                                                                       |
+| UI / UX       | Radix UI, Motion, react-icons                                                                                                   |
+| Tooling       | ESLint, React Compiler (Babel plugin), pnpm, Commitizen, commitlint, husky, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
+| Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                                                     |
+| Assets        | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                                                                        |
+| Development   | [Cursor](https://cursor.com/home) — AI-assisted design and implementation                                                       |
 
 ## Site Features
 
@@ -106,6 +106,7 @@ pnpm start       # serve production build
 pnpm lint        # ESLint
 pnpm typecheck   # tsc --noEmit
 pnpm check:i18n  # ja/en key parity + shared overlap
+pnpm commit      # interactive Conventional Commits (Commitizen)
 ```
 
 ## Project Structure
@@ -147,3 +148,4 @@ Built by JPK Engineering. Design and implementation were developed with [Cursor]
 - Bluesky: [@jumpei999.bsky.social](https://bsky.app/profile/jumpei999.bsky.social)
 - Discord: [jumpei999](https://discord.com/users/802407652343939123)
 - Google Local Guides: [Maps profile](https://www.google.co.jp/maps/contrib/114625111954146376736)
+- yukiyama: [jumpei](https://app-api.yukiyama.biz/app/user?id=Z8brqMg6jGR)
