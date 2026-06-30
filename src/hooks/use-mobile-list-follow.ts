@@ -7,6 +7,7 @@ import {
 } from "motion/react"
 import { useCallback, useLayoutEffect, useRef, type RefObject } from "react"
 import { progressToFractional } from "@/hooks/use-active-commit"
+import { scheduleLayoutMeasure } from "@/lib/schedule-layout-measure"
 
 function interpolateCenters(
   fractionalIndex: number,
@@ -109,8 +110,7 @@ export function useMobileListFollow({
   useLayoutEffect(() => {
     if (!enabled) return
 
-    remeasure()
-    const frameId = requestAnimationFrame(remeasure)
+    const cancelFrame = scheduleLayoutMeasure(remeasure)
 
     const resizeObserver = new ResizeObserver(remeasure)
     const stage = stageRef.current
@@ -123,7 +123,7 @@ export function useMobileListFollow({
     }
 
     return () => {
-      cancelAnimationFrame(frameId)
+      cancelFrame()
       resizeObserver.disconnect()
     }
   }, [enabled, itemRefs, listRef, remeasure, stageRef])

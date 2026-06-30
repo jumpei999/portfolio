@@ -1,4 +1,5 @@
 import { getSectionIdFromHref } from "@/lib/scroll-to-section"
+import { createStableValuePoller } from "@/lib/wait-for-stable-value"
 
 const STABLE_FRAMES = 3
 const MAX_WAIT_MS = 3000
@@ -28,9 +29,6 @@ export function restoreHashScroll(): () => void {
   }
 
   let done = false
-  let rafId = 0
-  let lastTop = target.offsetTop
-  let stableFrames = 0
 
   const finish = () => {
     if (done) {
@@ -38,43 +36,29 @@ export function restoreHashScroll(): () => void {
     }
 
     done = true
-    cancelAnimationFrame(rafId)
+    poller.cancel()
     observer.disconnect()
     clearTimeout(timeoutId)
 
     target.scrollIntoView({ behavior: "instant", block: "start" })
   }
 
-  const check = () => {
-    if (done) {
-      return
-    }
-
-    const top = target.offsetTop
-
-    if (top === lastTop) {
-      stableFrames += 1
-      if (stableFrames >= STABLE_FRAMES) {
-        finish()
-        return
-      }
-    } else {
-      stableFrames = 0
-      lastTop = top
-    }
-
-    rafId = requestAnimationFrame(check)
-  }
+  const poller = createStableValuePoller({
+    readValue: () => target.offsetTop,
+    stableFrames: STABLE_FRAMES,
+    onStable: finish,
+    isDone: () => done,
+  })
 
   const observer = new ResizeObserver(() => {
-    stableFrames = 0
-    rafId = requestAnimationFrame(check)
+    poller.resetStability()
+    poller.start()
   })
 
   observer.observe(document.documentElement)
 
   const timeoutId = globalThis.setTimeout(finish, MAX_WAIT_MS)
-  rafId = requestAnimationFrame(check)
+  poller.start()
 
   return finish
 }

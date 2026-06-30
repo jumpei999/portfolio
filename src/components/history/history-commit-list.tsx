@@ -10,6 +10,7 @@ import {
   ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
 } from "@/hooks/use-entrance-animation"
 import type { HistoryItem } from "@/data/history"
+import { scheduleLayoutMeasure } from "@/lib/schedule-layout-measure"
 import { cn } from "@/lib/utils"
 
 type HistoryCommitListLayout = "default" | "mobileStage"
@@ -112,12 +113,11 @@ export default function HistoryCommitList({
   }, [])
 
   useLayoutEffect(() => {
-    measureLineHeight()
-    const frameId = requestAnimationFrame(measureLineHeight)
+    const cancelFrame = scheduleLayoutMeasure(measureLineHeight)
 
     const root = listRef.current
     if (!root) {
-      cancelAnimationFrame(frameId)
+      cancelFrame()
       return
     }
 
@@ -125,7 +125,7 @@ export default function HistoryCommitList({
     resizeObserver.observe(root)
 
     return () => {
-      cancelAnimationFrame(frameId)
+      cancelFrame()
       resizeObserver.disconnect()
     }
   }, [activeId, items.length, layout, measureLineHeight])

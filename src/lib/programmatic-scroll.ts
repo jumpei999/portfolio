@@ -1,13 +1,10 @@
 import { prefersReducedMotion } from "@/lib/media-queries"
+import { createStableValuePoller } from "@/lib/wait-for-stable-value"
 
 type Listener = () => void
 
 let programmaticScrolling = false
 const listeners = new Set<Listener>()
-
-function prefersReducedScroll(): boolean {
-  return prefersReducedMotion()
-}
 
 function emit(): void {
   for (const listener of listeners) {
@@ -43,7 +40,7 @@ const SCROLL_STABLE_FRAMES = 4
 let activeScrollCleanup: (() => void) | null = null
 
 export function beginProgrammaticScroll(): void {
-  if (prefersReducedScroll()) {
+  if (prefersReducedMotion()) {
     return
   }
 
@@ -51,7 +48,6 @@ export function beginProgrammaticScroll(): void {
   setProgrammaticScrolling(true)
 
   let finished = false
-  let rafId = 0
 
   const finish = () => {
     if (finished) {
@@ -61,7 +57,7 @@ export function beginProgrammaticScroll(): void {
     finished = true
     document.removeEventListener("scrollend", finish)
     clearTimeout(timeoutId)
-    cancelAnimationFrame(rafId)
+    poller.cancel()
 
     if (activeScrollCleanup === cleanup) {
       activeScrollCleanup = null
@@ -79,29 +75,12 @@ export function beginProgrammaticScroll(): void {
   document.addEventListener("scrollend", finish, { once: true })
   const timeoutId = globalThis.setTimeout(finish, SCROLL_END_FALLBACK_MS)
 
-  let lastY = globalThis.scrollY
-  let stableFrames = 0
+  const poller = createStableValuePoller({
+    readValue: () => globalThis.scrollY,
+    stableFrames: SCROLL_STABLE_FRAMES,
+    onStable: finish,
+    isDone: () => finished,
+  })
 
-  const checkScrollSettled = () => {
-    if (finished) {
-      return
-    }
-
-    const nextY = globalThis.scrollY
-
-    if (nextY === lastY) {
-      stableFrames += 1
-      if (stableFrames >= SCROLL_STABLE_FRAMES) {
-        finish()
-        return
-      }
-    } else {
-      stableFrames = 0
-      lastY = nextY
-    }
-
-    rafId = requestAnimationFrame(checkScrollSettled)
-  }
-
-  rafId = requestAnimationFrame(checkScrollSettled)
+  poller.start()
 }

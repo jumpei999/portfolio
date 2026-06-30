@@ -1,6 +1,7 @@
 "use client"
 
 import { useLayoutEffect, useState, type RefObject } from "react"
+import { scheduleLayoutMeasure } from "@/lib/schedule-layout-measure"
 
 function getVerticalPadding(element: HTMLElement): number {
   const style = getComputedStyle(element)
@@ -30,7 +31,7 @@ export function useDockNeedsScroll(
       setNeedsScroll(article.scrollHeight > availableHeight)
     }
 
-    const frameId = requestAnimationFrame(measureNeedsScroll)
+    const cancelFrame = scheduleLayoutMeasure(measureNeedsScroll)
 
     const card = cardRef.current
     const article = articleRef.current
@@ -39,7 +40,7 @@ export function useDockNeedsScroll(
     if (article) resizeObserver.observe(article)
 
     return () => {
-      cancelAnimationFrame(frameId)
+      cancelFrame()
       resizeObserver.disconnect()
     }
   }, [activeId, articleRef, cardRef, isDock])
