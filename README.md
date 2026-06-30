@@ -20,7 +20,7 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 | Styling       | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens)                                                  |
 | i18n          | next-intl (Japanese / English, `localePrefix: as-needed`)                                                                       |
 | UI / UX       | Radix UI, Motion, react-icons                                                                                                   |
-| Tooling       | ESLint, React Compiler (Babel plugin), pnpm, Commitizen, commitlint, husky, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
+| Tooling       | ESLint, React Compiler (Babel plugin), pnpm, Commitizen, commitlint, husky, semantic-release, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
 | Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                                                     |
 | Assets        | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                                                                        |
 | Development   | [Cursor](https://cursor.com/home) — AI-assisted design and implementation                                                       |
@@ -92,9 +92,15 @@ Optional observability (see [`.env.example`](.env.example)):
 Production: [https://jpk-engineering.dev](https://jpk-engineering.dev). Vercel is connected to GitHub; merging to `main` triggers a production deploy after CI passes.
 
 1. Open a PR — [GitHub Actions](.github/workflows/ci.yml) runs `pnpm lint`, `typecheck`, `check:i18n`, and `build`
-2. Merge to `main` — Vercel deploys automatically ([`vercel.json`](vercel.json): `pnpm install` / `pnpm build`)
+2. Merge to `main` — Vercel deploys automatically ([`vercel.json`](vercel.json): `pnpm install` / `pnpm build`); CI then runs [semantic-release](release.config.mjs) when there are releasable commits
 3. Environment variables on Vercel: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL` (`https://jpk-engineering.dev`)
 4. Verify `/sitemap.xml`, `/robots.txt`, and the contact form on the production URL
+
+### Releases
+
+After CI passes on `main`, **semantic-release** bumps [`package.json`](package.json), updates [`CHANGELOG.md`](CHANGELOG.md), creates a Git tag (`vX.Y.Z`), and publishes a [GitHub Release](https://github.com/jumpei999/portfolio/releases). Version bumps follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:` → minor, `fix:` → patch, `BREAKING CHANGE` → major. Merges with only `chore:`, `refactor:`, or `style:` commits do not trigger a release.
+
+Repository Settings → Actions → General must grant workflows **Read and write permissions** so `GITHUB_TOKEN` can push tags and release commits.
 
 [Dependabot](.github/dependabot.yml) opens weekly PRs for npm and GitHub Actions updates (security fixes included).
 
@@ -106,13 +112,15 @@ pnpm start       # serve production build
 pnpm lint        # ESLint
 pnpm typecheck   # tsc --noEmit
 pnpm check:i18n  # ja/en key parity + shared overlap
-pnpm commit      # interactive Conventional Commits (Commitizen)
+pnpm commit          # interactive Conventional Commits (Commitizen)
+pnpm release:dry-run # preview next semantic-release version locally
 ```
 
 ## Project Structure
 
 ```
-.github/workflows/     # CI (lint, typecheck, i18n, build)
+.github/workflows/     # CI (lint, typecheck, i18n, build, semantic-release on main)
+release.config.mjs     # semantic-release config
 .github/dependabot.yml # Weekly dependency update PRs
 AGENTS.md              # Agent instructions (AI tools)
 .cursor/rules/         # Cursor project rules (e.g. responsive-design.mdc)

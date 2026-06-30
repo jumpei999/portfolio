@@ -12,6 +12,7 @@
     "check:i18n": "node scripts/check-i18n-keys.mjs",
     "analyze": "ANALYZE=true next build",
     "commit": "cz",
+    "release:dry-run": "semantic-release --dry-run",
     "prepare": "husky"
   },
   "config": {
@@ -44,6 +45,9 @@
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
     "@next/bundle-analyzer": "^16.2.6",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.8",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -54,6 +58,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "husky": "^9.1.7",
+    "semantic-release": "^25.0.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -21,12 +21,15 @@ pnpm lint
 pnpm typecheck
 pnpm check:i18n
 pnpm analyze  # optional: bundle report (ANALYZE=true)
-pnpm commit   # interactive Conventional Commits (Commitizen)
+pnpm commit          # interactive Conventional Commits (Commitizen)
+pnpm release:dry-run # preview next semantic-release version locally
 ```
 
 Commits use **Conventional Commits** (`feat:`, `fix:`, `refactor:`, etc.). `pnpm commit` runs Commitizen; `git commit` is validated locally by commitlint via husky (`commit-msg` hook). Config: [`commitlint.config.mjs`](commitlint.config.mjs).
 
-CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typecheck, i18n, build on PR/push), [`.github/dependabot.yml`](.github/dependabot.yml) (weekly dependency PRs), [`vercel.json`](vercel.json) (pnpm install/build for Vercel Git deploys).
+Releases: after CI passes on `main`, [semantic-release](release.config.mjs) updates `package.json` + `CHANGELOG.md`, tags `vX.Y.Z`, and creates a GitHub Release (`feat:` minor, `fix:` patch, `BREAKING CHANGE` major). Config: [`release.config.mjs`](release.config.mjs).
+
+CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typecheck, i18n, build on PR/push; semantic-release on `main` push), [`.github/dependabot.yml`](.github/dependabot.yml) (weekly dependency PRs), [`vercel.json`](vercel.json) (pnpm install/build for Vercel Git deploys).
 
 ## Layout
 
