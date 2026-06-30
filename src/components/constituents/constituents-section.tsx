@@ -46,21 +46,19 @@ export default function Constituents() {
       aria-label={t("ariaLabel")}
     >
         <div className="relative min-h-0 flex-1">
-          {placedTags.length > 0 && (
-            <div className="absolute inset-0">
-              <TagConnections
-                tags={placedTags}
-                selectedCategories={selectedReadonly}
-                started={animationStarted}
-              />
+          <div className="absolute inset-0">
+            <TagConnections
+              tags={placedTags}
+              selectedCategories={selectedReadonly}
+              started={animationStarted}
+            />
 
-              <TagCloud
-                tags={placedTags}
-                selectedCategories={selectedReadonly}
-                started={animationStarted}
-              />
-            </div>
-          )}
+            <TagCloud
+              tags={placedTags}
+              selectedCategories={selectedReadonly}
+              started={animationStarted}
+            />
+          </div>
 
           <CenterTitle title={t("title")} started={animationStarted} />
         </div>
