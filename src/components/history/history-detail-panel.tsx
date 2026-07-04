@@ -1,6 +1,6 @@
 "use client"
 
-import { useLayoutEffect, useRef, useState, type RefObject } from "react"
+import { useRef } from "react"
 import {
   AnimatePresence,
   motion,
@@ -9,9 +9,12 @@ import {
 } from "motion/react"
 import { useTranslations } from "next-intl"
 import { MOBILE_DOCK_MAX_HEIGHT_PX } from "@/components/history/constants"
+import { useDockNeedsScroll } from "@/hooks/use-dock-needs-scroll"
 import {
   ENTRANCE_EASE,
   ENTRANCE_STAGGER_SEC,
+  HISTORY_ARTICLE_DOCK_DURATION_SEC,
+  HISTORY_ARTICLE_SWITCH_DURATION_SEC,
 } from "@/hooks/use-entrance-animation"
 import type { HistoryItem } from "@/data/history"
 import { findHistoryItemById } from "@/lib/history-commit-label"
@@ -21,14 +24,6 @@ type HistoryDetailPanelProps = {
   activeId: string
   items: HistoryItem[]
   variant?: "default" | "dock"
-}
-
-function getVerticalPadding(element: HTMLElement): number {
-  const style = getComputedStyle(element)
-  return (
-    Number.parseFloat(style.paddingTop) +
-    Number.parseFloat(style.paddingBottom)
-  )
 }
 
 function getArticleMotionInitial(
@@ -47,43 +42,6 @@ function getArticleMotionExit(
   if (reduceMotion) return undefined
   if (isDock) return { opacity: 0 }
   return { opacity: 0, x: -12 }
-}
-
-function useDockNeedsScroll(
-  activeId: string,
-  isDock: boolean,
-  cardRef: RefObject<HTMLDivElement | null>,
-  articleRef: RefObject<HTMLElement | null>,
-) {
-  const [needsScroll, setNeedsScroll] = useState(false)
-
-  useLayoutEffect(() => {
-    if (!isDock) return
-
-    const measureNeedsScroll = () => {
-      const card = cardRef.current
-      const article = articleRef.current
-      if (!card || !article) return
-
-      const availableHeight = card.clientHeight - getVerticalPadding(card)
-      setNeedsScroll(article.scrollHeight > availableHeight)
-    }
-
-    const frameId = requestAnimationFrame(measureNeedsScroll)
-
-    const card = cardRef.current
-    const article = articleRef.current
-    const resizeObserver = new ResizeObserver(measureNeedsScroll)
-    if (card) resizeObserver.observe(card)
-    if (article) resizeObserver.observe(article)
-
-    return () => {
-      cancelAnimationFrame(frameId)
-      resizeObserver.disconnect()
-    }
-  }, [activeId, articleRef, cardRef, isDock])
-
-  return isDock && needsScroll
 }
 
 const detailItemHidden = { opacity: 0, y: 8 }
@@ -253,8 +211,10 @@ export default function HistoryDetailPanel({
           animate={isDock ? { opacity: 1 } : { opacity: 1, x: 0 }}
           exit={getArticleMotionExit(reduceMotion, isDock)}
           transition={{
-            duration: isDock ? 0.2 : 0.3,
-            ease: [0.24, 1, 0.32, 1],
+            duration: isDock
+              ? HISTORY_ARTICLE_DOCK_DURATION_SEC
+              : HISTORY_ARTICLE_SWITCH_DURATION_SEC,
+            ease: ENTRANCE_EASE,
           }}
         >
           <HistoryDetailContent

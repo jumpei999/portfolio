@@ -1,8 +1,4 @@
 import * as Sentry from "@sentry/nextjs"
+import { sentryInitOptions } from "@/lib/sentry/init-options"
 
-Sentry.init({
-  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-  tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1,
-  enableLogs: true,
-  sendDefaultPii: false,
-})
+Sentry.init(sentryInitOptions)

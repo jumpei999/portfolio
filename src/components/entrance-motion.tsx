@@ -3,13 +3,12 @@
 import { useRef, type ComponentPropsWithoutRef, type ReactNode } from "react"
 import { motion, useInView, useReducedMotion } from "motion/react"
 import {
+  ENTRANCE_ITEM_HIDDEN,
+  ENTRANCE_ITEM_VISIBLE,
   entranceInViewOptions,
   entranceItemTransition,
   useEntranceStarted,
 } from "@/hooks/use-entrance-animation"
-
-const itemHidden = { opacity: 0, y: 16 }
-const itemAnimate = { opacity: 1, y: 0 }
 
 type MotionTag = "div" | "h2" | "p"
 
@@ -49,8 +48,8 @@ export default function EntranceMotion({
       <motion.h2
         ref={ref}
         className={className}
-        initial={itemHidden}
-        animate={started ? itemAnimate : itemHidden}
+        initial={ENTRANCE_ITEM_HIDDEN}
+        animate={started ? ENTRANCE_ITEM_VISIBLE : ENTRANCE_ITEM_HIDDEN}
         transition={transition}
         {...rest}
       >
@@ -72,8 +71,8 @@ export default function EntranceMotion({
       <motion.p
         ref={ref}
         className={className}
-        initial={itemHidden}
-        animate={started ? itemAnimate : itemHidden}
+        initial={ENTRANCE_ITEM_HIDDEN}
+        animate={started ? ENTRANCE_ITEM_VISIBLE : ENTRANCE_ITEM_HIDDEN}
         transition={transition}
         {...rest}
       >
@@ -94,8 +93,8 @@ export default function EntranceMotion({
     <motion.div
       ref={ref}
       className={className}
-      initial={itemHidden}
-      animate={started ? itemAnimate : itemHidden}
+      initial={ENTRANCE_ITEM_HIDDEN}
+      animate={started ? ENTRANCE_ITEM_VISIBLE : ENTRANCE_ITEM_HIDDEN}
       transition={transition}
       {...rest}
     >

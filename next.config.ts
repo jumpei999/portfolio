@@ -13,6 +13,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   reactCompiler: true,
   devIndicators: false,
+  allowedDevOrigins: ["192.168.188.*"],
   turbopack: {
     root: path.join(__dirname),
   },

@@ -43,7 +43,9 @@ CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typec
 - i18n messages: [`src/messages/`](src/messages/) (`shared.json` + `ja.json` / `en.json`) — see [`.cursor/rules/i18n-messages.mdc`](.cursor/rules/i18n-messages.mdc) (no duplicate keys across shared / locale files)
 - Static data: [`src/data/`](src/data/) (nav, history, social links, site tech stack)
 - Section layout: [`src/lib/section-shell.ts`](src/lib/section-shell.ts) (spacing, viewport height, mobile bottom clearance)
-- Media queries: [`src/lib/media-queries.ts`](src/lib/media-queries.ts) (`MOBILE_MAX_WIDTH_PX`, `prefersReducedMotion`)
+- Media queries: [`src/lib/media-queries.ts`](src/lib/media-queries.ts) (`NARROW_MAX_WIDTH_PX`, `MOBILE_MAX_WIDTH_PX`, `prefersReducedMotion`)
+- Constituents placement: [`src/lib/constituents/placement.ts`](src/lib/constituents/placement.ts) (tier config + `buildPlacedTags`); [`src/hooks/use-placement-tier.ts`](src/hooks/use-placement-tier.ts), [`src/hooks/use-placed-tags.ts`](src/hooks/use-placed-tags.ts)
+- History hooks: [`src/hooks/use-active-commit.ts`](src/hooks/use-active-commit.ts), [`src/hooks/use-mobile-list-follow.ts`](src/hooks/use-mobile-list-follow.ts), [`src/hooks/use-dock-needs-scroll.ts`](src/hooks/use-dock-needs-scroll.ts)
 - Shared UI: [`src/components/ui/`](src/components/ui/)
 
 ## Conventions

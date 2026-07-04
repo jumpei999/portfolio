@@ -1,13 +1,10 @@
 import { prefersReducedMotion } from "@/lib/media-queries"
+import { createStableValuePoller } from "@/lib/wait-for-stable-value"
 
 type Listener = () => void
 
 let programmaticScrolling = false
 const listeners = new Set<Listener>()
-
-function prefersReducedScroll(): boolean {
-  return prefersReducedMotion()
-}
 
 function emit(): void {
   for (const listener of listeners) {
@@ -42,16 +39,8 @@ const SCROLL_STABLE_FRAMES = 4
 
 let activeScrollCleanup: (() => void) | null = null
 
-export function beginProgrammaticScroll(): void {
-  if (prefersReducedScroll()) {
-    return
-  }
-
-  activeScrollCleanup?.()
-  setProgrammaticScrolling(true)
-
+function runScrollEndWaiter(onEnd?: () => void): () => void {
   let finished = false
-  let rafId = 0
 
   const finish = () => {
     if (finished) {
@@ -61,47 +50,60 @@ export function beginProgrammaticScroll(): void {
     finished = true
     document.removeEventListener("scrollend", finish)
     clearTimeout(timeoutId)
-    cancelAnimationFrame(rafId)
+    poller.cancel()
+    onEnd?.()
+  }
 
+  document.addEventListener("scrollend", finish, { once: true })
+  const timeoutId = globalThis.setTimeout(finish, SCROLL_END_FALLBACK_MS)
+
+  const poller = createStableValuePoller({
+    readValue: () => globalThis.scrollY,
+    stableFrames: SCROLL_STABLE_FRAMES,
+    onStable: finish,
+    isDone: () => finished,
+  })
+
+  poller.start()
+
+  return finish
+}
+
+export function waitForScrollEnd(onScrollEnd?: () => void): void {
+  if (prefersReducedMotion()) {
+    onScrollEnd?.()
+    return
+  }
+
+  activeScrollCleanup?.()
+
+  const cleanup = runScrollEndWaiter(() => {
+    if (activeScrollCleanup === cleanup) {
+      activeScrollCleanup = null
+    }
+    onScrollEnd?.()
+  })
+
+  activeScrollCleanup = cleanup
+}
+
+export function beginProgrammaticScroll(onScrollEnd?: () => void): void {
+  if (prefersReducedMotion()) {
+    onScrollEnd?.()
+    return
+  }
+
+  activeScrollCleanup?.()
+  setProgrammaticScrolling(true)
+
+  const cleanup = runScrollEndWaiter(() => {
     if (activeScrollCleanup === cleanup) {
       activeScrollCleanup = null
     }
 
     setProgrammaticScrolling(false)
-  }
-
-  const cleanup = () => {
-    finish()
-  }
+    onScrollEnd?.()
+  })
 
   activeScrollCleanup = cleanup
-
-  document.addEventListener("scrollend", finish, { once: true })
-  const timeoutId = globalThis.setTimeout(finish, SCROLL_END_FALLBACK_MS)
-
-  let lastY = globalThis.scrollY
-  let stableFrames = 0
-
-  const checkScrollSettled = () => {
-    if (finished) {
-      return
-    }
-
-    const nextY = globalThis.scrollY
-
-    if (nextY === lastY) {
-      stableFrames += 1
-      if (stableFrames >= SCROLL_STABLE_FRAMES) {
-        finish()
-        return
-      }
-    } else {
-      stableFrames = 0
-      lastY = nextY
-    }
-
-    rafId = requestAnimationFrame(checkScrollSettled)
-  }
-
-  rafId = requestAnimationFrame(checkScrollSettled)
 }

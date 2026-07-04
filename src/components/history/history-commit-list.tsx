@@ -3,8 +3,14 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react"
 import { motion, useReducedMotion, type MotionValue } from "motion/react"
 import HistoryCommitItem from "@/components/history/history-commit-item"
-import { useMobileListFollow } from "@/components/history/use-mobile-list-follow"
+import { useMobileListFollow } from "@/hooks/use-mobile-list-follow"
+import {
+  ENTRANCE_DURATION_SEC,
+  ENTRANCE_EASE,
+  ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
+} from "@/hooks/use-entrance-animation"
 import type { HistoryItem } from "@/data/history"
+import { scheduleLayoutMeasure } from "@/lib/schedule-layout-measure"
 import { cn } from "@/lib/utils"
 
 type HistoryCommitListLayout = "default" | "mobileStage"
@@ -17,6 +23,7 @@ type HistoryCommitListProps = {
   animationStarted: boolean
   layout?: HistoryCommitListLayout
   scrollDriven?: boolean
+  clickNavActive?: boolean
   fractionalIndex?: number
   scrollYProgress?: MotionValue<number>
   stageRef?: RefObject<HTMLElement | null>
@@ -32,6 +39,7 @@ export default function HistoryCommitList({
   animationStarted,
   layout = "default",
   scrollDriven = false,
+  clickNavActive = false,
   fractionalIndex = 0,
   scrollYProgress,
   stageRef,
@@ -46,8 +54,9 @@ export default function HistoryCommitList({
   const isMobileStage = layout === "mobileStage"
   const followActive = isMobileStage && scrollDriven && Boolean(stageRef)
 
+  const progressIndex = clickNavActive ? fractionalIndex : activeIndex
   const progress =
-    items.length <= 1 ? 1 : activeIndex / (items.length - 1)
+    items.length <= 1 ? 1 : progressIndex / (items.length - 1)
 
   const offsetY = useMobileListFollow({
     stageRef: stageRef ?? { current: null },
@@ -107,12 +116,11 @@ export default function HistoryCommitList({
   }, [])
 
   useLayoutEffect(() => {
-    measureLineHeight()
-    const frameId = requestAnimationFrame(measureLineHeight)
+    const cancelFrame = scheduleLayoutMeasure(measureLineHeight)
 
     const root = listRef.current
     if (!root) {
-      cancelAnimationFrame(frameId)
+      cancelFrame()
       return
     }
 
@@ -120,7 +128,7 @@ export default function HistoryCommitList({
     resizeObserver.observe(root)
 
     return () => {
-      cancelAnimationFrame(frameId)
+      cancelFrame()
       resizeObserver.disconnect()
     }
   }, [activeId, items.length, layout, measureLineHeight])
@@ -138,7 +146,7 @@ export default function HistoryCommitList({
         aria-hidden
         initial={reduceMotion ? false : { scaleY: 0 }}
         animate={{ scaleY: animationStarted ? 1 : 0 }}
-        transition={{ duration: 0.6, ease: [0.24, 1, 0.32, 1] }}
+        transition={{ duration: ENTRANCE_DURATION_SEC, ease: ENTRANCE_EASE }}
         style={lineHeightStyle}
       />
 
@@ -149,7 +157,10 @@ export default function HistoryCommitList({
         animate={{
           scaleY: animationStarted && activeIndex >= 0 ? progress : 0,
         }}
-        transition={{ duration: 0.5, ease: [0.24, 1, 0.32, 1] }}
+        transition={{
+          duration: ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
+          ease: ENTRANCE_EASE,
+        }}
         style={
           lineHeightPx == null
             ? { height: "calc(100% - 0.75rem)" }
@@ -175,7 +186,6 @@ export default function HistoryCommitList({
           animationStarted={animationStarted}
           isActive={item.id === activeId}
           isLast={index === items.length - 1}
-          layout={isMobileStage ? "mobile" : "default"}
           itemRef={followActive ? setItemRef(index) : undefined}
           onSelect={onSelect}
         />

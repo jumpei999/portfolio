@@ -8,9 +8,15 @@ import HistoryCommitList from "@/components/history/history-commit-list"
 import HistoryDetailPanel from "@/components/history/history-detail-panel"
 import HistoryBackButton from "@/components/history/history-back-button"
 import HistorySkipButton from "@/components/history/history-skip-button"
-import { useActiveCommit } from "@/components/history/use-active-commit"
+import { useActiveCommit } from "@/hooks/use-active-commit"
 import EntranceMotion from "@/components/entrance-motion"
-import { useEntranceInView } from "@/hooks/use-entrance-animation"
+import {
+  ENTRANCE_DURATION_SEC,
+  ENTRANCE_EASE,
+  ENTRANCE_ITEM_HIDDEN,
+  ENTRANCE_ITEM_VISIBLE,
+  useEntranceInView,
+} from "@/hooks/use-entrance-animation"
 import { useHistoryItems } from "@/hooks/use-history-items"
 import { HISTORY_ITEM_IDS } from "@/data/history"
 import type { HistoryItem } from "@/data/history"
@@ -52,9 +58,9 @@ function HistorySkipFooter({ visible }: Readonly<{ visible: boolean }>) {
   return (
     <motion.div
       className="mt-auto hidden shrink-0 justify-center pt-4 lg:flex"
-      initial={{ opacity: 0, y: 16 }}
-      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-      transition={{ duration: 0.6, ease: [0.24, 1, 0.32, 1] }}
+      initial={ENTRANCE_ITEM_HIDDEN}
+      animate={visible ? ENTRANCE_ITEM_VISIBLE : ENTRANCE_ITEM_HIDDEN}
+      transition={{ duration: ENTRANCE_DURATION_SEC, ease: ENTRANCE_EASE }}
     >
       <HistorySkipButton />
     </motion.div>
@@ -79,6 +85,7 @@ type HistoryTimelinePanelsProps = {
   scrollDriven: boolean
   activeId: string
   activeIndex: number
+  clickNavActive: boolean
   fractionalIndex: number
   scrollYProgress?: MotionValue<number>
   timelineLabel: string
@@ -90,6 +97,7 @@ function HistoryTimelinePanels({
   scrollDriven,
   activeId,
   activeIndex,
+  clickNavActive,
   fractionalIndex,
   scrollYProgress,
   timelineLabel,
@@ -110,6 +118,7 @@ function HistoryTimelinePanels({
     timelineLabel,
     animationStarted,
     scrollDriven,
+    clickNavActive,
     fractionalIndex,
     scrollYProgress,
     onSelect,
@@ -167,6 +176,7 @@ export default function HistoryTimeline() {
   const {
     activeId,
     activeIndex,
+    clickNavActive,
     fractionalIndex,
     scrollYProgress,
     scrollToCommit,
@@ -183,6 +193,7 @@ export default function HistoryTimeline() {
       scrollDriven={scrollDriven}
       activeId={activeId}
       activeIndex={activeIndex}
+      clickNavActive={clickNavActive}
       fractionalIndex={fractionalIndex}
       scrollYProgress={scrollDriven ? scrollYProgress : undefined}
       timelineLabel={t("timelineAria")}
