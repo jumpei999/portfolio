@@ -21,15 +21,12 @@ function getItemAnimateTarget(
   return ENTRANCE_ITEM_HIDDEN
 }
 
-type HistoryCommitItemLayout = "default" | "mobile"
-
 type HistoryCommitItemProps = {
   item: HistoryItem
   index: number
   animationStarted: boolean
   isActive: boolean
   isLast: boolean
-  layout?: HistoryCommitItemLayout
   itemRef?: (element: HTMLLIElement | null) => void
   onSelect: (id: string) => void
 }
@@ -40,13 +37,11 @@ export default function HistoryCommitItem({
   animationStarted,
   isActive,
   isLast,
-  layout = "default",
   itemRef,
   onSelect,
 }: Readonly<HistoryCommitItemProps>) {
   const reduceMotion = useReducedMotion()
   const label = formatHistoryCommitLabel(item)
-  const isMobileLayout = layout === "mobile"
   const transition = entranceItemTransition(index, animationStarted)
   const itemAnimate = getItemAnimateTarget(reduceMotion, animationStarted)
 
@@ -92,8 +87,7 @@ export default function HistoryCommitItem({
         type="button"
         onClick={() => onSelect(item.id)}
         className={cn(
-          "min-w-0 pt-0 text-left font-mono text-sm transition-colors",
-          isMobileLayout && isActive ? "whitespace-normal" : "truncate",
+          "min-w-0 pt-0 text-left font-mono text-sm transition-colors truncate",
           isActive
             ? "text-foreground"
             : "text-muted-foreground hover:text-foreground",

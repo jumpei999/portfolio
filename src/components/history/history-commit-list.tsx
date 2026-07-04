@@ -183,7 +183,6 @@ export default function HistoryCommitList({
           animationStarted={animationStarted}
           isActive={item.id === activeId}
           isLast={index === items.length - 1}
-          layout={isMobileStage ? "mobile" : "default"}
           itemRef={followActive ? setItemRef(index) : undefined}
           onSelect={onSelect}
         />
