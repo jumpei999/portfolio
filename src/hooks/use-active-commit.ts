@@ -1,7 +1,9 @@
 "use client"
 
 import { useMotionValueEvent, useScroll, type MotionValue } from "motion/react"
-import { useCallback, useState, type RefObject } from "react"
+import { useCallback, useRef, useState, type RefObject } from "react"
+
+import { waitForScrollEnd } from "@/lib/programmatic-scroll"
 
 type UseActiveCommitOptions = {
   commitIds: string[]
@@ -32,6 +34,8 @@ export function useActiveCommit({
   )
   const [activeIndex, setActiveIndex] = useState(defaultIndex)
   const [fractionalIndex, setFractionalIndex] = useState(defaultIndex)
+  const [clickNavActive, setClickNavActive] = useState(false)
+  const clickNavTargetRef = useRef<number | null>(null)
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -42,7 +46,9 @@ export function useActiveCommit({
     if (!scrollDriven) return
     const fractional = progressToFractional(progress, commitIds.length)
     setFractionalIndex(fractional)
-    setActiveIndex(fractionalToIndex(fractional, commitIds.length))
+    if (clickNavTargetRef.current === null) {
+      setActiveIndex(fractionalToIndex(fractional, commitIds.length))
+    }
   })
 
   const scrollToCommit = useCallback(
@@ -51,7 +57,6 @@ export function useActiveCommit({
       if (index < 0) return
 
       setActiveIndex(index)
-      setFractionalIndex(index)
 
       if (!scrollDriven) return
 
@@ -68,6 +73,12 @@ export function useActiveCommit({
       const step = scrollable / (commitIds.length - 1)
       const targetY = trackTop + index * step
 
+      clickNavTargetRef.current = index
+      setClickNavActive(true)
+      waitForScrollEnd(() => {
+        clickNavTargetRef.current = null
+        setClickNavActive(false)
+      })
       window.scrollTo({ top: targetY, behavior: "smooth" })
     },
     [commitIds, scrollDriven, trackRef],
@@ -78,6 +89,7 @@ export function useActiveCommit({
   return {
     activeId,
     activeIndex,
+    clickNavActive,
     fractionalIndex,
     scrollYProgress: scrollYProgress as MotionValue<number>,
     scrollToCommit,

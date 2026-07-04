@@ -23,6 +23,7 @@ type HistoryCommitListProps = {
   animationStarted: boolean
   layout?: HistoryCommitListLayout
   scrollDriven?: boolean
+  clickNavActive?: boolean
   fractionalIndex?: number
   scrollYProgress?: MotionValue<number>
   stageRef?: RefObject<HTMLElement | null>
@@ -38,6 +39,7 @@ export default function HistoryCommitList({
   animationStarted,
   layout = "default",
   scrollDriven = false,
+  clickNavActive = false,
   fractionalIndex = 0,
   scrollYProgress,
   stageRef,
@@ -52,8 +54,9 @@ export default function HistoryCommitList({
   const isMobileStage = layout === "mobileStage"
   const followActive = isMobileStage && scrollDriven && Boolean(stageRef)
 
+  const progressIndex = clickNavActive ? fractionalIndex : activeIndex
   const progress =
-    items.length <= 1 ? 1 : activeIndex / (items.length - 1)
+    items.length <= 1 ? 1 : progressIndex / (items.length - 1)
 
   const offsetY = useMobileListFollow({
     stageRef: stageRef ?? { current: null },

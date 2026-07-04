@@ -85,6 +85,7 @@ type HistoryTimelinePanelsProps = {
   scrollDriven: boolean
   activeId: string
   activeIndex: number
+  clickNavActive: boolean
   fractionalIndex: number
   scrollYProgress?: MotionValue<number>
   timelineLabel: string
@@ -96,6 +97,7 @@ function HistoryTimelinePanels({
   scrollDriven,
   activeId,
   activeIndex,
+  clickNavActive,
   fractionalIndex,
   scrollYProgress,
   timelineLabel,
@@ -116,6 +118,7 @@ function HistoryTimelinePanels({
     timelineLabel,
     animationStarted,
     scrollDriven,
+    clickNavActive,
     fractionalIndex,
     scrollYProgress,
     onSelect,
@@ -173,6 +176,7 @@ export default function HistoryTimeline() {
   const {
     activeId,
     activeIndex,
+    clickNavActive,
     fractionalIndex,
     scrollYProgress,
     scrollToCommit,
@@ -189,6 +193,7 @@ export default function HistoryTimeline() {
       scrollDriven={scrollDriven}
       activeId={activeId}
       activeIndex={activeIndex}
+      clickNavActive={clickNavActive}
       fractionalIndex={fractionalIndex}
       scrollYProgress={scrollDriven ? scrollYProgress : undefined}
       timelineLabel={t("timelineAria")}
