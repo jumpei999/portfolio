@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/jumpei999/portfolio/compare/v1.2.0...v1.2.1) (2026-07-05)
+
+
+### Bug Fixes
+
+* implement scroll button animation on hero ([38bac64](https://github.com/jumpei999/portfolio/commit/38bac6471b5e679977f4f6c0a4f0e05a5e447b0a))
+* optimize font loading ([90ca65b](https://github.com/jumpei999/portfolio/commit/90ca65bef07305ad1458a93d4e63c7aac553a675)), closes [#10](https://github.com/jumpei999/portfolio/issues/10)
+
 # [1.2.0](https://github.com/jumpei999/portfolio/compare/v1.1.6...v1.2.0) (2026-07-05)
 
 
