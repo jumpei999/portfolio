@@ -49,6 +49,7 @@ export type ResumeExperienceSection = {
   introBullets?: string[]
   awards?: string[]
   managementBullets?: string[]
+  managementBulletAppend?: (ResumeRichText | undefined)[]
   seBullets?: ResumeSeEntry[]
   projects: ResumeProject[]
 }

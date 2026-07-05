@@ -1,5 +1,6 @@
 import type { ResumeExperienceSection } from "@/data/resume/types"
 import ResumeProjectCard from "@/components/resume/resume-project-card"
+import ResumeRichTextComponent from "@/components/resume/resume-rich-text"
 import ResumeSeEntries from "@/components/resume/resume-se-entries"
 
 type ResumeExperienceSectionProps = {
@@ -70,8 +71,15 @@ export default function ResumeExperienceSection({
         <div className="space-y-2">
           <p className="text-sm font-normal">経営・マネジメント実績</p>
           <ul className="list-disc space-y-2 pl-5 text-sm sm:text-base">
-            {section.managementBullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
+            {section.managementBullets.map((bullet, index) => (
+              <li key={bullet}>
+                {bullet}
+                {section.managementBulletAppend?.[index] ? (
+                  <ResumeRichTextComponent
+                    content={section.managementBulletAppend[index]!}
+                  />
+                ) : null}
+              </li>
             ))}
           </ul>
         </div>

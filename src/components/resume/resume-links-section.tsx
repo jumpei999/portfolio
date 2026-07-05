@@ -9,12 +9,11 @@ type ResumeLinksSectionProps = {
 export default function ResumeLinksSection({
   links,
 }: Readonly<ResumeLinksSectionProps>) {
-  const qrLinks = [links.github, links.portfolio]
+  const qrLinks = [links.portfolio, links.github]
 
   return (
     <section className="resume-links space-y-4">
-      <h2 className="text-xl font-bold print:hidden">リンク</h2>
-      <h2 className="hidden text-xl font-bold print:block">QRコード</h2>
+      <h2 className="text-xl font-bold print:hidden">制作物</h2>
       <p className="text-sm leading-relaxed sm:text-base print:text-black">
         <ResumeRichText content={links.intro} />
       </p>
@@ -35,7 +34,7 @@ export default function ResumeLinksSection({
               href={link.url}
               target="_blank"
               rel="noreferrer"
-              className="break-all text-primary underline-offset-4 hover:underline"
+              className="break-all text-muted-foreground underline-offset-4 hover:underline"
             >
               {link.url}
             </a>

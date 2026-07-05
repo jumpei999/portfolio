@@ -7,18 +7,18 @@
     "intro": [
       {
         "type": "text",
-        "value": "作成物やポートフォリオサイトは以下よりご覧いただけます。"
+        "value": "ポートフォリオサイトやそのソースコード等個人的な制作物は以下よりご覧いただけます。"
       }
     ],
-    "github": {
-      "label": "GitHub Profile",
-      "url": "https://github.com/jumpei999/",
-      "qrSrc": "/resume/assets/github-qr.png"
-    },
     "portfolio": {
       "label": "Portfolio Website",
       "url": "https://jpk-engineering.dev/",
       "qrSrc": "/resume/assets/jpk-qr.png"
+    },
+    "github": {
+      "label": "GitHub Profile",
+      "url": "https://github.com/jumpei999/",
+      "qrSrc": "/resume/assets/github-qr.png"
     }
   },
   "basicInfo": {
@@ -415,15 +415,13 @@
           "client": "官公庁",
           "title": "電子申請システム",
           "period": "1.5年",
-          "description": "公開鍵暗号方式を用いた申請書類の暗号化・復号化機能、各省庁システムとのI/F設計、実装。",
-          "technologies": ["Java", "Oracle", "Tomcat"]
+          "description": "公開鍵暗号方式を用いた申請書類の暗号化・復号化機能、各省庁システムとのI/F設計、実装。"
         },
         {
           "client": "通信キャリア",
           "title": "DWHプロジェクト",
           "period": "1.5年",
-          "description": "20名規模（複数チーム）のリーダーとして、SQLパフォーマンスチューニングや分析データ作成の要件抽出を主導。",
-          "technologies": ["Oracle", "BIツール"]
+          "description": "20名規模（複数チーム）のリーダーとして、SQLパフォーマンスチューニングや分析データ作成の要件抽出を主導。"
         },
         {
           "client": "運輸",
