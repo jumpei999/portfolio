@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jumpei999/portfolio/compare/v1.1.6...v1.2.0) (2026-07-05)
+
+
+### Features
+
+* implement resume page ([82fd095](https://github.com/jumpei999/portfolio/commit/82fd095ba77db0e143c58913a22f9553d5980192))
+
 ## [1.1.6](https://github.com/jumpei999/portfolio/compare/v1.1.5...v1.1.6) (2026-07-04)
 
 
