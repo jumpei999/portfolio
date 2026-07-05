@@ -82,6 +82,22 @@ pnpm dev
 
 Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` in `.env.local` (see [`.env.example`](.env.example)). Set `NEXT_PUBLIC_SITE_URL` to the production origin (e.g. `https://jpk-engineering.dev`) for SEO metadata, sitemap, and robots.
 
+### Resume routes (not in site navigation)
+
+- Public resume: `/resume` (generated from [`src/data/resume/resume.public.ts`](src/data/resume/resume.public.ts))
+- Private resume: `/resume/private` (password + encrypted [`src/data/resume/resume.private.enc`](src/data/resume/resume.private.enc))
+
+Edit flow:
+
+```bash
+pnpm resume:reveal     # decrypt to resume.private.json (local only, gitignored)
+# edit src/data/resume/resume.private.json
+pnpm resume:seal       # update resume.private.enc
+pnpm export:resume     # regenerate resume.public.ts
+```
+
+Production env (Vercel): `RESUME_ENCRYPTION_KEY`, `RESUME_PASSWORD_SECRET`, `RESUME_SESSION_SECRET`, `RESUME_SLACK_WEBHOOK_URL`, `CRON_SECRET`. Monthly private passwords are derived automatically; Slack notification runs on the 1st of each month (9:00 JST). Local fallback: `pnpm resume:password`.
+
 Optional observability (see [`.env.example`](.env.example)):
 
 - **Vercel Analytics** — enable in the Vercel project dashboard after deploy (no env vars); [`@vercel/analytics`](https://vercel.com/docs/analytics) is wired in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx). When enabled, production serves `/_vercel/insights/script.js` and the client sends page views after hydration.
@@ -93,7 +109,7 @@ Production: [https://jpk-engineering.dev](https://jpk-engineering.dev). Vercel i
 
 1. Open a PR — [GitHub Actions](.github/workflows/ci.yml) runs `pnpm lint`, `typecheck`, `check:i18n`, and `build`
 2. Merge to `main` — Vercel deploys automatically ([`vercel.json`](vercel.json): `pnpm install` / `pnpm build`); CI then runs [semantic-release](release.config.mjs) when there are releasable commits
-3. Environment variables on Vercel: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL` (`https://jpk-engineering.dev`)
+3. Environment variables on Vercel: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL` (`https://jpk-engineering.dev`), plus resume vars in [`.env.example`](.env.example) when using `/resume/private`
 4. Verify `/sitemap.xml`, `/robots.txt`, and the contact form on the production URL
 
 ### Releases
@@ -112,6 +128,7 @@ pnpm start       # serve production build
 pnpm lint        # ESLint
 pnpm typecheck   # tsc --noEmit
 pnpm check:i18n  # ja/en key parity + shared overlap
+pnpm resume:seal | resume:reveal | export:resume | resume:password
 pnpm commit          # interactive Conventional Commits (Commitizen)
 pnpm release:dry-run # preview next semantic-release version locally
 ```
@@ -130,9 +147,9 @@ src/
   lib/                 # Shared utilities (e.g. scroll-to-home.ts)
   messages/            # i18n (ja.json, en.json, shared.json)
   i18n/                # next-intl routing
-  data/                # Nav, social links, history, site-tech-stack.ts, etc.
-public/                # Logo and static SVG assets
-scripts/               # svg-to-tsx.mjs, check-i18n-keys.mjs
+  data/                # Nav, social links, history, resume, site-tech-stack.ts, etc.
+public/                # Logo, resume QR assets, static files
+scripts/               # svg-to-tsx.mjs, check-i18n-keys.mjs, resume-crypto scripts
 vercel.json            # Vercel install/build commands
 ```
 

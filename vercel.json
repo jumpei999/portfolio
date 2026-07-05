@@ -1,4 +1,10 @@
 {
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm build"
+  "buildCommand": "pnpm build",
+  "crons": [
+    {
+      "path": "/api/cron/resume-password-notify",
+      "schedule": "0 0 1 * *"
+    }
+  ]
 }

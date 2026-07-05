@@ -20,6 +20,10 @@ pnpm build
 pnpm lint
 pnpm typecheck
 pnpm check:i18n
+pnpm resume:seal      # resume.private.json -> resume.private.enc (needs RESUME_ENCRYPTION_KEY)
+pnpm resume:reveal    # resume.private.enc -> resume.private.json
+pnpm export:resume    # resume.private.json -> resume.public.ts
+pnpm resume:password  # print current monthly private-route password
 pnpm analyze  # optional: bundle report (ANALYZE=true)
 pnpm commit          # interactive Conventional Commits (Commitizen)
 pnpm release:dry-run # preview next semantic-release version locally
@@ -41,7 +45,8 @@ CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (lint, typec
 - Contact: Server Action in [`src/lib/contact/submit-contact.ts`](src/lib/contact/submit-contact.ts) (Resend)
 - SEO: [`src/lib/site-url.ts`](src/lib/site-url.ts), [`src/app/sitemap.ts`](src/app/sitemap.ts), [`src/app/robots.ts`](src/app/robots.ts), [`src/app/[locale]/opengraph-image.tsx`](src/app/[locale]/opengraph-image.tsx), [`src/components/seo/site-json-ld.tsx`](src/components/seo/site-json-ld.tsx)
 - i18n messages: [`src/messages/`](src/messages/) (`shared.json` + `ja.json` / `en.json`) — see [`.cursor/rules/i18n-messages.mdc`](.cursor/rules/i18n-messages.mdc) (no duplicate keys across shared / locale files)
-- Static data: [`src/data/`](src/data/) (nav, history, social links, site tech stack)
+- Static data: [`src/data/`](src/data/) (nav, history, social links, site tech stack, resume)
+- Resume (not in nav): [`src/app/[locale]/resume/`](src/app/[locale]/resume/) — public `/resume`, authenticated `/resume/private`; data in [`src/data/resume/`](src/data/resume/) (`resume.public.ts` committed, `resume.private.json` gitignored, `resume.private.enc` encrypted); scripts `pnpm resume:seal|reveal|export:resume|resume:password`; monthly password via HMAC + Slack cron ([`src/app/api/cron/resume-password-notify/route.ts`](src/app/api/cron/resume-password-notify/route.ts))
 - Section layout: [`src/lib/section-shell.ts`](src/lib/section-shell.ts) (spacing, viewport height, mobile bottom clearance)
 - Media queries: [`src/lib/media-queries.ts`](src/lib/media-queries.ts) (`NARROW_MAX_WIDTH_PX`, `MOBILE_MAX_WIDTH_PX`, `prefersReducedMotion`)
 - Constituents placement: [`src/lib/constituents/placement.ts`](src/lib/constituents/placement.ts) (tier config + `buildPlacedTags`); [`src/hooks/use-placement-tier.ts`](src/hooks/use-placement-tier.ts), [`src/hooks/use-placed-tags.ts`](src/hooks/use-placed-tags.ts)
