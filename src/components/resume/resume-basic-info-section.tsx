@@ -2,7 +2,7 @@ import type { ResumeData } from "@/data/resume/types"
 
 const fieldRowClassName =
   "grid min-w-0 grid-cols-[minmax(4.5rem,6rem)_1fr] items-baseline gap-x-3 gap-y-0.5"
-const labelClassName = "shrink-0 font-medium"
+const labelClassName = "shrink-0 font-normal"
 const valueClassName = "min-w-0"
 
 type ResumeBasicInfoSectionProps = {
@@ -14,7 +14,7 @@ export default function ResumeBasicInfoSection({
 }: Readonly<ResumeBasicInfoSectionProps>) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold">基本情報</h2>
+      <h2 className="text-xl font-bold">基本情報</h2>
       <dl className="space-y-2 text-sm sm:text-base">
         <div className={fieldRowClassName}>
           <dt className={labelClassName}>氏名</dt>

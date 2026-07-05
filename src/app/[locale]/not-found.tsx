@@ -9,7 +9,7 @@ export default async function NotFound() {
     <main className="flex min-h-svh flex-col items-center justify-center px-6 py-10 text-center">
       <div className="flex w-full max-w-lg flex-col items-center gap-5">
         <LogoTextLg className="h-10 w-auto sm:h-12" aria-hidden />
-        <h1 className="text-xl font-semibold sm:text-2xl">
+        <h1 className="text-xl font-bold sm:text-2xl">
           {t("notFoundTitle")}
         </h1>
         <p className="text-base text-muted-foreground text-pretty">
@@ -17,7 +17,7 @@ export default async function NotFound() {
         </p>
         <Link
           href="/"
-          className="text-sm font-medium underline underline-offset-4 hover:text-foreground"
+          className="text-sm font-normal underline underline-offset-4 hover:text-foreground"
         >
           {t("notFoundHome")}
         </Link>

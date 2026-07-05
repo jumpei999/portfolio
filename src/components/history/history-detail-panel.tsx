@@ -90,7 +90,7 @@ function HistoryDetailContent({
 
         {item.tags.length > 0 && (
           <div className={cn(isDock ? "mt-4" : "mt-6")}>
-            <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            <p className="mb-3 text-xs font-normal tracking-wide text-muted-foreground uppercase">
               {techStackLabel}
             </p>
             <ul className="flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ function HistoryDetailContent({
           animate={detailItemVisible}
           transition={detailItemTransition(3)}
         >
-          <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+          <p className="mb-3 text-xs font-normal tracking-wide text-muted-foreground uppercase">
             {techStackLabel}
           </p>
           <ul className="flex flex-wrap gap-2">

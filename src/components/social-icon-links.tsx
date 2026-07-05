@@ -55,7 +55,7 @@ export default function SocialIconLinks({
   return (
     <div className={cn("flex flex-wrap items-center gap-2", className)}>
       {showLabel && (
-        <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+        <p className="text-xs font-normal tracking-[0.18em] text-muted-foreground uppercase">
           {t("links.label")}
         </p>
       )}

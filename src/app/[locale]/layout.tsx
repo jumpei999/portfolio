@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers"
-import { Montserrat, M_PLUS_Rounded_1c } from "next/font/google"
+import { Montserrat, M_PLUS_1_Code, M_PLUS_Rounded_1c } from "next/font/google"
 import { NextIntlClientProvider, hasLocale } from "next-intl"
 import {
   getMessages,
@@ -32,13 +32,19 @@ import {
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["300", "400", "500"],
 })
 
 const mPlusRounded1c = M_PLUS_Rounded_1c({
   variable: "--font-m-plus-rounded-1c",
   subsets: ["latin"],
   weight: ["400", "700"],
+})
+
+const mPlus1Code = M_PLUS_1_Code({
+  variable: "--font-m-plus-1-code",
+  subsets: ["latin"],
+  weight: ["400"],
 })
 
 type LayoutProps = {
@@ -117,7 +123,7 @@ export default async function LocaleLayout({
       data-scroll-behavior="smooth"
     >
       <body
-        className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable}`}
+        className={`flex min-h-full flex-col font-sans ${mPlusRounded1c.variable} ${montserrat.variable} ${mPlus1Code.variable}`}
       >
         <ThemeProvider initialTheme={initialTheme}>
           <ThemeFavicon />

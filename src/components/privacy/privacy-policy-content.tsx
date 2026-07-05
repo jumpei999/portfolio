@@ -18,7 +18,7 @@ export default function PrivacyPolicyContent() {
     <div className="space-y-8 pr-1">
       {PRIVACY_SECTION_KEYS.map((sectionKey) => (
         <section key={sectionKey} className="space-y-2">
-          <h3 className="text-base font-semibold tracking-tight sm:text-lg">
+          <h3 className="text-base font-bold tracking-tight sm:text-lg">
             {t(`sections.${sectionKey}.heading`)}
           </h3>
           <p

@@ -26,7 +26,7 @@ export default function ResumeView({ data }: Readonly<ResumeViewProps>) {
       <ResumeSummarySection summary={data.summary} />
       <ResumeSkillsSection skills={data.skills} />
       <section className="space-y-8">
-        <h2 className="text-xl font-semibold">職務経歴詳細</h2>
+        <h2 className="text-xl font-bold">職務経歴詳細</h2>
         {data.experience.map((section) => (
           <ResumeExperienceSection key={section.id} section={section} />
         ))}

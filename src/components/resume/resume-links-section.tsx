@@ -13,8 +13,8 @@ export default function ResumeLinksSection({
 
   return (
     <section className="resume-links space-y-4">
-      <h2 className="text-xl font-semibold print:hidden">リンク</h2>
-      <h2 className="hidden text-xl font-semibold print:block">QRコード</h2>
+      <h2 className="text-xl font-bold print:hidden">リンク</h2>
+      <h2 className="hidden text-xl font-bold print:block">QRコード</h2>
       <p className="text-sm leading-relaxed sm:text-base print:text-black">
         <ResumeRichText content={links.intro} />
       </p>
@@ -56,7 +56,7 @@ export default function ResumeLinksSection({
               height={120}
               className="rounded-md"
             />
-            <figcaption className="text-sm font-medium">
+            <figcaption className="text-sm font-normal">
               {link.label}
             </figcaption>
           </figure>

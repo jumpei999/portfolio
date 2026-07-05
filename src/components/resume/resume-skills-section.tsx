@@ -9,11 +9,11 @@ export default function ResumeSkillsSection({
 }: Readonly<ResumeSkillsSectionProps>) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold">技術スタック</h2>
+      <h2 className="text-xl font-bold">技術スタック</h2>
       <dl className="space-y-3 sm:space-y-4">
         {skills.map((group) => (
           <div key={group.category} className="min-w-0 space-y-1">
-            <dt className="text-sm font-medium text-muted-foreground print:text-black/70">
+            <dt className="text-sm font-normal text-muted-foreground print:text-black/70">
               {group.category}
             </dt>
             <dd className="min-w-0 text-sm leading-relaxed text-foreground sm:text-base print:text-black">

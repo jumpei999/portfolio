@@ -18,7 +18,7 @@ export default function ResumeSummarySection({
 }: Readonly<ResumeSummarySectionProps>) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold">経歴要約</h2>
+      <h2 className="text-xl font-bold">経歴要約</h2>
       {summary.map((paragraph) => (
         <p
           key={paragraphKey(paragraph)}

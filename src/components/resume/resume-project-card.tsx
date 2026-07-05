@@ -3,7 +3,7 @@ import ResumeRichTextComponent from "@/components/resume/resume-rich-text"
 
 const fieldRowClassName =
   "grid min-w-0 grid-cols-[minmax(4.5rem,6rem)_1fr] items-baseline gap-x-3 gap-y-0.5"
-const labelClassName = "shrink-0 font-medium print:text-black"
+const labelClassName = "shrink-0 font-normal print:text-black"
 const valueClassName = "min-w-0 print:text-black"
 
 type ResumeProjectCardProps = {
@@ -25,7 +25,7 @@ export default function ResumeProjectCard({
 }: Readonly<ResumeProjectCardProps>) {
   return (
     <article className="resume-project space-y-3 rounded-lg bg-muted/30 p-4 print:rounded-none print:border-none print:bg-white print:p-3">
-      <h4 className="font-medium">{project.title}</h4>
+      <h4 className="font-normal">{project.title}</h4>
       <dl className="space-y-1 text-sm">
         <div className={fieldRowClassName}>
           <dt className={labelClassName}>期間</dt>
@@ -61,7 +61,7 @@ export default function ResumeProjectCard({
         </div>
       </dl>
       <div>
-        <p className="mb-2 text-sm font-medium">業務内容・成果</p>
+        <p className="mb-2 text-sm font-normal">業務内容・成果</p>
         <ul className="list-disc space-y-2 pl-5 text-sm sm:text-base">
           {project.achievements.map((achievement) => (
             <li key={achievementKey(project.id, achievement)}>
