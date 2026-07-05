@@ -84,17 +84,25 @@ Contact form requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EM
 
 ### Resume routes (not in site navigation)
 
-- Public resume: `/resume` (generated from [`src/data/resume/resume.public.ts`](src/data/resume/resume.public.ts))
-- Private resume: `/resume/private` (password + encrypted [`src/data/resume/resume.private.enc`](src/data/resume/resume.private.enc))
+- Public resume: `/resume` — `mergeResume(resume.shared.json, resume.public.json)` at runtime
+- Private resume: `/resume/private` — `mergeResume(resume.shared.json, resume.private.enc)` (password + encrypted private overrides)
 
-Edit flow:
+Edit flow (same layering idea as i18n `shared.json` + locale files):
 
 ```bash
-pnpm resume:reveal     # decrypt to resume.private.json (local only, gitignored)
-# edit src/data/resume/resume.private.json
-pnpm resume:seal       # update resume.private.enc
-pnpm export:resume     # regenerate resume.public.ts
+# edit src/data/resume/resume.shared.json     — common content (committed)
+# edit src/data/resume/resume.public.json     — public-only overrides (committed)
+pnpm resume:reveal                            # decrypt private overrides to resume.private.json
+# edit src/data/resume/resume.private.json    — private-only overrides (gitignored)
+pnpm resume:seal                              # update resume.private.enc
+pnpm check:resume                             # no duplicate leaf keys in shared vs overrides
 ```
+
+**Key placement:** identical in public/private → `resume.shared.json` only; public-only diffs → `resume.public.json`; private-only diffs → `resume.private.json`. Never duplicate leaf keys between shared and an override file.
+
+**Data schema** ([`src/data/resume/types.ts`](src/data/resume/types.ts)): structured JSON — `summary` as `ResumeRichText[]`; `skills` as `{ category, items[] }`; `techStack` as `string[]`; `achievements` as `ResumeRichText[]`; `seBullets` as `{ client, title, period?, description, technologies? }[]`; `links.intro` as `ResumeRichText`. Merge logic: [`merge-resume.ts`](src/lib/resume/merge-resume.ts).
+
+**PDF export** (browser print): open `/resume` or `/resume/private` → Print → Save as PDF (A4). Enable background graphics for QR codes. Web shows text links in the Links section; print/PDF shows QR codes instead ([`resume-print.css`](src/components/resume/resume-print.css)).
 
 Production env (Vercel): `RESUME_ENCRYPTION_KEY`, `RESUME_PASSWORD_SECRET`, `RESUME_SESSION_SECRET`, `RESUME_SLACK_WEBHOOK_URL`, `CRON_SECRET`. Monthly private passwords are derived automatically; Slack notification runs on the 1st of each month (9:00 JST). Local fallback: `pnpm resume:password`.
 
@@ -107,7 +115,7 @@ Optional observability (see [`.env.example`](.env.example)):
 
 Production: [https://jpk-engineering.dev](https://jpk-engineering.dev). Vercel is connected to GitHub; merging to `main` triggers a production deploy after CI passes.
 
-1. Open a PR — [GitHub Actions](.github/workflows/ci.yml) runs `pnpm lint`, `typecheck`, `check:i18n`, and `build`
+1. Open a PR — [GitHub Actions](.github/workflows/ci.yml) runs `pnpm lint`, `typecheck`, `check:i18n`, `check:resume`, and `build`
 2. Merge to `main` — Vercel deploys automatically ([`vercel.json`](vercel.json): `pnpm install` / `pnpm build`); CI then runs [semantic-release](release.config.mjs) when there are releasable commits
 3. Environment variables on Vercel: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `NEXT_PUBLIC_SITE_URL` (`https://jpk-engineering.dev`), plus resume vars in [`.env.example`](.env.example) when using `/resume/private`
 4. Verify `/sitemap.xml`, `/robots.txt`, and the contact form on the production URL
@@ -128,7 +136,8 @@ pnpm start       # serve production build
 pnpm lint        # ESLint
 pnpm typecheck   # tsc --noEmit
 pnpm check:i18n  # ja/en key parity + shared overlap
-pnpm resume:seal | resume:reveal | export:resume | resume:password
+pnpm check:resume # shared/public/private key overlap
+pnpm resume:seal | resume:reveal | resume:password
 pnpm commit          # interactive Conventional Commits (Commitizen)
 pnpm release:dry-run # preview next semantic-release version locally
 ```

@@ -13,4 +13,4 @@ const plaintext = decryptResumePayload(envelope, getEncryptionKeyFromEnv())
 JSON.parse(plaintext)
 writeFileSync(resumePrivateJsonPath, `${plaintext.trimEnd()}\n`, "utf8")
 
-console.log(`Revealed ${resumePrivateEncPath} -> ${resumePrivateJsonPath}`)
+console.log(`Revealed private overrides ${resumePrivateEncPath} -> ${resumePrivateJsonPath}`)

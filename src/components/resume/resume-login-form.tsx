@@ -27,7 +27,6 @@ export default function ResumeLoginForm() {
           name="password"
           type="password"
           autoComplete="current-password"
-          required
         />
       </div>
       {state.error ? (
@@ -35,9 +34,11 @@ export default function ResumeLoginForm() {
           {state.error}
         </p>
       ) : null}
-      <Button type="submit" className="w-full" disabled={isPending}>
-        {isPending ? "確認中..." : "ログイン"}
-      </Button>
+      <div className="flex justify-end">
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "確認中..." : "ログイン"}
+        </Button>
+      </div>
     </form>
   )
 }

@@ -30,6 +30,8 @@ jobs:
 
       - run: pnpm check:i18n
 
+      - run: pnpm check:resume
+
       - run: pnpm build
         env:
           NEXT_PUBLIC_SITE_URL: https://jpk-engineering.dev

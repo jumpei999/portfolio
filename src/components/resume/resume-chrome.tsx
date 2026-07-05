@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Link from "next/link"
+import "./resume-print.css"
 
 export const resumeRobots: Metadata["robots"] = {
   index: false,
@@ -17,17 +17,7 @@ type ResumeChromeProps = {
 
 export default function ResumeChrome({ children }: Readonly<ResumeChromeProps>) {
   return (
-    <div className="min-h-svh bg-background text-foreground">
-      <header className="site-chrome-surface sticky top-0 z-10 border-b border-border">
-        <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between px-6 sm:px-10">
-          <Link
-            href="/"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            ← Portfolio
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-svh bg-background text-foreground print:bg-white print:text-black">
       <main>{children}</main>
     </div>
   )

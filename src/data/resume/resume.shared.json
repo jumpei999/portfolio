@@ -1,0 +1,438 @@
+{
+  "meta": {
+    "lastUpdated": "2026年7月",
+    "documentTitle": "職務経歴書"
+  },
+  "links": {
+    "intro": [
+      {
+        "type": "text",
+        "value": "作成物やポートフォリオサイトは以下よりご覧いただけます。"
+      }
+    ],
+    "github": {
+      "label": "GitHub Profile",
+      "url": "https://github.com/jumpei999/",
+      "qrSrc": "/resume/assets/github-qr.png"
+    },
+    "portfolio": {
+      "label": "Portfolio Website",
+      "url": "https://jpk-engineering.dev/",
+      "qrSrc": "/resume/assets/jpk-qr.png"
+    }
+  },
+  "basicInfo": {
+    "employmentType": "フリーランス"
+  },
+  "summary": [
+    [
+      {
+        "type": "text",
+        "value": "フリーター時代にFlash/ActionScriptを用いたインタラクティブなWebサイト構築や物理法則の表現、PHPによるBlogシステムの自作やCMSプラグイン開発、自宅サーバー構築を通じてエンジニアとしての基礎知識を習得。"
+      }
+    ],
+    [
+      {
+        "type": "text",
+        "value": "2007年よりシステムエンジニアとして官公庁、物流、通信などのWebアプリケーション開発（Javaメイン）に従事。その後、ITサービス企業での児童向けプログラミングスクール事業の立ち上げ推進、SES事業統括や代表取締役を歴任し、経営、組織マネジメントも経験。"
+      }
+    ],
+    [
+      {
+        "type": "text",
+        "value": "2017年以降はグローバルコンサルティングファーム等において、PMおよびテックリードを兼務。Salesforceの導入、外部サービスとのAPI連携パッケージ製品開発、大規模プロジェクトのマネジメント、ブロックチェーンを活用した最先端のPoC開発など、技術とマネジメントの両輪で多数のプロジェクトを経験。"
+      }
+    ]
+  ],
+  "skills": [
+    {
+      "category": "言語",
+      "items": [
+        "TypeScript",
+        "JavaScript",
+        "Java",
+        "Python",
+        "PHP",
+        "GAS",
+        "Solidity",
+        "Apex",
+        "Scratch"
+      ]
+    },
+    {
+      "category": "フロントエンド / モバイル",
+      "items": [
+        "React",
+        "Next.js",
+        "Vue.js",
+        "React Native",
+        "Three.js",
+        "Tailwind CSS",
+        "Motion",
+        "Radix UI",
+        "shadcn/ui",
+        "next-intl"
+      ]
+    },
+    {
+      "category": "バックエンド",
+      "items": ["Node.js", "Spring Boot", "Java", "Apex", "PHP", "REST API"]
+    },
+    {
+      "category": "データベース",
+      "items": ["Oracle", "MySQL", "PostgreSQL", "Neo4j"]
+    },
+    {
+      "category": "プラットフォーム",
+      "items": ["AWS", "Vercel", "Cloudflare", "Heroku", "Ethereum"]
+    },
+    {
+      "category": "Salesforce",
+      "items": [
+        "Salesforce CRM",
+        "Field Service",
+        "Commerce Cloud",
+        "AppExchange",
+        "Apex",
+        "Heroku"
+      ]
+    },
+    {
+      "category": "DevOps",
+      "items": [
+        "GitHub Actions",
+        "GitLab CI",
+        "SonarQube",
+        "MkDocs",
+        "Playwright",
+        "pnpm",
+        "semantic-release",
+        "Husky",
+        "commitlint"
+      ]
+    },
+    {
+      "category": "運用 / 監視 / 周辺ツール",
+      "items": ["Sentry", "Resend", "Google Apps Script", "Cursor"]
+    },
+    {
+      "category": "その他",
+      "items": [
+        "PM",
+        "テックリード",
+        "マルチベンダー統括",
+        "オフショア開発",
+        "教育"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "freelance",
+      "heading": "フリーランス",
+      "period": "2026年3月 〜 現在",
+      "projects": [
+        {
+          "id": "freelance-public-portal",
+          "title": "官公庁 / 公共サービス系Webアプリケーション開発",
+          "period": "2026年3月 〜 現在",
+          "role": "フルスタックエンジニア",
+          "teamSize": "10名",
+          "techStack": [
+            "Vue.js",
+            "Spring Boot",
+            "TypeScript",
+            "REST API",
+            "MyBatis",
+            "PostgreSQL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ey",
+      "period": "2022年9月 - 2025年12月",
+      "department": "デリバリ部門",
+      "position": "マネージャー・システムアーキテクト",
+      "introBullets": [
+        "新ユニットの新規立ち上げメンバーとして入社",
+        "主にPM、テックリードを兼務する形でプロジェクトに参画",
+        "2つのプロジェクトで社内表彰を受賞"
+      ],
+      "projects": [
+        {
+          "id": "ey-automotive-pmo",
+          "title": "自動車製造業 / 基幹システム刷新プロジェクト",
+          "period": "2025年7月 〜 2025年12月",
+          "role": "PMO",
+          "teamSize": "自社チームは全体PMO 5名 / 開発ベンダー 90名強",
+          "techStack": [
+            "Java",
+            "Spring Boot",
+            "TypeScript",
+            "React",
+            "独自クラウド基盤"
+          ],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "物流領域のPMOとしてマルチベンダー体制を統括。他チームに跨る課題解決の推進やベンダーマネジメント、共通機能の検討を担当。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "多領域や外部システムとの連携、共通化ロジックが極めて複雑な大規模刷新において、これまでの開発知見を応用し現実的かつリーズナブルなシステム連携方式を提案、推進。"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "ey-finance-blockchain",
+          "title": "金融業 / ブロックチェーン活用PoCプロジェクト",
+          "period": "2024年9月 〜 2025年6月",
+          "role": "開発リード",
+          "teamSize": "自チーム 10名",
+          "techStack": [
+            "JavaScript",
+            "TypeScript",
+            "React",
+            "React Native",
+            "Python",
+            "Solidity",
+            "AWS",
+            "Ethereum"
+          ],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "ブロックチェーン基盤の構築、AWSでのWeb3基盤構築、銀行の厳しいセキュリティポリシーを満たすセキュアな開発環境構築など、技術面のリードおよび開発チームのマネジメント。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "PoCとしてのスピード感と金融業の厳格なセキュリティの両立という課題に対し下流工程にも深く関与。早期にリスクを検出、解消していくことで納期と品質を両立。"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "ey-automotive-accounting",
+          "title": "自動車製造業 / 連結会計システム刷新プロジェクト",
+          "period": "2023年4月 〜 2024年8月",
+          "role": "開発リード・マネジメント",
+          "teamSize": "自チーム 70名超",
+          "techStack": ["SAP", "Tagetik"],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "SAPからTagetikへの移行に伴う帳票およびデータ変換機能を開発する最大70名超の大規模チームのリード及びマネジメント。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "当初の計画に無理があり常にタイトな要員、スケジュール調整に迫られる難易度の高いプロジェクトであったが、現実的な最善策を提案し続けることでクライアントとの信頼を維持し開発タスクを推進。"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "ey-semiconductor-salesforce",
+          "title": "半導体製造装置製造業 / 基幹業務システム開発プロジェクト",
+          "period": "2022年9月 〜 2023年3月",
+          "role": "開発リード",
+          "teamSize": "11名",
+          "techStack": ["Salesforce", "Apex", "JavaScript"],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "Fit to Standard をベースとしたSalesforce基幹業務システム開発において、主にフィールドサービス領域のリードとして要件定義、設計、実装を担当。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "中長期のリソース計画の可視化や、フィールドサービスエンジニアの派遣最適化に向けた要件抽出を主導。"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apilio",
+      "period": "2017年10月 - 2022年8月",
+      "department": "デリバリ部門",
+      "position": "シニアコンサルタント",
+      "awards": [
+        "2018年 年間ベストプロジェクト賞（2回）",
+        "半期 Fastest Ramp-up 賞",
+        "2022年 四半期MVP受賞"
+      ],
+      "projects": [
+        {
+          "id": "apilio-line-package",
+          "title": "Salesforce × LINE × LINE WORKS 連携パッケージ製品開発",
+          "period": "2021年2月 〜 2022年8月",
+          "role": "PM・開発リード",
+          "teamSize": "12名",
+          "techStack": [
+            "Salesforce",
+            "Apex",
+            "JavaScript",
+            "MkDocs(SSG)",
+            "GitLab CI",
+            "SonarQube",
+            "LINE Messaging API",
+            "LINE WORKS API"
+          ],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "大手広告代理店との提携による Salesforce、LINE、LINE WORKS 連携AppExchange製品の立ち上げ。提案段階のフィージビリティ検証から参画。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "LINEトーク画面のSalesforce統合、名寄せ、メッセージ一斉配信など具体的な製品機能を提案、実装し、プレスリリースを経て多数の引き合いを獲得。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "長期的なDevOps効率化のためCI/CD環境（GitLab CI, SonarQube）や、静的サイトジェネレータ（MkDocs）を用いた Markdown to HTML のエンジニアライクなドキュメント作成、管理環境を構築し、チームへ定着させた。"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "apilio-apparel-crm",
+          "title": "アパレル業 / 店頭販売員向け顧客管理システム",
+          "period": "2020年8月 〜 2021年1月",
+          "role": "開発メンバー",
+          "teamSize": "6名",
+          "techStack": [
+            "Salesforce",
+            "Apex",
+            "JavaScript",
+            "Python",
+            "AWS Lambda",
+            "AWS Batch",
+            "Amazon ECR"
+          ],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "プロジェクトの遅延リスクを解消するため、スポット的な強化要員として途中合流。婦人靴のパターンオーダーECサイトを構築。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "他ベンダーの決定遅延により実装が懸念されていたAWSバッチ機能について、自社で巻き取る案を提示・実証。実際にAWS（Lambda/Batch）実装を巻き取ることでプロジェクト全体の遅延を最小限に抑えた。"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "apilio-market-research-salesforce",
+          "title": "市場調査業 / 基幹業務システム Salesforce導入",
+          "period": "2018年8月 〜 2020年7月 (計24ヶ月)",
+          "role": "PM・開発リード",
+          "teamSize": "4名〜10名（インドオフショアチーム 2名含む）",
+          "techStack": [
+            "Salesforce",
+            "Apex",
+            "JavaScript",
+            "SAP ByDesign",
+            "Oracle"
+          ],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "新規開発フェーズでは商品価格表の制御やデータ連携を担当し、インドオフショアとのブリッジ業務を経験。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "移行・DevOpsフェーズでは、顧客側に製品導入・開発知見がないリスクに対し、週2日の常駐を提案・実行。密なコミュニケーションでスピーディに要件抽出を行い、トラブルなくシステムを稼働。"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "apilio-insurance-migration",
+          "title": "保険業 / 代理店向けSoEシステムマイグレーション",
+          "period": "2017年10月 〜 2018年10月",
+          "role": "サブリード",
+          "teamSize": "16名",
+          "techStack": [
+            "Salesforce",
+            "Heroku",
+            "PostgreSQL",
+            "Java",
+            "Apex",
+            "JavaScript"
+          ],
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "10万人規模のユーザーが利用する代理店向けシステムを、SalesforceからHeroku（Java）へ移行する大規模マイグレーションプロジェクト。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "現行仕様のコード解析、変更点の要件定義、テストなどを担当し、計画通り一括切り替えを成功させた。"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "valutech",
+      "period": "2007年7月 - 2017年8月",
+      "position": "代表取締役（2016年9月〜） / システムエンジニア・社内研修講師（〜2016年8月）",
+      "managementBullets": [
+        "代表取締役に就任し、エンジニア目線での単価交渉強化により契約単価を平均20%以上向上。既存社員数を20%超新規採用し、年間売上を8億円から9億円へ拡大。",
+        "児童向けプログラミングスクール事業の立ち上げを主導し、東京・沖縄での運営、および独自SNSアプリケーション（UIにThree.js、バックエンドにNeo4jを採用した3DゲーミフィケーションSNS）のアーキテクチャ設計、開発リードを担当。"
+      ],
+      "seBullets": [
+        {
+          "client": "官公庁",
+          "title": "電子申請システム",
+          "period": "1.5年",
+          "description": "公開鍵暗号方式を用いた申請書類の暗号化・復号化機能、各省庁システムとのI/F設計、実装。",
+          "technologies": ["Java", "Oracle", "Tomcat"]
+        },
+        {
+          "client": "通信キャリア",
+          "title": "DWHプロジェクト",
+          "period": "1.5年",
+          "description": "20名規模（複数チーム）のリーダーとして、SQLパフォーマンスチューニングや分析データ作成の要件抽出を主導。",
+          "technologies": ["Oracle", "BIツール"]
+        },
+        {
+          "client": "運輸",
+          "title": "コスト分析システム",
+          "period": "3年",
+          "description": "要件定義からテストまで一気通貫で担当。全体が1年遅延する中、自チームはオンスケジュールで完遂。"
+        }
+      ],
+      "projects": []
+    }
+  ]
+}

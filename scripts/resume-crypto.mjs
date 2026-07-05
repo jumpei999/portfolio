@@ -16,9 +16,13 @@ export const resumePrivateEncPath = join(
   portfolioRoot,
   "src/data/resume/resume.private.enc",
 )
-export const resumePublicTsPath = join(
+export const resumeSharedJsonPath = join(
   portfolioRoot,
-  "src/data/resume/resume.public.ts",
+  "src/data/resume/resume.shared.json",
+)
+export const resumePublicJsonPath = join(
+  portfolioRoot,
+  "src/data/resume/resume.public.json",
 )
 
 function loadEnvLocal() {

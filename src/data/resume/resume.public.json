@@ -1,0 +1,45 @@
+{
+  "basicInfo": {
+    "name": "J.K.",
+    "birthday": "****年**月**日",
+    "address": "長野県松本市",
+    "phone": "***-****-****",
+    "email": "********@gmail.com"
+  },
+  "experience": [
+    {
+      "id": "freelance",
+      "projects": [
+        {
+          "id": "freelance-public-portal",
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "公共系サービス向けに、Vue.js + Spring Boot によるWebアプリケーションの設計・実装を担当。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "リリースに向けた遅延タスクの巻き取りと残不具合の迅速な解消が求められる中で短期間でコードベースと状況を把握しタスクを推進した。"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ey",
+      "heading": "大手総合グローバルコンサルティングファーム"
+    },
+    {
+      "id": "apilio",
+      "heading": "グローバルクラウド導入コンサルティング企業"
+    },
+    {
+      "id": "valutech",
+      "heading": "ITサービス企業（SES/教育事業）"
+    }
+  ]
+}

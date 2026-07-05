@@ -1,14 +1,27 @@
-export type Redactable<T> = {
-  private: T
-  public: T
-}
-
 export type ResumeEncryptedEnvelope = {
   v: number
   alg: "aes-256-gcm"
   iv: string
   tag: string
   ciphertext: string
+}
+
+export type ResumeTextSpan = { type: "text"; value: string }
+export type ResumeLinkSpan = { type: "link"; label: string; href: string }
+export type ResumeSpan = ResumeTextSpan | ResumeLinkSpan
+export type ResumeRichText = ResumeSpan[]
+
+export type ResumeSkillGroup = {
+  category: string
+  items: string[]
+}
+
+export type ResumeSeEntry = {
+  client: string
+  title: string
+  period?: string
+  description: string
+  technologies?: string[]
 }
 
 export type ResumeQrLink = {
@@ -23,20 +36,20 @@ export type ResumeProject = {
   period: string
   role: string
   teamSize?: string
-  techStack: string
-  achievements: Redactable<string>[]
+  techStack: string[]
+  achievements: ResumeRichText[]
 }
 
 export type ResumeExperienceSection = {
   id: string
-  heading: Redactable<string>
+  heading: string
   period: string
   department?: string
   position?: string
   introBullets?: string[]
   awards?: string[]
   managementBullets?: string[]
-  seBullets?: string[]
+  seBullets?: ResumeSeEntry[]
   projects: ResumeProject[]
 }
 
@@ -46,52 +59,38 @@ export type ResumeData = {
     documentTitle: string
   }
   links: {
-    intro: string
+    intro: ResumeRichText
     github: ResumeQrLink
     portfolio: ResumeQrLink
   }
   basicInfo: {
-    name: Redactable<string>
-    address: Redactable<string>
-    phone: Redactable<string>
-    email: Redactable<string>
-    employmentType: string
-  }
-  summary: string
-  skills: string[]
-  experience: ResumeExperienceSection[]
-}
-
-export type PublicResumeData = {
-  meta: ResumeData["meta"]
-  links: ResumeData["links"]
-  basicInfo: {
     name: string
+    birthday: string
     address: string
     phone: string
     email: string
     employmentType: string
   }
-  summary: string
-  skills: string[]
-  experience: Array<{
-    id: string
-    heading: string
-    period: string
-    department?: string
-    position?: string
-    introBullets?: string[]
-    awards?: string[]
-    managementBullets?: string[]
-    seBullets?: string[]
-    projects: Array<{
+  summary: ResumeRichText[]
+  skills: ResumeSkillGroup[]
+  experience: ResumeExperienceSection[]
+}
+
+export type ResumePartial = {
+  meta?: Partial<ResumeData["meta"]>
+  links?: Partial<ResumeData["links"]>
+  basicInfo?: Partial<ResumeData["basicInfo"]>
+  summary?: ResumeRichText[]
+  skills?: ResumeSkillGroup[]
+  experience?: Array<
+    Partial<Omit<ResumeExperienceSection, "projects">> & {
       id: string
-      title: string
-      period: string
-      role: string
-      teamSize?: string
-      techStack: string
-      achievements: string[]
-    }>
-  }>
+      projects?: Array<
+        Partial<Omit<ResumeProject, "achievements">> & {
+          id: string
+          achievements?: ResumeRichText[]
+        }
+      >
+    }
+  >
 }

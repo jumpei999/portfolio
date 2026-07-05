@@ -14,4 +14,4 @@ JSON.parse(plaintext)
 const envelope = encryptResumePayload(plaintext, getEncryptionKeyFromEnv())
 writeResumeEnvelope(resumePrivateEncPath, envelope)
 
-console.log(`Sealed ${resumePrivateJsonPath} -> ${resumePrivateEncPath}`)
+console.log(`Sealed private overrides ${resumePrivateJsonPath} -> ${resumePrivateEncPath}`)

@@ -11,10 +11,10 @@ export default async function PrivateResumeLoginPage() {
     <section className="mx-auto w-full max-w-md space-y-6 px-6 py-16 sm:px-10">
       <div className="space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          プライベート版 Resume
+          非公開版職務経歴書
         </h1>
         <p className="text-sm text-muted-foreground">
-          当月のパスワードを入力してください。
+          パスワードは月初に更新されます。
         </p>
       </div>
       <ResumeLoginForm />
