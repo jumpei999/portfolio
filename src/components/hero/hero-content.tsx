@@ -120,13 +120,18 @@ export default function HeroContent() {
           {secondaryMessage}
         </motion.p>
       </div>
-
-      <SectionScrollLink
-        href="#about"
-        label={t("scrollLabel")}
-        ariaLabel={t("scrollAria")}
+      <motion.div
         className="mt-8 flex md:mt-10"
-      />
+        initial={itemInitial}
+        animate={itemAnimate}
+        transition={{ ...itemTransition, delay: stagger * 3 }}
+      >
+        <SectionScrollLink
+          href="#about"
+          label={t("scrollLabel")}
+          ariaLabel={t("scrollAria")}
+        />
+      </motion.div>
     </div>
   )
 }
