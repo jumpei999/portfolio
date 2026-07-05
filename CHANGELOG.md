@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/jumpei999/portfolio/compare/v1.2.1...v1.2.2) (2026-07-05)
+
+
+### Bug Fixes
+
+* fix resume ([4e54f7e](https://github.com/jumpei999/portfolio/commit/4e54f7eedcbbe6fb205bf48c3032b9a6927b4583))
+
 ## [1.2.1](https://github.com/jumpei999/portfolio/compare/v1.2.0...v1.2.1) (2026-07-05)
 
 
