@@ -133,6 +133,23 @@
       "period": "2026年3月 〜 現在",
       "projects": [
         {
+          "id": "freelance-portfolio",
+          "title": "ポートフォリオサイト構築",
+          "period": "2026年6月",
+          "role": "フルスタックエンジニア",
+          "techStack": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "next-intl",
+            "Vercel",
+            "Sentry",
+            "Resend",
+            "GitHub Actions"
+          ]
+        },
+        {
           "id": "freelance-public-portal",
           "title": "官公庁 / 公共サービス系Webアプリケーション開発",
           "period": "2026年3月 〜 現在",

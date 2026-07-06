@@ -11,6 +11,23 @@
       "id": "freelance",
       "projects": [
         {
+          "id": "freelance-portfolio",
+          "achievements": [
+            [
+              {
+                "type": "text",
+                "value": "Next.js（App Router）+ TypeScript によるコーポレートスタイルのシングルページサイトを企画・設計・実装。日英i18n、テーマ切替、お問い合わせフォーム、公開版・限定公開版の二層構成による職務経歴書、レスポンシブ対応、SEO対応を含む。"
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "value": "Cursor による AI アシスト開発を設計・実装・リファクタリングに活用し、短期間での公開を実現。GitHub Actions / semantic-release / Sentry による CI/CD・監視基盤も整備。"
+              }
+            ]
+          ]
+        },
+        {
           "id": "freelance-public-portal",
           "achievements": [
             [
