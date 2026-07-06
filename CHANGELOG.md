@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/jumpei999/portfolio/compare/v1.2.5...v1.3.0) (2026-07-06)
+
+
+### Features
+
+* redesign ogp image ([e2c5d69](https://github.com/jumpei999/portfolio/commit/e2c5d69926fa6683d1c39887ac20697187d2876e)), closes [#11](https://github.com/jumpei999/portfolio/issues/11)
+
 ## [1.2.5](https://github.com/jumpei999/portfolio/compare/v1.2.4...v1.2.5) (2026-07-06)
 
 
