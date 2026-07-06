@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/jumpei999/portfolio/compare/v1.2.4...v1.2.5) (2026-07-06)
+
+
+### Bug Fixes
+
+* fix contact mail address ([f2ab242](https://github.com/jumpei999/portfolio/commit/f2ab242d124ade81746000030d7c552b65aa6508))
+
 ## [1.2.4](https://github.com/jumpei999/portfolio/compare/v1.2.3...v1.2.4) (2026-07-06)
 
 
