@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/jumpei999/portfolio/compare/v1.2.2...v1.2.3) (2026-07-06)
+
+
+### Bug Fixes
+
+* add developing this site to work history section of resume ([e48bf76](https://github.com/jumpei999/portfolio/commit/e48bf76be8f9f5a91ad47c5734ab30437d64f018))
+
 ## [1.2.2](https://github.com/jumpei999/portfolio/compare/v1.2.1...v1.2.2) (2026-07-05)
 
 
