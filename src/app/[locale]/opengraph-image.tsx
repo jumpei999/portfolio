@@ -1,11 +1,14 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ImageResponse } from "next/og"
 import { routing } from "@/i18n/routing"
-import OgLogoMark from "@/lib/og/og-logo-mark"
 import { loadOgFonts } from "@/lib/og/load-og-fonts"
+import OgSplitBackground from "@/lib/og/og-split-background"
+import OgSplitLogo from "@/lib/og/og-split-logo"
+import OgSplitText from "@/lib/og/og-split-text"
+import { OG_SIZE } from "@/lib/og/og-theme"
 
 export const alt = "JPK Engineering"
-export const size = { width: 1200, height: 630 }
+export const size = OG_SIZE
 export const contentType = "image/png"
 
 export function generateStaticParams() {
@@ -32,46 +35,17 @@ export default async function OpenGraphImage({
     <div
       style={{
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        height: "100%",
-        backgroundColor: "#f8fafc",
+        position: "relative",
+        width: OG_SIZE.width,
+        height: OG_SIZE.height,
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-          color: "#334155",
-        }}
-      >
-        <OgLogoMark width={448} height={448} />
-        <div
-          style={{
-            fontFamily: "Montserrat",
-            fontSize: 24,
-            fontWeight: 400,
-            letterSpacing: "6px",
-            marginTop: 24,
-          }}
-        >
-          {primaryMessage}
-        </div>
-        <div
-          style={{
-            fontFamily: "Montserrat",
-            fontSize: 16,
-            fontWeight: 300,
-            letterSpacing: "1.6px",
-            marginTop: "8px",
-          }}
-        >
-          {secondaryMessage}
-        </div>
-      </div>
+      <OgSplitBackground />
+      <OgSplitText
+        primaryMessage={primaryMessage}
+        secondaryMessage={secondaryMessage}
+      />
+      <OgSplitLogo />
     </div>,
     { ...size, fonts },
   )
