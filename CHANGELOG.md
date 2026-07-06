@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/jumpei999/portfolio/compare/v1.2.3...v1.2.4) (2026-07-06)
+
+
+### Bug Fixes
+
+* change email from gmail to jpk ([3bddbab](https://github.com/jumpei999/portfolio/commit/3bddbab5697dc122dfe19f2697e6853296fa8efa))
+
 ## [1.2.3](https://github.com/jumpei999/portfolio/compare/v1.2.2...v1.2.3) (2026-07-06)
 
 
