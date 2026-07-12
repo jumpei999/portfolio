@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/jumpei999/portfolio/compare/v1.3.0...v1.3.1) (2026-07-12)
+
+
+### Bug Fixes
+
+* add npm audit and resolve vulnerabilities ([eef177b](https://github.com/jumpei999/portfolio/commit/eef177b4267865080bbe532824a4eff0e1bb943e))
+
 # [1.3.0](https://github.com/jumpei999/portfolio/compare/v1.2.5...v1.3.0) (2026-07-06)
 
 
