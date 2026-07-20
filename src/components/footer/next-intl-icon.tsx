@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 type NextIntlIconProps = Readonly<{
-  className?: string
-}>
+  className?: string;
+}>;
 
 export default function NextIntlIcon({ className }: NextIntlIconProps) {
   return (
@@ -12,7 +12,7 @@ export default function NextIntlIcon({ className }: NextIntlIconProps) {
       viewBox="0 0 64 64"
       fill="none"
       stroke="currentColor"
-      className={cn("size-4", className)}
+      className={cn('size-4', className)}
       aria-hidden
     >
       <g
@@ -32,5 +32,5 @@ export default function NextIntlIcon({ className }: NextIntlIconProps) {
         />
       </g>
     </svg>
-  )
+  );
 }

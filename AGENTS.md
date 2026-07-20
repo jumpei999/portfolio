@@ -9,6 +9,7 @@ Personal portfolio site (single-page, corporate style). Freelance software engin
 - **next-intl** — locales `ja` (default) / `en`, `localePrefix: as-needed` (Japanese URLs have no prefix; English uses `/en`); first visit uses primary `Accept-Language` (ja only when primary is Japanese, else en), then `NEXT_LOCALE` cookie
 - **Theme** — [`theme-provider.tsx`](src/components/theme-provider.tsx) defaults to `system` (OS `prefers-color-scheme`); header [`theme-toggle.tsx`](src/components/theme-toggle.tsx) switches light/dark (persisted in `localStorage` + `portfolio-theme` cookie); SSR applies theme class on `<html>` via [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx) / [`theme-storage.ts`](src/lib/theme-storage.ts)
 - **Motion**, Radix UI, react-icons, **Resend** (contact form), **Sonner** (toasts), **Vercel Analytics**, **Sentry**, pnpm
+- **Biome** — lint + format ([`biome.json`](biome.json)); style: single quotes, always semicolons; editor defaults in [`.vscode/`](.vscode/)
 
 ## Commands
 
@@ -17,7 +18,9 @@ pnpm i
 cp .env.example .env.local   # RESEND_API_KEY, CONTACT_*, NEXT_PUBLIC_SITE_URL, SENTRY_*
 pnpm dev      # http://localhost:3000  (English: /en)
 pnpm build
-pnpm lint
+pnpm lint            # biome check .
+pnpm lint:fix        # biome check --write .
+pnpm format          # biome format --write .
 pnpm typecheck
 pnpm check:i18n
 pnpm check:resume
@@ -56,6 +59,7 @@ CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (audit `--au
 ## Conventions
 
 - Match existing patterns (naming, imports, component style) before adding abstractions.
+- JS/TS style is enforced by Biome: **single quotes**, **always semicolons**, 2-space indent.
 - Keep diffs focused; avoid unrelated changes.
 - Client components use `"use client"` where needed; prefer server components by default.
 - In-page section links use [`src/lib/scroll-to-section.ts`](src/lib/scroll-to-section.ts) (`preventDefault` + `scrollIntoView` + `replaceState`; Home clears the hash via [`scroll-to-home.ts`](src/lib/scroll-to-home.ts)).

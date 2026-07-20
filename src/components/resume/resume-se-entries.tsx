@@ -1,8 +1,8 @@
-import type { ResumeSeEntry } from "@/data/resume/types"
+import type { ResumeSeEntry } from '@/data/resume/types';
 
 type ResumeSeEntriesProps = {
-  entries: ResumeSeEntry[]
-}
+  entries: ResumeSeEntry[];
+};
 
 export default function ResumeSeEntries({
   entries,
@@ -20,7 +20,7 @@ export default function ResumeSeEntries({
               {entry.client} / {entry.title}
               {entry.period ? (
                 <span className="font-normal text-muted-foreground print:text-black/70">
-                  {" "}
+                  {' '}
                   ({entry.period})
                 </span>
               ) : null}
@@ -39,5 +39,5 @@ export default function ResumeSeEntries({
         ))}
       </dl>
     </div>
-  )
+  );
 }

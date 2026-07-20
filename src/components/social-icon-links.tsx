@@ -1,68 +1,68 @@
-"use client"
+'use client';
 
-import { useTranslations } from "next-intl"
-import type { IconType } from "react-icons"
-import { SiBluesky, SiDiscord, SiGithub, SiGooglemaps } from "react-icons/si"
-import { LuMountainSnow } from "react-icons/lu"
-import { SOCIAL_LINKS, type SocialLinkKey } from "@/data/social-links"
-import { Button } from "@/components/ui/button"
+import { useTranslations } from 'next-intl';
+import type { IconType } from 'react-icons';
+import { LuMountainSnow } from 'react-icons/lu';
+import { SiBluesky, SiDiscord, SiGithub, SiGooglemaps } from 'react-icons/si';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { cn } from "@/lib/utils"
+} from '@/components/ui/tooltip';
+import { SOCIAL_LINKS, type SocialLinkKey } from '@/data/social-links';
+import { cn } from '@/lib/utils';
 
 function getIcon(key: SocialLinkKey): IconType {
   switch (key) {
-    case "github":
-      return SiGithub
-    case "bluesky":
-      return SiBluesky
-    case "discord":
-      return SiDiscord
-    case "googleLocalGuides":
-      return SiGooglemaps
-    case "yukiyama":
-      return LuMountainSnow
+    case 'github':
+      return SiGithub;
+    case 'bluesky':
+      return SiBluesky;
+    case 'discord':
+      return SiDiscord;
+    case 'googleLocalGuides':
+      return SiGooglemaps;
+    case 'yukiyama':
+      return LuMountainSnow;
   }
 }
 
 type SocialIconLinksProps = Readonly<{
-  showLabel?: boolean
-  className?: string
-  iconClassName?: string
-  buttonClassName?: string
-  buttonSize?: "icon-sm" | "icon"
-  tooltipSide?: "top" | "right" | "bottom" | "left"
-  tooltipSideOffset?: number
-}>
+  showLabel?: boolean;
+  className?: string;
+  iconClassName?: string;
+  buttonClassName?: string;
+  buttonSize?: 'icon-sm' | 'icon';
+  tooltipSide?: 'top' | 'right' | 'bottom' | 'left';
+  tooltipSideOffset?: number;
+}>;
 
 const defaultIconClassName =
-  "size-4 text-muted-foreground transition-colors group-hover/button:text-foreground"
+  'size-4 text-muted-foreground transition-colors group-hover/button:text-foreground';
 
 export default function SocialIconLinks({
   showLabel = false,
   className,
   iconClassName = defaultIconClassName,
   buttonClassName,
-  buttonSize = "icon-sm",
-  tooltipSide = "bottom",
+  buttonSize = 'icon-sm',
+  tooltipSide = 'bottom',
   tooltipSideOffset = 0,
 }: SocialIconLinksProps) {
-  const t = useTranslations("about")
+  const t = useTranslations('about');
 
   return (
-    <div className={cn("flex flex-wrap items-center gap-2", className)}>
+    <div className={cn('flex flex-wrap items-center gap-2', className)}>
       {showLabel && (
         <p className="text-xs font-normal tracking-[0.18em] text-muted-foreground uppercase">
-          {t("links.label")}
+          {t('links.label')}
         </p>
       )}
       <div className="flex flex-wrap items-center gap-1">
         {SOCIAL_LINKS.map((link) => {
-          const Icon = getIcon(link.key)
-          const title = t(`links.${link.key}`)
+          const Icon = getIcon(link.key);
+          const title = t(`links.${link.key}`);
 
           return (
             <Tooltip key={link.key}>
@@ -76,10 +76,10 @@ export default function SocialIconLinks({
                   <a
                     href={link.href}
                     target={
-                      link.href.startsWith("mailto:") ? undefined : "_blank"
+                      link.href.startsWith('mailto:') ? undefined : '_blank'
                     }
                     rel={
-                      link.href.startsWith("mailto:") ? undefined : "noreferrer"
+                      link.href.startsWith('mailto:') ? undefined : 'noreferrer'
                     }
                     aria-label={title}
                   >
@@ -91,9 +91,9 @@ export default function SocialIconLinks({
                 {title}
               </TooltipContent>
             </Tooltip>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

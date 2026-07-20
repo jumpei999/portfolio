@@ -1,6 +1,6 @@
-import * as Sentry from "@sentry/nextjs"
-import { sentryInitOptions } from "@/lib/sentry/init-options"
+import * as Sentry from '@sentry/nextjs';
+import { sentryInitOptions } from '@/lib/sentry/init-options';
 
-Sentry.init(sentryInitOptions)
+Sentry.init(sentryInitOptions);
 
-export const onRouterTransitionStart = Sentry.captureRouterTransitionStart
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;

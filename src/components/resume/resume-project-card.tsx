@@ -1,23 +1,23 @@
-import type { ResumeProject, ResumeRichText } from "@/data/resume/types"
-import ResumeRichTextComponent from "@/components/resume/resume-rich-text"
+import ResumeRichTextComponent from '@/components/resume/resume-rich-text';
+import type { ResumeProject, ResumeRichText } from '@/data/resume/types';
 
 const fieldRowClassName =
-  "grid min-w-0 grid-cols-[minmax(4.5rem,6rem)_1fr] items-baseline gap-x-3 gap-y-0.5"
-const labelClassName = "shrink-0 font-normal print:text-black"
-const valueClassName = "min-w-0 print:text-black"
+  'grid min-w-0 grid-cols-[minmax(4.5rem,6rem)_1fr] items-baseline gap-x-3 gap-y-0.5';
+const labelClassName = 'shrink-0 font-normal print:text-black';
+const valueClassName = 'min-w-0 print:text-black';
 
 type ResumeProjectCardProps = {
-  project: ResumeProject
-}
+  project: ResumeProject;
+};
 
 function achievementKey(projectId: string, achievement: ResumeRichText) {
   const content = achievement
     .map((span) =>
-      span.type === "text" ? span.value : `${span.label}:${span.href}`,
+      span.type === 'text' ? span.value : `${span.label}:${span.href}`,
     )
-    .join("|")
+    .join('|');
 
-  return `${projectId}:${content}`
+  return `${projectId}:${content}`;
 }
 
 export default function ResumeProjectCard({
@@ -71,5 +71,5 @@ export default function ResumeProjectCard({
         </ul>
       </div>
     </article>
-  )
+  );
 }

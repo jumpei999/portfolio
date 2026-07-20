@@ -1,13 +1,13 @@
-"use client"
+'use client';
 
-import Error from "next/error"
+import NextError from 'next/error';
 
 export default function RootNotFound() {
   return (
     <html lang="en">
       <body>
-        <Error statusCode={404} />
+        <NextError statusCode={404} />
       </body>
     </html>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import type { ResumeSkillGroup } from "@/data/resume/types"
+import type { ResumeSkillGroup } from '@/data/resume/types';
 
 type ResumeSkillsSectionProps = {
-  skills: ResumeSkillGroup[]
-}
+  skills: ResumeSkillGroup[];
+};
 
 export default function ResumeSkillsSection({
   skills,
@@ -35,5 +35,5 @@ export default function ResumeSkillsSection({
         ))}
       </dl>
     </section>
-  )
+  );
 }

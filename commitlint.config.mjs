@@ -1,8 +1,8 @@
 const commitlintConfig = {
-  extends: ["@commitlint/config-conventional"],
+  extends: ['@commitlint/config-conventional'],
   ignores: [
-    (message) => message.startsWith("Merge "),
-    (message) => message.startsWith("Revert "),
+    (message) => message.startsWith('Merge '),
+    (message) => message.startsWith('Revert '),
   ],
 };
 

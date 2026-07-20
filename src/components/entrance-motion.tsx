@@ -1,47 +1,47 @@
-"use client"
+'use client';
 
-import { useRef, type ComponentPropsWithoutRef, type ReactNode } from "react"
-import { motion, useInView, useReducedMotion } from "motion/react"
+import { motion, useInView, useReducedMotion } from 'motion/react';
+import { type ComponentPropsWithoutRef, type ReactNode, useRef } from 'react';
 import {
   ENTRANCE_ITEM_HIDDEN,
   ENTRANCE_ITEM_VISIBLE,
   entranceInViewOptions,
   entranceItemTransition,
   useEntranceStarted,
-} from "@/hooks/use-entrance-animation"
+} from '@/hooks/use-entrance-animation';
 
-type MotionTag = "div" | "h2" | "p"
+type MotionTag = 'div' | 'h2' | 'p';
 
 type EntranceMotionProps = {
-  as?: MotionTag
-  children: ReactNode
-  className?: string
-  delayIndex?: number
+  as?: MotionTag;
+  children: ReactNode;
+  className?: string;
+  delayIndex?: number;
 } & Omit<
   ComponentPropsWithoutRef<typeof motion.div>,
-  "initial" | "animate" | "transition" | "children"
->
+  'initial' | 'animate' | 'transition' | 'children'
+>;
 
 export default function EntranceMotion({
-  as = "div",
+  as = 'div',
   children,
   className,
   delayIndex = 0,
   ...rest
 }: EntranceMotionProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, entranceInViewOptions)
-  const reduceMotion = useReducedMotion()
-  const started = useEntranceStarted(inView === true)
-  const transition = entranceItemTransition(delayIndex, started)
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, entranceInViewOptions);
+  const reduceMotion = useReducedMotion();
+  const started = useEntranceStarted(inView === true);
+  const transition = entranceItemTransition(delayIndex, started);
 
-  if (as === "h2") {
+  if (as === 'h2') {
     if (reduceMotion) {
       return (
         <motion.h2 ref={ref} className={className} {...rest}>
           {children}
         </motion.h2>
-      )
+      );
     }
 
     return (
@@ -55,16 +55,16 @@ export default function EntranceMotion({
       >
         {children}
       </motion.h2>
-    )
+    );
   }
 
-  if (as === "p") {
+  if (as === 'p') {
     if (reduceMotion) {
       return (
         <motion.p ref={ref} className={className} {...rest}>
           {children}
         </motion.p>
-      )
+      );
     }
 
     return (
@@ -78,7 +78,7 @@ export default function EntranceMotion({
       >
         {children}
       </motion.p>
-    )
+    );
   }
 
   if (reduceMotion) {
@@ -86,7 +86,7 @@ export default function EntranceMotion({
       <motion.div ref={ref} className={className} {...rest}>
         {children}
       </motion.div>
-    )
+    );
   }
 
   return (
@@ -100,5 +100,5 @@ export default function EntranceMotion({
     >
       {children}
     </motion.div>
-  )
+  );
 }

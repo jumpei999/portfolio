@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import { motion } from "motion/react"
+import { motion } from 'motion/react';
 
 type CenterTitleProps = {
-  title: string
-  started: boolean
-}
+  title: string;
+  started: boolean;
+};
 
 export default function CenterTitle({
   title,
@@ -21,12 +21,12 @@ export default function CenterTitle({
         }
         transition={
           started
-            ? { type: "spring", stiffness: 280, damping: 22 }
+            ? { type: 'spring', stiffness: 280, damping: 22 }
             : { duration: 0 }
         }
       >
         {title}
       </motion.h2>
     </div>
-  )
+  );
 }

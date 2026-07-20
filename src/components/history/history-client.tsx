@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import dynamic from "next/dynamic"
-import { scrollTrackHeight } from "@/components/history/constants"
-import { HISTORY_ITEM_IDS } from "@/data/history"
+import dynamic from 'next/dynamic';
+import { scrollTrackHeight } from '@/components/history/constants';
+import { HISTORY_ITEM_IDS } from '@/data/history';
 
 const HistoryTimeline = dynamic(
-  () => import("@/components/history/history-timeline"),
+  () => import('@/components/history/history-timeline'),
   {
     ssr: false,
     loading: () => (
@@ -16,12 +16,12 @@ const HistoryTimeline = dynamic(
       />
     ),
   },
-)
+);
 
 export default function HistoryClient() {
   return (
     <div className="mx-auto w-full max-w-6xl">
       <HistoryTimeline />
     </div>
-  )
+  );
 }

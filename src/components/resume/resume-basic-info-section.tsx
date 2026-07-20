@@ -1,13 +1,13 @@
-import type { ResumeData } from "@/data/resume/types"
+import type { ResumeData } from '@/data/resume/types';
 
 const fieldRowClassName =
-  "grid min-w-0 grid-cols-[minmax(4.5rem,6rem)_1fr] items-baseline gap-x-3 gap-y-0.5"
-const labelClassName = "shrink-0 font-normal"
-const valueClassName = "min-w-0"
+  'grid min-w-0 grid-cols-[minmax(4.5rem,6rem)_1fr] items-baseline gap-x-3 gap-y-0.5';
+const labelClassName = 'shrink-0 font-normal';
+const valueClassName = 'min-w-0';
 
 type ResumeBasicInfoSectionProps = {
-  basicInfo: ResumeData["basicInfo"]
-}
+  basicInfo: ResumeData['basicInfo'];
+};
 
 export default function ResumeBasicInfoSection({
   basicInfo,
@@ -42,5 +42,5 @@ export default function ResumeBasicInfoSection({
         </div>
       </dl>
     </section>
-  )
+  );
 }

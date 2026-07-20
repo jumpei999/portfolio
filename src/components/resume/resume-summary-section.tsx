@@ -1,16 +1,16 @@
-import type { ResumeRichText } from "@/data/resume/types"
-import ResumeRichTextComponent from "@/components/resume/resume-rich-text"
+import ResumeRichTextComponent from '@/components/resume/resume-rich-text';
+import type { ResumeRichText } from '@/data/resume/types';
 
 type ResumeSummarySectionProps = {
-  summary: ResumeRichText[]
-}
+  summary: ResumeRichText[];
+};
 
 function paragraphKey(paragraph: ResumeRichText) {
   return paragraph
     .map((span) =>
-      span.type === "text" ? span.value : `${span.label}:${span.href}`,
+      span.type === 'text' ? span.value : `${span.label}:${span.href}`,
     )
-    .join("|")
+    .join('|');
 }
 
 export default function ResumeSummarySection({
@@ -28,5 +28,5 @@ export default function ResumeSummarySection({
         </p>
       ))}
     </section>
-  )
+  );
 }

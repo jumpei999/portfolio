@@ -1,11 +1,11 @@
-import type { ResumeExperienceSection } from "@/data/resume/types"
-import ResumeProjectCard from "@/components/resume/resume-project-card"
-import ResumeRichTextComponent from "@/components/resume/resume-rich-text"
-import ResumeSeEntries from "@/components/resume/resume-se-entries"
+import ResumeProjectCard from '@/components/resume/resume-project-card';
+import ResumeRichTextComponent from '@/components/resume/resume-rich-text';
+import ResumeSeEntries from '@/components/resume/resume-se-entries';
+import type { ResumeExperienceSection as ResumeExperienceSectionData } from '@/data/resume/types';
 
 type ResumeExperienceSectionProps = {
-  section: ResumeExperienceSection
-}
+  section: ResumeExperienceSectionData;
+};
 
 export default function ResumeExperienceSection({
   section,
@@ -24,8 +24,8 @@ export default function ResumeExperienceSection({
             : {section.department}
             {section.position ? (
               <>
-                {" "}
-                /{" "}
+                {' '}
+                /{' '}
                 <span className="font-normal text-foreground print:text-black">
                   役職
                 </span>
@@ -71,16 +71,15 @@ export default function ResumeExperienceSection({
         <div className="space-y-2">
           <p className="text-sm font-normal">経営・マネジメント実績</p>
           <ul className="list-disc space-y-2 pl-5 text-sm sm:text-base">
-            {section.managementBullets.map((bullet, index) => (
-              <li key={bullet}>
-                {bullet}
-                {section.managementBulletAppend?.[index] ? (
-                  <ResumeRichTextComponent
-                    content={section.managementBulletAppend[index]!}
-                  />
-                ) : null}
-              </li>
-            ))}
+            {section.managementBullets.map((bullet, index) => {
+              const append = section.managementBulletAppend?.[index];
+              return (
+                <li key={bullet}>
+                  {bullet}
+                  {append ? <ResumeRichTextComponent content={append} /> : null}
+                </li>
+              );
+            })}
           </ul>
         </div>
       ) : null}
@@ -89,5 +88,5 @@ export default function ResumeExperienceSection({
         <ResumeSeEntries entries={section.seBullets} />
       ) : null}
     </div>
-  )
+  );
 }

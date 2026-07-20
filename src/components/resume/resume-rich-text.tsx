@@ -1,14 +1,17 @@
-import type { ResumeRichText, ResumeSpan } from "@/data/resume/types"
+import type {
+  ResumeRichText as ResumeRichTextContent,
+  ResumeSpan,
+} from '@/data/resume/types';
 
 type ResumeRichTextProps = {
-  content: ResumeRichText
-  className?: string
-}
+  content: ResumeRichTextContent;
+  className?: string;
+};
 
 function spanKey(span: ResumeSpan) {
-  return span.type === "text"
+  return span.type === 'text'
     ? `text:${span.value}`
-    : `link:${span.href}:${span.label}`
+    : `link:${span.href}:${span.label}`;
 }
 
 export default function ResumeRichText({
@@ -18,7 +21,7 @@ export default function ResumeRichText({
   return (
     <span className={className}>
       {content.map((span) => {
-        if (span.type === "link") {
+        if (span.type === 'link') {
           return (
             <a
               key={spanKey(span)}
@@ -29,11 +32,11 @@ export default function ResumeRichText({
             >
               {span.label}
             </a>
-          )
+          );
         }
 
-        return <span key={spanKey(span)}>{span.value}</span>
+        return <span key={spanKey(span)}>{span.value}</span>;
       })}
     </span>
-  )
+  );
 }

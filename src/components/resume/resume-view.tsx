@@ -1,13 +1,13 @@
-import type { ResumeData } from "@/data/resume/types"
-import ResumeBasicInfoSection from "@/components/resume/resume-basic-info-section"
-import ResumeExperienceSection from "@/components/resume/resume-experience-section"
-import ResumeLinksSection from "@/components/resume/resume-links-section"
-import ResumeSkillsSection from "@/components/resume/resume-skills-section"
-import ResumeSummarySection from "@/components/resume/resume-summary-section"
+import ResumeBasicInfoSection from '@/components/resume/resume-basic-info-section';
+import ResumeExperienceSection from '@/components/resume/resume-experience-section';
+import ResumeLinksSection from '@/components/resume/resume-links-section';
+import ResumeSkillsSection from '@/components/resume/resume-skills-section';
+import ResumeSummarySection from '@/components/resume/resume-summary-section';
+import type { ResumeData } from '@/data/resume/types';
 
 type ResumeViewProps = {
-  data: ResumeData
-}
+  data: ResumeData;
+};
 
 export default function ResumeView({ data }: Readonly<ResumeViewProps>) {
   return (
@@ -32,5 +32,5 @@ export default function ResumeView({ data }: Readonly<ResumeViewProps>) {
         ))}
       </section>
     </article>
-  )
+  );
 }

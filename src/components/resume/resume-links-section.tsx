@@ -1,15 +1,15 @@
-import Image from "next/image"
-import type { ResumeData } from "@/data/resume/types"
-import ResumeRichText from "@/components/resume/resume-rich-text"
+import Image from 'next/image';
+import ResumeRichText from '@/components/resume/resume-rich-text';
+import type { ResumeData } from '@/data/resume/types';
 
 type ResumeLinksSectionProps = {
-  links: ResumeData["links"]
-}
+  links: ResumeData['links'];
+};
 
 export default function ResumeLinksSection({
   links,
 }: Readonly<ResumeLinksSectionProps>) {
-  const qrLinks = [links.portfolio, links.github]
+  const qrLinks = [links.portfolio, links.github];
 
   return (
     <section className="resume-links space-y-4">
@@ -62,5 +62,5 @@ export default function ResumeLinksSection({
         ))}
       </div>
     </section>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import { redirect } from "next/navigation"
-import { isResumeAuthenticated } from "@/lib/resume/auth"
-import ResumeLoginForm from "@/components/resume/resume-login-form"
+import { redirect } from 'next/navigation';
+import ResumeLoginForm from '@/components/resume/resume-login-form';
+import { isResumeAuthenticated } from '@/lib/resume/auth';
 
 export default async function PrivateResumeLoginPage() {
   if (await isResumeAuthenticated()) {
-    redirect("/resume/private")
+    redirect('/resume/private');
   }
 
   return (
@@ -19,5 +19,5 @@ export default async function PrivateResumeLoginPage() {
       </div>
       <ResumeLoginForm />
     </section>
-  )
+  );
 }

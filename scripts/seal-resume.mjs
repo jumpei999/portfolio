@@ -1,17 +1,19 @@
 #!/usr/bin/env node
-import { readFileSync } from "node:fs"
+import { readFileSync } from 'node:fs';
 import {
   encryptResumePayload,
   getEncryptionKeyFromEnv,
   resumePrivateEncPath,
   resumePrivateJsonPath,
   writeResumeEnvelope,
-} from "./resume-crypto.mjs"
+} from './resume-crypto.mjs';
 
-const plaintext = readFileSync(resumePrivateJsonPath, "utf8")
-JSON.parse(plaintext)
+const plaintext = readFileSync(resumePrivateJsonPath, 'utf8');
+JSON.parse(plaintext);
 
-const envelope = encryptResumePayload(plaintext, getEncryptionKeyFromEnv())
-writeResumeEnvelope(resumePrivateEncPath, envelope)
+const envelope = encryptResumePayload(plaintext, getEncryptionKeyFromEnv());
+writeResumeEnvelope(resumePrivateEncPath, envelope);
 
-console.log(`Sealed private overrides ${resumePrivateJsonPath} -> ${resumePrivateEncPath}`)
+console.log(
+  `Sealed private overrides ${resumePrivateJsonPath} -> ${resumePrivateEncPath}`,
+);

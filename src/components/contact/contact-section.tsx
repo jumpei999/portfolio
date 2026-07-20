@@ -1,12 +1,12 @@
-import Section from "@/components/section"
-import ContactSectionContent from "@/components/contact/contact-section-content"
+import ContactSectionContent from '@/components/contact/contact-section-content';
+import Section from '@/components/section';
 import {
   SECTION_CONTENT_LAYOUT,
   SECTION_GAP,
   SECTION_PB,
   SECTION_PX,
-} from "@/lib/section-shell"
-import { cn } from "@/lib/utils"
+} from '@/lib/section-shell';
+import { cn } from '@/lib/utils';
 
 export default function ContactSection() {
   return (
@@ -19,5 +19,5 @@ export default function ContactSection() {
         <ContactSectionContent />
       </Section>
     </>
-  )
+  );
 }

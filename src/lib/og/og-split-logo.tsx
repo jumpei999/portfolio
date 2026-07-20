@@ -1,17 +1,25 @@
-import { computeOgLayout, OG_LAYOUT } from "@/lib/og/og-layout"
-import OgLogoSvg from "@/lib/og/og-logo-svg"
-import { OG_SPLIT, OG_THEME, toLocalClipPath } from "@/lib/og/og-theme"
+import { computeOgLayout, OG_LAYOUT } from '@/lib/og/og-layout';
+import OgLogoSvg from '@/lib/og/og-logo-svg';
+import { OG_SPLIT, OG_THEME, toLocalClipPath } from '@/lib/og/og-theme';
 
 export default function OgSplitLogo() {
-  const layout = computeOgLayout()
-  const lightClip = toLocalClipPath(OG_SPLIT.lightPolygon, layout.logoX, layout.logoY)
-  const darkClip = toLocalClipPath(OG_SPLIT.darkPolygon, layout.logoX, layout.logoY)
+  const layout = computeOgLayout();
+  const lightClip = toLocalClipPath(
+    OG_SPLIT.lightPolygon,
+    layout.logoX,
+    layout.logoY,
+  );
+  const darkClip = toLocalClipPath(
+    OG_SPLIT.darkPolygon,
+    layout.logoX,
+    layout.logoY,
+  );
 
   return (
     <div
       style={{
-        display: "flex",
-        position: "absolute",
+        display: 'flex',
+        position: 'absolute',
         left: layout.logoX,
         top: layout.logoY,
         width: OG_LAYOUT.logo.width,
@@ -24,7 +32,7 @@ export default function OgSplitLogo() {
         width={OG_LAYOUT.logo.width}
         height={OG_LAYOUT.logo.height}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
           clipPath: darkClip,
@@ -36,12 +44,12 @@ export default function OgSplitLogo() {
         width={OG_LAYOUT.logo.width}
         height={OG_LAYOUT.logo.height}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
           clipPath: lightClip,
         }}
       />
     </div>
-  )
+  );
 }

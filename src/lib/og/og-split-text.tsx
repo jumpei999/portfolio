@@ -1,10 +1,10 @@
-import { computeOgLayout, OG_LAYOUT } from "@/lib/og/og-layout"
-import { OG_SIZE, OG_SPLIT_CLIP, OG_THEME } from "@/lib/og/og-theme"
+import { computeOgLayout, OG_LAYOUT } from '@/lib/og/og-layout';
+import { OG_SIZE, OG_SPLIT_CLIP, OG_THEME } from '@/lib/og/og-theme';
 
 type OgSplitTextProps = {
-  primaryMessage: string
-  secondaryMessage: string
-}
+  primaryMessage: string;
+  secondaryMessage: string;
+};
 
 function OgSplitTextLayer({
   primaryMessage,
@@ -12,37 +12,37 @@ function OgSplitTextLayer({
   color,
   clipPath,
 }: Readonly<OgSplitTextProps & { color: string; clipPath: string }>) {
-  const layout = computeOgLayout()
+  const layout = computeOgLayout();
   const textTop =
-    layout.logoY + OG_LAYOUT.logo.height + OG_LAYOUT.primary.marginTop
+    layout.logoY + OG_LAYOUT.logo.height + OG_LAYOUT.primary.marginTop;
 
   return (
     <div
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         width: OG_SIZE.width,
         height: OG_SIZE.height,
-        display: "flex",
+        display: 'flex',
         clipPath,
       }}
     >
       <div
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: textTop,
           left: 0,
           width: OG_SIZE.width,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
           color,
         }}
       >
         <div
           style={{
-            fontFamily: "Montserrat",
+            fontFamily: 'Montserrat',
             fontSize: OG_LAYOUT.primary.fontSize,
             fontWeight: OG_LAYOUT.primary.fontWeight,
             letterSpacing: `${OG_LAYOUT.primary.letterSpacing}px`,
@@ -52,7 +52,7 @@ function OgSplitTextLayer({
         </div>
         <div
           style={{
-            fontFamily: "Montserrat",
+            fontFamily: 'Montserrat',
             fontSize: OG_LAYOUT.secondary.fontSize,
             fontWeight: OG_LAYOUT.secondary.fontWeight,
             letterSpacing: `${OG_LAYOUT.secondary.letterSpacing}px`,
@@ -63,7 +63,7 @@ function OgSplitTextLayer({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function OgSplitText({
@@ -73,8 +73,8 @@ export default function OgSplitText({
   return (
     <div
       style={{
-        display: "flex",
-        position: "absolute",
+        display: 'flex',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: OG_SIZE.width,
@@ -94,5 +94,5 @@ export default function OgSplitText({
         clipPath={OG_SPLIT_CLIP.light}
       />
     </div>
-  )
+  );
 }

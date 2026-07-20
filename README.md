@@ -20,7 +20,7 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 | Styling       | Tailwind CSS v4, shadcn/ui (Lyra), semantic CSS variables (slate-based tokens)                                                  |
 | i18n          | next-intl (Japanese / English, `localePrefix: as-needed`)                                                                       |
 | UI / UX       | Radix UI, Motion, react-icons                                                                                                   |
-| Tooling       | ESLint, React Compiler (Babel plugin), pnpm, Commitizen, commitlint, husky, semantic-release, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
+| Tooling       | Biome, React Compiler (Babel plugin), pnpm, Commitizen, commitlint, husky, semantic-release, GitHub Actions, Dependabot, `@next/bundle-analyzer` |
 | Observability | Vercel Analytics, Sentry (`@sentry/nextjs`)                                                                                     |
 | Assets        | Inline SVG brand components via `scripts/svg-to-tsx.mjs`                                                                        |
 | Development   | [Cursor](https://cursor.com/home) — AI-assisted design and implementation                                                       |
@@ -133,7 +133,9 @@ Other scripts:
 ```bash
 pnpm build       # production build
 pnpm start       # serve production build
-pnpm lint        # ESLint
+pnpm lint        # Biome check (lint + format)
+pnpm lint:fix    # Biome check --write
+pnpm format      # Biome format --write
 pnpm typecheck   # tsc --noEmit
 pnpm check:i18n  # ja/en key parity + shared overlap
 pnpm check:resume # shared/public/private key overlap
@@ -148,6 +150,8 @@ pnpm release:dry-run # preview next semantic-release version locally
 .github/workflows/     # CI (lint, typecheck, i18n, build, semantic-release on main)
 release.config.mjs     # semantic-release config
 .github/dependabot.yml # Weekly dependency update PRs
+biome.json             # Biome lint + format
+.vscode/               # Editor defaults (Biome formatter)
 AGENTS.md              # Agent instructions (AI tools)
 .cursor/rules/         # Cursor project rules (e.g. responsive-design.mdc)
 src/

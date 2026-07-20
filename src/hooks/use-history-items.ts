@@ -1,14 +1,11 @@
-"use client"
+'use client';
 
-import { useMemo } from "react"
-import { useTranslations } from "next-intl"
-import {
-  HISTORY_ITEM_CONFIGS,
-  type HistoryItem,
-} from "@/data/history"
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import { HISTORY_ITEM_CONFIGS, type HistoryItem } from '@/data/history';
 
 export function useHistoryItems(): HistoryItem[] {
-  const tItems = useTranslations("history.items")
+  const tItems = useTranslations('history.items');
 
   return useMemo(
     () =>
@@ -19,5 +16,5 @@ export function useHistoryItems(): HistoryItem[] {
         tags: tItems.raw(`${config.id}.tags`) as string[],
       })),
     [tItems],
-  )
+  );
 }

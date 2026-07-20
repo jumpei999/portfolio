@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import SocialIconLinks from "@/components/social-icon-links"
+import SocialIconLinks from '@/components/social-icon-links';
 
 export default function SocialLinks() {
-  return <SocialIconLinks showLabel className="pt-2" />
+  return <SocialIconLinks showLabel className="pt-2" />;
 }

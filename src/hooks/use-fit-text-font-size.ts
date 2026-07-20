@@ -1,35 +1,34 @@
-"use client"
+'use client';
 
 import {
+  type RefObject,
   useLayoutEffect,
   useState,
   useSyncExternalStore,
-  type RefObject,
-} from "react"
-import { DESKTOP_MIN_MEDIA_QUERY } from "@/lib/media-queries"
+} from 'react';
+import { DESKTOP_MIN_MEDIA_QUERY } from '@/lib/media-queries';
 
 type UseFitTextFontSizeOptions = {
-  containerRef: RefObject<HTMLElement | null>
-  textRef: RefObject<HTMLElement | null>
-  minPx: number
-  maxPx: number
-  contentKey: string
-  trackingTiers: readonly number[]
-}
+  containerRef: RefObject<HTMLElement | null>;
+  textRef: RefObject<HTMLElement | null>;
+  minPx: number;
+  maxPx: number;
+  contentKey: string;
+  trackingTiers: readonly number[];
+};
 
 export type FitTextFontSizeResult = {
-  enabled: boolean
-  fontSizePx: number
-  letterSpacingEm: number
-  ready: boolean
-}
+  enabled: boolean;
+  fontSizePx: number;
+  letterSpacingEm: number;
+  ready: boolean;
+};
 
 type Measurement = {
-  contentKey: string
-  fontSizePx: number
-  letterSpacingEm: number
-}
-
+  contentKey: string;
+  fontSizePx: number;
+  letterSpacingEm: number;
+};
 
 function findMaxFontSize(
   textEl: HTMLElement,
@@ -38,25 +37,25 @@ function findMaxFontSize(
   maxPx: number,
   letterSpacingEm: number,
 ): number {
-  textEl.style.letterSpacing = `${letterSpacingEm}em`
+  textEl.style.letterSpacing = `${letterSpacingEm}em`;
 
-  let low = minPx
-  let high = maxPx
-  let best = minPx
+  let low = minPx;
+  let high = maxPx;
+  let best = minPx;
 
   while (low <= high) {
-    const mid = Math.round(((low + high) / 2) * 2) / 2
-    textEl.style.fontSize = `${mid}px`
+    const mid = Math.round(((low + high) / 2) * 2) / 2;
+    textEl.style.fontSize = `${mid}px`;
 
     if (textEl.scrollWidth <= containerWidth) {
-      best = mid
-      low = mid + 0.5
+      best = mid;
+      low = mid + 0.5;
     } else {
-      high = mid - 0.5
+      high = mid - 0.5;
     }
   }
 
-  return best
+  return best;
 }
 
 function measureFit(
@@ -65,38 +64,38 @@ function measureFit(
   minPx: number,
   maxPx: number,
   trackingTiers: readonly number[],
-): Pick<FitTextFontSizeResult, "fontSizePx" | "letterSpacingEm"> {
-  const width = container.clientWidth
-  let bestFontSize = minPx
-  let bestTracking = trackingTiers[0] ?? 0
+): Pick<FitTextFontSizeResult, 'fontSizePx' | 'letterSpacingEm'> {
+  const width = container.clientWidth;
+  let bestFontSize = minPx;
+  let bestTracking = trackingTiers[0] ?? 0;
 
   for (const tier of trackingTiers) {
-    const fontSize = findMaxFontSize(textEl, width, minPx, maxPx, tier)
+    const fontSize = findMaxFontSize(textEl, width, minPx, maxPx, tier);
 
     if (
       fontSize > bestFontSize ||
       (fontSize === bestFontSize && tier > bestTracking)
     ) {
-      bestFontSize = fontSize
-      bestTracking = tier
+      bestFontSize = fontSize;
+      bestTracking = tier;
     }
   }
 
-  return { fontSizePx: bestFontSize, letterSpacingEm: bestTracking }
+  return { fontSizePx: bestFontSize, letterSpacingEm: bestTracking };
 }
 
 function subscribeMobileFitEnabled(onStoreChange: () => void) {
-  const mediaQuery = globalThis.matchMedia(DESKTOP_MIN_MEDIA_QUERY)
-  mediaQuery.addEventListener("change", onStoreChange)
-  return () => mediaQuery.removeEventListener("change", onStoreChange)
+  const mediaQuery = globalThis.matchMedia(DESKTOP_MIN_MEDIA_QUERY);
+  mediaQuery.addEventListener('change', onStoreChange);
+  return () => mediaQuery.removeEventListener('change', onStoreChange);
 }
 
 function getMobileFitEnabledSnapshot() {
-  return !globalThis.matchMedia(DESKTOP_MIN_MEDIA_QUERY).matches
+  return !globalThis.matchMedia(DESKTOP_MIN_MEDIA_QUERY).matches;
 }
 
 function getMobileFitEnabledServerSnapshot() {
-  return false
+  return false;
 }
 
 export function useFitTextFontSize({
@@ -107,36 +106,36 @@ export function useFitTextFontSize({
   contentKey,
   trackingTiers,
 }: UseFitTextFontSizeOptions): FitTextFontSizeResult {
-  const defaultTracking = trackingTiers[0] ?? 0
+  const defaultTracking = trackingTiers[0] ?? 0;
   const enabled = useSyncExternalStore(
     subscribeMobileFitEnabled,
     getMobileFitEnabledSnapshot,
     getMobileFitEnabledServerSnapshot,
-  )
-  const [measurement, setMeasurement] = useState<Measurement | null>(null)
+  );
+  const [measurement, setMeasurement] = useState<Measurement | null>(null);
 
   useLayoutEffect(() => {
     if (!enabled) {
-      return
+      return;
     }
 
-    const container = containerRef.current
-    const textEl = textRef.current
+    const container = containerRef.current;
+    const textEl = textRef.current;
     if (!container || !textEl) {
-      return
+      return;
     }
 
-    let cancelled = false
+    let cancelled = false;
 
     const runMeasure = () => {
       if (cancelled) {
-        return
+        return;
       }
 
-      const width = container.clientWidth
+      const width = container.clientWidth;
       if (width <= 0) {
-        requestAnimationFrame(runMeasure)
-        return
+        requestAnimationFrame(runMeasure);
+        return;
       }
 
       const measured = measureFit(
@@ -145,39 +144,31 @@ export function useFitTextFontSize({
         minPx,
         maxPx,
         trackingTiers,
-      )
+      );
 
       if (!cancelled) {
         setMeasurement({
           contentKey,
           fontSizePx: measured.fontSizePx,
           letterSpacingEm: measured.letterSpacingEm,
-        })
+        });
       }
-    }
+    };
 
     const schedule = () => {
-      void document.fonts.ready.then(runMeasure)
-    }
+      void document.fonts.ready.then(runMeasure);
+    };
 
-    schedule()
+    schedule();
 
-    const observer = new ResizeObserver(schedule)
-    observer.observe(container)
+    const observer = new ResizeObserver(schedule);
+    observer.observe(container);
 
     return () => {
-      cancelled = true
-      observer.disconnect()
-    }
-  }, [
-    containerRef,
-    textRef,
-    enabled,
-    minPx,
-    maxPx,
-    contentKey,
-    trackingTiers,
-  ])
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [containerRef, textRef, enabled, minPx, maxPx, contentKey, trackingTiers]);
 
   if (!enabled) {
     return {
@@ -185,16 +176,15 @@ export function useFitTextFontSize({
       fontSizePx: minPx,
       letterSpacingEm: defaultTracking,
       ready: true,
-    }
+    };
   }
 
-  const isReady =
-    measurement !== null && measurement.contentKey === contentKey
+  const isReady = measurement !== null && measurement.contentKey === contentKey;
 
   return {
     enabled: true,
     fontSizePx: isReady ? measurement.fontSizePx : minPx,
     letterSpacingEm: isReady ? measurement.letterSpacingEm : defaultTracking,
     ready: isReady,
-  }
+  };
 }

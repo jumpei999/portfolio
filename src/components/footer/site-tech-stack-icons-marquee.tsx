@@ -1,67 +1,67 @@
-"use client"
+'use client';
 
-import { useTranslations } from "next-intl"
-import { useReducedMotion } from "motion/react"
+import { useReducedMotion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import {
+  type CSSProperties,
+  type Ref,
   useLayoutEffect,
   useRef,
   useState,
-  type CSSProperties,
-  type Ref,
-} from "react"
-import { TechStackIcon } from "@/components/footer/site-tech-stack-icon-item"
-import { FOOTER_ICON_CLASS } from "@/components/footer/footer-icon-styles"
-import { SITE_TECH_STACK } from "@/data/site-tech-stack"
-import { cn } from "@/lib/utils"
+} from 'react';
+import { FOOTER_ICON_CLASS } from '@/components/footer/footer-icon-styles';
+import { TechStackIcon } from '@/components/footer/site-tech-stack-icon-item';
+import { SITE_TECH_STACK } from '@/data/site-tech-stack';
+import { cn } from '@/lib/utils';
 
-const MARQUEE_SPEED_PX_PER_SEC = 12
-const MARQUEE_COPY_BUFFER = 2
-const MARQUEE_FALLBACK_COPY_COUNT = 5
+const MARQUEE_SPEED_PX_PER_SEC = 12;
+const MARQUEE_COPY_BUFFER = 2;
+const MARQUEE_FALLBACK_COPY_COUNT = 5;
 
 type SiteTechStackIconsMarqueeProps = Readonly<{
-  className?: string
-}>
+  className?: string;
+}>;
 
 type MarqueeMetrics = Readonly<{
-  shiftPx: number
-  copyCount: number
-}>
+  shiftPx: number;
+  copyCount: number;
+}>;
 
 type FooterMarqueeTrackStyle = CSSProperties & {
-  "--footer-marquee-shift": string
-  "--footer-marquee-duration": string
-}
+  '--footer-marquee-shift': string;
+  '--footer-marquee-duration': string;
+};
 
 function getFooterMarqueeTrackStyle(shiftPx: number): FooterMarqueeTrackStyle {
   return {
-    "--footer-marquee-shift": `${shiftPx}px`,
-    "--footer-marquee-duration": `${shiftPx / MARQUEE_SPEED_PX_PER_SEC}s`,
-  }
+    '--footer-marquee-shift': `${shiftPx}px`,
+    '--footer-marquee-duration': `${shiftPx / MARQUEE_SPEED_PX_PER_SEC}s`,
+  };
 }
 
 const MARQUEE_SEGMENT_CLASS =
-  "flex shrink-0 flex-nowrap items-center gap-1 pr-1"
+  'flex shrink-0 flex-nowrap items-center gap-1 pr-1';
 
 function getMarqueeCopyCount(
   viewportWidth: number,
   segmentWidth: number,
 ): number {
   if (segmentWidth <= 0) {
-    return 2
+    return 2;
   }
 
   return Math.max(
     2,
     Math.ceil(viewportWidth / segmentWidth) + MARQUEE_COPY_BUFFER,
-  )
+  );
 }
 
 function MarqueeIconSegment({
   idPrefix,
   ref,
 }: Readonly<{
-  idPrefix: string
-  ref?: Ref<HTMLDivElement>
+  idPrefix: string;
+  ref?: Ref<HTMLDivElement>;
 }>) {
   return (
     <div ref={ref} className={MARQUEE_SEGMENT_CLASS} aria-hidden>
@@ -74,101 +74,101 @@ function MarqueeIconSegment({
         </span>
       ))}
     </div>
-  )
+  );
 }
 
 export default function SiteTechStackIconsMarquee({
   className,
 }: SiteTechStackIconsMarqueeProps) {
-  const t = useTranslations("footer")
-  const reduceMotion = useReducedMotion()
-  const viewportRef = useRef<HTMLDivElement>(null)
-  const segmentRef = useRef<HTMLDivElement>(null)
-  const metricsLockedRef = useRef(false)
-  const [metrics, setMetrics] = useState<MarqueeMetrics | null>(null)
+  const t = useTranslations('footer');
+  const reduceMotion = useReducedMotion();
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const segmentRef = useRef<HTMLDivElement>(null);
+  const metricsLockedRef = useRef(false);
+  const [metrics, setMetrics] = useState<MarqueeMetrics | null>(null);
 
   useLayoutEffect(() => {
     if (reduceMotion || metricsLockedRef.current) {
-      return
+      return;
     }
 
-    const viewport = viewportRef.current
-    const segment = segmentRef.current
+    const viewport = viewportRef.current;
+    const segment = segmentRef.current;
     if (!viewport || !segment) {
-      return
+      return;
     }
 
-    let cancelled = false
+    let cancelled = false;
 
     const measureOnce = () => {
       if (cancelled || metricsLockedRef.current) {
-        return
+        return;
       }
 
-      const shiftPx = Math.round(segment.getBoundingClientRect().width)
-      const viewportWidth = Math.round(viewport.getBoundingClientRect().width)
+      const shiftPx = Math.round(segment.getBoundingClientRect().width);
+      const viewportWidth = Math.round(viewport.getBoundingClientRect().width);
 
       if (shiftPx <= 0 || viewportWidth <= 0) {
-        return
+        return;
       }
 
-      metricsLockedRef.current = true
+      metricsLockedRef.current = true;
       setMetrics({
         shiftPx,
         copyCount: getMarqueeCopyCount(viewportWidth, shiftPx),
-      })
-    }
+      });
+    };
 
-    if (document.fonts.status === "loaded") {
-      measureOnce()
+    if (document.fonts.status === 'loaded') {
+      measureOnce();
     } else {
-      void document.fonts.ready.then(measureOnce)
+      void document.fonts.ready.then(measureOnce);
     }
 
     return () => {
-      cancelled = true
-    }
-  }, [reduceMotion])
+      cancelled = true;
+    };
+  }, [reduceMotion]);
 
   if (reduceMotion) {
     return (
-      <div
-        className={cn("pointer-events-none overflow-x-auto", className)}
-        aria-label={t("techStackAria")}
+      <section
+        className={cn('pointer-events-none overflow-x-auto', className)}
+        aria-label={t('techStackAria')}
       >
         <div className="mx-auto flex w-max justify-center">
           <MarqueeIconSegment idPrefix="static" />
         </div>
-      </div>
-    )
+      </section>
+    );
   }
 
-  const shiftPx = metrics?.shiftPx ?? null
-  const copyCount = metrics?.copyCount ?? MARQUEE_FALLBACK_COPY_COUNT
+  const shiftPx = metrics?.shiftPx ?? null;
+  const copyCount = metrics?.copyCount ?? MARQUEE_FALLBACK_COPY_COUNT;
 
   return (
-    <div
+    <section
       ref={viewportRef}
-      className={cn("pointer-events-none overflow-hidden", className)}
-      aria-label={t("techStackAria")}
+      className={cn('pointer-events-none overflow-hidden', className)}
+      aria-label={t('techStackAria')}
     >
       <div
         className={cn(
-          "footer-marquee-track flex w-max items-center",
-          shiftPx !== null && "footer-marquee-track--active",
+          'footer-marquee-track flex w-max items-center',
+          shiftPx !== null && 'footer-marquee-track--active',
         )}
         style={
           shiftPx === null ? undefined : getFooterMarqueeTrackStyle(shiftPx)
         }
       >
-        {Array.from({ length: copyCount }, (_, index) => (
+        {Array.from({ length: copyCount }, (_, copyIndex) => (
           <MarqueeIconSegment
-            key={index}
-            idPrefix={`${index}`}
-            ref={index === 0 ? segmentRef : undefined}
+            key={`marquee-copy-${copyIndex}`}
+            idPrefix={`${copyIndex}`}
+            ref={copyIndex === 0 ? segmentRef : undefined}
           />
         ))}
       </div>
-    </div>
-  )
+    </section>
+  );
 }

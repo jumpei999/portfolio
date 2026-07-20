@@ -1,9 +1,9 @@
 type StableValuePollerOptions = {
-  readValue: () => number
-  stableFrames: number
-  onStable: () => void
-  isDone: () => boolean
-}
+  readValue: () => number;
+  stableFrames: number;
+  onStable: () => void;
+  isDone: () => boolean;
+};
 
 export function createStableValuePoller({
   readValue,
@@ -11,48 +11,48 @@ export function createStableValuePoller({
   onStable,
   isDone,
 }: StableValuePollerOptions) {
-  let rafId = 0
-  let lastValue = readValue()
-  let stableFrames = 0
+  let rafId = 0;
+  let lastValue = readValue();
+  let stableFrames = 0;
 
   const cancel = () => {
-    cancelAnimationFrame(rafId)
-    rafId = 0
-  }
+    cancelAnimationFrame(rafId);
+    rafId = 0;
+  };
 
   const resetStability = () => {
-    stableFrames = 0
-  }
+    stableFrames = 0;
+  };
 
   const tick = () => {
     if (isDone()) {
-      cancel()
-      return
+      cancel();
+      return;
     }
 
-    const value = readValue()
+    const value = readValue();
 
     if (value === lastValue) {
-      stableFrames += 1
+      stableFrames += 1;
       if (stableFrames >= requiredStableFrames) {
-        onStable()
-        cancel()
-        return
+        onStable();
+        cancel();
+        return;
       }
     } else {
-      stableFrames = 0
-      lastValue = value
+      stableFrames = 0;
+      lastValue = value;
     }
 
-    rafId = requestAnimationFrame(tick)
-  }
+    rafId = requestAnimationFrame(tick);
+  };
 
   const start = () => {
-    cancel()
-    lastValue = readValue()
-    stableFrames = 0
-    rafId = requestAnimationFrame(tick)
-  }
+    cancel();
+    lastValue = readValue();
+    stableFrames = 0;
+    rafId = requestAnimationFrame(tick);
+  };
 
-  return { start, cancel, resetStability }
+  return { start, cancel, resetStability };
 }

@@ -1,5 +1,7 @@
 .next/
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .pnpm-store/
 node_modules/
 .env

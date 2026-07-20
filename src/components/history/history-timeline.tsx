@@ -1,36 +1,39 @@
-"use client"
+'use client';
 
-import { useRef, type ReactNode } from "react"
-import { motion, useReducedMotion, type MotionValue } from "motion/react"
-import { useTranslations } from "next-intl"
-import { scrollTrackHeight } from "@/components/history/constants"
-import HistoryCommitList from "@/components/history/history-commit-list"
-import HistoryDetailPanel from "@/components/history/history-detail-panel"
-import HistoryBackButton from "@/components/history/history-back-button"
-import HistorySkipButton from "@/components/history/history-skip-button"
-import { useActiveCommit } from "@/hooks/use-active-commit"
-import EntranceMotion from "@/components/entrance-motion"
+import { type MotionValue, motion, useReducedMotion } from 'motion/react';
+import { useTranslations } from 'next-intl';
+import { type ReactNode, useRef } from 'react';
+import EntranceMotion from '@/components/entrance-motion';
+import { scrollTrackHeight } from '@/components/history/constants';
+import HistoryBackButton from '@/components/history/history-back-button';
+import HistoryCommitList from '@/components/history/history-commit-list';
+import HistoryDetailPanel from '@/components/history/history-detail-panel';
+import HistorySkipButton from '@/components/history/history-skip-button';
+import type { HistoryItem } from '@/data/history';
+import { HISTORY_ITEM_IDS } from '@/data/history';
+import { useActiveCommit } from '@/hooks/use-active-commit';
 import {
   ENTRANCE_DURATION_SEC,
   ENTRANCE_EASE,
   ENTRANCE_ITEM_HIDDEN,
   ENTRANCE_ITEM_VISIBLE,
   useEntranceInView,
-} from "@/hooks/use-entrance-animation"
-import { useHistoryItems } from "@/hooks/use-history-items"
-import { HISTORY_ITEM_IDS } from "@/data/history"
-import type { HistoryItem } from "@/data/history"
-import { cn } from "@/lib/utils"
-import { SECTION_VIEWPORT_HEIGHT } from "@/lib/section-shell"
+} from '@/hooks/use-entrance-animation';
+import { useHistoryItems } from '@/hooks/use-history-items';
+import { SECTION_VIEWPORT_HEIGHT } from '@/lib/section-shell';
+import { cn } from '@/lib/utils';
 
-const commitIds = HISTORY_ITEM_IDS
+const commitIds = HISTORY_ITEM_IDS;
 
 function HistoryHeading() {
-  const t = useTranslations("history")
+  const t = useTranslations('history');
 
   return (
     <header className="max-lg:mb-2 mb-4 shrink-0 sm:mb-6">
-      <EntranceMotion className="mb-4 hidden justify-center lg:flex" delayIndex={0}>
+      <EntranceMotion
+        className="mb-4 hidden justify-center lg:flex"
+        delayIndex={0}
+      >
         <HistoryBackButton />
       </EntranceMotion>
       <EntranceMotion
@@ -38,21 +41,21 @@ function HistoryHeading() {
         delayIndex={1}
         className="text-4xl font-bold tracking-tight sm:text-5xl"
       >
-        {t("heading")}
+        {t('heading')}
       </EntranceMotion>
     </header>
-  )
+  );
 }
 
 function HistorySkipFooter({ visible }: Readonly<{ visible: boolean }>) {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {
     return (
       <div className="mt-auto hidden shrink-0 justify-center pt-4 lg:flex">
         <HistorySkipButton />
       </div>
-    )
+    );
   }
 
   return (
@@ -64,7 +67,7 @@ function HistorySkipFooter({ visible }: Readonly<{ visible: boolean }>) {
     >
       <HistorySkipButton />
     </motion.div>
-  )
+  );
 }
 
 function HistoryBody({
@@ -77,20 +80,20 @@ function HistoryBody({
       {children}
       <HistorySkipFooter visible={sectionStarted} />
     </div>
-  )
+  );
 }
 
 type HistoryTimelinePanelsProps = {
-  items: HistoryItem[]
-  scrollDriven: boolean
-  activeId: string
-  activeIndex: number
-  clickNavActive: boolean
-  fractionalIndex: number
-  scrollYProgress?: MotionValue<number>
-  timelineLabel: string
-  onSelect: (id: string) => void
-}
+  items: HistoryItem[];
+  scrollDriven: boolean;
+  activeId: string;
+  activeIndex: number;
+  clickNavActive: boolean;
+  fractionalIndex: number;
+  scrollYProgress?: MotionValue<number>;
+  timelineLabel: string;
+  onSelect: (id: string) => void;
+};
 
 function HistoryTimelinePanels({
   items,
@@ -103,13 +106,13 @@ function HistoryTimelinePanels({
   timelineLabel,
   onSelect,
 }: Readonly<HistoryTimelinePanelsProps>) {
-  const stageRef = useRef<HTMLDivElement>(null)
-  const itemRefs = useRef<(HTMLElement | null)[]>([])
+  const stageRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const { ref: desktopListRef, started: desktopListStarted } =
-    useEntranceInView()
+    useEntranceInView();
   const { ref: mobileListRef, started: mobileListStarted } =
-    useEntranceInView()
-  const animationStarted = desktopListStarted || mobileListStarted
+    useEntranceInView();
+  const animationStarted = desktopListStarted || mobileListStarted;
 
   const listProps = {
     items,
@@ -124,7 +127,7 @@ function HistoryTimelinePanels({
     onSelect,
     stageRef,
     itemRefs,
-  }
+  };
 
   return (
     <>
@@ -147,31 +150,38 @@ function HistoryTimelinePanels({
           <div
             ref={stageRef}
             className={cn(
-              "h-full min-h-0 pb-5",
+              'h-full min-h-0 pb-5',
               scrollDriven
-                ? "overflow-hidden"
-                : "overflow-y-auto overscroll-y-contain",
+                ? 'overflow-hidden'
+                : 'overflow-y-auto overscroll-y-contain',
             )}
           >
             <HistoryCommitList layout="mobileStage" {...listProps} />
           </div>
         </div>
-        <EntranceMotion className="shrink-0 border-t border-border py-4" delayIndex={2}>
-          <HistoryDetailPanel activeId={activeId} items={items} variant="dock" />
+        <EntranceMotion
+          className="shrink-0 border-t border-border py-4"
+          delayIndex={2}
+        >
+          <HistoryDetailPanel
+            activeId={activeId}
+            items={items}
+            variant="dock"
+          />
         </EntranceMotion>
       </div>
     </>
-  )
+  );
 }
 
 export default function HistoryTimeline() {
-  const t = useTranslations("history")
-  const items = useHistoryItems()
-  const reduceMotion = useReducedMotion()
-  const trackRef = useRef<HTMLDivElement>(null)
+  const t = useTranslations('history');
+  const items = useHistoryItems();
+  const reduceMotion = useReducedMotion();
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  const scrollDriven = !reduceMotion
-  const { ref: sectionRef, started: sectionStarted } = useEntranceInView()
+  const scrollDriven = !reduceMotion;
+  const { ref: sectionRef, started: sectionStarted } = useEntranceInView();
 
   const {
     activeId,
@@ -185,7 +195,7 @@ export default function HistoryTimeline() {
     trackRef,
     defaultId: commitIds[0],
     scrollDriven,
-  })
+  });
 
   const timelineContent = (
     <HistoryTimelinePanels
@@ -196,10 +206,10 @@ export default function HistoryTimeline() {
       clickNavActive={clickNavActive}
       fractionalIndex={fractionalIndex}
       scrollYProgress={scrollDriven ? scrollYProgress : undefined}
-      timelineLabel={t("timelineAria")}
+      timelineLabel={t('timelineAria')}
       onSelect={scrollToCommit}
     />
-  )
+  );
 
   if (!scrollDriven) {
     return (
@@ -210,7 +220,7 @@ export default function HistoryTimeline() {
           </div>
         </HistoryBody>
       </div>
-    )
+    );
   }
 
   return (
@@ -221,11 +231,14 @@ export default function HistoryTimeline() {
     >
       <div
         className={cn(
-          "sticky top-(--site-header-height) flex flex-col overflow-x-hidden overflow-hidden max-lg:py-0 lg:py-8",
+          'sticky top-(--site-header-height) flex flex-col overflow-x-hidden overflow-hidden max-lg:py-0 lg:py-8',
           SECTION_VIEWPORT_HEIGHT,
         )}
       >
-        <div ref={sectionRef} className="flex min-h-0 min-w-0 flex-1 flex-col w-full">
+        <div
+          ref={sectionRef}
+          className="flex min-h-0 min-w-0 flex-1 flex-col w-full"
+        >
           <HistoryBody sectionStarted={sectionStarted}>
             <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden max-lg:py-0 lg:py-4">
               {timelineContent}
@@ -234,5 +247,5 @@ export default function HistoryTimeline() {
         </div>
       </div>
     </div>
-  )
+  );
 }

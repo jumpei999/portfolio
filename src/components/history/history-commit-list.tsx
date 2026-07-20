@@ -1,35 +1,42 @@
-"use client"
+'use client';
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react"
-import { motion, useReducedMotion, type MotionValue } from "motion/react"
-import HistoryCommitItem from "@/components/history/history-commit-item"
-import { useMobileListFollow } from "@/hooks/use-mobile-list-follow"
+import { type MotionValue, motion, useReducedMotion } from 'motion/react';
+import {
+  type RefObject,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import HistoryCommitItem from '@/components/history/history-commit-item';
+import type { HistoryItem } from '@/data/history';
 import {
   ENTRANCE_DURATION_SEC,
   ENTRANCE_EASE,
   ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
-} from "@/hooks/use-entrance-animation"
-import type { HistoryItem } from "@/data/history"
-import { scheduleLayoutMeasure } from "@/lib/schedule-layout-measure"
-import { cn } from "@/lib/utils"
+} from '@/hooks/use-entrance-animation';
+import { useMobileListFollow } from '@/hooks/use-mobile-list-follow';
+import { scheduleLayoutMeasure } from '@/lib/schedule-layout-measure';
+import { cn } from '@/lib/utils';
 
-type HistoryCommitListLayout = "default" | "mobileStage"
+type HistoryCommitListLayout = 'default' | 'mobileStage';
 
 type HistoryCommitListProps = {
-  items: HistoryItem[]
-  activeId: string
-  activeIndex: number
-  timelineLabel: string
-  animationStarted: boolean
-  layout?: HistoryCommitListLayout
-  scrollDriven?: boolean
-  clickNavActive?: boolean
-  fractionalIndex?: number
-  scrollYProgress?: MotionValue<number>
-  stageRef?: RefObject<HTMLElement | null>
-  itemRefs?: RefObject<(HTMLElement | null)[]>
-  onSelect: (id: string) => void
-}
+  items: HistoryItem[];
+  activeId: string;
+  activeIndex: number;
+  timelineLabel: string;
+  animationStarted: boolean;
+  layout?: HistoryCommitListLayout;
+  scrollDriven?: boolean;
+  clickNavActive?: boolean;
+  fractionalIndex?: number;
+  scrollYProgress?: MotionValue<number>;
+  stageRef?: RefObject<HTMLElement | null>;
+  itemRefs?: RefObject<(HTMLElement | null)[]>;
+  onSelect: (id: string) => void;
+};
 
 export default function HistoryCommitList({
   items,
@@ -37,7 +44,7 @@ export default function HistoryCommitList({
   activeIndex,
   timelineLabel,
   animationStarted,
-  layout = "default",
+  layout = 'default',
   scrollDriven = false,
   clickNavActive = false,
   fractionalIndex = 0,
@@ -46,17 +53,16 @@ export default function HistoryCommitList({
   itemRefs: externalItemRefs,
   onSelect,
 }: Readonly<HistoryCommitListProps>) {
-  const reduceMotion = useReducedMotion()
-  const listRef = useRef<HTMLDivElement>(null)
-  const internalItemRefs = useRef<(HTMLLIElement | null)[]>([])
-  const itemRefs = externalItemRefs ?? internalItemRefs
+  const reduceMotion = useReducedMotion();
+  const listRef = useRef<HTMLDivElement>(null);
+  const internalItemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const itemRefs = externalItemRefs ?? internalItemRefs;
 
-  const isMobileStage = layout === "mobileStage"
-  const followActive = isMobileStage && scrollDriven && Boolean(stageRef)
+  const isMobileStage = layout === 'mobileStage';
+  const followActive = isMobileStage && scrollDriven && Boolean(stageRef);
 
-  const progressIndex = clickNavActive ? fractionalIndex : activeIndex
-  const progress =
-    items.length <= 1 ? 1 : progressIndex / (items.length - 1)
+  const progressIndex = clickNavActive ? fractionalIndex : activeIndex;
+  const progress = items.length <= 1 ? 1 : progressIndex / (items.length - 1);
 
   const offsetY = useMobileListFollow({
     stageRef: stageRef ?? { current: null },
@@ -66,82 +72,85 @@ export default function HistoryCommitList({
     itemCount: items.length,
     scrollYProgress,
     enabled: followActive,
-  })
+  });
 
   const setItemRef = useCallback(
     (index: number) => (element: HTMLLIElement | null) => {
-      itemRefs.current[index] = element
+      itemRefs.current[index] = element;
     },
     [itemRefs],
-  )
+  );
 
-  const skipInitialScrollIntoView = useRef(true)
+  const skipInitialScrollIntoView = useRef(true);
 
+  // activeId is intentional: scroll target is in the DOM via [data-active].
+  // biome-ignore lint/correctness/useExhaustiveDependencies: re-run when active commit changes
   useEffect(() => {
-    if (layout !== "default" || scrollDriven) return
+    if (layout !== 'default' || scrollDriven) return;
 
     if (skipInitialScrollIntoView.current) {
-      skipInitialScrollIntoView.current = false
-      return
+      skipInitialScrollIntoView.current = false;
+      return;
     }
 
-    const container = listRef.current
-    if (!container) return
+    const container = listRef.current;
+    if (!container) return;
 
-    const activeItem = container.querySelector<HTMLElement>("[data-active]")
-    activeItem?.scrollIntoView({ block: "nearest", behavior: "instant" })
-  }, [activeId, layout, scrollDriven])
+    const activeItem = container.querySelector<HTMLElement>('[data-active]');
+    activeItem?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+  }, [activeId, layout, scrollDriven]);
 
-  const [lineHeightPx, setLineHeightPx] = useState<number | null>(null)
+  const [lineHeightPx, setLineHeightPx] = useState<number | null>(null);
 
   const measureLineHeight = useCallback(() => {
-    const root = listRef.current
-    if (!root) return
+    const root = listRef.current;
+    if (!root) return;
 
     const lineContainer =
-      root.querySelector<HTMLElement>(":scope > .relative") ?? root
+      root.querySelector<HTMLElement>(':scope > .relative') ?? root;
     const lastDot = root.querySelector<HTMLElement>(
-      "ol > li:last-child [data-commit-dot]",
-    )
-    if (!lastDot) return
+      'ol > li:last-child [data-commit-dot]',
+    );
+    if (!lastDot) return;
 
-    let offsetTop = lastDot.offsetHeight / 2
-    let element: HTMLElement | null = lastDot
+    let offsetTop = lastDot.offsetHeight / 2;
+    let element: HTMLElement | null = lastDot;
     while (element && element !== lineContainer) {
-      offsetTop += element.offsetTop
-      element = element.offsetParent as HTMLElement | null
+      offsetTop += element.offsetTop;
+      element = element.offsetParent as HTMLElement | null;
     }
 
-    setLineHeightPx(Math.max(0, offsetTop - 6))
-  }, [])
+    setLineHeightPx(Math.max(0, offsetTop - 6));
+  }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: activeId remounts layout size
   useLayoutEffect(() => {
-    const cancelFrame = scheduleLayoutMeasure(measureLineHeight)
+    const cancelFrame = scheduleLayoutMeasure(measureLineHeight);
 
-    const root = listRef.current
+    const root = listRef.current;
     if (!root) {
-      cancelFrame()
-      return
+      cancelFrame();
+      return;
     }
 
-    const resizeObserver = new ResizeObserver(measureLineHeight)
-    resizeObserver.observe(root)
+    const resizeObserver = new ResizeObserver(measureLineHeight);
+    resizeObserver.observe(root);
 
     return () => {
-      cancelFrame()
-      resizeObserver.disconnect()
-    }
-  }, [activeId, items.length, layout, measureLineHeight])
+      cancelFrame();
+      resizeObserver.disconnect();
+    };
+  }, [activeId, items.length, layout, measureLineHeight]);
 
   const lineHeightStyle =
-    lineHeightPx == null ? undefined : { height: lineHeightPx }
+    lineHeightPx == null ? undefined : { height: lineHeightPx };
 
   const timelineLine = (
     <>
       <motion.div
         className={cn(
-          "pointer-events-none absolute top-1.5 left-3 w-0.5 -translate-x-1/2 origin-top bg-border",
-          lineHeightPx == null && "bottom-1.5",
+          'pointer-events-none absolute top-1.5 left-3 w-0.5 -translate-x-1/2 origin-top bg-border',
+          lineHeightPx == null && 'bottom-1.5',
         )}
         aria-hidden
         initial={reduceMotion ? false : { scaleY: 0 }}
@@ -163,19 +172,16 @@ export default function HistoryCommitList({
         }}
         style={
           lineHeightPx == null
-            ? { height: "calc(100% - 0.75rem)" }
+            ? { height: 'calc(100% - 0.75rem)' }
             : lineHeightStyle
         }
       />
     </>
-  )
+  );
 
   const listItems = (
     <ol
-      className={cn(
-        "relative m-0 list-none p-0",
-        isMobileStage && "py-1.5",
-      )}
+      className={cn('relative m-0 list-none p-0', isMobileStage && 'py-1.5')}
       aria-label={timelineLabel}
     >
       {items.map((item, index) => (
@@ -191,7 +197,7 @@ export default function HistoryCommitList({
         />
       ))}
     </ol>
-  )
+  );
 
   if (followActive) {
     return (
@@ -201,7 +207,7 @@ export default function HistoryCommitList({
           {listItems}
         </motion.div>
       </div>
-    )
+    );
   }
 
   return (
@@ -209,5 +215,5 @@ export default function HistoryCommitList({
       {timelineLine}
       {listItems}
     </div>
-  )
+  );
 }

@@ -1,58 +1,58 @@
-"use client"
+'use client';
 
-import { useMemo } from "react"
-import { motion, useReducedMotion } from "motion/react"
-import type { Category } from "@/data/category-config"
-import { buildTagEdges, type Edge } from "@/components/constituents/edges"
-import { isTagHighlighted } from "@/components/constituents/highlight"
-import type { PlacedTag } from "@/components/constituents/types"
+import { motion, useReducedMotion } from 'motion/react';
+import { useMemo } from 'react';
+import { buildTagEdges, type Edge } from '@/components/constituents/edges';
+import { isTagHighlighted } from '@/components/constituents/highlight';
+import type { PlacedTag } from '@/components/constituents/types';
+import type { Category } from '@/data/category-config';
 
-const LINE_FADE_START = 0.08
-const LINE_FADE_END = 0.92
+const LINE_FADE_START = 0.08;
+const LINE_FADE_END = 0.92;
 
 type TagConnectionsProps = {
-  tags: PlacedTag[]
-  selectedCategories: ReadonlySet<Category>
-  started: boolean
-}
+  tags: PlacedTag[];
+  selectedCategories: ReadonlySet<Category>;
+  started: boolean;
+};
 
 function isEdgeActive(
   edge: Edge,
   tagByLabel: Map<string, PlacedTag>,
   selected: ReadonlySet<Category>,
 ): boolean {
-  if (edge.kind === "radial") {
-    const tag = tagByLabel.get(edge.toLabel)
-    return tag ? isTagHighlighted(tag, selected) : false
+  if (edge.kind === 'radial') {
+    const tag = tagByLabel.get(edge.toLabel);
+    return tag ? isTagHighlighted(tag, selected) : false;
   }
 
-  const from = tagByLabel.get(edge.fromLabel)
-  const to = tagByLabel.get(edge.toLabel)
-  if (!from || !to) return false
-  return isTagHighlighted(from, selected) && isTagHighlighted(to, selected)
+  const from = tagByLabel.get(edge.fromLabel);
+  const to = tagByLabel.get(edge.toLabel);
+  if (!from || !to) return false;
+  return isTagHighlighted(from, selected) && isTagHighlighted(to, selected);
 }
 
 function edgePopDelay(edge: Edge, tagByLabel: Map<string, PlacedTag>) {
-  if (edge.kind === "radial") {
-    return tagByLabel.get(edge.toLabel)?.popDelay ?? 0
+  if (edge.kind === 'radial') {
+    return tagByLabel.get(edge.toLabel)?.popDelay ?? 0;
   }
-  const from = tagByLabel.get(edge.fromLabel)?.popDelay ?? 0
-  const to = tagByLabel.get(edge.toLabel)?.popDelay ?? 0
-  return Math.max(from, to)
+  const from = tagByLabel.get(edge.fromLabel)?.popDelay ?? 0;
+  const to = tagByLabel.get(edge.toLabel)?.popDelay ?? 0;
+  return Math.max(from, to);
 }
 
 function edgeOpacity(edge: Edge, active: boolean) {
   if (active) {
-    return edge.kind === "radial" ? 0.28 : 0.22
+    return edge.kind === 'radial' ? 0.28 : 0.22;
   }
-  return edge.kind === "radial" ? 0.07 : 0.05
+  return edge.kind === 'radial' ? 0.07 : 0.05;
 }
 
 function gradientId(edge: Edge) {
   return `${edge.kind}-${edge.fromLabel}-${edge.toLabel}`.replaceAll(
     /[^a-zA-Z0-9_-]/g,
-    "_",
-  )
+    '_',
+  );
 }
 
 function lineTransition(
@@ -60,16 +60,16 @@ function lineTransition(
   reduceMotion: boolean | null,
   delay: number,
 ) {
-  if (!started) return { duration: 0 }
-  if (reduceMotion) return { duration: 0.2, delay }
+  if (!started) return { duration: 0 };
+  if (reduceMotion) return { duration: 0.2, delay };
   return {
-    opacity: { duration: 0.35, delay, ease: "easeOut" as const },
-  }
+    opacity: { duration: 0.35, delay, ease: 'easeOut' as const },
+  };
 }
 
 function EndpointFadeGradient({ edge }: Readonly<{ edge: Edge }>) {
-  const fadeIn = `${LINE_FADE_START * 100}%`
-  const fadeOut = `${LINE_FADE_END * 100}%`
+  const fadeIn = `${LINE_FADE_START * 100}%`;
+  const fadeOut = `${LINE_FADE_END * 100}%`;
 
   return (
     <linearGradient
@@ -85,7 +85,7 @@ function EndpointFadeGradient({ edge }: Readonly<{ edge: Edge }>) {
       <stop offset={fadeOut} stopColor="currentColor" stopOpacity="1" />
       <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
     </linearGradient>
-  )
+  );
 }
 
 export default function TagConnections({
@@ -93,14 +93,14 @@ export default function TagConnections({
   selectedCategories,
   started,
 }: Readonly<TagConnectionsProps>) {
-  const reduceMotion = useReducedMotion()
-  const edges = useMemo(() => buildTagEdges(tags), [tags])
+  const reduceMotion = useReducedMotion();
+  const edges = useMemo(() => buildTagEdges(tags), [tags]);
   const tagByLabel = useMemo(
     () => new Map(tags.map((tag) => [tag.label, tag])),
     [tags],
-  )
+  );
 
-  if (edges.length === 0) return null
+  if (edges.length === 0) return null;
 
   return (
     <svg
@@ -116,9 +116,9 @@ export default function TagConnections({
       </defs>
 
       {edges.map((edge) => {
-        const active = isEdgeActive(edge, tagByLabel, selectedCategories)
-        const delay = edgePopDelay(edge, tagByLabel)
-        const id = `${edge.kind}-${edge.fromLabel}-${edge.toLabel}`
+        const active = isEdgeActive(edge, tagByLabel, selectedCategories);
+        const delay = edgePopDelay(edge, tagByLabel);
+        const id = `${edge.kind}-${edge.fromLabel}-${edge.toLabel}`;
 
         return (
           <motion.line
@@ -128,7 +128,7 @@ export default function TagConnections({
             x2={edge.x2}
             y2={edge.y2}
             stroke={`url(#${gradientId(edge)})`}
-            strokeWidth={edge.kind === "radial" ? 1 : 0.75}
+            strokeWidth={edge.kind === 'radial' ? 1 : 0.75}
             vectorEffect="non-scaling-stroke"
             initial={{ opacity: 0 }}
             animate={{
@@ -136,8 +136,8 @@ export default function TagConnections({
             }}
             transition={lineTransition(started, reduceMotion, delay)}
           />
-        )
+        );
       })}
     </svg>
-  )
+  );
 }

@@ -1,109 +1,109 @@
-import { prefersReducedMotion } from "@/lib/media-queries"
-import { createStableValuePoller } from "@/lib/wait-for-stable-value"
+import { prefersReducedMotion } from '@/lib/media-queries';
+import { createStableValuePoller } from '@/lib/wait-for-stable-value';
 
-type Listener = () => void
+type Listener = () => void;
 
-let programmaticScrolling = false
-const listeners = new Set<Listener>()
+let programmaticScrolling = false;
+const listeners = new Set<Listener>();
 
 function emit(): void {
   for (const listener of listeners) {
-    listener()
+    listener();
   }
 }
 
 function setProgrammaticScrolling(next: boolean): void {
   if (programmaticScrolling === next) {
-    return
+    return;
   }
 
-  programmaticScrolling = next
-  emit()
+  programmaticScrolling = next;
+  emit();
 }
 
 export function subscribeProgrammaticScrolling(listener: Listener): () => void {
-  listeners.add(listener)
-  return () => listeners.delete(listener)
+  listeners.add(listener);
+  return () => listeners.delete(listener);
 }
 
 export function getProgrammaticScrollingSnapshot(): boolean {
-  return programmaticScrolling
+  return programmaticScrolling;
 }
 
 export function getProgrammaticScrollingServerSnapshot(): boolean {
-  return false
+  return false;
 }
 
-const SCROLL_END_FALLBACK_MS = 1000
-const SCROLL_STABLE_FRAMES = 4
+const SCROLL_END_FALLBACK_MS = 1000;
+const SCROLL_STABLE_FRAMES = 4;
 
-let activeScrollCleanup: (() => void) | null = null
+let activeScrollCleanup: (() => void) | null = null;
 
 function runScrollEndWaiter(onEnd?: () => void): () => void {
-  let finished = false
+  let finished = false;
 
   const finish = () => {
     if (finished) {
-      return
+      return;
     }
 
-    finished = true
-    document.removeEventListener("scrollend", finish)
-    clearTimeout(timeoutId)
-    poller.cancel()
-    onEnd?.()
-  }
+    finished = true;
+    document.removeEventListener('scrollend', finish);
+    clearTimeout(timeoutId);
+    poller.cancel();
+    onEnd?.();
+  };
 
-  document.addEventListener("scrollend", finish, { once: true })
-  const timeoutId = globalThis.setTimeout(finish, SCROLL_END_FALLBACK_MS)
+  document.addEventListener('scrollend', finish, { once: true });
+  const timeoutId = globalThis.setTimeout(finish, SCROLL_END_FALLBACK_MS);
 
   const poller = createStableValuePoller({
     readValue: () => globalThis.scrollY,
     stableFrames: SCROLL_STABLE_FRAMES,
     onStable: finish,
     isDone: () => finished,
-  })
+  });
 
-  poller.start()
+  poller.start();
 
-  return finish
+  return finish;
 }
 
 export function waitForScrollEnd(onScrollEnd?: () => void): void {
   if (prefersReducedMotion()) {
-    onScrollEnd?.()
-    return
+    onScrollEnd?.();
+    return;
   }
 
-  activeScrollCleanup?.()
+  activeScrollCleanup?.();
 
   const cleanup = runScrollEndWaiter(() => {
     if (activeScrollCleanup === cleanup) {
-      activeScrollCleanup = null
+      activeScrollCleanup = null;
     }
-    onScrollEnd?.()
-  })
+    onScrollEnd?.();
+  });
 
-  activeScrollCleanup = cleanup
+  activeScrollCleanup = cleanup;
 }
 
 export function beginProgrammaticScroll(onScrollEnd?: () => void): void {
   if (prefersReducedMotion()) {
-    onScrollEnd?.()
-    return
+    onScrollEnd?.();
+    return;
   }
 
-  activeScrollCleanup?.()
-  setProgrammaticScrolling(true)
+  activeScrollCleanup?.();
+  setProgrammaticScrolling(true);
 
   const cleanup = runScrollEndWaiter(() => {
     if (activeScrollCleanup === cleanup) {
-      activeScrollCleanup = null
+      activeScrollCleanup = null;
     }
 
-    setProgrammaticScrolling(false)
-    onScrollEnd?.()
-  })
+    setProgrammaticScrolling(false);
+    onScrollEnd?.();
+  });
 
-  activeScrollCleanup = cleanup
+  activeScrollCleanup = cleanup;
 }

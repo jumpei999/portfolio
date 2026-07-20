@@ -1,14 +1,13 @@
-"use client"
+'use client';
 
-import { useLayoutEffect, useState, type RefObject } from "react"
-import { scheduleLayoutMeasure } from "@/lib/schedule-layout-measure"
+import { type RefObject, useLayoutEffect, useState } from 'react';
+import { scheduleLayoutMeasure } from '@/lib/schedule-layout-measure';
 
 function getVerticalPadding(element: HTMLElement): number {
-  const style = getComputedStyle(element)
+  const style = getComputedStyle(element);
   return (
-    Number.parseFloat(style.paddingTop) +
-    Number.parseFloat(style.paddingBottom)
-  )
+    Number.parseFloat(style.paddingTop) + Number.parseFloat(style.paddingBottom)
+  );
 }
 
 export function useDockNeedsScroll(
@@ -17,33 +16,34 @@ export function useDockNeedsScroll(
   cardRef: RefObject<HTMLDivElement | null>,
   articleRef: RefObject<HTMLElement | null>,
 ) {
-  const [needsScroll, setNeedsScroll] = useState(false)
+  const [needsScroll, setNeedsScroll] = useState(false);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: remeasure when active content changes
   useLayoutEffect(() => {
-    if (!isDock) return
+    if (!isDock) return;
 
     const measureNeedsScroll = () => {
-      const card = cardRef.current
-      const article = articleRef.current
-      if (!card || !article) return
+      const card = cardRef.current;
+      const article = articleRef.current;
+      if (!card || !article) return;
 
-      const availableHeight = card.clientHeight - getVerticalPadding(card)
-      setNeedsScroll(article.scrollHeight > availableHeight)
-    }
+      const availableHeight = card.clientHeight - getVerticalPadding(card);
+      setNeedsScroll(article.scrollHeight > availableHeight);
+    };
 
-    const cancelFrame = scheduleLayoutMeasure(measureNeedsScroll)
+    const cancelFrame = scheduleLayoutMeasure(measureNeedsScroll);
 
-    const card = cardRef.current
-    const article = articleRef.current
-    const resizeObserver = new ResizeObserver(measureNeedsScroll)
-    if (card) resizeObserver.observe(card)
-    if (article) resizeObserver.observe(article)
+    const card = cardRef.current;
+    const article = articleRef.current;
+    const resizeObserver = new ResizeObserver(measureNeedsScroll);
+    if (card) resizeObserver.observe(card);
+    if (article) resizeObserver.observe(article);
 
     return () => {
-      cancelFrame()
-      resizeObserver.disconnect()
-    }
-  }, [activeId, articleRef, cardRef, isDock])
+      cancelFrame();
+      resizeObserver.disconnect();
+    };
+  }, [activeId, articleRef, cardRef, isDock]);
 
-  return isDock && needsScroll
+  return isDock && needsScroll;
 }

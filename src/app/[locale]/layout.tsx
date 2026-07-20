@@ -1,123 +1,123 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import { cookies } from "next/headers"
-import { Montserrat, M_PLUS_1_Code, M_PLUS_Rounded_1c } from "next/font/google"
-import { NextIntlClientProvider, hasLocale } from "next-intl"
+import { Analytics } from '@vercel/analytics/next';
+import type { Metadata } from 'next';
+import { M_PLUS_1_Code, M_PLUS_Rounded_1c, Montserrat } from 'next/font/google';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
-} from "next-intl/server"
-import { Analytics } from "@vercel/analytics/next"
-import "../globals.css"
-import SiteJsonLd from "@/components/seo/site-json-ld"
-import { ThemeProvider } from "@/components/theme-provider"
-import ThemeFavicon from "@/components/theme-favicon"
-import { routing } from "@/i18n/routing"
+} from 'next-intl/server';
+import '../globals.css';
+import SiteJsonLd from '@/components/seo/site-json-ld';
+import ThemeFavicon from '@/components/theme-favicon';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { routing } from '@/i18n/routing';
 import {
   getAbsoluteLocalizedUrl,
   getLocalizedPath,
   getSiteUrl,
-} from "@/lib/site-url"
-import { Toaster } from "@/components/ui/sonner"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { cn } from "@/lib/utils"
+} from '@/lib/site-url';
 import {
   getThemeColorScheme,
   getThemeHtmlClass,
   parseTheme,
   THEME_STORAGE_KEY,
-} from "@/lib/theme-storage"
+} from '@/lib/theme-storage';
+import { cn } from '@/lib/utils';
 
 const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-})
+  variable: '--font-montserrat',
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+});
 
 const mPlusRounded1c = M_PLUS_Rounded_1c({
-  variable: "--font-m-plus-rounded-1c",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-})
+  variable: '--font-m-plus-rounded-1c',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 const mPlus1Code = M_PLUS_1_Code({
-  variable: "--font-m-plus-1-code",
-  subsets: ["latin"],
-  weight: ["400"],
-})
+  variable: '--font-m-plus-1-code',
+  subsets: ['latin'],
+  weight: ['400'],
+});
 
 type LayoutProps = {
-  children: React.ReactNode
-  params: Promise<{ locale: string }>
-}
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "metadata" })
-  const siteUrl = getSiteUrl()
-  const canonicalPath = getLocalizedPath(locale)
-  const openGraphLocale = locale === "ja" ? "ja_JP" : "en_US"
-  const alternateOpenGraphLocale = locale === "ja" ? "en_US" : "ja_JP"
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'metadata' });
+  const siteUrl = getSiteUrl();
+  const canonicalPath = getLocalizedPath(locale);
+  const openGraphLocale = locale === 'ja' ? 'ja_JP' : 'en_US';
+  const alternateOpenGraphLocale = locale === 'ja' ? 'en_US' : 'ja_JP';
 
   return {
     metadataBase: siteUrl,
-    title: t("title"),
-    description: t("description"),
+    title: t('title'),
+    description: t('description'),
     alternates: {
       canonical: canonicalPath,
       languages: {
-        ja: "/",
-        en: "/en",
-        "x-default": "/",
+        ja: '/',
+        en: '/en',
+        'x-default': '/',
       },
     },
     openGraph: {
-      title: t("openGraph.title"),
-      description: t("openGraph.description"),
-      type: "website",
+      title: t('openGraph.title'),
+      description: t('openGraph.description'),
+      type: 'website',
       url: getAbsoluteLocalizedUrl(locale),
-      siteName: t("title"),
+      siteName: t('title'),
       locale: openGraphLocale,
       alternateLocale: [alternateOpenGraphLocale],
     },
     twitter: {
-      card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
     },
-  }
+  };
 }
 
 export default async function LocaleLayout({
   children,
   params,
 }: Readonly<LayoutProps>) {
-  const { locale } = await params
+  const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
-    notFound()
+    notFound();
   }
 
-  setRequestLocale(locale)
-  const messages = await getMessages()
-  const cookieStore = await cookies()
-  const initialTheme = parseTheme(cookieStore.get(THEME_STORAGE_KEY)?.value)
-  const themeClass = getThemeHtmlClass(initialTheme)
-  const colorScheme = getThemeColorScheme(initialTheme)
+  setRequestLocale(locale);
+  const messages = await getMessages();
+  const cookieStore = await cookies();
+  const initialTheme = parseTheme(cookieStore.get(THEME_STORAGE_KEY)?.value);
+  const themeClass = getThemeHtmlClass(initialTheme);
+  const colorScheme = getThemeColorScheme(initialTheme);
 
   return (
     <html
       lang={locale}
-      className={cn("h-full", themeClass)}
+      className={cn('h-full', themeClass)}
       style={colorScheme ? { colorScheme } : undefined}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
@@ -141,5 +141,5 @@ export default async function LocaleLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

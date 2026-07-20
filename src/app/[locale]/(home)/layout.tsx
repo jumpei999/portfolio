@@ -1,11 +1,11 @@
-import Header from "@/components/header"
-import SkipToMain from "@/components/skip-to-main"
-import MobileBottomNav from "@/components/header/mobile-bottom-nav"
-import HashScrollRestore from "@/components/hash-scroll-restore"
+import HashScrollRestore from '@/components/hash-scroll-restore';
+import Header from '@/components/header';
+import MobileBottomNav from '@/components/header/mobile-bottom-nav';
+import SkipToMain from '@/components/skip-to-main';
 
 type HomeLayoutProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export default function HomeLayout({ children }: Readonly<HomeLayoutProps>) {
   return (
@@ -16,5 +16,5 @@ export default function HomeLayout({ children }: Readonly<HomeLayoutProps>) {
       {children}
       <MobileBottomNav />
     </>
-  )
+  );
 }

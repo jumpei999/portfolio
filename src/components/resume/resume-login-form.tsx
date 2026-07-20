@@ -1,22 +1,22 @@
-"use client"
+'use client';
 
-import { useActionState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { loginToPrivateResume } from "@/lib/resume/login-action"
+import { useActionState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { loginToPrivateResume } from '@/lib/resume/login-action';
 
 type LoginFormState = {
-  error?: string
-}
+  error?: string;
+};
 
-const initialState: LoginFormState = {}
+const initialState: LoginFormState = {};
 
 export default function ResumeLoginForm() {
   const [state, formAction, isPending] = useActionState(
     loginToPrivateResume,
     initialState,
-  )
+  );
 
   return (
     <form action={formAction} className="mx-auto w-full max-w-md space-y-4">
@@ -36,9 +36,9 @@ export default function ResumeLoginForm() {
       ) : null}
       <div className="flex justify-end">
         <Button type="submit" disabled={isPending}>
-          {isPending ? "確認中..." : "ログイン"}
+          {isPending ? '確認中...' : 'ログイン'}
         </Button>
       </div>
     </form>
-  )
+  );
 }

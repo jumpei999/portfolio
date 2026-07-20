@@ -1,102 +1,99 @@
-import { cookies } from "next/headers"
+import { cookies } from 'next/headers';
+import { signResumeSession, verifyResumeSession } from '@/lib/resume/crypto';
 import {
   getCurrentAuthEpoch,
-  verifyMonthlyPassword,
   getPasswordSecretFromEnv,
-} from "@/lib/resume/monthly-password"
-import {
-  signResumeSession,
-  verifyResumeSession,
-} from "@/lib/resume/crypto"
+  verifyMonthlyPassword,
+} from '@/lib/resume/monthly-password';
 
-export const RESUME_SESSION_COOKIE = "resume_private_session"
-const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30
+export const RESUME_SESSION_COOKIE = 'resume_private_session';
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 
 type ResumeSessionPayload = {
-  epoch: string
-  exp: number
-}
+  epoch: string;
+  exp: number;
+};
 
 function getSessionSecretFromEnv(): string {
-  const secret = process.env.RESUME_SESSION_SECRET
+  const secret = process.env.RESUME_SESSION_SECRET;
   if (!secret) {
-    throw new Error("RESUME_SESSION_SECRET is not set")
+    throw new Error('RESUME_SESSION_SECRET is not set');
   }
-  return secret
+  return secret;
 }
 
 function encodeSession(payload: ResumeSessionPayload, secret: string): string {
   const encodedPayload = Buffer.from(JSON.stringify(payload)).toString(
-    "base64url",
-  )
-  const signature = signResumeSession(encodedPayload, secret)
-  return `${encodedPayload}.${signature}`
+    'base64url',
+  );
+  const signature = signResumeSession(encodedPayload, secret);
+  return `${encodedPayload}.${signature}`;
 }
 
 function decodeSession(
   value: string,
   secret: string,
 ): ResumeSessionPayload | null {
-  const [encodedPayload, signature] = value.split(".")
+  const [encodedPayload, signature] = value.split('.');
   if (!encodedPayload || !signature) {
-    return null
+    return null;
   }
 
   if (!verifyResumeSession(encodedPayload, signature, secret)) {
-    return null
+    return null;
   }
 
   try {
     return JSON.parse(
-      Buffer.from(encodedPayload, "base64url").toString("utf8"),
-    ) as ResumeSessionPayload
+      Buffer.from(encodedPayload, 'base64url').toString('utf8'),
+    ) as ResumeSessionPayload;
   } catch {
-    return null
+    return null;
   }
 }
 
 export async function isResumeAuthenticated(): Promise<boolean> {
-  const cookieStore = await cookies()
-  const value = cookieStore.get(RESUME_SESSION_COOKIE)?.value
+  const cookieStore = await cookies();
+  const value = cookieStore.get(RESUME_SESSION_COOKIE)?.value;
   if (!value) {
-    return false
+    return false;
   }
 
-  const payload = decodeSession(value, getSessionSecretFromEnv())
+  const payload = decodeSession(value, getSessionSecretFromEnv());
   if (!payload) {
-    return false
+    return false;
   }
 
   if (payload.epoch !== getCurrentAuthEpoch()) {
-    return false
+    return false;
   }
 
-  return payload.exp > Math.floor(Date.now() / 1000)
+  return payload.exp > Math.floor(Date.now() / 1000);
 }
 
 export function createResumeSessionCookieValue(now = new Date()): string {
   const payload: ResumeSessionPayload = {
     epoch: getCurrentAuthEpoch(now),
     exp: Math.floor(now.getTime() / 1000) + SESSION_MAX_AGE_SECONDS,
-  }
+  };
 
-  return encodeSession(payload, getSessionSecretFromEnv())
+  return encodeSession(payload, getSessionSecretFromEnv());
 }
 
 export function verifyResumeLoginPassword(
   password: string,
   now = new Date(),
 ): boolean {
-  return verifyMonthlyPassword(password, getPasswordSecretFromEnv(), now)
+  return verifyMonthlyPassword(password, getPasswordSecretFromEnv(), now);
 }
 
 export function getResumeSessionCookieOptions(now = new Date()) {
   return {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
-    path: "/",
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax' as const,
+    path: '/',
     maxAge: SESSION_MAX_AGE_SECONDS,
     expires: new Date(now.getTime() + SESSION_MAX_AGE_SECONDS * 1000),
-  }
+  };
 }

@@ -2,12 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@source inline(
-  "pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
-  "max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
-  "h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]",
-  "max-md:h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]"
-);
+@source inline("pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]");
+@source inline("max-md:pb-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]");
+@source inline("h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]");
+@source inline("max-md:h-[calc(var(--site-bottom-nav-height)+env(safe-area-inset-bottom,0))]");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -194,7 +192,8 @@ html.dark:not(.light) {
 @media (max-width: 767px) {
   html {
     scroll-padding-bottom: calc(
-      var(--site-bottom-nav-height) + env(safe-area-inset-bottom, 0px)
+      var(--site-bottom-nav-height) +
+      env(safe-area-inset-bottom, 0px)
     );
   }
 }

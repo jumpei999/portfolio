@@ -1,21 +1,21 @@
-"use client"
+'use client';
 
-import ProfileImageSwitcher from "@/components/about/profile-image-switcher"
-import SocialLinks from "@/components/about/social-links"
-import EntranceMotion from "@/components/entrance-motion"
+import ProfileImageSwitcher from '@/components/about/profile-image-switcher';
+import SocialLinks from '@/components/about/social-links';
+import EntranceMotion from '@/components/entrance-motion';
 
 type AboutSectionContentProps = {
-  heading: string
-  paragraphs: string[]
-  initialIndex: number
-}
+  heading: string;
+  paragraphs: string[];
+  initialIndex: number;
+};
 
 export default function AboutSectionContent({
   heading,
   paragraphs,
   initialIndex,
 }: Readonly<AboutSectionContentProps>) {
-  const paragraphStartIndex = 2
+  const paragraphStartIndex = 2;
 
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(280px,360px)] md:items-center">
@@ -55,5 +55,5 @@ export default function AboutSectionContent({
         <ProfileImageSwitcher initialIndex={initialIndex} />
       </EntranceMotion>
     </div>
-  )
+  );
 }

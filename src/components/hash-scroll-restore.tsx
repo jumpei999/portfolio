@@ -1,16 +1,16 @@
-"use client"
+'use client';
 
-import { useLayoutEffect } from "react"
+import { useLayoutEffect } from 'react';
 import {
   initManualScrollRestoration,
   restoreHashScroll,
-} from "@/lib/hash-scroll-restore"
+} from '@/lib/hash-scroll-restore';
 
 export default function HashScrollRestore() {
   useLayoutEffect(() => {
-    initManualScrollRestoration()
-    return restoreHashScroll()
-  }, [])
+    initManualScrollRestoration();
+    return restoreHashScroll();
+  }, []);
 
-  return null
+  return null;
 }
