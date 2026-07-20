@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/jumpei999/portfolio/compare/v1.3.1...v1.3.2) (2026-07-20)
+
+
+### Bug Fixes
+
+* resolve vulnerabilities ([6591e4b](https://github.com/jumpei999/portfolio/commit/6591e4bdb58d82048da06c71a02b2b9f95ba2494))
+
 ## [1.3.1](https://github.com/jumpei999/portfolio/compare/v1.3.0...v1.3.1) (2026-07-12)
 
 
