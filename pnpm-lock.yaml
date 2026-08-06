@@ -76,8 +76,8 @@ importers:
         specifier: ^21.2.0
         version: 21.2.0
       '@next/bundle-analyzer':
-        specifier: ^16.2.10
-        version: 16.2.10
+        specifier: ^16.2.11
+        version: 16.2.11
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@25.0.8(supports-color@8.1.1)(typescript@6.0.3))
@@ -663,8 +663,8 @@ packages:
       '@cfworker/json-schema':
         optional: true
 
-  '@next/bundle-analyzer@16.2.10':
-    resolution: {integrity: sha512-KcepWhb3IVniZgm00GSSCQDEUQqZXuXtuXRh8J6e3Un342TcQ77iK4DedeEkct+fcx7yFEDL2J6z4Jeho5JDAw==}
+  '@next/bundle-analyzer@16.2.11':
+    resolution: {integrity: sha512-C5228wy1RC0g7uOSvmQhrZXCuEeLIPureKkqramAkySmqY2Y0yw6K+TyAxXXvtrYe4uehnZs3YMFfJcorBRwpg==}
 
   '@next/env@16.2.10':
     resolution: {integrity: sha512-zLPxg9M0MEHmygpj5OuxjQ+vHMiy/K7cSp74G8ecYolmgUWw0RwN02tF56npup/+qaI8JB97hQgS/r2Hb6QwVA==}
@@ -5682,7 +5682,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@next/bundle-analyzer@16.2.10':
+  '@next/bundle-analyzer@16.2.11':
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
