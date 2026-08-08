@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/jumpei999/portfolio/compare/v1.3.2...v1.3.3) (2026-08-08)
+
+
+### Bug Fixes
+
+* unblock CI by overriding vulnerable sharp and postcss ([4dfb5c8](https://github.com/jumpei999/portfolio/commit/4dfb5c8d327fa26409e5ebec41a8559c37b16c9c))
+
 ## [1.3.2](https://github.com/jumpei999/portfolio/compare/v1.3.1...v1.3.2) (2026-07-20)
 
 
