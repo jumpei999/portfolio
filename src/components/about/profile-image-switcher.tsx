@@ -2,62 +2,99 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { type KeyboardEvent, useState } from 'react';
+import { type PointerEvent, useRef, useState } from 'react';
 import {
-  clampProfileImageIndex,
-  PROFILE_IMAGES,
-  pickRandomProfileIndex,
+  PROFILE_IMAGE_ALTERNATE,
+  PROFILE_IMAGE_DEFAULT,
 } from '@/data/profile-images';
+import { useCanHover } from '@/hooks/use-can-hover';
 import { cn } from '@/lib/utils';
 
-type ProfileImageSwitcherProps = {
-  initialIndex: number;
-};
-
-export default function ProfileImageSwitcher({
-  initialIndex,
-}: Readonly<ProfileImageSwitcherProps>) {
+export default function ProfileImageSwitcher() {
   const t = useTranslations('about');
-  const [currentIndex, setCurrentIndex] = useState(() =>
-    clampProfileImageIndex(initialIndex),
-  );
+  const canHover = useCanHover();
+  const rootRef = useRef<HTMLButtonElement>(null);
+  const [revealed, setRevealed] = useState(false);
 
-  const currentImage = PROFILE_IMAGES[currentIndex];
-
-  const randomizeImage = () => {
-    setCurrentIndex((current) => pickRandomProfileIndex(current));
+  const hideReveal = () => {
+    setRevealed(false);
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      randomizeImage();
+  const handlePointerEnter = () => {
+    if (canHover) {
+      setRevealed(true);
+    }
+  };
+
+  const handlePointerLeave = () => {
+    hideReveal();
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLButtonElement>) => {
+    if (canHover) return;
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    setRevealed(true);
+  };
+
+  const handlePointerUp = () => {
+    if (!canHover) {
+      hideReveal();
+    }
+  };
+
+  const handleFocus = () => {
+    // Touch/mouse focus must not stick the alternate after press-and-hold.
+    if (rootRef.current?.matches(':focus-visible')) {
+      setRevealed(true);
     }
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <button
-        type="button"
-        onClick={randomizeImage}
-        onKeyDown={handleKeyDown}
-        aria-label={t('profileImages.randomizeAria')}
+    <button
+      ref={rootRef}
+      type="button"
+      aria-label={t('profileImages.revealAria')}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={hideReveal}
+      onFocus={handleFocus}
+      onBlur={hideReveal}
+      onContextMenu={(event) => {
+        event.preventDefault();
+      }}
+      className={cn(
+        'relative aspect-square w-full max-w-sm overflow-hidden rounded-3xl',
+        'cursor-pointer touch-manipulation',
+        'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+      )}
+    >
+      <Image
+        src={PROFILE_IMAGE_ALTERNATE}
+        alt=""
+        fill
+        sizes="(max-width: 768px) 80vw, 384px"
+        className="object-cover"
+        loading="lazy"
+        aria-hidden
+      />
+
+      <div
         className={cn(
-          'relative aspect-square w-full max-w-sm overflow-hidden rounded-3xl',
-          'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+          'absolute inset-0 transition-opacity duration-200',
+          revealed ? 'opacity-0' : 'opacity-100',
         )}
       >
         <Image
-          src={currentImage.src}
-          alt={t(`profileImages.${currentImage.imageKey}.alt`)}
+          src={PROFILE_IMAGE_DEFAULT}
+          alt={t('profileImages.alt')}
           fill
           sizes="(max-width: 768px) 80vw, 384px"
           className="object-cover"
+          priority
         />
-      </button>
-      <p className="w-full text-right text-sm text-muted-foreground px-2">
-        {t(`profileImages.${currentImage.imageKey}.label`)}
-      </p>
-    </div>
+      </div>
+    </button>
   );
 }

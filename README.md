@@ -30,7 +30,7 @@ Local development: [http://localhost:3000](http://localhost:3000) (English: [/en
 Single-page layout ([`src/app/[locale]/(home)/page.tsx`](<src/app/[locale]/(home)/page.tsx>)):
 
 - **Home** — Brand logo and scroll cue (mobile and desktop)
-- **About** — Profile copy with randomized/switchable images
+- **About** — Profile copy with a hover/press-to-reveal alternate image
 - **History** — Git-style timeline of milestones
 - **Constituents** — A tag cloud of my constituents
 - **Contact** — Inquiry form (Resend)

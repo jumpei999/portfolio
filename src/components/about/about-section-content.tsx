@@ -7,13 +7,11 @@ import EntranceMotion from '@/components/entrance-motion';
 type AboutSectionContentProps = {
   heading: string;
   paragraphs: string[];
-  initialIndex: number;
 };
 
 export default function AboutSectionContent({
   heading,
   paragraphs,
-  initialIndex,
 }: Readonly<AboutSectionContentProps>) {
   const paragraphStartIndex = 2;
 
@@ -52,7 +50,7 @@ export default function AboutSectionContent({
         className="order-2 md:col-start-2 md:row-start-1 md:self-center"
         delayIndex={1}
       >
-        <ProfileImageSwitcher initialIndex={initialIndex} />
+        <ProfileImageSwitcher />
       </EntranceMotion>
     </div>
   );

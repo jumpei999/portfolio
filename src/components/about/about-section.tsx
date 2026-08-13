@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import AboutSectionContent from '@/components/about/about-section-content';
 import Section from '@/components/section';
-import { pickInitialProfileIndex } from '@/data/profile-images';
 import {
   SECTION_CONTENT_LAYOUT,
   SECTION_PX,
@@ -20,14 +19,10 @@ export default async function AboutSection() {
         SECTION_CONTENT_LAYOUT,
         SECTION_PX,
         SECTION_PY_MD,
-        'md:scroll-mt-[-32px]',
+        'md:-scroll-mt-8',
       )}
     >
-      <AboutSectionContent
-        heading={t('heading')}
-        paragraphs={paragraphs}
-        initialIndex={pickInitialProfileIndex()}
-      />
+      <AboutSectionContent heading={t('heading')} paragraphs={paragraphs} />
     </Section>
   );
 }
