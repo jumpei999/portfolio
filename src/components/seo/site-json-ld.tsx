@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { getAbsoluteLocalizedUrl } from '@/lib/site-url';
 
 type SiteJsonLdProps = Readonly<{
@@ -6,7 +6,6 @@ type SiteJsonLdProps = Readonly<{
 }>;
 
 export default async function SiteJsonLd({ locale }: SiteJsonLdProps) {
-  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'metadata' });
   const siteUrl = getAbsoluteLocalizedUrl(locale);
 

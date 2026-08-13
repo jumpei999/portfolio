@@ -1,4 +1,3 @@
-import { setRequestLocale } from 'next-intl/server';
 import About from '@/components/about/about-section';
 import ConstituentsClient from '@/components/constituents/constituents-client';
 import ConstituentsSeo from '@/components/constituents/constituents-seo';
@@ -14,18 +13,11 @@ import {
 } from '@/lib/section-shell';
 import { cn } from '@/lib/utils';
 
-type PageProps = {
-  params: Promise<{ locale: string }>;
-};
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function Home({ params }: Readonly<PageProps>) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-
+export default async function Home() {
   return (
     <main id="main" tabIndex={-1} className="flex flex-col outline-none">
       <div className={cn(MOBILE_BOTTOM_CLEARANCE, 'flex flex-col md:pb-0')}>
