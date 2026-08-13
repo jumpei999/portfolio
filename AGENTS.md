@@ -36,7 +36,7 @@ Commits use **Conventional Commits** (`feat:`, `fix:`, `refactor:`, etc.). `pnpm
 
 Releases: after CI passes on `main`, [semantic-release](release.config.mjs) updates `package.json` + `CHANGELOG.md`, tags `vX.Y.Z`, and creates a GitHub Release (`feat:` minor, `fix:` patch, `BREAKING CHANGE` major). Config: [`release.config.mjs`](release.config.mjs).
 
-CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (audit `--audit-level=high`, lint, typecheck, i18n, resume keys, build on PR/push; semantic-release on `main` push), [`.github/dependabot.yml`](.github/dependabot.yml) (weekly dependency PRs), [`vercel.json`](vercel.json) (pnpm install/build for Vercel Git deploys).
+CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (audit `--audit-level=high`, lint, typecheck, i18n, resume keys, build on PR/push; semantic-release on `main` push via GitHub App token — `RELEASE_APP_CLIENT_ID` / `RELEASE_APP_PRIVATE_KEY`), [`.github/dependabot.yml`](.github/dependabot.yml) (weekly dependency PRs), [`vercel.json`](vercel.json) (pnpm install/build for Vercel Git deploys).
 
 ## Layout
 
