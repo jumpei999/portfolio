@@ -31,27 +31,8 @@
       "This site feels more like a space for self-expression than a traditional portfolio. If anything here resonates with you, please feel free to reach out—whether it's for a casual chat, shared interests, or a project. (Though, I certainly won't complain if it's about a work opportunity!)"
     ],
     "profileImages": {
-      "berserk": {
-        "alt": "Berserk-style profile image",
-        "label": "Beherit will cry soon - Berserk Style"
-      },
-      "ghibli": {
-        "alt": "Ghibli-style profile image",
-        "label": "The Classic - Ghibli Style"
-      },
-      "gundam": {
-        "alt": "Gundam-style profile image",
-        "label": "Bow-tank Birth - Gundam Style"
-      },
-      "hokuto": {
-        "alt": "Fist of the North Star-style profile image",
-        "label": "No sleeves needed - Fist of the North Star Style"
-      },
-      "seiya": {
-        "alt": "Saint Seiya-style profile image",
-        "label": "Pegasus Dog - Saint Seiya Style"
-      },
-      "randomizeAria": "Show a random profile image"
+      "alt": "Profile image",
+      "revealAria": "Show an alternate profile image"
     }
   },
   "history": {
