@@ -124,7 +124,13 @@ Production: [https://jpk-engineering.dev](https://jpk-engineering.dev). Vercel i
 
 After CI passes on `main`, **semantic-release** bumps [`package.json`](package.json), updates [`CHANGELOG.md`](CHANGELOG.md), creates a Git tag (`vX.Y.Z`), and publishes a [GitHub Release](https://github.com/jumpei999/portfolio/releases). Version bumps follow [Conventional Commits](https://www.conventionalcommits.org/): `feat:` → minor, `fix:` → patch, `BREAKING CHANGE` → major. Merges with only `chore:`, `refactor:`, or `style:` commits do not trigger a release.
 
-Repository Settings → Actions → General must grant workflows **Read and write permissions** so `GITHUB_TOKEN` can push tags and release commits.
+Release pushes use a dedicated [GitHub App](https://docs.github.com/en/apps) (not `GITHUB_TOKEN`) so they can bypass the `main` ruleset. Configure:
+
+1. Create and install a GitHub App on this repository (Contents / Issues / Pull requests: Read and write)
+2. Add the App to the ruleset **Bypass list** (**Always allow**)
+3. Repository Settings → Secrets and variables → Actions:
+   - Variable `RELEASE_APP_CLIENT_ID` — App **Client ID** (`Iv23…` on the App settings page; preferred over numeric App ID)
+   - Secret `RELEASE_APP_PRIVATE_KEY` — App private key (`.pem`)
 
 [Dependabot](.github/dependabot.yml) opens weekly PRs for npm and GitHub Actions updates (security fixes included).
 
