@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/jumpei999/portfolio/compare/v1.3.3...v1.4.0) (2026-08-13)
+
+
+### Features
+
+* reveal alternate profile image on hover or press ([#40](https://github.com/jumpei999/portfolio/issues/40)) ([6998248](https://github.com/jumpei999/portfolio/commit/6998248a80fdcc8cbe159c5cfd28e1816858dcb7))
+
 ## [1.3.3](https://github.com/jumpei999/portfolio/compare/v1.3.2...v1.3.3) (2026-08-08)
 
 
