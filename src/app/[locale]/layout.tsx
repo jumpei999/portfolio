@@ -4,11 +4,7 @@ import { M_PLUS_1_Code, M_PLUS_Rounded_1c, Montserrat } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import {
-  getMessages,
-  getTranslations,
-  setRequestLocale,
-} from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import '../globals.css';
 import SiteJsonLd from '@/components/seo/site-json-ld';
 import ThemeFavicon from '@/components/theme-favicon';
@@ -107,7 +103,6 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  setRequestLocale(locale);
   const messages = await getMessages();
   const cookieStore = await cookies();
   const initialTheme = parseTheme(cookieStore.get(THEME_STORAGE_KEY)?.value);

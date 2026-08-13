@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { loadOgFonts } from '@/lib/og/load-og-fonts';
 import OgSplitBackground from '@/lib/og/og-split-background';
@@ -21,7 +21,6 @@ export default async function OpenGraphImage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  setRequestLocale(locale);
 
   const [tHero, fonts] = await Promise.all([
     getTranslations({ locale, namespace: 'hero' }),
