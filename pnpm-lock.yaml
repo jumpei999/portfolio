@@ -52,8 +52,8 @@ importers:
         specifier: ^5.7.0
         version: 5.7.0(react@19.2.8)
       resend:
-        specifier: ^6.19.0
-        version: 6.19.0
+        specifier: ^6.20.0
+        version: 6.20.0
       shadcn:
         specifier: ^4.17.0
         version: 4.17.0(supports-color@8.1.1)(typescript@6.0.3)
@@ -4382,8 +4382,8 @@ packages:
     resolution: {integrity: sha512-QT7FVMXfWOYFbeRBF6nu+I6tr2Tf3u0q8RIEjNob/heKY/nh7drD/k7eeMFmSQgnTtCzLDcCu/XEnpW2wk4xCQ==}
     engines: {node: '>=9.3.0 || >=8.10.0 <9.0.0'}
 
-  resend@6.19.0:
-    resolution: {integrity: sha512-JnEdYnd9WyBDIzunsEZtUF8n3cBKM9SlmySaos/7wwi4sEXKG1Zz4M64VFAyk+278erX01Fq2wHQ3p7OIdPriA==}
+  resend@6.20.0:
+    resolution: {integrity: sha512-fXDFt7jVMuka6ruS79DzaQFKPyxOAUtoYUGSl3dTUyOnFK9klmUULxADQRzFFtHfHRipYyy62jYcm4cMKqvtjw==}
     engines: {node: '>=20'}
     peerDependencies:
       '@react-email/render': '*'
@@ -9274,7 +9274,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  resend@6.19.0:
+  resend@6.20.0:
     dependencies:
       postal-mime: 2.7.5
       standardwebhooks: 1.0.0
