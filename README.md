@@ -132,7 +132,7 @@ Release pushes use a dedicated [GitHub App](https://docs.github.com/en/apps) (no
    - Variable `RELEASE_APP_CLIENT_ID` — App **Client ID** (`Iv23…` on the App settings page; preferred over numeric App ID)
    - Secret `RELEASE_APP_PRIVATE_KEY` — App private key (`.pem`)
 
-[Dependabot](.github/dependabot.yml) opens weekly PRs for npm and GitHub Actions updates (security fixes included).
+[Dependabot](.github/dependabot.yml) opens weekly PRs for npm and GitHub Actions updates (security fixes included). npm groups production patch, production minor, and development (patch+minor); Actions groups patch and minor. Major updates stay individual. [Auto-merge](.github/workflows/dependabot-automerge.yml) runs after CI for `production-patch`, `development`, and Actions `patch` only (enable Allow auto-merge and require the `quality` check on `main`).
 
 Other scripts:
 
@@ -153,9 +153,9 @@ pnpm release:dry-run # preview next semantic-release version locally
 ## Project Structure
 
 ```
-.github/workflows/     # CI (lint, typecheck, i18n, build, semantic-release on main)
+.github/workflows/     # CI, Dependabot auto-merge, semantic-release on main
 release.config.mjs     # semantic-release config
-.github/dependabot.yml # Weekly dependency update PRs
+.github/dependabot.yml # Weekly grouped dependency update PRs
 biome.json             # Biome lint + format
 .vscode/               # Editor defaults (Biome formatter)
 AGENTS.md              # Agent instructions (AI tools)

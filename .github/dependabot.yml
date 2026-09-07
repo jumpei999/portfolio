@@ -13,8 +13,39 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      production-patch:
+        dependency-type: production
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+      production-minor:
+        dependency-type: production
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+      development:
+        dependency-type: development
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    groups:
+      patch:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+      minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
