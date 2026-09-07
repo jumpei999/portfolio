@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/jumpei999/portfolio/compare/v1.4.0...v1.4.1) (2026-09-07)
+
+
+### Bug Fixes
+
+* resolve vulnerabilities ([#47](https://github.com/jumpei999/portfolio/issues/47)) ([bdf2195](https://github.com/jumpei999/portfolio/commit/bdf21956fb9f4cfeeb0cd42509a7baebffd28bbb))
+
 # [1.4.0](https://github.com/jumpei999/portfolio/compare/v1.3.3...v1.4.0) (2026-08-13)
 
 
