@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/jumpei999/portfolio/compare/v1.4.1...v1.4.2) (2026-09-08)
+
+
+### Bug Fixes
+
+* keep oldest History commit visible on desktop ([#49](https://github.com/jumpei999/portfolio/issues/49)) ([62d8afd](https://github.com/jumpei999/portfolio/commit/62d8afd004245bc7daa6d88143d25662bb116393))
+
 ## [1.4.1](https://github.com/jumpei999/portfolio/compare/v1.4.0...v1.4.1) (2026-09-07)
 
 
