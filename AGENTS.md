@@ -53,7 +53,7 @@ CI / deploy: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (audit `--au
 - Section layout: [`src/lib/section-shell.ts`](src/lib/section-shell.ts) (spacing, viewport height, mobile bottom clearance)
 - Media queries: [`src/lib/media-queries.ts`](src/lib/media-queries.ts) (`NARROW_MAX_WIDTH_PX`, `MOBILE_MAX_WIDTH_PX`, `prefersReducedMotion`)
 - Constituents placement: [`src/lib/constituents/placement.ts`](src/lib/constituents/placement.ts) (tier config + `buildPlacedTags`); [`src/hooks/use-placement-tier.ts`](src/hooks/use-placement-tier.ts), [`src/hooks/use-placed-tags.ts`](src/hooks/use-placed-tags.ts)
-- History hooks: [`src/hooks/use-active-commit.ts`](src/hooks/use-active-commit.ts), [`src/hooks/use-mobile-list-follow.ts`](src/hooks/use-mobile-list-follow.ts), [`src/hooks/use-dock-needs-scroll.ts`](src/hooks/use-dock-needs-scroll.ts)
+- History hooks: [`src/hooks/use-active-commit.ts`](src/hooks/use-active-commit.ts), [`src/hooks/use-list-follow.ts`](src/hooks/use-list-follow.ts), [`src/hooks/use-dock-needs-scroll.ts`](src/hooks/use-dock-needs-scroll.ts)
 - Shared UI: [`src/components/ui/`](src/components/ui/)
 
 ## Conventions
@@ -75,3 +75,13 @@ Summary: support minimum **320px**, design baseline **375px**, tablet via Tailwi
 ## Docs
 
 Human-oriented overview: [`README.md`](README.md)
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
