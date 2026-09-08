@@ -106,8 +106,10 @@ function HistoryTimelinePanels({
   timelineLabel,
   onSelect,
 }: Readonly<HistoryTimelinePanelsProps>) {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const desktopStageRef = useRef<HTMLDivElement>(null);
+  const mobileStageRef = useRef<HTMLDivElement>(null);
+  const desktopItemRefs = useRef<(HTMLElement | null)[]>([]);
+  const mobileItemRefs = useRef<(HTMLElement | null)[]>([]);
   const { ref: desktopListRef, started: desktopListStarted } =
     useEntranceInView();
   const { ref: mobileListRef, started: mobileListStarted } =
@@ -125,15 +127,31 @@ function HistoryTimelinePanels({
     fractionalIndex,
     scrollYProgress,
     onSelect,
-    stageRef,
-    itemRefs,
   };
 
   return (
     <>
-      <div className="hidden min-h-0 w-full min-w-0 lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,13fr)] lg:items-start lg:gap-12">
-        <div ref={desktopListRef} className="min-w-0">
-          <HistoryCommitList layout="default" {...listProps} />
+      <div className="hidden min-h-0 w-full min-w-0 flex-1 lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,13fr)] lg:items-stretch lg:gap-12">
+        <div
+          ref={desktopListRef}
+          className="relative min-h-0 min-w-0 overflow-hidden"
+        >
+          <div
+            ref={desktopStageRef}
+            className={cn(
+              'h-full min-h-0',
+              scrollDriven
+                ? 'overflow-hidden'
+                : 'overflow-y-auto overscroll-y-contain',
+            )}
+          >
+            <HistoryCommitList
+              layout="default"
+              {...listProps}
+              stageRef={desktopStageRef}
+              itemRefs={desktopItemRefs}
+            />
+          </div>
         </div>
         <div className="min-w-0 overflow-hidden">
           <EntranceMotion className="min-w-0 w-full max-w-full" delayIndex={2}>
@@ -148,7 +166,7 @@ function HistoryTimelinePanels({
           className="relative min-h-0 flex-1 overflow-hidden"
         >
           <div
-            ref={stageRef}
+            ref={mobileStageRef}
             className={cn(
               'h-full min-h-0 pb-5',
               scrollDriven
@@ -156,7 +174,12 @@ function HistoryTimelinePanels({
                 : 'overflow-y-auto overscroll-y-contain',
             )}
           >
-            <HistoryCommitList layout="mobileStage" {...listProps} />
+            <HistoryCommitList
+              layout="mobileStage"
+              {...listProps}
+              stageRef={mobileStageRef}
+              itemRefs={mobileItemRefs}
+            />
           </div>
         </div>
         <EntranceMotion

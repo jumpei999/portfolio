@@ -16,7 +16,7 @@ import {
   ENTRANCE_EASE,
   ENTRANCE_TIMELINE_PROGRESS_DURATION_SEC,
 } from '@/hooks/use-entrance-animation';
-import { useMobileListFollow } from '@/hooks/use-mobile-list-follow';
+import { useListFollow } from '@/hooks/use-list-follow';
 import { scheduleLayoutMeasure } from '@/lib/schedule-layout-measure';
 import { cn } from '@/lib/utils';
 
@@ -59,12 +59,12 @@ export default function HistoryCommitList({
   const itemRefs = externalItemRefs ?? internalItemRefs;
 
   const isMobileStage = layout === 'mobileStage';
-  const followActive = isMobileStage && scrollDriven && Boolean(stageRef);
+  const followActive = scrollDriven && Boolean(stageRef);
 
   const progressIndex = clickNavActive ? fractionalIndex : activeIndex;
   const progress = items.length <= 1 ? 1 : progressIndex / (items.length - 1);
 
-  const offsetY = useMobileListFollow({
+  const offsetY = useListFollow({
     stageRef: stageRef ?? { current: null },
     listRef,
     itemRefs,

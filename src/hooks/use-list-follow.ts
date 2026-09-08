@@ -45,7 +45,7 @@ function computeClampedY(
   return Math.min(0, Math.max(minY, idealY));
 }
 
-type UseMobileListFollowOptions = {
+type UseListFollowOptions = {
   stageRef: RefObject<HTMLElement | null>;
   listRef: RefObject<HTMLElement | null>;
   itemRefs: RefObject<(HTMLElement | null)[]>;
@@ -55,7 +55,7 @@ type UseMobileListFollowOptions = {
   enabled: boolean;
 };
 
-export function useMobileListFollow({
+export function useListFollow({
   stageRef,
   listRef,
   itemRefs,
@@ -63,7 +63,7 @@ export function useMobileListFollow({
   itemCount,
   scrollYProgress,
   enabled,
-}: UseMobileListFollowOptions) {
+}: UseListFollowOptions) {
   const y = useMotionValue(0);
   const noopScrollProgress = useMotionValue(0);
   const centersRef = useRef<number[]>([]);
