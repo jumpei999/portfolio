@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/jumpei999/portfolio/compare/v1.4.2...v1.4.3) (2026-11-24)
+
+
+### Bug Fixes
+
+* resolve dependency vulnerabilities ([#57](https://github.com/jumpei999/portfolio/issues/57)) ([8e02b15](https://github.com/jumpei999/portfolio/commit/8e02b15169857bd198e22c67133c28a7d99e5eda))
+
 ## [1.4.2](https://github.com/jumpei999/portfolio/compare/v1.4.1...v1.4.2) (2026-09-08)
 
 
