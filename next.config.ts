@@ -1,6 +1,6 @@
 import path from 'node:path';
 import bundleAnalyzer from '@next/bundle-analyzer';
-import { withSentryConfig } from '@sentry/nextjs';
+import { withSentryConfig } from '@sentry/nextjs/config';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
